@@ -1,3 +1,5 @@
+package CodeSmellers;
+
 import java.io.*;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -23,7 +25,7 @@ public class FindLongMethods implements Bloatable {
             classMethods.put(cls, cls.getDeclaredMethods());
         }
     }
-
+    // Doesn't find body if method body is on one line or if no parameters
     public int getMethodBody(int startLine, File javaSource) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(javaSource);
         BufferedReader input = new BufferedReader(new InputStreamReader(fileInputStream));
@@ -66,6 +68,7 @@ public class FindLongMethods implements Bloatable {
     public String getKeyword(String keyword, File javaSource) throws FileNotFoundException {
         FileInputStream fileInputStream = new FileInputStream(javaSource);
         BufferedReader input = new BufferedReader(new InputStreamReader(fileInputStream));
+
         Pattern methodPattern = Pattern.compile(keyword + "\\(.*\\)\\{"); // regular expression to find first line of method
         Matcher matcher = methodPattern.matcher("");
         String line;
@@ -74,9 +77,11 @@ public class FindLongMethods implements Bloatable {
 
         try {
             while ((line = input.readLine()) != null) {
+
                 matcher.reset(line);
                 i++;
                 while (matcher.find()) {
+                    System.out.println("Line " + line);
                     startLine = i;
                 }
             }
@@ -105,7 +110,7 @@ public class FindLongMethods implements Bloatable {
     @Override
     public void reflectClass() {
         getClassMethods();
-        int fileToTest = 0; // change value to check different class
+        int fileToTest = 1; // change value to check different class
         //new File("src\\methodsToText").mkdir();
         System.out.println(classSourceFiles.get(fileToTest).getSimpleName());
         String keyword = classSourceFiles.get(fileToTest).getDeclaredMethods()[0].getName();
