@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
-        String directoryPath = ""; // Add path to root of directory here
+        String directoryPath = ""; // Add path to root of directory here 
         directoryReader.getFiles(directoryPath);
 
         if(DirectoryReader.getDirectoryLevel() > 0){
@@ -18,7 +18,7 @@ public class Main {
             packageArray[0] = null;
             packageArray[1] = directoryPath;
         }
-
+        System.out.println(packageArray[0] + " " + packageArray[1]);
         try {
             directoryReader.loadClasses(packageArray);
         } catch (FileNotFoundException e) {
@@ -28,9 +28,17 @@ public class Main {
         ArrayList<Class> loadedClasses = new ArrayList<>(directoryReader.getLoadedClasses()); // classes ready for reflection
         ArrayList<File> javaSource = new ArrayList<>(directoryReader.getJavaSourceArrayList()); // can read java files as text
 
-        /*Make class constructors with loadedClasses and javaSource as params.
-        * All code smell classes can be done by reading java files as text files from javaSource
-        * or by reflecting on classes from loadedClasses or both depending on smell
-        * */
+        /*Bloat Tests
+        * Test for Classes*/
+        FindLargeClass findLargeClasses = new FindLargeClass();
+        findLargeClasses.findLargeFiles(javaSource,loadedClasses);
+        findLargeClasses.reflectClass();
+        findLargeClasses.printReport();
+
+        // Test for Long Methods
+        System.out.println("\n");
+        FindLongMethods findLongMethods = new FindLongMethods(loadedClasses, javaSource);
+        System.out.println("\nMethod Body From Find LongMethods");
+        findLongMethods.reflectClass();
     }
 }
