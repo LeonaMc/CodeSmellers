@@ -1,3 +1,5 @@
+package CodeSmellers;
+
 import java.io.FileNotFoundException;
 
 public interface Countable {
