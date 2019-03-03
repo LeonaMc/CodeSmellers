@@ -93,11 +93,12 @@ public class DirectoryReader extends PackageFinder {
         }
 
         URLClassLoader cl = URLClassLoader.newInstance(classUrl);
-
+        int index = 0;
         for (File file : getClassArrayList()) { // iterate through .class files
             String className = file.getName().substring(0, file.getName().length() - 6); // remove .class from string
-            if (getKeyword("package", getJavaSourceArrayList().get(0)) != null) { // check if java source files belong to a package
-                className = packageArray[0] + "." + className; // if class has package set className to packageName.className, classLoader won't work otherwise
+            String packageName = getKeyword("package", getJavaSourceArrayList().get(index));
+            if (packageName != null) { // check if java source files belong to a package
+                className = packageName + "." + className; // if class has package set className to packageName.className, classLoader won't work otherwise {packageArray[0]}
             }
 
             try {
@@ -105,6 +106,9 @@ public class DirectoryReader extends PackageFinder {
                 loadedClasses.add(loadedClass); // all new Class objects added to loadedClasses Array
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
+            }
+            if(index < getJavaSourceArrayList().size() - 1){
+                index++;
             }
         }
     }
