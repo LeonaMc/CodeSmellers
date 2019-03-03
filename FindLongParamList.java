@@ -1,3 +1,5 @@
+package CodeSmellers;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Method;
