@@ -13,16 +13,20 @@ public class PackageFinder implements SourceReadable {
 
     }
 
+    public String getPackageName(){
+        return packageName;
+    }
+
     @Override
     public String getKeyword(String keyword, File javaSource) throws FileNotFoundException {
         Scanner fileScanner = new Scanner(javaSource);
         while (fileScanner.hasNextLine()) {
-            Scanner wordScanner = new Scanner(fileScanner.nextLine());
+            packageName = fileScanner.nextLine();
+            Scanner wordScanner = new Scanner(packageName);
 
             while (wordScanner.hasNext()) {
                 String nextWord = wordScanner.next();
                 if (nextWord.equals(keyword)) {
-                    packageName = nextWord;
                     packageFound = true;
                     wordScanner.close();
                     break;
@@ -38,6 +42,7 @@ public class PackageFinder implements SourceReadable {
                 break;
             }
         }
+        packageName = packageName.substring(8, packageName.length()-1);
         return packageName;
     }
 }
