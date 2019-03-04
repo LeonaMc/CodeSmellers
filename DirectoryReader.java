@@ -46,6 +46,10 @@ public class DirectoryReader extends PackageFinder {
         return directoryLevel;
     }
 
+    private String getClassName(int index){
+        return getClassArrayList().get(index).getName();
+    }
+
     /*Recursive Method
     *searches project directory for subfolders, .java and .class files
     *adds subfolders to queue, .java and .class files to seperate ArrayLists
@@ -93,18 +97,23 @@ public class DirectoryReader extends PackageFinder {
         }
 
         URLClassLoader cl = URLClassLoader.newInstance(classUrl);
-
-        for (File file : getClassArrayList()) { // iterate through .class files
-            String className = file.getName().substring(0, file.getName().length() - 6); // remove .class from string
-            if (getKeyword("package", getJavaSourceArrayList().get(0)) != null) { // check if java source files belong to a package
-                className = packageArray[0] + "." + className; // if class has package set className to packageName.className, classLoader won't work otherwise
-            }
-
-            try {
-                Class loadedClass = cl.loadClass(className); // load classes for reflection
-                loadedClasses.add(loadedClass); // all new Class objects added to loadedClasses Array
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+        int index = 0;
+        for (int i = 0; i  < getClassArrayList().size(); i++) { // iterate through .class files
+            if(!getClassName(i).contains("$")){ // don't try to load inner classes. Inner classes are compiled separate to the class they are defined in and have a $ in the name
+                String className = getClassName(i).substring(0, getClassName(i).length() - 6); // remove .class from string
+                String packageName = getKeyword("package", getJavaSourceArrayList().get(index));
+                if (packageName != null) { // check if java source files belong to a package
+                    className = packageName + "." + className; // if class has package set className to packageName.className, classLoader won't work otherwise {packageArray[0]}
+                }
+                try {
+                    Class loadedClass = cl.loadClass(className); // load classes for reflection
+                    loadedClasses.add(loadedClass); // all new Class objects added to loadedClasses Array
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                if(index < getJavaSourceArrayList().size() - 1){
+                    index++;
+                }
             }
         }
     }
