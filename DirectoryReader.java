@@ -94,21 +94,22 @@ public class DirectoryReader extends PackageFinder {
 
         URLClassLoader cl = URLClassLoader.newInstance(classUrl);
         int index = 0;
-        for (File file : getClassArrayList()) { // iterate through .class files
-            String className = file.getName().substring(0, file.getName().length() - 6); // remove .class from string
-            String packageName = getKeyword("package", getJavaSourceArrayList().get(index));
-            if (packageName != null) { // check if java source files belong to a package
-                className = packageName + "." + className; // if class has package set className to packageName.className, classLoader won't work otherwise {packageArray[0]}
-            }
-
-            try {
-                Class loadedClass = cl.loadClass(className); // load classes for reflection
-                loadedClasses.add(loadedClass); // all new Class objects added to loadedClasses Array
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-            if(index < getJavaSourceArrayList().size() - 1){
-                index++;
+        for (int i = 0; i  < getClassArrayList().size(); i++) { // iterate through .class files
+            if(!getClassArrayList().get(i).getName().contains("$")){ // don't try to load inner classes. Inner classes are compiled separate to the class they are defined in and have a $ in the name
+                String className = getClassArrayList().get(i).getName().substring(0, getClassArrayList().get(i).getName().length() - 6); // remove .class from string
+                String packageName = getKeyword("package", getJavaSourceArrayList().get(index));
+                if (packageName != null) { // check if java source files belong to a package
+                    className = packageName + "." + className; // if class has package set className to packageName.className, classLoader won't work otherwise {packageArray[0]}
+                }
+                try {
+                    Class loadedClass = cl.loadClass(className); // load classes for reflection
+                    loadedClasses.add(loadedClass); // all new Class objects added to loadedClasses Array
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                if(index < getJavaSourceArrayList().size() - 1){
+                    index++;
+                }
             }
         }
     }
