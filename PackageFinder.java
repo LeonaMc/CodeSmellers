@@ -13,10 +13,6 @@ public class PackageFinder implements SourceReadable {
 
     }
 
-    public String getPackageName(){
-        return packageName;
-    }
-
     @Override
     public String getKeyword(String keyword, File javaSource) throws FileNotFoundException {
         Scanner fileScanner = new Scanner(javaSource);
@@ -29,20 +25,30 @@ public class PackageFinder implements SourceReadable {
                 if (nextWord.equals(keyword)) {
                     packageFound = true;
                     wordScanner.close();
+                    fileScanner.close();
                     break;
                 } else if (nextWord.equals("class")) {
                     packageName = null;
                     classKeywordFound = true;
                     wordScanner.close();
+                    fileScanner.close();
                     break;
                 }
             }
             if (packageFound || classKeywordFound) {
-                fileScanner.close();
                 break;
             }
         }
-        packageName = packageName.substring(8, packageName.length()-1);
+
+        if(packageName != null && !classKeywordFound){
+            packageName = packageName.substring(8, packageName.length()-1);
+        }
+        else if(classKeywordFound){
+            packageName = null;
+        }
+
+        classKeywordFound = false;
+        packageFound = false;
         return packageName;
     }
 }
