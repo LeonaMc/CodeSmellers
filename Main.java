@@ -30,7 +30,7 @@ public class Main {
         ArrayList<File> javaSource = new ArrayList<>(directoryReader.getJavaSourceArrayList()); // can read java files as text
 
         /*Bloat Tests
-        * Test for Classes*/
+        * Test for Large Classes*/
         FindLargeClass findLargeClasses = new FindLargeClass();
         findLargeClasses.findLargeFiles(javaSource,loadedClasses);
         findLargeClasses.reflectClass();
