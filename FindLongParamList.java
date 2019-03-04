@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-public class FindLongParamList implements Bloatable{
+public class FindLongParamList implements Countable{
     private ArrayList<Class> classArrayList;
 
     public FindLongParamList(ArrayList<Class> classArrayList){
@@ -18,22 +18,7 @@ public class FindLongParamList implements Bloatable{
     }
 
     @Override
-    public void reflectClass() {
-
-    }
-
-    @Override
-    public int countLines(File javaSource) throws FileNotFoundException {
+    public int countComponents(Class cls) throws FileNotFoundException {
         return 0;
-    }
-
-    @Override
-    public void printReport() {
-
-    }
-
-    @Override
-    public String getKeyword(String keyword, File javaSource) throws FileNotFoundException {
-        return null;
     }
 }
