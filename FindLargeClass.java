@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-// Find better name for class!
+// Refactor Class to take class and java arrays in constructor, give length of file in report
 public class FindLargeClass implements Bloatable {
     private ArrayList<Class> bloatedClassFiles;
     private ArrayList<File> bloatedSourceFiles; // may not need this!
@@ -42,7 +42,7 @@ public class FindLargeClass implements Bloatable {
         }
         return lines;
     }
-    // find better name!
+
     public void findLargeFiles(ArrayList<File> javaSource, ArrayList<Class> loadedClass){
         numberOfSourceFiles = loadedClass.size();
         for (int i = 0; i < javaSource.size(); i++){
