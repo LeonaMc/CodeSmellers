@@ -28,9 +28,18 @@ public class Main {
         ArrayList<Class> loadedClasses = new ArrayList<>(directoryReader.getLoadedClasses()); // classes ready for reflection
         ArrayList<File> javaSource = new ArrayList<>(directoryReader.getJavaSourceArrayList()); // can read java files as text
 
+        // prints list of loaded classes
+        for(Class cls : loadedClasses){
+            System.out.println(cls.getName());
+        }
+
+        // prints list of java files
+        for (File file : javaSource){
+            System.out.println(file.getName());
+        }
         /*Make class constructors with loadedClasses and javaSource as params.
         * All code smell classes can be done by reading java files as text files from javaSource
         * or by reflecting on classes from loadedClasses or both depending on smell
-        * */
+        * Java source files are represented as File objects so can be treated as a normal text file i.e can use a file scanner to read*/
     }
 }
