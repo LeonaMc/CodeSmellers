@@ -2,7 +2,6 @@ package CodeSmellers;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 public class Main {
@@ -34,7 +33,7 @@ public class Main {
         FindLargeClass findLargeClasses = new FindLargeClass();
         findLargeClasses.findLargeFiles(javaSource,loadedClasses);
         findLargeClasses.reflectClass();
-        findLargeClasses.printReport();
+        findLargeClasses.printTestReport();
 
         // Test for Long Methods
         System.out.println("\n");
