@@ -41,7 +41,7 @@ public class PackageFinder implements SourceReadable {
         }
 
         if(packageName != null && !classKeywordFound){
-            packageName = packageName.substring(8, packageName.length()-1);
+            packageName = packageName.substring(8, packageName.length()-1); // strips "package " from start of string and ; from end
         }
         else if(classKeywordFound){
             packageName = null;
