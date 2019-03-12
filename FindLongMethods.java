@@ -136,9 +136,4 @@ public class FindLongMethods implements Bloatable {
     public int countLines(File javaSource) throws FileNotFoundException {
         return 0;
     }
-
-    @Override
-    public void printReport() {
-
-    }
 }
