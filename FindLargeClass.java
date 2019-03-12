@@ -73,8 +73,8 @@ public class FindLargeClass implements Bloatable {
         }
     }
 
-    @Override
-    public void printReport(){
+
+    public void printTestReport(){
         double bloated = 0;
         for (Class cls: bloatedClassFiles){
             String newline = "\n";
