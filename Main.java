@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
-        String directoryPath = ""; // Add path to root of directory here
+        String directoryPath = "/home/johnnymurf/Google Drive/Year 3/Semester2/SoftwareEngineering/test"; // Add path to root of directory here
         directoryReader.getFiles(directoryPath);
 
         if(DirectoryReader.getDirectoryLevel() > 0){
