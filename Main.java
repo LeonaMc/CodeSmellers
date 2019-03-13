@@ -45,5 +45,6 @@ public class Main {
         FeatureEnvy featureEnvy = new FeatureEnvy(javaSource);
         featureEnvy.getClassNames();
         featureEnvy.getInstantiatedNames();
+        featureEnvy.countFeatureEnvy();
     }
 }
