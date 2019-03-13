@@ -22,27 +22,68 @@
 *  6. Return a smell rating based on a heuristic
 * */
 
-
-
 package CodeSmellers;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
 
 public class FeatureEnvy {
 
-    private Class[] javaClasses;
-    private File[] javaSources;
+    //  private ArrayList<Class> javaClasses;
+    private ArrayList<File> javaSources;
 
-    FeatureEnvy(Class[] javaClasses, File[] javaSources){
-        this.javaClasses = javaClasses;
+    FeatureEnvy(ArrayList<File> javaSources) {
         this.javaSources = javaSources;
     }
 
-    ArrayList<String> classNames = new ArrayList<>();
-    private void getClassNames(){
-        for(Class cl : javaClasses){
-            System.out.println(cl.getName());
+    //    Get class names
+    private ArrayList<String> classNames = new ArrayList<>();
+
+    public void getClassNames() {
+        for (File file : javaSources) {
+            classNames.add(file.getName().replace(".java", ""));
         }
     }
+
+    //    Searches through each file looking for class name
+//    Adds instantiated name to Array List of Hash Maps
+//    Key will be instantiated Names. value will be class name
+//    eg. Class foo = new Class() -> key=foo value=Class
+//    String array list will just hold instantiated class names like foo
+    private ArrayList<HashMap<String, String>> instantiatedToClassHash = new ArrayList<>();
+    private ArrayList<String> instantiatedClassNames = new ArrayList<>();
+
+    public void getInstantiatedNames() throws FileNotFoundException {
+        for (File file : javaSources) {
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] words = line.split(" ");
+                int i = 0;
+                for (String word : words) {
+                    if (classNames.contains(word)) {
+                        instantiatedClassNames.add(words[i + 1].replaceAll("[^A-Za-z0-9]", ""));
+                        HashMap<String, String> hashMap = new HashMap<>();
+                        hashMap.put(words[i + 1].replaceAll("[^A-Za-z0-9]", ""), word);
+                        instantiatedToClassHash.add(hashMap);
+                        i++;
+                    }
+                }
+            }
+        }
+    }
+
+        private HashMap<String, Integer> classToNumberOfCalls = new HashMap<>();
+        private void classNamesAsKeys () {
+            for (String name : classNames) {
+                classToNumberOfCalls.put(name, 0);
+            }
+        }
+        private void countFeatureEnvy () {
+            classNamesAsKeys();
+        }
 }
+
