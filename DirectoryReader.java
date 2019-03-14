@@ -76,6 +76,37 @@ public class DirectoryReader extends PackageFinder {
         }
     }
 
+    public String[] getClasspath(String path) {
+        String[] splitPath;
+        splitPath = path.split(special);
+        boolean isEclipse = false;
+
+        int index = 0;
+        for (int i = 0; i < splitPath.length; i++) {
+            if (splitPath[i].compareTo("production") == 0) {
+                index = i + 1;
+            } else if (splitPath[i].compareTo("bin") == 0 && !splitPath[i + 1].contains(".class")) { // find classpath if eclipse project
+                isEclipse = true;
+                index = i + 1;
+            } else if (splitPath[i].compareTo("bin") == 0 && splitPath[i + 1].contains(".class")) {  // eclipse project with no package name
+                index = i;
+            }
+        }
+        String[] relevantPath = new String[2];
+        relevantPath[0] = splitPath[index]; // add package name
+        relevantPath[1] = "";
+
+        if (isEclipse) {
+            for (int i = 0; i <= index - 1; i++) {
+                relevantPath[1] += splitPath[i] + special; // add root to classpath
+            }
+        } else
+            for (int i = 0; i <= index; i++) {
+                relevantPath[1] += splitPath[i] + special; // add root to classpath
+            }
+        return relevantPath; // array holding package name and path to root of package classpath
+    }
+
     /*ClassLoader method
     * Loads classes from different projects or directories
     * loaded classes can then be reflected on
@@ -112,36 +143,5 @@ public class DirectoryReader extends PackageFinder {
                 }
             }
         }
-    }
-
-    public String[] getClasspath(String path) {
-        String[] splitPath;
-        splitPath = path.split(special);
-        boolean isEclipse = false;
-
-        int index = 0;
-        for (int i = 0; i < splitPath.length; i++) {
-            if (splitPath[i].compareTo("production") == 0) {
-                index = i + 1;
-            } else if (splitPath[i].compareTo("bin") == 0 && !splitPath[i + 1].contains(".class")) { // find classpath if eclipse project
-                isEclipse = true;
-                index = i + 1;
-            } else if (splitPath[i].compareTo("bin") == 0 && splitPath[i + 1].contains(".class")) {  // eclipse project with no package name
-                index = i;
-            }
-        }
-        String[] relevantPath = new String[2];
-        relevantPath[0] = splitPath[index]; // add package name
-        relevantPath[1] = "";
-
-        if (isEclipse) {
-            for (int i = 0; i <= index - 1; i++) {
-                relevantPath[1] += splitPath[i] + special; // add root to classpath
-            }
-        } else
-            for (int i = 0; i <= index; i++) {
-                relevantPath[1] += splitPath[i] + special; // add root to classpath
-            }
-        return relevantPath; // array holding package name and path to root of package classpath
     }
 }
