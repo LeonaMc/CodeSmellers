@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
-        String directoryPath = ""; // Add path to root of directory here
+        String directoryPath = "C:\\Users\\RickTheRuler\\Dropbox\\SoftwareEngineering2"; // Add path to root of directory here
         directoryReader.getFiles(directoryPath);
 
         if(DirectoryReader.getDirectoryLevel() > 0){
@@ -40,6 +40,12 @@ public class Main {
         FindLongMethods findLongMethods = new FindLongMethods(loadedClasses, javaSource);
         System.out.println("\nMethod Body From Find LongMethods");
         findLongMethods.reflectClass();
+
+        // Test for primitive obsession
+        PrimitiveObsession primitiveObsession = new PrimitiveObsession(javaSource,loadedClasses);
+        primitiveObsession.reflectClass();
+        System.out.println("\nflaggedClasses = " + primitiveObsession.flaggedClasses.size());
+
 
     }
 }
