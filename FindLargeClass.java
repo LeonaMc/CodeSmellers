@@ -22,6 +22,7 @@ public class FindLargeClass implements Bloatable {
         return null;
     }
 
+    @ReadingSource
     @Override
     public int countLines(File javaSource) throws FileNotFoundException {
         FileReader fileReader = new FileReader(javaSource);
@@ -58,6 +59,7 @@ public class FindLargeClass implements Bloatable {
         }
     }
 
+    @Reflecting
     @Override
     public void reflectClass() {
         // if long class, reflect and find ways to improve e.g. count number of primitives and methods advise on results
@@ -72,7 +74,6 @@ public class FindLargeClass implements Bloatable {
             classReports.put(cls,report);
         }
     }
-
 
     public void printTestReport(){
         double bloated = 0;
