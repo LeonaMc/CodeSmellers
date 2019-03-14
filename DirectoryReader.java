@@ -113,6 +113,7 @@ public class DirectoryReader extends PackageFinder {
     * @Param String[] packageArray see getClassPath() def and implementation after this method
     * packageArray[0] = package name if there is one
     * packageArray[1] = classpath(just a filepath that is the root folder for the .class files) for package*/
+    @ClassLoader
     public void loadClasses(String[] packageArray) throws FileNotFoundException {
 
         String path = packageArray[1];
