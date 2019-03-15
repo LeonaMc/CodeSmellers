@@ -19,6 +19,10 @@ public class PrimitiveObsession implements Reflectable{
         this.loadedClasses.addAll(loadedClasses);
     }
 
+    public ArrayList<Class> getFlaggedClasses() {
+        return flaggedClasses;
+    }
+
     private String getFieldSimpleName(Field field){
         return field.getType().getSimpleName();
     }

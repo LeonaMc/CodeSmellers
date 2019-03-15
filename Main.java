@@ -44,7 +44,7 @@ public class Main {
         // Test for primitive obsession
         PrimitiveObsession primitiveObsession = new PrimitiveObsession(javaSource,loadedClasses);
         primitiveObsession.reflectClass();
-        System.out.println("\nflaggedClasses = " + primitiveObsession.flaggedClasses.size());
+        System.out.println("\nflaggedClasses = " + primitiveObsession.getFlaggedClasses().size());
 
 
     }

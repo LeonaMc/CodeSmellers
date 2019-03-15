@@ -1,9 +1,9 @@
 package CodeSmellers;
 
-public class Reporter implements Reportable {
+public class Reporter extends Report implements Reportable {
 
     public Reporter(){
-        
+
     }
 
     @Override
