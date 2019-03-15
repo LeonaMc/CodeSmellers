@@ -46,6 +46,10 @@ public class DirectoryReader extends PackageFinder {
         return directoryLevel;
     }
 
+    private String getClassName(int index){
+        return getClassArrayList().get(index).getName();
+    }
+
     /*Recursive Method
     *searches project directory for subfolders, .java and .class files
     *adds subfolders to queue, .java and .class files to seperate ArrayLists

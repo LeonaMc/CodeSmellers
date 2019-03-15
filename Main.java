@@ -5,10 +5,11 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
         String directoryPath = "C:\\Users\\RickTheRuler\\Dropbox\\SoftwareEngineering2"; // Add path to root of directory here
+
         directoryReader.getFiles(directoryPath);
 
         if(DirectoryReader.getDirectoryLevel() > 0){
@@ -27,7 +28,7 @@ public class Main {
 
         ArrayList<Class> loadedClasses = new ArrayList<>(directoryReader.getLoadedClasses()); // classes ready for reflection
         ArrayList<File> javaSource = new ArrayList<>(directoryReader.getJavaSourceArrayList()); // can read java files as text
-
+        
         /*Bloat Tests
         * Test for Large Classes*/
         FindLargeClass findLargeClasses = new FindLargeClass();
@@ -45,7 +46,6 @@ public class Main {
         PrimitiveObsession primitiveObsession = new PrimitiveObsession(javaSource,loadedClasses);
         primitiveObsession.reflectClass();
         System.out.println("\nflaggedClasses = " + primitiveObsession.getFlaggedClasses().size());
-
 
     }
 }
