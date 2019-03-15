@@ -7,9 +7,9 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 public class PrimitiveObsession implements Reflectable{
-    ArrayList<File> javaSource;
-    ArrayList<Class> loadedClasses;
-    ArrayList<Class> flaggedClasses;
+    private ArrayList<File> javaSource;
+    private ArrayList<Class> loadedClasses;
+    private ArrayList<Class> flaggedClasses;
 
     public PrimitiveObsession(ArrayList<File> javaSource, ArrayList<Class> loadedClasses){
         flaggedClasses = new ArrayList<>();
