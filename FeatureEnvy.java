@@ -20,19 +20,18 @@
  *     The number of times name appears will highlight often a class is using another
  *     class's methods as it will appear like 'name.methodCall()'
  *  6. Return a smell rating based on a heuristic
- * */
+ */
 
 package CodeSmellers;
 
-import javafx.beans.binding.StringBinding;
-
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.sql.Array;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FeatureEnvy {
 
@@ -43,81 +42,99 @@ public class FeatureEnvy {
         this.javaSources = javaSources;
     }
 
+    private class EachClassFeatureEnvySmell{
+        private  String className;
+        private String otherClassName;
+        private int numberOfCalls;
+
+        EachClassFeatureEnvySmell(String name, String otherName, int numOfCalls) {
+            className = name;
+            otherClassName= otherName;
+            numberOfCalls = numOfCalls;
+        }
+        public String toString(){
+            return className + " calls " + otherClassName +" " +numberOfCalls+" times";
+        }
+        public int getNumberOfCalls(){
+            return numberOfCalls;
+        }
+    }
+
     //   Get class names
     private ArrayList<String> classNames = new ArrayList<>();
-
     public void getClassNames() {
         for (File file : javaSources) {
-            if(!file.getName().toLowerCase().contains("test")) { //ignore tests
+            //ignore tests and main
+            if(checkValidFile(file)) {
                 classNames.add(file.getName().replace(".java", ""));
             }
         }
     }
-
-    //    Searches through each file looking for class name
-//    Adds instantiated name to Array List of Hash Maps
-//    Key will be instantiated Names. value will be class name
-//    eg. Class foo = new Class() -> key=foo value=Class
-//    String array list will just hold instantiated class names like foo
-    private ArrayList<HashMap<String, String>> instantiatedToClassHash = new ArrayList<>();
-    private ArrayList<String> instantiatedClassNames = new ArrayList<>();
-
-    public void getInstantiatedNames() throws FileNotFoundException {
-        System.out.println("Class Names: "+classNames.toString());
-        for (File file : javaSources) {
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] words = line.split(" ");
-
-                int i = 0;
-                for (String word : words) {
-                    if (classNames.contains(word) && !word.toLowerCase().contains("test") && !word.contains("class")) { //ignore tests
-                        // prevents duplicates
-                        System.out.println("Array: "+Arrays.toString(words));
-                        if (!instantiatedClassNames.contains(words[i + 1].replaceAll("[^A-Za-z0-9]", ""))) {
-
-                            instantiatedClassNames.add(words[i + 1].replaceAll("[^A-Za-z0-9]", ""));
-                            HashMap<String, String> hashMap = new HashMap<>();
-                            hashMap.put(words[i + 1].replaceAll("[^A-Za-z0-9]", ""), word);
-                            instantiatedToClassHash.add(hashMap);
-                       }
-                    }
-                    i++;
-                }
-            }
-        }
-    }
-
-    private HashMap<String, Integer> classToNumberOfCalls = new HashMap<>();
-    private void classNamesAsKeys () {
-        for (String name : classNames) {
-            classToNumberOfCalls.put(name, 0);
-        }
-    }
-    public void countFeatureEnvy () throws FileNotFoundException {
-        classNamesAsKeys();
-//            TODO finish this method
-        int i = 0;
-        int count = 0;
-        for(String instantiatedName: instantiatedClassNames){
-            System.out.println("****"+instantiatedClassNames);
-            for(File file: javaSources){
-                Scanner scanner = new Scanner(file);
-                while(scanner.hasNextLine()) {
-                    String line = scanner.nextLine();
-                    String[] words = line.split(" ");
-                    for (String word : words) {
-                        if (word.contains(instantiatedName)) {
-                            String className = instantiatedToClassHash.get(i).get(instantiatedName);
-                            classToNumberOfCalls.put(className, classToNumberOfCalls.get(className) + 1);
+    //    Searches through each file looking for instantiation names
+    //    names will be added to array list
+    //   private ArrayList<String> instantiatedNames = new ArrayList<>();
+    private HashMap<String, String> instantiatedNameToClassName = new HashMap<>();
+    public void getInstantiatedNames() throws IOException {
+        for(File file: javaSources) {
+            if (checkValidFile(file)) {
+                String content = new String(Files.readAllBytes(Paths.get(file.getPath())));
+                for (String classname : classNames) {
+                    Pattern pattern = Pattern.compile(classname + "\\W+(\\w+)");
+                    Matcher matcher = pattern.matcher(content);
+                    while(matcher.find()) {
+                        if(checkValidRegex(matcher.group(0))) {
+                            instantiatedNameToClassName.put(matcher.group(1)+".",classname); //dot is used for method calls
                         }
                     }
                 }
             }
-            i++;
         }
-        System.out.println("Count Feature Envy: "+classToNumberOfCalls.toString());
     }
+
+    private ArrayList<EachClassFeatureEnvySmell> featureEnvySmellsList = new ArrayList<>();
+    public void getNumberOfOtherClassCalls() throws IOException {
+        for(File file : javaSources){
+            if(checkValidFile(file)){
+                String content = new String(Files.readAllBytes(Paths.get(file.getPath())));
+                for(String instantiatedName : instantiatedNameToClassName.keySet()){
+                    int count = 0;
+                    Pattern pattern = Pattern.compile("\\b"+instantiatedName+"\\b");
+                    Matcher matcher = pattern.matcher(content);
+                    boolean foundFlag = false;
+                    while(matcher.find()){
+                        if(instantiatedName.contentEquals(matcher.group(0))) {
+                            foundFlag = !foundFlag;
+                            count++;
+                        }
+                    }
+                    if(foundFlag){
+                        featureEnvySmellsList.add(new EachClassFeatureEnvySmell
+                                (file.getName().replace(".java",""),
+                                        instantiatedNameToClassName.get(instantiatedName), count));
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean checkValidRegex(String input){
+        String[] invalidChars = {"{","(",")"};
+        for(String string: invalidChars){
+            if(input.contains(string)){
+                return false;
+            }
+        }
+        return true;
+    }
+    private boolean checkValidFile(File file){
+        String [] invalidStrings = {"test","main"};
+        for(String string : invalidStrings){
+            if(file.getName().toLowerCase().contains(string)){
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
 
