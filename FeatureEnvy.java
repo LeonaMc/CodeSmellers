@@ -25,6 +25,7 @@
 package CodeSmellers;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -33,15 +34,22 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FeatureEnvy {
+public class FeatureEnvy implements SourceReadable,Reportable{
 
     //  private ArrayList<Class> javaClasses;
     private ArrayList<File> javaSources;
+    private ArrayList<String> classNames = new ArrayList<>();
+    private HashMap<String, String> instantiatedNameToClassName = new HashMap<>();
+    private static ArrayList<EachClassFeatureEnvySmell> featureEnvySmellsList = new ArrayList<>();
 
     FeatureEnvy(ArrayList<File> javaSources) {
         this.javaSources = javaSources;
     }
+    @Override
+    public void printReport() {
 
+    }
+//    Private inner class will hold each class
     private class EachClassFeatureEnvySmell{
         private  String className;
         private String otherClassName;
@@ -55,13 +63,9 @@ public class FeatureEnvy {
         public String toString(){
             return className + " calls " + otherClassName +" " +numberOfCalls+" times";
         }
-        public int getNumberOfCalls(){
-            return numberOfCalls;
-        }
     }
 
     //   Get class names
-    private ArrayList<String> classNames = new ArrayList<>();
     public void getClassNames() {
         for (File file : javaSources) {
             //ignore tests and main
@@ -70,10 +74,7 @@ public class FeatureEnvy {
             }
         }
     }
-    //    Searches through each file looking for instantiation names
-    //    names will be added to array list
-    //   private ArrayList<String> instantiatedNames = new ArrayList<>();
-    private HashMap<String, String> instantiatedNameToClassName = new HashMap<>();
+
     public void getInstantiatedNames() throws IOException {
         for(File file: javaSources) {
             if (checkValidFile(file)) {
@@ -91,13 +92,12 @@ public class FeatureEnvy {
         }
     }
 
-    private ArrayList<EachClassFeatureEnvySmell> featureEnvySmellsList = new ArrayList<>();
     public void getNumberOfOtherClassCalls() throws IOException {
         for(File file : javaSources){
             if(checkValidFile(file)){
                 String content = new String(Files.readAllBytes(Paths.get(file.getPath())));
+                int count = 0;
                 for(String instantiatedName : instantiatedNameToClassName.keySet()){
-                    int count = 0;
                     Pattern pattern = Pattern.compile("\\b"+instantiatedName+"\\b");
                     Matcher matcher = pattern.matcher(content);
                     boolean foundFlag = false;
@@ -115,6 +115,10 @@ public class FeatureEnvy {
                 }
             }
         }
+    }
+    @Override
+    public String getKeyword(String keyword, File javaSource) throws FileNotFoundException {
+        return null;
     }
 
     private boolean checkValidRegex(String input){
