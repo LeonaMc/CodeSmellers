@@ -31,7 +31,7 @@ public class Main {
         // prints list of loaded classes
         for (Class cls : loadedClasses) {
             //   System.out.println(cls.getName());
-
+        }
             // prints list of java files
             for (File file : javaSource) {
                 //  System.out.println(file.getName());
@@ -42,10 +42,9 @@ public class Main {
              * Java source files are represented as File objects so can be treated as a normal text file i.e can use a file scanner to read*/
 
 
-        }
+
         FeatureEnvy featureEnvy = new FeatureEnvy(javaSource);
-        featureEnvy.getClassNames();
-        featureEnvy.getInstantiatedNames();
-        featureEnvy.getNumberOfOtherClassCalls();
+        featureEnvy.findFeatureEnvy();
+        featureEnvy.printReport();
     }
 }
