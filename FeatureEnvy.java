@@ -40,15 +40,20 @@ public class FeatureEnvy implements SourceReadable,Reportable{
 
     private ArrayList<File> javaSources;
     private HashMap<String, String> instantiatedNameToClassName = new HashMap<>();
-    private static ArrayList<EachClassSmell> classSmellsList = new ArrayList<>();
+    protected static ArrayList<EachClassSmell> classSmellsList = new ArrayList<>();
 
     FeatureEnvy(ArrayList<File> javaSources) {
         this.javaSources = javaSources;
     }
 
-    public void findFeatureEnvy() throws IOException {
-        findInstantiatedNames();
-        findNumberOfOtherClassCalls();
+    public void findFeatureEnvy() {
+        try {
+            findInstantiatedNames();
+            findNumberOfOtherClassCalls();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
     }
     @Override
     public void printReport() {
@@ -57,8 +62,7 @@ public class FeatureEnvy implements SourceReadable,Reportable{
         }
     }
 
-//    Private inner class will hold each class, a list of other classes, and how many times the class uses those
-//
+    //    Private inner class will hold each class, a list of other classes, and how many times the class uses those
     private class EachClassSmell{
         private  String className;
         private HashMap<String,Integer> otherClassToNumberOfCalls = new HashMap<>();

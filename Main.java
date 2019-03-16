@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
         String directoryPath = "/home/johnnymurf/Google Drive/Year 3/Semester2/SoftwareEngineering/test"; // Add path to root of directory here
