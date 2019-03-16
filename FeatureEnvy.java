@@ -23,7 +23,6 @@
  */
 
 package CodeSmellers;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -36,11 +35,9 @@ import java.util.regex.Pattern;
 
 public class FeatureEnvy implements SourceReadable,Reportable{
 
-    //  private ArrayList<Class> javaClasses;
     private ArrayList<File> javaSources;
-    private ArrayList<String> classNames = new ArrayList<>();
     private HashMap<String, String> instantiatedNameToClassName = new HashMap<>();
-    private static ArrayList<EachClassFeatureEnvySmell> featureEnvySmellsList = new ArrayList<>();
+    private static ArrayList<EachClassSmell> classSmellsList = new ArrayList<>();
 
     FeatureEnvy(ArrayList<File> javaSources) {
         this.javaSources = javaSources;
@@ -49,35 +46,40 @@ public class FeatureEnvy implements SourceReadable,Reportable{
     public void printReport() {
 
     }
-//    Private inner class will hold each class
-    private class EachClassFeatureEnvySmell{
-        private  String className;
-        private String otherClassName;
-        private int numberOfCalls;
 
-        EachClassFeatureEnvySmell(String name, String otherName, int numOfCalls) {
+    //    Private inner class will hold each class
+    private class EachClassSmell{
+        private  String className;
+        private HashMap<String,Integer> otherClassToNumberOfCalls = new HashMap<>();
+
+        EachClassSmell(String name, ArrayList<String> classNames) {
             className = name;
-            otherClassName= otherName;
-            numberOfCalls = numOfCalls;
+            for(String string: classNames){
+                otherClassToNumberOfCalls.put(string,0);
+            }
+        }
+        private void addClassAndNumOfCalls(String otherClassName, int count){
+            otherClassToNumberOfCalls.put(otherClassName, otherClassToNumberOfCalls.get(otherClassName) + count);
         }
         public String toString(){
-            return className + " calls " + otherClassName +" " +numberOfCalls+" times";
+            return className +": "+otherClassToNumberOfCalls.toString()+"\n";
         }
-    }
 
-    //   Get class names
-    public void getClassNames() {
+    }
+    public ArrayList<String> getClassNames() {
+        ArrayList<String> classNames = new ArrayList<>();
         for (File file : javaSources) {
-            //ignore tests and main
             if(checkValidFile(file)) {
                 classNames.add(file.getName().replace(".java", ""));
             }
         }
+        return classNames;
     }
 
     public void getInstantiatedNames() throws IOException {
         for(File file: javaSources) {
             if (checkValidFile(file)) {
+                ArrayList<String> classNames = getClassNames();
                 String content = new String(Files.readAllBytes(Paths.get(file.getPath())));
                 for (String classname : classNames) {
                     Pattern pattern = Pattern.compile(classname + "\\W+(\\w+)");
@@ -93,28 +95,32 @@ public class FeatureEnvy implements SourceReadable,Reportable{
     }
 
     public void getNumberOfOtherClassCalls() throws IOException {
+        int test = 0;
         for(File file : javaSources){
-            if(checkValidFile(file)){
-                String content = new String(Files.readAllBytes(Paths.get(file.getPath())));
-                int count = 0;
-                for(String instantiatedName : instantiatedNameToClassName.keySet()){
-                    Pattern pattern = Pattern.compile("\\b"+instantiatedName+"\\b");
-                    Matcher matcher = pattern.matcher(content);
-                    boolean foundFlag = false;
-                    while(matcher.find()){
-                        if(instantiatedName.contentEquals(matcher.group(0))) {
-                            foundFlag = !foundFlag;
-                            count++;
+            String fileToClassName = file.getName().replace(".java","");
+            if(checkValidFile(file)) {
+                    EachClassSmell smell = new EachClassSmell(fileToClassName, getClassNames());
+                    String content = new String(Files.readAllBytes(Paths.get(file.getPath())));
+                    int count = 0;
+                    for (String instantiatedName : instantiatedNameToClassName.keySet()) {
+                        Pattern pattern = Pattern.compile("\\b" + instantiatedName + "\\b");
+                        Matcher matcher = pattern.matcher(content);
+                        boolean foundFlag = false;
+                        while (matcher.find()) {
+                            if (instantiatedName.contentEquals(matcher.group(0))) {
+                                foundFlag = !foundFlag;
+                                count++;
+                            }
+                        }
+                        if (foundFlag) {
+                            smell.addClassAndNumOfCalls(instantiatedNameToClassName.get(instantiatedName), count);
+                            count = 0;
                         }
                     }
-                    if(foundFlag){
-                        featureEnvySmellsList.add(new EachClassFeatureEnvySmell
-                                (file.getName().replace(".java",""),
-                                        instantiatedNameToClassName.get(instantiatedName), count));
-                    }
+                    classSmellsList.add(smell);
                 }
             }
-        }
+        System.out.println(classSmellsList.toString());
     }
     @Override
     public String getKeyword(String keyword, File javaSource) throws FileNotFoundException {

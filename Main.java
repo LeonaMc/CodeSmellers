@@ -41,10 +41,11 @@ public class Main {
              * or by reflecting on classes from loadedClasses or both depending on smell
              * Java source files are represented as File objects so can be treated as a normal text file i.e can use a file scanner to read*/
 
-            FeatureEnvy featureEnvy = new FeatureEnvy(javaSource);
-            featureEnvy.getClassNames();
-            featureEnvy.getInstantiatedNames();
-            featureEnvy.getNumberOfOtherClassCalls();
+
         }
+        FeatureEnvy featureEnvy = new FeatureEnvy(javaSource);
+        featureEnvy.getClassNames();
+        featureEnvy.getInstantiatedNames();
+        featureEnvy.getNumberOfOtherClassCalls();
     }
 }
