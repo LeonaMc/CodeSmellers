@@ -7,16 +7,16 @@ import java.util.HashMap;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-//
+
 public class FindLongMethods implements Bloatable {
     private HashMap<Class, Method[]> classMethods;
     private ArrayList<Class> classSourceFiles;
     private ArrayList<File> javaSourceFiles;
     private Stack<Integer> bracketStack = new Stack<>();
 
-    FindLongMethods(ArrayList<Class> classSourceFiles, ArrayList<File> javaSourceFiles) {
-        this.classSourceFiles = new ArrayList<>(classSourceFiles);
-        this.javaSourceFiles = new ArrayList<>(javaSourceFiles);
+    FindLongMethods(ArrayList<Class> loadedClasses, ArrayList<File> javaSource) {
+        this.classSourceFiles = new ArrayList<>(loadedClasses);
+        this.javaSourceFiles = new ArrayList<>(javaSource);
         classMethods = new HashMap<>();
     }
 
@@ -81,7 +81,7 @@ public class FindLongMethods implements Bloatable {
                 matcher.reset(line);
                 i++;
                 while (matcher.find()) {
-                    System.out.println("Line " + line);
+                    System.out.println(line);
                     startLine = i;
                 }
             }
@@ -107,6 +107,7 @@ public class FindLongMethods implements Bloatable {
         return null;
     }
 
+    @Reflecting
     @Override
     public void reflectClass() {
         getClassMethods();
@@ -114,6 +115,7 @@ public class FindLongMethods implements Bloatable {
         //new File("src\\methodsToText").mkdir();
         System.out.println(classSourceFiles.get(fileToTest).getSimpleName());
         String keyword = classSourceFiles.get(fileToTest).getDeclaredMethods()[0].getName();
+        System.out.println("Keyword " + keyword);
 
         try {
             getKeyword(keyword, javaSourceFiles.get(fileToTest));
