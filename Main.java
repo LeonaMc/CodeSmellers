@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
-        String directoryPath = ""; // Add path to root of directory here
+        String directoryPath = "C:\\Users\\RickTheRuler\\Dropbox\\SoftwareEngineering2"; // Add path to root of directory here
 
         directoryReader.getFiles(directoryPath);
 
@@ -33,8 +33,8 @@ public class Main {
 
         /*Bloat Tests
         * Test for Large Classes*/
-        FindLargeClass findLargeClasses = new FindLargeClass();
-        findLargeClasses.findLargeFiles(javaSource,loadedClasses);
+        FindLargeClass findLargeClasses = new FindLargeClass(javaSource,loadedClasses);
+        findLargeClasses.findLargeFiles();
         findLargeClasses.reflectClass();
         findLargeClasses.printTestReport();
 
@@ -49,5 +49,9 @@ public class Main {
         primitiveObsession.reflectClass();
         System.out.println("\nflaggedClasses = " + primitiveObsession.getFlaggedClasses().size());
 
+        // Test for long param list for methods
+        FindLongParamList longParamList = new FindLongParamList(loadedClasses);
+        longParamList.reflectClass();
+        longParamList.printTestReport();
     }
 }
