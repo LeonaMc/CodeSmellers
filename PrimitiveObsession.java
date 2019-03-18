@@ -5,22 +5,18 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PrimitiveObsession implements Reflectable{
-    private ArrayList<File> javaSource;
     private ArrayList<Class> loadedClasses;
-    private ArrayList<Class> flaggedClasses;
+    private ArrayList<Class> cleanClasses;
+    private HashMap<Class,Integer> obsessedClasses;
 
-    public PrimitiveObsession(ArrayList<File> javaSource, ArrayList<Class> loadedClasses){
-        flaggedClasses = new ArrayList<>();
-        this.javaSource = new ArrayList<>();
+    public PrimitiveObsession(ArrayList<Class> loadedClasses){
+        obsessedClasses = new HashMap<>();
+        cleanClasses = new ArrayList<>();
         this.loadedClasses = new ArrayList<>();
-        this.javaSource.addAll(javaSource);
         this.loadedClasses.addAll(loadedClasses);
-    }
-
-    public ArrayList<Class> getFlaggedClasses() {
-        return flaggedClasses;
     }
 
     private String getFieldSimpleName(Field field){
@@ -43,27 +39,6 @@ public class PrimitiveObsession implements Reflectable{
     }
 
     @Reflecting
-    private void inspectFlaggedClasses(){
-        for(Class cls : flaggedClasses){
-            /*for (Method method : cls.getDeclaredMethods()){
-                if(method.getParameterTypes().length > 0){
-                    for (Class c : method.getParameterTypes()){
-                        System.out.println(method.getName() + " " + c.getSimpleName());
-                    }
-                    System.out.print("\n");
-                }
-            }*/
-
-            for(Field field : cls.getDeclaredFields()){
-                if(isPrimitive(field)){
-                    System.out.println(field.getName() + " " + field.getType());
-                }
-            }
-            System.out.print("\n");
-        }
-    }
-
-    @Reflecting
     @Override
     public void reflectClass() {
         for (Class cls: loadedClasses){
@@ -74,12 +49,22 @@ public class PrimitiveObsession implements Reflectable{
                 }
             }
             if(fieldCount >= 5){
-                flaggedClasses.add(cls);
+                obsessedClasses.put(cls, fieldCount);
+            }
+            else{
+                cleanClasses.add(cls);
             }
         }
+        loadedClasses.removeAll(cleanClasses);
+    }
 
-        if(flaggedClasses.size() > 0){
-            inspectFlaggedClasses();
+    public void printTestReport(){
+        if(!obsessedClasses.isEmpty()){
+            System.out.println("List of classes which have been flagged for primitive obsession");
+            for(Class cls : loadedClasses){
+                System.out.println("Class " + cls.getName() + " has " + obsessedClasses.get(cls) + " Primitive fields");
+            }
+            System.out.println("Advised to clean flagged classes or make new class for data\n"); // placeholder message
         }
     }
 }
