@@ -12,7 +12,7 @@ public class Main {
 
         directoryReader.getFiles(directoryPath);
 
-        if(DirectoryReader.getDirectoryLevel() > 0){
+        if(directoryReader.getDirectoryLevel() > 0){
             packageArray = directoryReader.getClasspath(directoryReader.getClassArrayList().get(0).getPath());
         }
         else{
@@ -33,23 +33,27 @@ public class Main {
 
         /*Bloat Tests
         * Test for Large Classes*/
+        System.out.println("==========================Test Large Class==========================");
         FindLargeClass findLargeClasses = new FindLargeClass(javaSource,loadedClasses);
         findLargeClasses.findLargeFiles();
         findLargeClasses.reflectClass();
         findLargeClasses.printTestReport();
 
         // Test for Long Methods
+        System.out.println("==========================Test Long Method==========================");
         System.out.println("\n");
         FindLongMethods findLongMethods = new FindLongMethods(loadedClasses, javaSource);
         System.out.println("\nMethod Body From Find LongMethods");
         findLongMethods.reflectClass();
 
         // Test for primitive obsession
-        PrimitiveObsession primitiveObsession = new PrimitiveObsession(javaSource,loadedClasses);
+        System.out.println("==========================Test Primitive Obsession==========================");
+        PrimitiveObsession primitiveObsession = new PrimitiveObsession(loadedClasses);
         primitiveObsession.reflectClass();
-        System.out.println("\nflaggedClasses = " + primitiveObsession.getFlaggedClasses().size());
+        primitiveObsession.printTestReport();
 
         // Test for long param list for methods
+        System.out.println("==========================Test Long Method Param List==========================");
         FindLongParamList longParamList = new FindLongParamList(loadedClasses);
         longParamList.reflectClass();
         longParamList.printTestReport();
