@@ -68,8 +68,8 @@ public class FindLongMethods implements Bloatable {
     public String getKeyword(String keyword, File javaSource) throws FileNotFoundException {
         FileInputStream fileInputStream = new FileInputStream(javaSource);
         BufferedReader input = new BufferedReader(new InputStreamReader(fileInputStream));
-
-        Pattern methodPattern = Pattern.compile(keyword + "\\(.*\\)\\{"); // regular expression to find first line of method
+        String regex = keyword + "\\(.*\\)\\{";
+        Pattern methodPattern = Pattern.compile(regex); // regular expression to find first line of method
         Matcher matcher = methodPattern.matcher("");
         String line;
         int startLine = 0;
@@ -111,7 +111,7 @@ public class FindLongMethods implements Bloatable {
     @Override
     public void reflectClass() {
         getClassMethods();
-        int fileToTest = 1; // change value to check different class
+        int fileToTest = 0; // change value to check different class
         //new File("src\\methodsToText").mkdir();
         System.out.println(classSourceFiles.get(fileToTest).getSimpleName());
         String keyword = classSourceFiles.get(fileToTest).getDeclaredMethods()[0].getName();
