@@ -6,14 +6,17 @@ import java.util.HashMap;
 
 // Refactor Class to take class and java arrays in constructor, give length of file in report
 public class FindLargeClass implements Bloatable {
-    private ArrayList<Class> bloatedClassFiles;
-    private ArrayList<File> bloatedSourceFiles; // may not need this!
-    private int numberOfSourceFiles = 0;
+    private ArrayList<Class> loadedClasses;
+    private ArrayList<File> javaSource; // may not need this!
+    private int numberOfSourceFiles;
     private HashMap<Class, ArrayList<String>> classReports; // see reflectClass()
 
-    FindLargeClass(){
-        bloatedClassFiles = new ArrayList<>();
-        bloatedSourceFiles = new ArrayList<>();
+    FindLargeClass(ArrayList<File> javaSource, ArrayList<Class> loadedClasses){
+        this.javaSource = new ArrayList<>();
+        this.loadedClasses = new ArrayList<>();
+        this.javaSource.addAll(javaSource);
+        this.loadedClasses.addAll(loadedClasses);
+        numberOfSourceFiles = javaSource.size();
         classReports = new HashMap<>();
     }
 
@@ -44,14 +47,13 @@ public class FindLargeClass implements Bloatable {
         return lines;
     }
 
-    public void findLargeFiles(ArrayList<File> javaSource, ArrayList<Class> loadedClass){
-        numberOfSourceFiles = loadedClass.size();
+    public void findLargeFiles(){
         for (int i = 0; i < javaSource.size(); i++){
             try {
                 int upperBound = 200;
-                if(countLines(javaSource.get(i)) > upperBound){
-                    bloatedSourceFiles.add(javaSource.get(i));
-                    bloatedClassFiles.add(loadedClass.get(i));
+                if(!(countLines(javaSource.get(i)) > upperBound)){ // files not large
+                    loadedClasses.remove(i);
+                    javaSource.remove(i);
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -63,7 +65,7 @@ public class FindLargeClass implements Bloatable {
     @Override
     public void reflectClass() {
         // if long class, reflect and find ways to improve e.g. count number of primitives and methods advise on results
-        for (Class cls : bloatedClassFiles){
+        for (Class cls : loadedClasses){
             ArrayList<String> report = new ArrayList<>();
             if(cls.getDeclaredMethods().length > 10){ // placeholder value, not sure how many methods is too many
                 report.add(cls.getName() + " has " + cls.getDeclaredMethods().length + " Methods"); // need better report messages
@@ -77,7 +79,7 @@ public class FindLargeClass implements Bloatable {
 
     public void printTestReport(){
         double bloated = 0;
-        for (Class cls: bloatedClassFiles){
+        for (Class cls: loadedClasses){
             String newline = "\n";
             System.out.println("Java Class: " + cls.getSimpleName() + " is too large " + newline);
             for(String report: classReports.get(cls)){
