@@ -130,12 +130,12 @@ public class DirectoryReader extends PackageFinder {
 
         URLClassLoader cl = URLClassLoader.newInstance(classUrl);
         int index = 0;
-        for (int i = 0; i  < getClassArrayList().size(); i++) { // iterate through .class files
+        for (int i = 0; i < getClassArrayList().size(); i++) { // iterate through .class files
             if(!getClassArrayList().get(i).getName().contains("$")){ // don't try to load inner classes. Inner classes are compiled separate to the class they are defined in and have a $ in the name
-                String className = getClassArrayList().get(i).getName().substring(0, getClassArrayList().get(i).getName().length() - 6); // remove .class from string
+                String className = getClassName(i).substring(0, getClassName(i).length() - 6); // remove .class from string
                 String packageName = getKeyword("package", getJavaSourceArrayList().get(index));
                 if (packageName != null) { // check if java source files belong to a package
-                    className = packageName + "." + className; // if class has package set className to packageName.className, classLoader won't work otherwise {packageArray[0]}
+                    className = packageName + "." + className; // if class has package set className to packageName.className, classLoader won't work otherwise
                 }
                 try {
                     Class loadedClass = cl.loadClass(className); // load classes for reflection
