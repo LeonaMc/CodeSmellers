@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
-        String directoryPath = "C:\\Users\\RickTheRuler\\Dropbox\\SoftwareEngineering2"; // Add path to root of directory here
+        String directoryPath = ""; // Add path to root of directory here
 
         directoryReader.getFiles(directoryPath);
 
