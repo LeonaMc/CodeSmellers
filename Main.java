@@ -57,5 +57,7 @@ public class Main {
         FindLongParamList longParamList = new FindLongParamList(loadedClasses);
         longParamList.reflectClass();
         longParamList.printTestReport();
+
+        System.out.println("Test commit");
     }
 }
