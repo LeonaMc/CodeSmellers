@@ -41,7 +41,7 @@ public class Main { // add to misc smell class check for bad encapsulation e.g c
         findLargeClasses.reflectClass();
         ArrayList<Class> largeClassEffectedClasses = findLargeClasses.getReport().getEffectedClasses();
         Report largeClassReport = findLargeClasses.getReport();
-        double largePercent = ((double)largeClassReport.getEffectedClasses().size()/(double)loadedClasses.size()) * 100;
+        double largePercent = ((double)largeClassReport.getEffectedClasses().size()/(double)loadedClasses.size())*100;
         System.out.println("Number of effected classes = " + largeClassReport.getEffectedClasses().size());
         System.out.println(largeClassReport.df.format(largePercent) + "%" + " of files in project effected");
         for(Class cls:largeClassEffectedClasses){
