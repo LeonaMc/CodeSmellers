@@ -6,16 +6,18 @@ import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class FindLongParamList implements Reflectable{
+public class LongParamList implements Reflectable{
     private ArrayList<Class> loadedClasses;
     private ArrayList<Class> cleanClasses;
+    private Report report;
     private HashMap<Class, ArrayList<Method>> longParamMap;
 
-    public FindLongParamList(ArrayList<Class> loadedClasses){
+    public LongParamList(ArrayList<Class> loadedClasses){
         this.loadedClasses = new ArrayList<>();
         this.loadedClasses.addAll(loadedClasses);
         cleanClasses = new ArrayList<>();
         longParamMap = new HashMap<>();
+        report = new Report();
     }
 
     private void findLongParamMethods(Class cls) throws FileNotFoundException {
@@ -26,7 +28,7 @@ public class FindLongParamList implements Reflectable{
             }
         }
         if(longParamMethods.size() > 0){
-            longParamMap.put(cls,longParamMethods);
+            report.setCodeSmellData(cls, longParamMethods);
         }
         else{
             cleanClasses.add(cls);
@@ -43,9 +45,14 @@ public class FindLongParamList implements Reflectable{
             }
         }
         loadedClasses.removeAll(cleanClasses);
+        report.setEffectedClasses(loadedClasses);
     }
 
-    // test
+    public Report getReport() {
+        return report;
+    }
+
+    // test redundant
     public void printTestReport(){
         for(Class cls : loadedClasses){
             System.out.println("Long parameter methods in class " + cls.getSimpleName());
@@ -56,7 +63,6 @@ public class FindLongParamList implements Reflectable{
                     System.out.println(parameter.getName() + " of type " + parameter.getType());
                 }
             }
-            System.out.println("Suggested to create a new methods and split functionality in class " + cls.getSimpleName() + "\n"); // template message
         }
     }
 }
