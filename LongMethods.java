@@ -2,26 +2,27 @@ package CodeSmellers;
 
 import java.io.*;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FindLongMethods implements Bloatable {
+public class LongMethods implements Inspectable {
     private HashMap<Class, Method[]> classMethods;
-    private ArrayList<Class> classSourceFiles;
+    private ArrayList<Class> loadedClasses;
     private ArrayList<File> javaSourceFiles;
     private Stack<Integer> bracketStack = new Stack<>();
 
-    FindLongMethods(ArrayList<Class> loadedClasses, ArrayList<File> javaSource) {
-        this.classSourceFiles = new ArrayList<>(loadedClasses);
+    LongMethods(ArrayList<Class> loadedClasses, ArrayList<File> javaSource) {
+        this.loadedClasses = new ArrayList<>(loadedClasses);
         this.javaSourceFiles = new ArrayList<>(javaSource);
         classMethods = new HashMap<>();
     }
 
     public void getClassMethods() {
-        for (Class cls : classSourceFiles) { //
+        for (Class cls : loadedClasses) { //
             classMethods.put(cls, cls.getDeclaredMethods());
         }
     }
@@ -68,7 +69,18 @@ public class FindLongMethods implements Bloatable {
     public String getKeyword(String keyword, File javaSource) throws FileNotFoundException {
         FileInputStream fileInputStream = new FileInputStream(javaSource);
         BufferedReader input = new BufferedReader(new InputStreamReader(fileInputStream));
-        String regex = keyword + "\\(.*\\)\\{";
+        Class myClass =  loadedClasses.get(javaSourceFiles.indexOf(javaSource));
+        Method myMethod = null;
+        for(Method method: myClass.getDeclaredMethods()){
+            if (method.getName().equalsIgnoreCase(keyword)){
+                myMethod = method;
+            }
+        }
+        System.out.println("myMethod " + myMethod.getName());
+        String buildRegex = Modifier.toString(myMethod.getModifiers());
+        System.out.println("BuildRegex " + buildRegex);
+        String regex = buildRegex + " " + keyword;
+        System.out.println("Regex " + regex);
         Pattern methodPattern = Pattern.compile(regex); // regular expression to find first line of method
         Matcher matcher = methodPattern.matcher("");
         String line;
@@ -80,6 +92,7 @@ public class FindLongMethods implements Bloatable {
 
                 matcher.reset(line);
                 i++;
+                System.out.println(line);
                 while (matcher.find()) {
                     System.out.println(line);
                     startLine = i;
@@ -111,10 +124,10 @@ public class FindLongMethods implements Bloatable {
     @Override
     public void reflectClass() {
         getClassMethods();
-        int fileToTest = 0; // change value to check different class
+        int fileToTest = 1; // change value to check different class
         //new File("src\\methodsToText").mkdir();
-        System.out.println(classSourceFiles.get(fileToTest).getSimpleName());
-        String keyword = classSourceFiles.get(fileToTest).getDeclaredMethods()[0].getName();
+        System.out.println(loadedClasses.get(fileToTest).getSimpleName());
+        String keyword = loadedClasses.get(fileToTest).getDeclaredMethods()[0].getName();
         System.out.println("Keyword " + keyword);
 
         try {
@@ -122,7 +135,7 @@ public class FindLongMethods implements Bloatable {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        /*for(Class cls : classSourceFiles){
+        /*for(Class cls : loadedClasses){
             Method[] tempClassMethods = classMethods.get(cls);
             for(Method meth: tempClassMethods){
                 try {
@@ -132,10 +145,5 @@ public class FindLongMethods implements Bloatable {
                 }
             }
         }*/
-    }
-
-    @Override
-    public int countLines(File javaSource) throws FileNotFoundException {
-        return 0;
     }
 }
