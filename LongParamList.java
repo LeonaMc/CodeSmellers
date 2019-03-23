@@ -10,13 +10,11 @@ public class LongParamList implements Reflectable{
     private ArrayList<Class> loadedClasses;
     private ArrayList<Class> cleanClasses;
     private Report report;
-    private HashMap<Class, ArrayList<Method>> longParamMap;
 
     public LongParamList(ArrayList<Class> loadedClasses){
         this.loadedClasses = new ArrayList<>();
         this.loadedClasses.addAll(loadedClasses);
         cleanClasses = new ArrayList<>();
-        longParamMap = new HashMap<>();
         report = new Report();
     }
 
@@ -50,19 +48,5 @@ public class LongParamList implements Reflectable{
 
     public Report getReport() {
         return report;
-    }
-
-    // test redundant
-    public void printTestReport(){
-        for(Class cls : loadedClasses){
-            System.out.println("Long parameter methods in class " + cls.getSimpleName());
-            for(Method method : longParamMap.get(cls)){
-                System.out.print("\nParameter count for " + method.getName() +" is " + method.getParameterCount() + "\n"
-                        + "Parameters are\n");
-                for (Parameter parameter : method.getParameters()){
-                    System.out.println(parameter.getName() + " of type " + parameter.getType());
-                }
-            }
-        }
     }
 }

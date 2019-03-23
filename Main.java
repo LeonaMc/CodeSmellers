@@ -22,8 +22,6 @@ public class Main { // add to misc smell class check for bad encapsulation e.g c
             packageArray[1] = directoryPath;
         }
 
-        System.out.println(packageArray[0] + " " + packageArray[1]);
-
         try {
             directoryReader.loadClasses(packageArray);
         } catch (FileNotFoundException e) {
