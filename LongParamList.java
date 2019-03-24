@@ -2,9 +2,7 @@ package CodeSmellers;
 
 import java.io.FileNotFoundException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class LongParamList implements Reflectable{
     private ArrayList<Class> loadedClasses;
@@ -26,7 +24,7 @@ public class LongParamList implements Reflectable{
             }
         }
         if(longParamMethods.size() > 0){
-            report.setCodeSmellData(cls, longParamMethods);
+            report.putCodeSmellData(cls, longParamMethods);
         }
         else{
             cleanClasses.add(cls);
