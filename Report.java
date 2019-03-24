@@ -24,7 +24,7 @@ public class Report<T> {
         this.effectedClasses.addAll(effectedClasses);
     }
 
-    public void setCodeSmellData(Class key, T data){
+    public void putCodeSmellData(Class key, T data){
         this.codeSmellData.put(key, data);
     }
 
