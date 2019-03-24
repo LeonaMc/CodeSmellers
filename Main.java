@@ -4,13 +4,26 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 // for large class get number of lines and number of primitives get percent of lines used by primitives
+// Change every instance of getIndexOf() in source and class arraylists with better solution
+// Add logic to smell class or report to catch cases of no smell detected
+// Add if reportFromClass.getEffectedClasses > 0 boolean classObject.IsEffected = true
+// Can be used to reference which classes are effected as some code smells can be an indicator for others e.g large class with small number of methods
+// might indicate long methods or primitive obsession etc
+// further implementation of LazyClass needed. Small class alone does not indicate a lazy class, check for use in other classes(reflection). Some code smells are mutually exclusive e.g GodClass/LazyClass etc
+// duplicate code starts by wednesday
+// Need to add catch for compiler created variables in any class that will access class fields PrimitiveObsession/TooManyLiterals. Check bookmark.
+// LongMethods working need to figure out what data is relevant to add to report, effected methods or string
+// Finish TooManyLiterals check bookmark
+// report file path of effected classes to user
 public class Main { // add to misc smell class check for bad encapsulation e.g check public class variables
     public static void main(String[] args) throws FileNotFoundException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException, InstantiationException {
         String newline = "\n";
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
-        String directoryPath = ""; // Add path to root of directory here
+        String directoryPath = "C:\\Users\\RickTheRuler\\Dropbox\\SoftwareEngineering2"; // Add path to root of directory here
 
         directoryReader.getFiles(directoryPath);
 
@@ -37,8 +50,8 @@ public class Main { // add to misc smell class check for bad encapsulation e.g c
         LargeClass findLargeClasses = new LargeClass(javaSource,loadedClasses);
         findLargeClasses.findLargeFiles();
         findLargeClasses.reflectClass();
-        ArrayList<Class> largeClassEffectedClasses = findLargeClasses.getReport().getEffectedClasses();
         Report largeClassReport = findLargeClasses.getReport();
+        ArrayList<Class> largeClassEffectedClasses = largeClassReport.getEffectedClasses();
         double largePercent = ((double)largeClassReport.getEffectedClasses().size()/(double)loadedClasses.size())*100;
         System.out.println("Number of effected classes = " + largeClassReport.getEffectedClasses().size());
         System.out.println(largeClassReport.df.format(largePercent) + "%" + " of files in project effected");
@@ -47,12 +60,19 @@ public class Main { // add to misc smell class check for bad encapsulation e.g c
         }
         System.out.println(newline);
 
-        // Test for Long Methods
-       // System.out.println("==========================Test Long Method==========================");
-       // System.out.println("\n");
-       // LongMethods findLongMethods = new LongMethods(loadedClasses, javaSource);
-       // System.out.println("\nMethod Body From Find LongMethods");
-       // findLongMethods.reflectClass();
+       //  Test for Long Methods
+//       System.out.println("==========================Test Long Method==========================");
+//       LongMethods findLongMethods = new LongMethods(loadedClasses, javaSource);
+//       findLongMethods.reflectClass();
+//       Report longMethodReport = findLongMethods.getReport();
+//       ArrayList<Class> longMethodEffectedClasses = longMethodReport.getEffectedClasses();
+//       System.out.println("Size = " + longMethodEffectedClasses.size() + newline);
+//       for(Class cls : longMethodEffectedClasses){
+//           for(Method method: cls.getDeclaredMethods()){
+//               System.out.println( + newline); // toString bug can be used
+//           }
+//
+//       }
 
         // Test for primitive obsession
         System.out.println("==========================Test Primitive Obsession==========================");
