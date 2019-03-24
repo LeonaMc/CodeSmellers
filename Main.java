@@ -23,7 +23,7 @@ public class Main { // add to misc smell class check for bad encapsulation e.g c
         String newline = "\n";
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
-        String directoryPath = "C:\\Users\\RickTheRuler\\Dropbox\\SoftwareEngineering2"; // Add path to root of directory here
+        String directoryPath = ""; // Add path to root of directory here
 
         directoryReader.getFiles(directoryPath);
 
