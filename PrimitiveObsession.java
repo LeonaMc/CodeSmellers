@@ -45,7 +45,7 @@ public class PrimitiveObsession implements Reflectable{
                 }
             }
             if(fieldCount >= 5){
-                report.setCodeSmellData(cls, fieldCount); // add code smell data for each effected class
+                report.putCodeSmellData(cls, fieldCount); // add code smell data for each effected class
             }
             else{
                 cleanClasses.add(cls);
@@ -58,13 +58,4 @@ public class PrimitiveObsession implements Reflectable{
     public Report getReport() {
         return report;
     }
-
-    //public void printTestReport(){
-    //    if(!obsessedClasses.isEmpty()){
-    //        System.out.println("List of classes which have been flagged for primitive obsession");
-    //        for(Class cls : loadedClasses){
-    //            System.out.println("Class " + cls.getName() + " has " + obsessedClasses.get(cls) + " Primitive fields");
-    //        }
-    //    }
-    //}
 }
