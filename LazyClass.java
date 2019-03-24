@@ -37,7 +37,7 @@ public class LazyClass implements Reflectable{
         }// add else and put in lazyClassReport its clean for small classes
         if(cleanClasses.size() > 0){
             loadedClasses.removeAll(cleanClasses);
-            lazyClassReport.setEffectedClasses(loadedClasses);// catch empty smelly classes in Report
+            lazyClassReport.setEffectedClasses(loadedClasses);// catch empty effected classes in Report
         }
         return lazyFound;
     }
@@ -48,12 +48,12 @@ public class LazyClass implements Reflectable{
             if(cls.getDeclaredMethods().length == 0 && cls.getDeclaredFields().length > 0){
                 //System.out.println(cls.getSimpleName() + " is used for data\n");
                 String data = cls.getSimpleName() + " is used for data";
-                lazyClassReport.setCodeSmellData(cls, data);
+                lazyClassReport.putCodeSmellData(cls, data);
             }
             else if(cls.getDeclaredMethods().length > 0 && cls.getDeclaredMethods().length < 5){
                 //System.out.println(cls.getSimpleName() + " has too few methods\n");
                 String data = cls.getSimpleName() + " has too few methods";
-                lazyClassReport.setCodeSmellData(cls, data);
+                lazyClassReport.putCodeSmellData(cls, data);
             }
             //add more
         }
