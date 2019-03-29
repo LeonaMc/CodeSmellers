@@ -33,6 +33,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,20 +46,29 @@ public class FeatureEnvy implements SourceReadable,Reportable{
     FeatureEnvy(ArrayList<File> javaSources) {
         this.javaSources = javaSources;
     }
+    public float getDirectorySmell(){
+        findFeatureEnvy();
+        int numOfClasses = classSmellsList.size();
+        float percentageSmell = 0f;
+        int totalNumOfCalls = 0;
 
-    public void findFeatureEnvy() {
+        for(EachClassSmell classSmell : classSmellsList){
+            totalNumOfCalls += classSmell.getNumOfOtherClassCalls();
+        }
+        return 0;
+    }
+    private void findFeatureEnvy() {
         try {
             findInstantiatedNames();
             findNumberOfOtherClassCalls();
         } catch (IOException e) {
             e.printStackTrace();
-
         }
     }
     @Override
     public void printReport() {
         for(EachClassSmell smell : classSmellsList) {
-            System.out.println(smell.toString());
+            System.out.println(smell.eachClassSmellToString());
         }
     }
 
@@ -66,6 +76,7 @@ public class FeatureEnvy implements SourceReadable,Reportable{
     private class EachClassSmell{
         private  String className;
         private HashMap<String,Integer> otherClassToNumberOfCalls = new HashMap<>();
+
         EachClassSmell(String name, ArrayList<String> classNames) {
             className = name;
             for(String className: classNames){
@@ -75,13 +86,17 @@ public class FeatureEnvy implements SourceReadable,Reportable{
         private void addClassAndNumOfCalls(String otherClassName, int count){
             otherClassToNumberOfCalls.put(otherClassName, otherClassToNumberOfCalls.get(otherClassName) + count);
         }
-        public String toString(){
+        private String eachClassSmellToString(){
             return className +": "+otherClassToNumberOfCalls.toString()+"\n";
         }
-
+        private float getNumOfOtherClassCalls(){
+            int num = 0;
+            for(Map.Entry<String,Integer> classCalls : otherClassToNumberOfCalls.entrySet()){
+                num += classCalls.getValue();
+            }
+            return num;
+        }
     }
-
-
     private ArrayList<String> getClassNames() {
         ArrayList<String> classNames = new ArrayList<>();
         for (File file : javaSources) {
@@ -159,6 +174,7 @@ public class FeatureEnvy implements SourceReadable,Reportable{
         }
         return true;
     }
+
 
 }
 

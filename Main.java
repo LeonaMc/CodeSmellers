@@ -44,7 +44,7 @@ public class Main {
 
 
         FeatureEnvy featureEnvy = new FeatureEnvy(javaSource);
-        featureEnvy.findFeatureEnvy();
+        featureEnvy.getDirectorySmell();
         featureEnvy.printReport();
     }
 }
