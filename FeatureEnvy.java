@@ -33,7 +33,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -46,18 +45,8 @@ public class FeatureEnvy implements SourceReadable,Reportable{
     FeatureEnvy(ArrayList<File> javaSources) {
         this.javaSources = javaSources;
     }
-    public float getDirectorySmell(){
-        findFeatureEnvy();
-        int numOfClasses = classSmellsList.size();
-        float percentageSmell = 0f;
-        int totalNumOfCalls = 0;
 
-        for(EachClassSmell classSmell : classSmellsList){
-            totalNumOfCalls += classSmell.getNumOfOtherClassCalls();
-        }
-        return 0;
-    }
-    private void findFeatureEnvy() {
+    public void findFeatureEnvy() {
         try {
             findInstantiatedNames();
             findNumberOfOtherClassCalls();
@@ -65,29 +54,25 @@ public class FeatureEnvy implements SourceReadable,Reportable{
             e.printStackTrace();
         }
     }
-
-//    Ignore this is for myself
     public void printReport() {
+        System.out.println("Print report");
         for(EachClassSmell smell : classSmellsList) {
-            System.out.println(smell.eachClassSmellToString());
+            System.out.println(smell.smellToString());
+
         }
     }
-
     @Override
     public Report returnReport() {
         return null;
     }
-
     @Override
     public void formatData() {
-
     }
 
     //    Private inner class will hold each class, a list of other classes, and how many times the class uses those
     private class EachClassSmell{
         private  String className;
         private HashMap<String,Integer> otherClassToNumberOfCalls = new HashMap<>();
-
         EachClassSmell(String name, ArrayList<String> classNames) {
             className = name;
             for(String className: classNames){
@@ -97,16 +82,11 @@ public class FeatureEnvy implements SourceReadable,Reportable{
         private void addClassAndNumOfCalls(String otherClassName, int count){
             otherClassToNumberOfCalls.put(otherClassName, otherClassToNumberOfCalls.get(otherClassName) + count);
         }
-        private String eachClassSmellToString(){
+        public String smellToString(){
+
             return className +": "+otherClassToNumberOfCalls.toString()+"\n";
         }
-        private float getNumOfOtherClassCalls(){
-            int num = 0;
-            for(Map.Entry<String,Integer> classCalls : otherClassToNumberOfCalls.entrySet()){
-                num += classCalls.getValue();
-            }
-            return num;
-        }
+
     }
     private ArrayList<String> getClassNames() {
         ArrayList<String> classNames = new ArrayList<>();
@@ -186,6 +166,4 @@ public class FeatureEnvy implements SourceReadable,Reportable{
         return true;
     }
 
-
 }
-
