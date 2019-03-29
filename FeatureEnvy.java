@@ -65,11 +65,22 @@ public class FeatureEnvy implements SourceReadable,Reportable{
             e.printStackTrace();
         }
     }
-    @Override
+
+//    Ignore this is for myself
     public void printReport() {
         for(EachClassSmell smell : classSmellsList) {
             System.out.println(smell.eachClassSmellToString());
         }
+    }
+
+    @Override
+    public Report returnReport() {
+        return null;
+    }
+
+    @Override
+    public void formatData() {
+
     }
 
     //    Private inner class will hold each class, a list of other classes, and how many times the class uses those
