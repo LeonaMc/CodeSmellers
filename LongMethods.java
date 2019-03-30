@@ -34,7 +34,7 @@ public class LongMethods implements Inspectable {
         return report;
     }
 
-
+    // Doesn't find body if method body is on one line or if no parameters
     public int getMethodBody(int startLine, File javaSource) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(javaSource);
         BufferedReader input = new BufferedReader(new InputStreamReader(fileInputStream));
