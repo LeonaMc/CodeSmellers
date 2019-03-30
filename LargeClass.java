@@ -4,10 +4,10 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class LargeClass implements Inspectable {
-    private ArrayList<Class> loadedClasses;
-    private ArrayList<File> javaSource;
+    private ArrayList<Class> loadedClasses; // All classes to be inspected, loaded for reflection
+    private ArrayList<File> javaSource; // all source files from project being inspected
     private LineCounter lineCounter;
-    private Report report;
+    private Report report; // stores results of inspection
 
     LargeClass(ArrayList<File> javaSource, ArrayList<Class> loadedClasses){
         this.javaSource = new ArrayList<>();
@@ -22,20 +22,21 @@ public class LargeClass implements Inspectable {
     public String getKeyword(String keyword, File javaSource) throws FileNotFoundException {
         return null;
     }
-
+    // determines if class suffers from large class code smell
+    // when loop is finished only effected classes and java source files will be left in each ArrayList
     public void findLargeFiles(){
-        for (int i = 0; i < javaSource.size(); i++){
+        for (int i = 0; i < javaSource.size(); i++){ // iterate through each element of javaSource
             try {
-                int upperBound = 200;
+                int upperBound = 200; // heuristic
                 if(!(lineCounter.countLines(javaSource.get(i)) > upperBound)){ // files not large
-                    loadedClasses.remove(i);
-                    javaSource.remove(i);
+                    loadedClasses.remove(i); // remove clean class
+                    javaSource.remove(i); // remove clean file
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
-        report.setEffectedClasses(loadedClasses);
+        report.setEffectedClasses(loadedClasses); // add list of effected classes to report
     }
 
     @Reflecting
@@ -53,7 +54,7 @@ public class LargeClass implements Inspectable {
             }
         }
     }
-
+    // returns report
     public Report getReport() {
         return report;
     }
