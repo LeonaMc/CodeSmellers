@@ -3,23 +3,18 @@ package CodeSmellers;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-/*each code smell class has a report object as class variable.
-* if class being inspected is found clean add to clean ArrayList
-* Remove all clean classes from loadedClass array
-* add (loadedClasses - clean classes) to report Array effectedClasses
-* size of effectedClasses array is number of classes effected, can get info from each class in effected array e.g class name etc
-* HashMap will hold individual class data of code smell using class as key to data found in code smell class
-* code smell class will return report*/
 public class Report<T> {
     DecimalFormat df = new DecimalFormat("#.00");
-    private ArrayList<Class> effectedClasses;
-    private HashMap<Class,T> codeSmellData;
+    private ArrayList<Class> effectedClasses; // holds only effected classes of code smell report belongs to
+    private HashMap<Class,T> codeSmellData; // holds data found from code smell inspection. All keys are held in effected classes
+    private double percentOfFilesEffected; // overall percent of effected classes
 
     public Report(){
         effectedClasses = new ArrayList<>();
         codeSmellData = new HashMap<>();
+        percentOfFilesEffected = 0.0;
     }
-
+    //
     public void setEffectedClasses(ArrayList<Class> effectedClasses){
         this.effectedClasses.addAll(effectedClasses);
     }
@@ -34,5 +29,13 @@ public class Report<T> {
 
     public HashMap<Class,T> getCodeSmellData() {
         return codeSmellData;
+    }
+
+    private double setPercentage(int loadedClassSize){
+        return ((double)effectedClasses.size()/(double)loadedClassSize)*100;
+    }
+
+    public String getPercentage(){
+        return df.format(percentOfFilesEffected)+"%";
     }
 }
