@@ -119,7 +119,7 @@ public class DirectoryReader extends PackageFinder {
     * packageArray[1] = classpath(just a filepath that is the root folder for the .class files) for package*/
     @ClassLoader
     public void loadClasses(String[] packageArray) throws FileNotFoundException {
-
+        //System.out.println("Package " + packageArray[0]+ " " + packageArray[1]);
         String path = packageArray[1];
         URL[] classUrl = new URL[0];
         try {
@@ -134,8 +134,10 @@ public class DirectoryReader extends PackageFinder {
             if(!getClassArrayList().get(i).getName().contains("$")){ // don't try to load inner classes. Inner classes are compiled separate to the class they are defined in and have a $ in the name
                 String className = getClassName(i).substring(0, getClassName(i).length() - 6); // remove .class from string
                 String packageName = getKeyword("package", getJavaSourceArrayList().get(index));
+
                 if (packageName != null) { // check if java source files belong to a package
                     className = packageName + "." + className; // if class has package set className to packageName.className, classLoader won't work otherwise
+                    //System.out.println(className);
                 }
                 try {
                     Class loadedClass = cl.loadClass(className); // load classes for reflection
