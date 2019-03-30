@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CodeSmellers.Controller.ChangeSceneController">
+   <children>
+      <Pane layoutX="-244.0" layoutY="-259.0" prefHeight="750.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text layoutX="14.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Code Smells">
+               <font>
+                  <Font name="System Bold" size="72.0" />
+               </font></Text>
+            <ImageView fitHeight="139.0" fitWidth="183.0" layoutX="845.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Skunk.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="14.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Project Upload">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Text>
+            <Text layoutX="14.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Upload project:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Button layoutX="14.0" layoutY="711.0" mnemonicParsing="false" onAction="#goBackToWelomeScreen" text="Back" />
+            <Button layoutX="934.0" layoutY="711.0" mnemonicParsing="false" text="Next" />
+            <Button layoutX="14.0" layoutY="339.0" mnemonicParsing="false" onAction="#openDirectoryChooser" text="Upload" />
+            <TextField fx:id="textField" layoutX="14.0" layoutY="295.0" prefHeight="25.0" prefWidth="455.0" promptText="No file selected" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
