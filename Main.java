@@ -72,28 +72,21 @@ public class Main { // add to misc smell class check for bad encapsulation e.g c
         ArrayList<Class> loadedClasses = new ArrayList<>(directoryReader.getLoadedClasses()); // classes ready for reflection
         ArrayList<File> javaSource = new ArrayList<>(directoryReader.getJavaSourceArrayList()); // can read java files as text
 
-     //  for (Class cls : loadedClasses){
-     //      System.out.println(cls.getName());
-     //  }
-
-     //  for (File file : javaSource){
-     //      System.out.println(file.getName());
-     //  }
         //Bloat Tests
         // Test for Large Classes
-     System.out.println("==========================Test Large Class==========================");
-     LargeClass findLargeClasses = new LargeClass(javaSource,loadedClasses);
-     findLargeClasses.findLargeFiles();
-     findLargeClasses.reflectClass();
-     Report largeClassReport = findLargeClasses.getReport();
-     ArrayList<Class> largeClassEffectedClasses = largeClassReport.getEffectedClasses();
-     double largePercent = ((double)largeClassReport.getEffectedClasses().size()/(double)loadedClasses.size())*100;
-     System.out.println("Number of effected classes = " + largeClassReport.getEffectedClasses().size());
-     System.out.println(largeClassReport.df.format(largePercent) + "%" + " of files in project effected");
-     for(Class cls:largeClassEffectedClasses){
-         System.out.println(cls.getName());
-     }
-     System.out.println(newline);
+         System.out.println("==========================Test Large Class==========================");
+         LargeClass findLargeClasses = new LargeClass(javaSource,loadedClasses);
+         findLargeClasses.findLargeFiles();
+         findLargeClasses.reflectClass();
+         Report largeClassReport = findLargeClasses.getReport();
+         ArrayList<Class> largeClassEffectedClasses = largeClassReport.getEffectedClasses();
+         double largePercent = ((double)largeClassReport.getEffectedClasses().size()/(double)loadedClasses.size())*100;
+         System.out.println("Number of effected classes = " + largeClassReport.getEffectedClasses().size());
+         System.out.println(largeClassReport.df.format(largePercent) + "%" + " of files in project effected");
+         for(Class cls:largeClassEffectedClasses){
+             System.out.println(cls.getName());
+         }
+         System.out.println(newline);
 
     //  Test for Long Methods
 //    System.out.println("==========================Test Long Method==========================");
