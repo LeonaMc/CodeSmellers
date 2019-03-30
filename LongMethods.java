@@ -34,7 +34,7 @@ public class LongMethods implements Inspectable {
         return report;
     }
 
-    // Doesn't find body if method body is on one line or if no parameters
+
     public int getMethodBody(int startLine, File javaSource) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(javaSource);
         BufferedReader input = new BufferedReader(new InputStreamReader(fileInputStream));
@@ -87,7 +87,6 @@ public class LongMethods implements Inspectable {
         String buildRegex;
         buildRegex = Modifier.toString(myMethod.getModifiers()); // add catch for null getModifiers
         buildRegex = buildRegex + " " + myMethod.getReturnType().getSimpleName();
-        //System.out.println("BuildRegex " + buildRegex);
         String regex = buildRegex + " " + keyword;
 
         Pattern methodPattern = Pattern.compile(Pattern.quote(regex)); // regular expression to find first line of method
