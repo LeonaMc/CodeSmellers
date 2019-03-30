@@ -14,47 +14,32 @@ public class PrimitiveObsession implements Reflectable{
         this.loadedClasses.addAll(loadedClasses);
         report = new Report();
     }
-
+    // method shortens repeated calls to getSimpleName
     private String getFieldSimpleName(Field field){
         return field.getType().getSimpleName();
-    }
-
-    private boolean isPrimitive(Field field){
-        boolean isPrimitive = false;
-
-        if(getFieldSimpleName(field).equalsIgnoreCase("int") ||
-                getFieldSimpleName(field).equalsIgnoreCase("double") ||
-                getFieldSimpleName(field).equalsIgnoreCase("boolean") ||
-                getFieldSimpleName(field).equalsIgnoreCase("float") ||
-                getFieldSimpleName(field).equalsIgnoreCase("String") ||
-                getFieldSimpleName(field).equalsIgnoreCase("char")){
-
-            isPrimitive = true;
-        }
-        return isPrimitive;
     }
 
     @Reflecting
     @Override
     public void reflectClass() {
-        for (Class cls: loadedClasses){
-            int fieldCount = 0;
-            for (Field field: cls.getDeclaredFields()){
-                if(isPrimitive(field)){
-                    fieldCount++;
+        for (Class cls: loadedClasses){ // for each class
+            int fieldCount = 0; // set fieldCount to 0 for current class
+            for (Field field: cls.getDeclaredFields()){ // for each field
+                if(field.getType().isPrimitive()){ // if type is primitive
+                    fieldCount++; // increment counter
                 }
             }
-            if(fieldCount >= 5){
+            if(fieldCount >= 5){ // heuristic = 5 needs to be changed
                 report.putCodeSmellData(cls, fieldCount); // add code smell data for each effected class
             }
             else{
-                cleanClasses.add(cls);
+                cleanClasses.add(cls); // clean classes will be removed
             }
         }
-        loadedClasses.removeAll(cleanClasses);
+        loadedClasses.removeAll(cleanClasses); // remove all clean classes
         report.setEffectedClasses(loadedClasses); // add effected classes to report
     }
-
+    // returns report
     public Report getReport() {
         return report;
     }
