@@ -17,33 +17,33 @@ public class LongParamList implements Reflectable{
     }
 
     private void findLongParamMethods(Class cls) throws FileNotFoundException {
-        ArrayList<Method> longParamMethods = new ArrayList<>();
-        for (Method method: cls.getDeclaredMethods()){
-            if(method.getParameterCount() >= 4){
-                longParamMethods.add(method);
+        ArrayList<Method> longParamMethods = new ArrayList<>(); // effected methods
+        for (Method method: cls.getDeclaredMethods()){ // for each method of class
+            if(method.getParameterCount() >= 4){ // heuristic = 4
+                longParamMethods.add(method); // add effected method
             }
         }
-        if(longParamMethods.size() > 0){
-            report.putCodeSmellData(cls, longParamMethods);
+        if(longParamMethods.size() > 0){ // if current class has effected methods
+            report.putCodeSmellData(cls, longParamMethods); // add data to report
         }
         else{
-            cleanClasses.add(cls);
+            cleanClasses.add(cls); // else add the clean class
         }
     }
 
     @Override
     public void reflectClass() {
-        for(Class cls: loadedClasses){
+        for(Class cls: loadedClasses){ // for each class to be inspected
             try {
-                findLongParamMethods(cls);
+                findLongParamMethods(cls); // run inspection
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
-        loadedClasses.removeAll(cleanClasses);
-        report.setEffectedClasses(loadedClasses);
+        loadedClasses.removeAll(cleanClasses); // remove clean classes so only effected classes left
+        report.setEffectedClasses(loadedClasses); // add effected classes classes to report
     }
-
+    // returns report
     public Report getReport() {
         return report;
     }
