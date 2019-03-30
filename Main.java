@@ -1,64 +1,53 @@
 package CodeSmellers;
 
-import CodeSmellers.Model.SplashScreen;
-import com.sun.javafx.applet.Splash;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-import static javafx.application.Application.launch;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
-// for large class get number of lines and number of primitives get percent of lines used by primitives
-// Change every instance of getIndexOf() in source and class arraylists with better solution
-// Add logic to smell class or report to catch cases of no smell detected
-// Add if reportFromClass.getEffectedClasses > 0 boolean classObject.IsEffected = true
-// Can be used to reference which classes are effected as some code smells can be an indicator for others e.g large class with small number of methods
-// might indicate long methods or primitive obsession etc
-// further implementation of LazyClass needed. Small class alone does not indicate a lazy class, check for use in other classes(reflection). Some code smells are mutually exclusive e.g GodClass/LazyClass etc
-// duplicate code starts by wednesday
-// LongMethods working need to figure out what data is relevant to add to report, effected methods or string
-// report file path of effected classes to user
-public class Main { // add to misc smell class check for bad encapsulation e.g check public class variables
-    // Setting up GUI
-//    @Override
-//    public void start(Stage primaryStage){
-//        try {
-//            Parent root = FXMLLoader.load(this.getClass().getResource("/CodeSmellers.Model/WelcomeScreen.fxml"));
-//            primaryStage.setScene(new Scene(root));
-//            primaryStage.show();
-//        } catch(Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+import CodeSmellers.Model.SplashScreen;
 
-    public static void main(String[] args) throws FileNotFoundException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException, InstantiationException, InterruptedException {
-        String newline = "\n";
+public class Main extends Application{
+	
+	// Setting up GUI
+	@Override
+	public void start(Stage primaryStage) {
+		try {
+		    Parent root = FXMLLoader.load(this.getClass().getResource("/CodeSmellers/Model/WelcomeScreen.fxml"));
+		    primaryStage.setScene(new Scene(root));
+	        primaryStage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+    public static void main(String[] args) throws InterruptedException, FileNotFoundException, ClassNotFoundException, NoSuchFieldException, InstantiationException, IllegalAccessException {
+    	String newline = "\n";
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
         String directoryPath = ""; // Add path to root of directory here
-
         directoryReader.getFiles(directoryPath);
-
-        Splash Screen;
+	    
+	    // Splash Screen
         SplashScreen splashScreen = new SplashScreen();
         splashScreen.setVisible(true);
         Thread thread = Thread.currentThread();
         thread.sleep(2500);
         splashScreen.dispose();
-
+        
         // Calling the Welcome Screen for GUI in main
-        launch(args);
+        launch(args); 
 
-        if (directoryReader.getDirectoryLevel() > 0) {
+        if(directoryReader.getDirectoryLevel() > 0){
             packageArray = directoryReader.getClasspath(directoryReader.getClassArrayList().get(0).getPath());
-        } else {
+        }
+        else{
             packageArray[0] = null;
             packageArray[1] = directoryPath;
         }
@@ -71,17 +60,16 @@ public class Main { // add to misc smell class check for bad encapsulation e.g c
 
         ArrayList<Class> loadedClasses = new ArrayList<>(directoryReader.getLoadedClasses()); // classes ready for reflection
         ArrayList<File> javaSource = new ArrayList<>(directoryReader.getJavaSourceArrayList()); // can read java files as text
-        LineCounter lineCounter = new LineCounter();
-        for (File file : javaSource) {
-            if (file.getName().contains("FeatureEnvy")) {
-                try {
-                    System.out.println("Comment count: " + lineCounter.countBody(file));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+
+        // prints list of loaded classes
+        for(Class cls : loadedClasses){
+            System.out.println(cls.getName());
         }
 
+        // prints list of java files
+        for (File file : javaSource){
+            System.out.println(file.getName());
+        }
         //Bloat Tests
         // Test for Large Classes
         System.out.println("==========================Test Large Class==========================");
