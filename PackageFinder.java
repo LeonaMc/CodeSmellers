@@ -28,9 +28,13 @@ public class PackageFinder implements SourceReadable {
         Scanner fileScanner = new Scanner(javaSource);
         int lineNumber = 0; // current line number
         boolean multiLineCommentFound = false; // /* found if true
+        boolean commentFound = false;
         while (fileScanner.hasNextLine()) {
             lineNumber++;
-            packageName = fileScanner.nextLine();
+            do{
+                packageName = fileScanner.nextLine();
+            }while(packageName.startsWith("//"));
+
             Scanner wordScanner = new Scanner(packageName);
 
             while (wordScanner.hasNext()) {
@@ -38,7 +42,7 @@ public class PackageFinder implements SourceReadable {
                 if(nextWord.contains("/*")){
                     multiLineCommentFound = true;
                 }
-                if(!multiLineCommentFound){ // if /* not found
+                if(!multiLineCommentFound && !commentFound){ // if /* not found
                     if (nextWord.equals(keyword)) {
                         packageFound = true;
                         wordScanner.close();
