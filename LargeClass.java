@@ -2,7 +2,7 @@ package CodeSmellers;
 
 import java.io.*;
 import java.util.ArrayList;
-
+// need to implement better data return
 public class LargeClass implements Inspectable {
     private ArrayList<Class> loadedClasses; // All classes to be inspected, loaded for reflection
     private ArrayList<File> javaSource; // all source files from project being inspected
