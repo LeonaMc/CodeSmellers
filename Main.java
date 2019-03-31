@@ -13,19 +13,19 @@ import javafx.scene.Scene;
 
 import CodeSmellers.Model.SplashScreen;
 
-public class Main extends Application{
+public class Main{
 	
 	// Setting up GUI
-	@Override
-	public void start(Stage primaryStage) {
-		try {
-		    Parent root = FXMLLoader.load(this.getClass().getResource("/CodeSmellers/Model/WelcomeScreen.fxml"));
-		    primaryStage.setScene(new Scene(root));
-	        primaryStage.show();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	@Override
+//	public void start(Stage primaryStage) {
+//		try {
+//		    Parent root = FXMLLoader.load(this.getClass().getResource("/CodeSmellers/Model/WelcomeScreen.fxml"));
+//		    primaryStage.setScene(new Scene(root));
+//	        primaryStage.show();
+//		} catch(Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
     public static void main(String[] args) throws InterruptedException, FileNotFoundException, ClassNotFoundException, NoSuchFieldException, InstantiationException, IllegalAccessException {
     	String newline = "\n";
@@ -35,14 +35,14 @@ public class Main extends Application{
         directoryReader.getFiles(directoryPath);
 	    
 	    // Splash Screen
-        SplashScreen splashScreen = new SplashScreen();
-        splashScreen.setVisible(true);
-        Thread thread = Thread.currentThread();
-        thread.sleep(2500);
-        splashScreen.dispose();
-        
-        // Calling the Welcome Screen for GUI in main
-        launch(args); 
+//        SplashScreen splashScreen = new SplashScreen();
+//        splashScreen.setVisible(true);
+//        Thread thread = Thread.currentThread();
+//        thread.sleep(2500);
+//        splashScreen.dispose();
+//
+//        // Calling the Welcome Screen for GUI in main
+//        launch(args);
 
         if(directoryReader.getDirectoryLevel() > 0){
             packageArray = directoryReader.getClasspath(directoryReader.getClassArrayList().get(0).getPath());
@@ -61,15 +61,6 @@ public class Main extends Application{
         ArrayList<Class> loadedClasses = new ArrayList<>(directoryReader.getLoadedClasses()); // classes ready for reflection
         ArrayList<File> javaSource = new ArrayList<>(directoryReader.getJavaSourceArrayList()); // can read java files as text
 
-        // prints list of loaded classes
-        for(Class cls : loadedClasses){
-            System.out.println(cls.getName());
-        }
-
-        // prints list of java files
-        for (File file : javaSource){
-            System.out.println(file.getName());
-        }
         //Bloat Tests
         // Test for Large Classes
         System.out.println("==========================Test Large Class==========================");
@@ -92,12 +83,8 @@ public class Main extends Application{
         findLongMethods.reflectClass();
         Report longMethodReport = findLongMethods.getReport();
         ArrayList<Class> longMethodEffectedClasses = longMethodReport.getEffectedClasses();
-        System.out.println("Size = " + longMethodEffectedClasses.size() + newline);
         for (Class cls : longMethodEffectedClasses) {
-            for (Method method : cls.getDeclaredMethods()) {
-                System.out.println(newline); // toString bug can be used
-            }
-
+            System.out.println(longMethodReport.getLongMethodData().get(longMethodReport.getCodeSmellData().get(cls)));
         }
 
         //Test for primitive obsession
@@ -114,7 +101,7 @@ public class Main extends Application{
         }
 
         //Test long param list for methods
-        System.out.println("==========================Test Long Method Param List==========================");
+        System.out.println("==========================Test Long Parameter List==========================");
         LongParamList longParamList = new LongParamList(loadedClasses);
         longParamList.reflectClass();
         Report longParamReport = longParamList.getReport();
