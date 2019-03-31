@@ -51,11 +51,14 @@ public class Main { // add to misc smell class check for bad encapsulation e.g c
          * Java source files are represented as File objects so can be treated as a normal text file i.e can use a file scanner to read*/
 
 
-        FeatureEnvy featureEnvy = new FeatureEnvy(javaSource);
-        featureEnvy.findFeatureEnvy();
-        System.out.println("SSSs");
-        featureEnvy.printReport();
-
+        FeatureEnvy featureEnvy = new FeatureEnvy(javaSource,loadedClasses);
+     //   featureEnvy.findFeatureEnvy();
+       // featureEnvy.printReport();
+        Report featureEnvyReport = featureEnvy.returnReport();
+        ArrayList<Class> featureEnvyAffectedClasses = featureEnvyReport.getEffectedClasses();
+        for(Class cl : featureEnvyAffectedClasses){
+            System.out.println(featureEnvyReport.getCodeSmellData().get(cl));
+        }
 
 
         //Bloat Tests
@@ -128,22 +131,22 @@ public class Main { // add to misc smell class check for bad encapsulation e.g c
 //        //TooManyLiterals tooManyLiterals = new TooManyLiterals(loadedClasses);
 //        //tooManyLiterals.ref();
 //
-//        // Test for Lazy Class
-//        System.out.println("==========================Test Lazy Class==========================");
-//        LazyClass lazyClass = new LazyClass(loadedClasses, javaSource);
-//        if (lazyClass.findSmallClass()) {
-//            lazyClass.reflectClass();
-//            Report lazyClassReport = lazyClass.getLazyClassReport();
-//            // for loop for smelly classes in report
-//            ArrayList<Class> lazyEffectedClasses = lazyClassReport.getEffectedClasses();
-//            System.out.println("Number of effected classes = " + lazyEffectedClasses.size());
-//            double lazyPercent = ((double) lazyEffectedClasses.size() / (double) loadedClasses.size()) * 100;
-//            System.out.println(largeClassReport.df.format(lazyPercent) + "% of files in project are effected");
-//            for (Class effectedClass : lazyEffectedClasses) {
-//                System.out.println("\nEffected class name = " + effectedClass.getSimpleName());
-//                System.out.println(lazyClassReport.getCodeSmellData().get(effectedClass));
-//            }
-//        }
+        // Test for Lazy Class
+        System.out.println("==========================Test Lazy Class==========================");
+        LazyClass lazyClass = new LazyClass(loadedClasses, javaSource);
+        if (lazyClass.findSmallClass()) {
+            lazyClass.reflectClass();
+            Report lazyClassReport = lazyClass.getLazyClassReport();
+            // for loop for smelly classes in report
+            ArrayList<Class> lazyEffectedClasses = lazyClassReport.getEffectedClasses();
+            System.out.println("Number of effected classes = " + lazyEffectedClasses.size());
+            double lazyPercent = ((double) lazyEffectedClasses.size() / (double) loadedClasses.size()) * 100;
+            System.out.println(largeClassReport.df.format(lazyPercent) + "% of files in project are effected");
+            for (Class effectedClass : lazyEffectedClasses) {
+                System.out.println("\nEffected class name = " + effectedClass.getSimpleName());
+                System.out.println(lazyClassReport.getCodeSmellData().get(effectedClass));
+            }
+        }
     }
 
 }
