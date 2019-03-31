@@ -30,10 +30,10 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <Button layoutX="14.0" layoutY="711.0" mnemonicParsing="false" onAction="#goBackToWelomeScreen" text="Back" />
-            <Button layoutX="934.0" layoutY="711.0" mnemonicParsing="false" text="Next" />
             <Button layoutX="14.0" layoutY="339.0" mnemonicParsing="false" onAction="#openDirectoryChooser" text="Upload" />
             <TextField fx:id="textField" layoutX="14.0" layoutY="295.0" prefHeight="25.0" prefWidth="455.0" promptText="No file selected" />
+            <Button layoutX="412.0" layoutY="339.0" mnemonicParsing="false" onAction="#returnInfo" text="Analyse" />
+            <TextArea fx:id="textArea" layoutX="14.0" layoutY="396.0" prefHeight="240.0" prefWidth="455.0" />
          </children>
       </Pane>
    </children>

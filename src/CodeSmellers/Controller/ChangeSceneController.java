@@ -7,8 +7,11 @@ package CodeSmellers.Controller;
 //import gui.controller;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
+import CodeSmellers.DirectoryReader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,12 +27,13 @@ public class ChangeSceneController {
 	private Label lbl;
 	
 	@FXML 
-	private TextArea txt;
+	private TextArea textArea;
 	
 	@FXML 
 	private TextField textField;
 	
-	private static String directoryPath;
+	private static String dir;
+	//DirectoryReader directoryReader = new DirectoryReader();
 	
 	// Changes welcome screen to screen 2 
 	// Want to be able to read from button to get scene, once read
@@ -84,13 +88,56 @@ public class ChangeSceneController {
              File directory = dir_chooser.showDialog(stage); 
      		if (directory != null) { 
                 textField.setText(directory.getAbsolutePath()); 
-                directoryPath = directory.getAbsolutePath(); // TODO: use for drectory in main 
+                dir = directory.getAbsolutePath(); // TODO: use for drectory in main 
+                System.out.println(dir);
      		}
              stage.show(); 
         }  
         catch (Exception e) { 
             System.out.println(e.getMessage()); 
         }
+	}
+	
+	public void returnInfo(ActionEvent event) {
+        String[] packageArray = new String[2];
+        DirectoryReader directoryReader = new DirectoryReader();
+        String directoryPath = null; // Add path to root of directory here
+      //  String directoryPath = "C:\\Eclipse\\SoftwareEngineering3\\src"; 
+        directoryReader.getFiles(directoryPath);
+        
+        if(DirectoryReader.getDirectoryLevel() > 0){
+            packageArray = directoryReader.getClasspath(directoryReader.getClassArrayList().get(0).getPath());
+        }
+        else{
+            packageArray[0] = null;
+            packageArray[1] = directoryPath;
+        }
+
+        try {
+            directoryReader.loadClasses(packageArray);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<Class> loadedClasses = new ArrayList<>(directoryReader.getLoadedClasses()); // classes ready for reflection
+        ArrayList<File> javaSource = new ArrayList<>(directoryReader.getJavaSourceArrayList()); // can read java files as text
+
+        textArea.setText("List of classes: \n");
+        // prints list of loaded classes
+        for(Class cls : loadedClasses){
+            System.out.println(cls.getName());
+       //     textArea.setText(cls.getName());
+            textArea.appendText(cls.getName() + "\n");
+        }
+        
+        textArea.appendText("List of java sources: \n");
+        // prints list of java files
+        for (File file : javaSource){
+            System.out.println(file.getName());
+          //  textArea.setText(file.getName());
+            textArea.selectNextWord();
+            textArea.appendText(file.getName() + "\n");
+        } 
 	}
 	
 	public void defineDuplicatedCode() throws IOException{

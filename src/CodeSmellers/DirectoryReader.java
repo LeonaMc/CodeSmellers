@@ -15,9 +15,9 @@ public class DirectoryReader extends PackageFinder {
     private ArrayList<File> classArrayList; // holds .class files found in getFiles
     private String special; // special character "\\\\" for windows, "/" for linux or mac, set in constructor. Used in class loader
     private ArrayList<Class> loadedClasses = new ArrayList<>(); // array of loaded classes ready for reflection, filled in loadClasses()
-    private int directoryLevel = 0;
+    private static int directoryLevel = 0;
 
-    DirectoryReader() {
+    public DirectoryReader() {
         subDirectoryQueue = new LinkedList<>();
         javaSourceArrayList = new ArrayList<>();
         classArrayList = new ArrayList<>();
@@ -42,7 +42,7 @@ public class DirectoryReader extends PackageFinder {
         return classArrayList;
     }
 
-    public int getDirectoryLevel() {
+    public static int getDirectoryLevel() {
         return directoryLevel;
     }
 
