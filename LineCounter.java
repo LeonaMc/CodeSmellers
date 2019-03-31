@@ -15,6 +15,7 @@ public class LineCounter implements Countable {
         FileReader fileReader = new FileReader(javaSource);
         LineNumberReader numberReader = new LineNumberReader(fileReader);
         int lines = 0;
+
         try {
             while (numberReader.readLine() != null) {
                 lines++;
