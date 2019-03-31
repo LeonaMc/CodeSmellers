@@ -31,7 +31,7 @@ public class LineCounter implements Countable {
         return lines;
     }
 
-    public int countBody(File javaSource, int flag) throws IOException {
+    public int countCommentBody(File javaSource, int flag) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(javaSource); // new input stream
         BufferedReader input = new BufferedReader(new InputStreamReader(fileInputStream)); // Buffered reader for large files
         String line; // current line from reader
