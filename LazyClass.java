@@ -2,7 +2,7 @@ package CodeSmellers;
 
 import java.io.*;
 import java.util.ArrayList;
-
+// need to implement better data return
 public class LazyClass implements Reflectable{
     private ArrayList<Class> loadedClasses;
     private ArrayList<File> javaSource;
