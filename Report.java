@@ -41,11 +41,15 @@ public class Report<T> {
     public HashMap<Method, String> getLongMethodData(){
         return longMethodData;
     }
-    private double setPercentage(int loadedClassSize){
-        return ((double)effectedClasses.size()/(double)loadedClassSize)*100;
+    public void setPercentage(int loadedClassSize){
+        percentOfFilesEffected = ((double)effectedClasses.size()/(double)loadedClassSize)*100;
     }
 
     public String getPercentage(){
         return df.format(percentOfFilesEffected)+"%";
+    }
+
+    public String printSizeOfEffectedClasses(){
+        return "Number of effected classes = " + effectedClasses.size();
     }
 }
