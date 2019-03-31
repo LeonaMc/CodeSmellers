@@ -21,7 +21,7 @@ public class PackageFinder implements SourceReadable {
     public String getKeyword(String keyword, File javaSource) throws FileNotFoundException {
         int endOfMultiLine = 0; // stores start line number of multiline comment is there is one at start of file
         try {
-            endOfMultiLine = lineCounter.countBody(javaSource, 0); // countBody finds start and end line number of multiline comment
+            endOfMultiLine = lineCounter.countCommentBody(javaSource, 0); // countCommentBody finds start and end line number of multiline comment
         } catch (IOException e) {
             e.printStackTrace();
         }
