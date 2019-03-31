@@ -38,7 +38,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FeatureEnvy implements SourceReadable,Reportable{
-    private final int THRESHOLD = 4;
+    private final int THRESHOLD = 3;
     private ArrayList<File> javaSources;
     private ArrayList<Class> javaClasses;
     private HashMap<String, String> instantiatedNameToClassName = new HashMap<>();
@@ -75,10 +75,10 @@ public class FeatureEnvy implements SourceReadable,Reportable{
                 }
             }
             if(data.length() > eachClassSmell.className.length() + 1){ // if something was found..
-                report.setEffectedClasses(affectedClasses);
                 report.putCodeSmellData(getClass(eachClassSmell.className),data);
             }
         }
+        report.setEffectedClasses(affectedClasses);
         return report;
     }
     @Override
