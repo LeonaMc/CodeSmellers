@@ -24,7 +24,7 @@ public class Main { // add to misc smell class check for bad encapsulation e.g c
         String newline = "\n";
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
-        String directoryPath = "/home/johnnymurf/Google Drive/Year 3/Semester2/SoftwareEngineering/test"; // Add path to root of directory here
+        String directoryPath = "/home/johnnymurf/Google Drive/Year 3/Semester2/SoftwareEngineering/Project"; // Add path to root of directory here
 
         directoryReader.getFiles(directoryPath);
 
@@ -63,19 +63,19 @@ public class Main { // add to misc smell class check for bad encapsulation e.g c
 
         //Bloat Tests
         // Test for Large Classes
-        System.out.println("==========================Test Large Class==========================");
-        LargeClass findLargeClasses = new LargeClass(javaSource, loadedClasses);
-        findLargeClasses.findLargeFiles();
-        findLargeClasses.reflectClass();
-        Report largeClassReport = findLargeClasses.getReport();
-        ArrayList<Class> largeClassEffectedClasses = largeClassReport.getEffectedClasses();
-        double largePercent = ((double) largeClassReport.getEffectedClasses().size() / (double) loadedClasses.size()) * 100;
-        System.out.println("Number of effected classes = " + largeClassReport.getEffectedClasses().size());
-        System.out.println(largeClassReport.df.format(largePercent) + "%" + " of files in project effected");
-        for (Class cls : largeClassEffectedClasses) {
-            System.out.println(largeClassReport.getCodeSmellData().get(cls));
-        }
-        System.out.println(newline);
+//        System.out.println("==========================Test Large Class==========================");
+//        LargeClass findLargeClasses = new LargeClass(javaSource, loadedClasses);
+//        findLargeClasses.findLargeFiles();
+//        findLargeClasses.reflectClass();
+//        Report largeClassReport = findLargeClasses.getReport();
+//        ArrayList<Class> largeClassEffectedClasses = largeClassReport.getEffectedClasses();
+//        double largePercent = ((double) largeClassReport.getEffectedClasses().size() / (double) loadedClasses.size()) * 100;
+//        System.out.println("Number of effected classes = " + largeClassReport.getEffectedClasses().size());
+//        System.out.println(largeClassReport.df.format(largePercent) + "%" + " of files in project effected");
+//        for (Class cls : largeClassEffectedClasses) {
+//            System.out.println(largeClassReport.getCodeSmellData().get(cls));
+//        }
+//        System.out.println(newline);
 
         //  Test for Long Methods
 //       System.out.println("==========================Test Long Method==========================");
@@ -92,17 +92,17 @@ public class Main { // add to misc smell class check for bad encapsulation e.g c
 //       }
 //
 //        // Test for primitive obsession
-        System.out.println("==========================Test Primitive Obsession==========================");
-        PrimitiveObsession primitiveObsession = new PrimitiveObsession(loadedClasses);
-        primitiveObsession.reflectClass();
-        Report primitiveReport = primitiveObsession.getReport();
-        ArrayList<Class> primitiveEffectedClasses = primitiveReport.getEffectedClasses();
-        System.out.println("Number of effected classes = " + primitiveEffectedClasses.size());
-        double primitivePercent = ((double) primitiveEffectedClasses.size() / loadedClasses.size()) * 100;
-        System.out.println(primitiveReport.df.format(primitivePercent) + "% of files in project effected\n");
-        for (Class cls : primitiveEffectedClasses) {
-            System.out.println("Class " + cls.getSimpleName() + " has " + primitiveReport.getCodeSmellData().get(cls) + " primitive fields");
-        }
+//        System.out.println("==========================Test Primitive Obsession==========================");
+//        PrimitiveObsession primitiveObsession = new PrimitiveObsession(loadedClasses);
+//        primitiveObsession.reflectClass();
+//        Report primitiveReport = primitiveObsession.getReport();
+//        ArrayList<Class> primitiveEffectedClasses = primitiveReport.getEffectedClasses();
+//        System.out.println("Number of effected classes = " + primitiveEffectedClasses.size());
+//        double primitivePercent = ((double) primitiveEffectedClasses.size() / loadedClasses.size()) * 100;
+//        System.out.println(primitiveReport.df.format(primitivePercent) + "% of files in project effected\n");
+//        for (Class cls : primitiveEffectedClasses) {
+//            System.out.println("Class " + cls.getSimpleName() + " has " + primitiveReport.getCodeSmellData().get(cls) + " primitive fields");
+//        }
 //
 //        //Test long param list for methods
 //        System.out.println("==========================Test Long Method Param List==========================");
@@ -132,21 +132,21 @@ public class Main { // add to misc smell class check for bad encapsulation e.g c
 //        //tooManyLiterals.ref();
 //
         // Test for Lazy Class
-        System.out.println("==========================Test Lazy Class==========================");
-        LazyClass lazyClass = new LazyClass(loadedClasses, javaSource);
-        if (lazyClass.findSmallClass()) {
-            lazyClass.reflectClass();
-            Report lazyClassReport = lazyClass.getLazyClassReport();
-            // for loop for smelly classes in report
-            ArrayList<Class> lazyEffectedClasses = lazyClassReport.getEffectedClasses();
-            System.out.println("Number of effected classes = " + lazyEffectedClasses.size());
-            double lazyPercent = ((double) lazyEffectedClasses.size() / (double) loadedClasses.size()) * 100;
-            System.out.println(largeClassReport.df.format(lazyPercent) + "% of files in project are effected");
-            for (Class effectedClass : lazyEffectedClasses) {
-                System.out.println("\nEffected class name = " + effectedClass.getSimpleName());
-                System.out.println(lazyClassReport.getCodeSmellData().get(effectedClass));
-            }
-        }
-    }
+//        System.out.println("==========================Test Lazy Class==========================");
+//        LazyClass lazyClass = new LazyClass(loadedClasses, javaSource);
+//        if (lazyClass.findSmallClass()) {
+//            lazyClass.reflectClass();
+//            Report lazyClassReport = lazyClass.getLazyClassReport();
+//            // for loop for smelly classes in report
+//            ArrayList<Class> lazyEffectedClasses = lazyClassReport.getEffectedClasses();
+//            System.out.println("Number of effected classes = " + lazyEffectedClasses.size());
+//            double lazyPercent = ((double) lazyEffectedClasses.size() / (double) loadedClasses.size()) * 100;
+//            System.out.println(largeClassReport.df.format(lazyPercent) + "% of files in project are effected");
+//            for (Class effectedClass : lazyEffectedClasses) {
+//                System.out.println("\nEffected class name = " + effectedClass.getSimpleName());
+//                System.out.println(lazyClassReport.getCodeSmellData().get(effectedClass));
+//            }
+//        }
+   }
 
 }

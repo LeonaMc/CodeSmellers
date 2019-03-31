@@ -38,7 +38,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FeatureEnvy implements SourceReadable,Reportable{
-
+    private final int THRESHOLD = 4;
     private ArrayList<File> javaSources;
     private ArrayList<Class> javaClasses;
     private HashMap<String, String> instantiatedNameToClassName = new HashMap<>();
@@ -69,8 +69,7 @@ public class FeatureEnvy implements SourceReadable,Reportable{
             String data = eachClassSmell.className +":";
             Map<String,Integer> map = eachClassSmell.otherClassToNumberOfCalls;
             for(Map.Entry<String,Integer> entry : map.entrySet()){
-                    //threshold of 3 calls to other class
-                if(entry.getValue() >= 3){
+                if(entry.getValue() >= THRESHOLD){
                     data += "\ncalls " + entry.getKey() + " " + entry.getValue() + " times";
                     affectedClasses.add(getClass(eachClassSmell.className));
                 }
