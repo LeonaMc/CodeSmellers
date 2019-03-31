@@ -13,36 +13,36 @@ import javafx.scene.Scene;
 
 import CodeSmellers.Model.SplashScreen;
 
-public class Main{
-	
-	// Setting up GUI
-//	@Override
-//	public void start(Stage primaryStage) {
-//		try {
-//		    Parent root = FXMLLoader.load(this.getClass().getResource("/CodeSmellers/Model/WelcomeScreen.fxml"));
-//		    primaryStage.setScene(new Scene(root));
-//	        primaryStage.show();
-//		} catch(Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-	
+public class Main extends Application{
+
+    // Setting up GUI
+    @Override
+    public void start(Stage primaryStage) {
+        try {
+            Parent root = FXMLLoader.load(this.getClass().getResource("/CodeSmellers/Model/WelcomeScreen.fxml"));
+            primaryStage.setScene(new Scene(root));
+            primaryStage.show();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) throws InterruptedException, FileNotFoundException, ClassNotFoundException, NoSuchFieldException, InstantiationException, IllegalAccessException {
-    	String newline = "\n";
+        String newline = "\n";
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
         String directoryPath = ""; // Add path to root of directory here
         directoryReader.getFiles(directoryPath);
-	    
-	    // Splash Screen
-//        SplashScreen splashScreen = new SplashScreen();
-//        splashScreen.setVisible(true);
-//        Thread thread = Thread.currentThread();
-//        thread.sleep(2500);
-//        splashScreen.dispose();
-//
-//        // Calling the Welcome Screen for GUI in main
-//        launch(args);
+
+        // Splash Screen
+        SplashScreen splashScreen = new SplashScreen();
+        splashScreen.setVisible(true);
+        Thread thread = Thread.currentThread();
+        thread.sleep(2500);
+        splashScreen.dispose();
+
+        // Calling the Welcome Screen for GUI in main
+        launch(args);
 
         if(directoryReader.getDirectoryLevel() > 0){
             packageArray = directoryReader.getClasspath(directoryReader.getClassArrayList().get(0).getPath());
@@ -61,6 +61,15 @@ public class Main{
         ArrayList<Class> loadedClasses = new ArrayList<>(directoryReader.getLoadedClasses()); // classes ready for reflection
         ArrayList<File> javaSource = new ArrayList<>(directoryReader.getJavaSourceArrayList()); // can read java files as text
 
+        // prints list of loaded classes
+        for(Class cls : loadedClasses){
+            System.out.println(cls.getName());
+        }
+
+        // prints list of java files
+        for (File file : javaSource){
+            System.out.println(file.getName());
+        }
         //Bloat Tests
         // Test for Large Classes
         System.out.println("==========================Test Large Class==========================");
