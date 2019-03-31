@@ -14,10 +14,6 @@ public class PrimitiveObsession implements Reflectable{
         this.loadedClasses.addAll(loadedClasses);
         report = new Report();
     }
-    // method shortens repeated calls to getSimpleName
-    private String getFieldSimpleName(Field field){
-        return field.getType().getSimpleName();
-    }
 
     @Reflecting
     @Override
