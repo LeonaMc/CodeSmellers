@@ -135,26 +135,26 @@ public class LongMethods implements Inspectable {
         ArrayList<Class> cleanClasses = new ArrayList<>();
 
         for(Class cls : loadedClasses){
-            HashMap<Method,String> longMethodData = new HashMap<>();
             Method[] tempClassMethods = classMethods.get(cls);
+            ArrayList<Method> effectedMethods = new ArrayList<>();
             String effectedMethodMessage = null;
             for(Method method: tempClassMethods){
                 try {
                     effectedMethodMessage = getKeyword(method.getName(), javaSourceFiles.get(loadedClasses.indexOf(cls)));
                     if(effectedMethodMessage != null){
-                        longMethodData.put(method, effectedMethodMessage);
+                        effectedMethods.add(method);
+                        report.putLongMethodData(method, effectedMethodMessage);
                     }
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
             }
-            if (!longMethodData.isEmpty()){
-                report.putCodeSmellData(cls, longMethodData);
+            if(!effectedMethods.isEmpty()){
+                for(Method method : effectedMethods){
+                    report.putCodeSmellData(cls, method);
+                }
             }
-        }
-
-        for(Class cls : loadedClasses){
-            if (!report.getCodeSmellData().containsKey(cls)){
+            else if(effectedMethods.isEmpty()){
                 cleanClasses.add(cls);
             }
         }
