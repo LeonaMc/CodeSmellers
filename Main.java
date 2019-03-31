@@ -32,7 +32,7 @@ public class Main { //extends Application
         String newline = "\n";
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
-        String directoryPath = "C:\\Users\\RickTheRuler\\IdeaProjects\\CodeSmellers"; // Add path to root of directory here
+        String directoryPath = ""; // Add path to root of directory here
         directoryReader.getFiles(directoryPath);
 
         // Splash Screen
@@ -63,65 +63,62 @@ public class Main { //extends Application
         ArrayList<File> javaSource = new ArrayList<>(directoryReader.getJavaSourceArrayList()); // can read java files as text
 
         //Bloat Tests
-        // Test for Large Classes
+        // Large Class Finished
         System.out.println("==========================Test Large Class==========================");
         LargeClass findLargeClasses = new LargeClass(javaSource, loadedClasses);
         findLargeClasses.findLargeFiles();
         findLargeClasses.reflectClass();
         Report largeClassReport = findLargeClasses.getReport();
         ArrayList<Class> largeClassEffectedClasses = largeClassReport.getEffectedClasses();
-        double largePercent = ((double) largeClassReport.getEffectedClasses().size() / (double) loadedClasses.size()) * 100;
-        System.out.println("Number of effected classes = " + largeClassReport.getEffectedClasses().size());
-        System.out.println(largeClassReport.df.format(largePercent) + "%" + " of files in project effected");
+        largeClassReport.setPercentage(loadedClasses.size());
+        System.out.println(largeClassReport.printSizeOfEffectedClasses());
+        System.out.println(largeClassReport.getPercentage() + " of files in project effected");
         for (Class cls : largeClassEffectedClasses) {
-            System.out.println(cls.getName());
-        }
-        System.out.println(newline);
+            System.out.println(largeClassReport.getCodeSmellData().get(cls));
 
-        //Test for Long Methods
+        }
+
+        //Long Methods finished
         System.out.println("==========================Test Long Method==========================");
         LongMethods findLongMethods = new LongMethods(loadedClasses, javaSource);
         findLongMethods.reflectClass();
         Report longMethodReport = findLongMethods.getReport();
+        longMethodReport.setPercentage(loadedClasses.size());
         ArrayList<Class> longMethodEffectedClasses = longMethodReport.getEffectedClasses();
+        System.out.println(longMethodReport.printSizeOfEffectedClasses());
+        System.out.println(longMethodReport.getPercentage() + " of files in project effected");
+        System.out.print(newline);
         for (Class cls : longMethodEffectedClasses) {
             System.out.println(longMethodReport.getLongMethodData().get(longMethodReport.getCodeSmellData().get(cls)));
+            System.out.print(newline);
         }
 
         //Test for primitive obsession
-        System.out.println("==========================Test Primitive Obsession==========================");
-        PrimitiveObsession primitiveObsession = new PrimitiveObsession(loadedClasses);
-        primitiveObsession.reflectClass();
-        Report primitiveReport = primitiveObsession.getReport();
-        ArrayList<Class> primitiveEffectedClasses = primitiveReport.getEffectedClasses();
-        System.out.println("Number of effected classes = " + primitiveEffectedClasses.size());
-        double primitivePercent = ((double) primitiveEffectedClasses.size() / loadedClasses.size()) * 100;
-        System.out.println(primitiveReport.df.format(primitivePercent) + "% of files in project effected\n");
-        for (Class cls : primitiveEffectedClasses) {
-            System.out.println("Class " + cls.getSimpleName() + " has " + primitiveReport.getCodeSmellData().get(cls) + " primitive fields");
+//        System.out.println("==========================Test Primitive Obsession==========================");
+//        PrimitiveObsession primitiveObsession = new PrimitiveObsession(loadedClasses);
+//        primitiveObsession.reflectClass();
+//        Report primitiveReport = primitiveObsession.getReport();
+//        ArrayList<Class> primitiveEffectedClasses = primitiveReport.getEffectedClasses();
+//        System.out.println("Number of effected classes = " + primitiveEffectedClasses.size());
+//        double primitivePercent = ((double) primitiveEffectedClasses.size() / loadedClasses.size()) * 100;
+//        System.out.println(primitiveReport.df.format(primitivePercent) + "% of files in project effected\n");
+//        for (Class cls : primitiveEffectedClasses) {
+//            System.out.println("Class " + cls.getSimpleName() + " has " + primitiveReport.getCodeSmellData().get(cls) + " primitive fields");
+//        }
+
+        //Long Param List Done
+        System.out.println("==========================Test Long Parameter List==========================");
+        LongParamList longParamList = new LongParamList(loadedClasses);
+        longParamList.reflectClass();
+        Report longParamReport = longParamList.getReport();
+        ArrayList<Class> longParamEffectedClasses = longParamReport.getEffectedClasses();
+        System.out.println(longParamReport.printSizeOfEffectedClasses());
+        longParamReport.setPercentage(loadedClasses.size());
+        System.out.println(longParamReport.getPercentage() + " of files effected");
+        for(Class cls : longParamEffectedClasses){
+            System.out.print(longParamReport.getCodeSmellData().get(cls));
         }
 
-        //Test long param list for methods
-//        System.out.println("==========================Test Long Parameter List==========================");
-//        LongParamList longParamList = new LongParamList(loadedClasses);
-//        longParamList.reflectClass();
-//        Report longParamReport = longParamList.getReport();
-//        ArrayList<Class> longParam = longParamReport.getEffectedClasses();
-//        System.out.println("Number of effected Classes = " + longParamReport.getEffectedClasses().size());
-//        double longParamPercent = ((double) longParam.size() / (double) loadedClasses.size()) * 100;
-//        System.out.println(longParamReport.df.format(longParamPercent) + "% of files effected");
-//        for (Class longParamClass : longParam) {
-//            System.out.println("\nName of effected class = " + longParamClass.getSimpleName());
-//            ArrayList<Method> effectedMethods = (ArrayList<Method>) longParamReport.getCodeSmellData().get(longParamClass);
-//
-//            System.out.println("Number of effected methods = " + effectedMethods.size());
-//            double methodPercent = ((double) effectedMethods.size() / (double) longParamClass.getDeclaredMethods().length) * 100;
-//            System.out.println(longParamReport.df.format(methodPercent) + "% of methods effected\n");
-//            System.out.println("Method names");
-//            for (Method method : effectedMethods) {
-//                System.out.println(method.getName() + " has " + method.getParameters().length + " parameters");
-//            }
-//        }
 //        System.out.println(newline);
 //        //Test for Too Many Literals
 //        System.out.println("==========================Test Too Many Literals==========================");
@@ -145,16 +142,16 @@ public class Main { //extends Application
 //            }
 //        }
 
-        LineCounter lineCounter = new LineCounter();
-        for(File file: javaSource){
-            if(file.getName().contains("test")){
-                try {
-                    System.out.println(lineCounter.countCommentBody(file,0));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+//        LineCounter lineCounter = new LineCounter();
+//        for(File file: javaSource){
+//            if(file.getName().contains("test")){
+//                try {
+//                    System.out.println(lineCounter.countCommentBody(file,0));
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
 
     }
 }
