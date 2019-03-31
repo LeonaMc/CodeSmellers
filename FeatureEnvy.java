@@ -37,7 +37,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FeatureEnvy implements SourceReadable,Reportable{
-
     private ArrayList<File> javaSources;
     private HashMap<String, String> instantiatedNameToClassName = new HashMap<>();
     protected static ArrayList<EachClassSmell> classSmellsList = new ArrayList<>();
