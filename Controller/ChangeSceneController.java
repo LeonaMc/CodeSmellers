@@ -105,7 +105,7 @@ public class ChangeSceneController {
       //  String directoryPath = "C:\\Eclipse\\SoftwareEngineering3\\src"; 
         directoryReader.getFiles(directoryPath);
         
-        if(DirectoryReader.getDirectoryLevel() > 0){
+        if(directoryReader.getDirectoryLevel() > 0){
             packageArray = directoryReader.getClasspath(directoryReader.getClassArrayList().get(0).getPath());
         }
         else{
