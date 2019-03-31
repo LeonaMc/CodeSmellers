@@ -20,19 +20,19 @@ public class TooManyLiterals implements Reflectable {
     public void reflectClass() {
 
     }
-
+    // shortens code for every call to getSimpleName
     private String getFieldSimpleName(Field field){
         return field.getType().getSimpleName();
     }
-
+    // method body will be moved to reflectClass when excepptions are handled correctly
     public void ref() throws IllegalArgumentException, IllegalAccessException, ClassNotFoundException, NoSuchFieldException, InstantiationException {
-        for (Class cls : loadedClasses) {
-            System.out.println("Class: " + cls.getSimpleName());
-            for (final Field field : cls.getDeclaredFields()) {
-                if(field.getType().isPrimitive() && !field.isSynthetic()){
-                    field.setAccessible(true);
-                    try{
-                        System.out.println(Modifier.toString(field.getModifiers())+" "+field.getType()+" "+field.getName()+" = "+field.get(cls).toString());
+        for (Class cls : loadedClasses) { // for each class
+            System.out.println("Class: " + cls.getSimpleName()); // test print name
+            for (final Field field : cls.getDeclaredFields()) { // for each field in class set filed to final
+                if(field.getType().isPrimitive() && !field.isSynthetic()){ // only get primitives and reject synthetic variables(compiler made)
+                    field.setAccessible(true); // if field modifier is private set to accessible
+                    try{ // report needs to be implemented
+                        System.out.println(Modifier.toString(field.getModifiers())+" "+field.getType()+" "+field.getName()+" = "+field.get(cls).toString()); // test print data
                     }
                     catch (IllegalArgumentException e){
                         continue;
