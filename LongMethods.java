@@ -13,8 +13,10 @@ public class LongMethods implements Inspectable {
     private HashMap<Class, Method[]> classMethods;
     private ArrayList<Class> loadedClasses;
     private ArrayList<File> javaSourceFiles;
-    private Stack<Integer> bracketStack;
+    private Stack<Character> bracketStack;
     private Report report;
+    private char openingBrace;
+    private char closingBrace;
 
     LongMethods(ArrayList<Class> loadedClasses, ArrayList<File> javaSource) {
         this.loadedClasses = new ArrayList<>(loadedClasses);
@@ -22,6 +24,8 @@ public class LongMethods implements Inspectable {
         report = new Report();
         bracketStack = new Stack<>();
         classMethods = new HashMap<>();
+        openingBrace = '{'; // was originally in method body but was being added to bracket stack
+        closingBrace = '}';
     }
 
     public void getClassMethods() {
@@ -34,7 +38,6 @@ public class LongMethods implements Inspectable {
         return report;
     }
 
-    // Doesn't find body if method body is on one line or if no parameters
     public int getMethodBody(int startLine, File javaSource) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(javaSource);
         BufferedReader input = new BufferedReader(new InputStreamReader(fileInputStream));
@@ -45,22 +48,20 @@ public class LongMethods implements Inspectable {
         while ((line = input.readLine()) != null) {
             i++;
             if (i == startLine) {
-                //System.out.println(line);
                 foundStart = true;
                 for (int j = 0; j < line.length(); j++) {
-                    if (line.charAt(j) == '{') {
-                        bracketStack.push((int) line.charAt(j));
+                    if (line.charAt(j) == openingBrace) {
+                        bracketStack.push(line.charAt(j));
                     }
                 }
             } else if (foundStart) {
-                //System.out.println(line);
                 for (int j = 0; j < line.length(); j++) {
-                    if (line.charAt(j) == '{') {
-                        bracketStack.push((int) line.charAt(j));
-                    } else if (line.charAt(j) == '}') {
+                    if (line.charAt(j) == openingBrace) {
+                        bracketStack.push(line.charAt(j));
+                    } else if (line.charAt(j) == closingBrace){
                         bracketStack.pop();
                         if (bracketStack.isEmpty()) {
-                            endLine = i+1;
+                            endLine = i;
                             foundEnd = true;
                         }
                     }
