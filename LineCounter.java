@@ -31,7 +31,7 @@ public class LineCounter implements Countable {
         return lines;
     }
 
-    public int countBody(File javaSource) throws IOException {
+    public int countBody(File javaSource, int flag) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(javaSource); // new input stream
         BufferedReader input = new BufferedReader(new InputStreamReader(fileInputStream)); // Buffered reader for large files
         String line; // current line from reader
@@ -71,6 +71,11 @@ public class LineCounter implements Countable {
                 break;
             }
         }
-        return endCommentLine; //endCommentLine - startCommentLine; //return this for comment length
+        if(flag == 0)
+            return endCommentLine; // return if searching for line in file where multiline comment ends
+        else if(flag == 1)
+            return endCommentLine - startCommentLine; //return this for comment length
+        else
+            return -1; // return -1 if wrong flag param given, check return for -1
     }
 }
