@@ -4,7 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -32,7 +36,7 @@ public class Main { //extends Application
         String newline = "\n";
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
-        String directoryPath = ""; // Add path to root of directory here
+        String directoryPath = "C:\\Users\\RickTheRuler\\IdeaProjects\\CodeSmellers"; // Add path to root of directory here
         directoryReader.getFiles(directoryPath);
 
         // Splash Screen
@@ -152,6 +156,23 @@ public class Main { //extends Application
 //                }
 //            }
 //        }
+
+        String a = "abc";
+        String b = "abc";
+        String c = "abb";
+
+        Set<String> set = new HashSet<>();
+        String content = null;
+        String content1 = null;
+        try {
+            content = new String(Files.readAllBytes(Paths.get(javaSource.get(0).getPath())));
+            content1 = new String(Files.readAllBytes(Paths.get(javaSource.get(0).getPath())));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(set.add(content));
+        System.out.println(set.add(content1));
+        System.out.println(set.add(b));
 
     }
 }
