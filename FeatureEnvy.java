@@ -33,40 +33,66 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FeatureEnvy implements SourceReadable,Reportable{
+    private final int THRESHOLD = 3;
     private ArrayList<File> javaSources;
+    private ArrayList<Class> javaClasses;
     private HashMap<String, String> instantiatedNameToClassName = new HashMap<>();
     protected static ArrayList<EachClassSmell> classSmellsList = new ArrayList<>();
+    private Report report;
 
-    FeatureEnvy(ArrayList<File> javaSources) {
+    FeatureEnvy(ArrayList<File> javaSources, ArrayList<Class> javaClasses) {
         this.javaSources = javaSources;
+        this.javaClasses = javaClasses;
+        report = new Report();
     }
 
-    public void findFeatureEnvy() {
+    private void findFeatureEnvy() {
         try {
             findInstantiatedNames();
             findNumberOfOtherClassCalls();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-    public void printReport() {
-        System.out.println("Print report");
-        for(EachClassSmell smell : classSmellsList) {
-            System.out.println(smell.smellToString());
 
-        }
     }
+
     @Override
     public Report returnReport() {
-        return null;
+        findFeatureEnvy();
+        ArrayList<Class> affectedClasses = new ArrayList<>();
+        for(EachClassSmell eachClassSmell : classSmellsList){
+            String data = eachClassSmell.className +":";
+            Map<String,Integer> map = eachClassSmell.otherClassToNumberOfCalls;
+            for(Map.Entry<String,Integer> entry : map.entrySet()){
+                if(entry.getValue() >= THRESHOLD){
+                    data += "\ncalls " + entry.getKey() + " " + entry.getValue() + " times";
+                    affectedClasses.add(getClass(eachClassSmell.className));
+                }
+            }
+            if(data.length() > eachClassSmell.className.length() + 1){ // if something was found..
+                report.putCodeSmellData(getClass(eachClassSmell.className),data);
+            }
+        }
+        report.setEffectedClasses(affectedClasses);
+        return report;
     }
     @Override
     public void formatData() {
     }
+    private Class getClass(String name){
+        for(Class cl : javaClasses){
+            if(name.equals(cl.getSimpleName())){
+                return cl;
+            }
+        }
+        return null; //might have to throw class not found error
+    }
+
 
     //    Private inner class will hold each class, a list of other classes, and how many times the class uses those
     private class EachClassSmell{
@@ -80,10 +106,6 @@ public class FeatureEnvy implements SourceReadable,Reportable{
         }
         private void addClassAndNumOfCalls(String otherClassName, int count){
             otherClassToNumberOfCalls.put(otherClassName, otherClassToNumberOfCalls.get(otherClassName) + count);
-        }
-        public String smellToString(){
-
-            return className +": "+otherClassToNumberOfCalls.toString()+"\n";
         }
 
     }
