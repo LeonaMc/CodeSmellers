@@ -38,7 +38,7 @@ public class LongMethods implements Inspectable {
         return report;
     }
 
-    public int getMethodBody(int startLine, File javaSource) throws IOException {
+    private int getMethodBody(int startLine, File javaSource) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(javaSource);
         BufferedReader input = new BufferedReader(new InputStreamReader(fileInputStream));
         String line;
@@ -58,7 +58,7 @@ public class LongMethods implements Inspectable {
                 for (int j = 0; j < line.length(); j++) {
                     if (line.charAt(j) == openingBrace) {
                         bracketStack.push(line.charAt(j));
-                    } else if (line.charAt(j) == closingBrace){
+                    } else if (line.charAt(j) == closingBrace) {
                         bracketStack.pop();
                         if (bracketStack.isEmpty()) {
                             endLine = i;
@@ -78,10 +78,10 @@ public class LongMethods implements Inspectable {
     public String getKeyword(String keyword, File javaSource) throws FileNotFoundException {
         FileInputStream fileInputStream = new FileInputStream(javaSource);
         BufferedReader input = new BufferedReader(new InputStreamReader(fileInputStream));
-        Class myClass =  loadedClasses.get(javaSourceFiles.indexOf(javaSource));
+        Class myClass = loadedClasses.get(javaSourceFiles.indexOf(javaSource));
         Method myMethod = null;
-        for(Method method: myClass.getDeclaredMethods()){
-            if (method.getName().equalsIgnoreCase(keyword)){
+        for (Method method : myClass.getDeclaredMethods()) {
+            if (method.getName().equalsIgnoreCase(keyword)) {
                 myMethod = method;
             }
         }
@@ -97,16 +97,15 @@ public class LongMethods implements Inspectable {
         int i = 0;
         try {
             while ((line = input.readLine()) != null) {
-
                 matcher.reset(line);
                 i++;
                 while (matcher.find()) {
                     startLine = i;
                 }
             }
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         try {
             fileInputStream.close();
@@ -121,12 +120,11 @@ public class LongMethods implements Inspectable {
             e.printStackTrace();
         }
 
-        if(endLine-startLine > 30){
+        if (endLine - startLine > 30) {
             return "Method " + keyword + " in " + javaSource.getName() + " is " + (endLine - startLine) + " lines long\n" +
-                   "Method starts at line " + startLine + " and ends at line " + endLine + " in " + javaSource.getName();
-        }
-        else
-        return null;
+                    "Method starts at line " + startLine + " and ends at line " + endLine + " in " + javaSource.getName();
+        } else
+            return null;
     }
 
     @Reflecting
@@ -135,14 +133,14 @@ public class LongMethods implements Inspectable {
         getClassMethods();
         ArrayList<Class> cleanClasses = new ArrayList<>();
 
-        for(Class cls : loadedClasses){
+        for (Class cls : loadedClasses) {
             Method[] tempClassMethods = classMethods.get(cls);
             ArrayList<Method> effectedMethods = new ArrayList<>();
             String effectedMethodMessage = null;
-            for(Method method: tempClassMethods){
+            for (Method method : tempClassMethods) {
                 try {
                     effectedMethodMessage = getKeyword(method.getName(), javaSourceFiles.get(loadedClasses.indexOf(cls)));
-                    if(effectedMethodMessage != null){
+                    if (effectedMethodMessage != null) {
                         effectedMethods.add(method);
                         report.putLongMethodData(method, effectedMethodMessage);
                     }
@@ -150,16 +148,15 @@ public class LongMethods implements Inspectable {
                     e.printStackTrace();
                 }
             }
-            if(!effectedMethods.isEmpty()){
-                for(Method method : effectedMethods){
+            if (!effectedMethods.isEmpty()) {
+                for (Method method : effectedMethods) {
                     report.putCodeSmellData(cls, method);
                 }
-            }
-            else if(effectedMethods.isEmpty()){
+            } else if (effectedMethods.isEmpty()) {
                 cleanClasses.add(cls);
             }
         }
-        if(!cleanClasses.isEmpty()){
+        if (!cleanClasses.isEmpty()) {
             loadedClasses.removeAll(cleanClasses);
             report.setEffectedClasses(loadedClasses);
         }
