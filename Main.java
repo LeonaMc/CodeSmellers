@@ -53,14 +53,14 @@ public class Main { // add to misc smell class check for bad encapsulation e.g c
 
 
         FeatureEnvy featureEnvy = new FeatureEnvy(javaSource,loadedClasses);
-     //   featureEnvy.findFeatureEnvy();
-       // featureEnvy.printReport();
+     //   featureEnvy.findFeatureEnvy()
+     //   featureEnvy.printReport();
         Report featureEnvyReport = featureEnvy.returnReport();
         ArrayList<Class> featureEnvyAffectedClasses = featureEnvyReport.getEffectedClasses();
         System.out.println(featureEnvyAffectedClasses.toString());
         for(Class cl : featureEnvyAffectedClasses){
            System.out.println(featureEnvyReport.getCodeSmellData().get(cl));
-            System.out.println(newline);
+      //      System.out.println(newline);
         }
 
 
