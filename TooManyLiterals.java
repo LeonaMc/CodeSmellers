@@ -24,7 +24,7 @@ public class TooManyLiterals implements Reflectable {
     private String getFieldSimpleName(Field field){
         return field.getType().getSimpleName();
     }
-    // method body will be moved to reflectClass when excepptions are handled correctly
+    // method body will be moved to reflectClass when exceptions are handled correctly
     public void ref() throws IllegalArgumentException, IllegalAccessException, ClassNotFoundException, NoSuchFieldException, InstantiationException {
         for (Class cls : loadedClasses) { // for each class
             System.out.println("Class: " + cls.getSimpleName()); // test print name
