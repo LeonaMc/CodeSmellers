@@ -6,50 +6,54 @@ import java.util.ArrayList;
 import java.util.HashMap;
 public class Report<T> {
     DecimalFormat df = new DecimalFormat("#.00");
-    private ArrayList<Class> effectedClasses; // holds only effected classes of code smell report belongs to
-    private HashMap<Class,T> codeSmellData; // holds data found from code smell inspection. All keys are held in effected classes
+    private ArrayList<Class> affectedClasses; // holds only effected classes of code smell report belongs to
+    private HashMap<Class,T> reportData; // holds data found from code smell inspection. All keys are held in affected classes
     private HashMap<Method,String> longMethodData;
-    private double percentOfFilesEffected; // overall percent of effected classes
+    private double percentOfFilesAffected; // overall percent of affected classes
 
     public Report(){
-        effectedClasses = new ArrayList<>();
-        codeSmellData = new HashMap<>();
+        affectedClasses = new ArrayList<>();
+        reportData = new HashMap<>();
         longMethodData = new HashMap<>();
-        percentOfFilesEffected = 0.0;
+        percentOfFilesAffected = 0.0;
+    }
+    // adds only classes affected by smell
+    public void setAffectedClasses(ArrayList<Class> affectedClasses){
+        this.affectedClasses.addAll(affectedClasses);
     }
     //
-    public void setEffectedClasses(ArrayList<Class> effectedClasses){
-        this.effectedClasses.addAll(effectedClasses);
-    }
-
-    public void putCodeSmellData(Class key, T data){
-        this.codeSmellData.put(key, data);
+    public void putReportData(Class key, T data){
+        this.reportData.put(key, data);
     }
 
     public void putLongMethodData(Method key, String data){
         this.longMethodData.put(key, data);
     }
 
-    public ArrayList<Class> getEffectedClasses() {
-        return effectedClasses;
+    public ArrayList<Class> getAffectedClasses() {
+        return affectedClasses;
     }
 
-    public HashMap<Class,T> getCodeSmellData() {
-        return codeSmellData;
+    public HashMap<Class,T> getReportData() {
+        return reportData;
     }
 
     public HashMap<Method, String> getLongMethodData(){
         return longMethodData;
     }
     public void setPercentage(int loadedClassSize){
-        percentOfFilesEffected = ((double)effectedClasses.size()/(double)loadedClassSize)*100;
+        percentOfFilesAffected = ((double) affectedClasses.size()/(double)loadedClassSize)*100;
     }
 
-    public String getPercentage(){
-        return df.format(percentOfFilesEffected)+"%";
+    public Double getPercentage(){
+        return percentOfFilesAffected;
     }
 
-    public String printSizeOfEffectedClasses(){
-        return "Number of effected classes = " + effectedClasses.size();
+    public String printSizeOfAffectedClasses(){
+        return "Number of affected classes = " + affectedClasses.size();
+    }
+
+    public String percentToString(){
+        return df.format(percentOfFilesAffected)+"%";
     }
 }
