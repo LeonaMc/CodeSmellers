@@ -28,14 +28,10 @@ public class LongMethods implements Inspectable {
         closingBrace = '}';
     }
 
-    public void getClassMethods() {
+    private void getClassMethods() {
         for (Class cls : loadedClasses) { //
             classMethods.put(cls, cls.getDeclaredMethods());
         }
-    }
-
-    public Report getReport() {
-        return report;
     }
 
     private int getMethodBody(int startLine, File javaSource) throws IOException {
@@ -135,30 +131,34 @@ public class LongMethods implements Inspectable {
 
         for (Class cls : loadedClasses) {
             Method[] tempClassMethods = classMethods.get(cls);
-            ArrayList<Method> effectedMethods = new ArrayList<>();
-            String effectedMethodMessage = null;
+            ArrayList<Method> affectedMethods = new ArrayList<>();
+            String affectedMethodMessage = null;
             for (Method method : tempClassMethods) {
                 try {
-                    effectedMethodMessage = getKeyword(method.getName(), javaSourceFiles.get(loadedClasses.indexOf(cls)));
-                    if (effectedMethodMessage != null) {
-                        effectedMethods.add(method);
-                        report.putLongMethodData(method, effectedMethodMessage);
+                    affectedMethodMessage = getKeyword(method.getName(), javaSourceFiles.get(loadedClasses.indexOf(cls)));
+                    if (affectedMethodMessage != null) {
+                        affectedMethods.add(method);
+                        report.putLongMethodData(method, affectedMethodMessage);
                     }
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
             }
-            if (!effectedMethods.isEmpty()) {
-                for (Method method : effectedMethods) {
-                    report.putCodeSmellData(cls, method);
+            if (!affectedMethods.isEmpty()) {
+                for (Method method : affectedMethods) {
+                    report.putReportData(cls, method);
                 }
-            } else if (effectedMethods.isEmpty()) {
+            } else if (affectedMethods.isEmpty()) {
                 cleanClasses.add(cls);
             }
         }
         if (!cleanClasses.isEmpty()) {
             loadedClasses.removeAll(cleanClasses);
-            report.setEffectedClasses(loadedClasses);
+            report.setAffectedClasses(loadedClasses);
         }
+    }
+
+    public Report getReport(){
+        return report;
     }
 }
