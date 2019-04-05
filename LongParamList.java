@@ -58,7 +58,7 @@ public class LongParamList implements Reflectable{
             for (Method method : affectedMethods) {
                 builder.append("\n" + method.getName() + " has " + method.getParameters().length + " parameters\nParameter types are\n");
                 for (Class parameter : method.getParameterTypes()){
-                    builder.append(parameter.getTypeName() + "\n");
+                    builder.append(parameter.getSimpleName() + "\n");
                 }
             }
             report.putReportData(cls, builder.toString());
