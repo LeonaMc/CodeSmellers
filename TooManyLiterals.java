@@ -18,14 +18,6 @@ public class TooManyLiterals implements Reflectable {
 
     @Override
     public void reflectClass() {
-
-    }
-    // shortens code for every call to getSimpleName
-    private String getFieldSimpleName(Field field){
-        return field.getType().getSimpleName();
-    }
-    // method body will be moved to reflectClass when exceptions are handled correctly
-    public void ref() throws IllegalArgumentException, IllegalAccessException, ClassNotFoundException, NoSuchFieldException, InstantiationException {
         for (Class cls : loadedClasses) { // for each class
             System.out.println("Class: " + cls.getSimpleName()); // test print name
             for (final Field field : cls.getDeclaredFields()) { // for each field in class set filed to final
@@ -36,10 +28,17 @@ public class TooManyLiterals implements Reflectable {
                     }
                     catch (IllegalArgumentException e){
                         continue;
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
                     }
                 }
             }
             System.out.print("\n");
         }
     }
+    // shortens code for every call to getSimpleName
+    private String getFieldSimpleName(Field field){
+        return field.getType().getSimpleName();
+    }
+
 }
