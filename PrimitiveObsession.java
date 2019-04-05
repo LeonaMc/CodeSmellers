@@ -17,52 +17,53 @@ public class PrimitiveObsession implements Reflectable{
     }
 
     // count primitive methods of a class
-    public int getNumPrimitiveMethods(Class host){
+    private int getNumPrimitiveMethods(Class cls){
         int primitiveMethodCount = 0; // counter
 
-        for(Method method : host.getDeclaredMethods()){ // for each method in host
-            if (method.getReturnType().isPrimitive()){ // if method isPrimitive
+        for(Method method : cls.getDeclaredMethods()){ // for each method in host
+            if (method.getReturnType().isPrimitive() && !method.getReturnType().equals(void.class)){ // if method isPrimitive and not void
                 primitiveMethodCount++; // increment counter
             }
         }
         return primitiveMethodCount; // return final count
     }
     // count primitive fields of a class
-    public int getNumPrimitiveFields(Class host){
+    private int getNumPrimitiveFields(Class cls){
         int primitiveFieldCount = 0; // counter
 
-        for(Field field: host.getDeclaredFields()){ // for each field
+        for(Field field: cls.getDeclaredFields()){ // for each field
             if (field.getType().isPrimitive()){ // if field is primitive
                 primitiveFieldCount++; // increment counter
             }
         }
         return primitiveFieldCount; // return final count
     }
-    // count primitive parameters of a method
-    public int getNumPrimitiveParameters(Method host){
-        int primitiveParamCount = 0; // counter
-
-        for(Class parameterType: host.getParameterTypes()){ // for each parameter type of host method
-            if(parameterType.isPrimitive()){ // if primitive
-                primitiveParamCount++; // increment
-            }
-        }
-        return primitiveParamCount; // return final count
-    }
 
     @Reflecting
     @Override
     public void reflectClass() {
         for (Class cls: loadedClasses){ // for each class
-            int fieldCount = 0; // set fieldCount to 0 for current class
+            int primitiveCount = getNumPrimitiveMethods(cls) + getNumPrimitiveFields(cls); // set primitiveCount to number of primitive fields + methods
             String message = "";
-            for (Field field: cls.getDeclaredFields()){ // for each field
-                if(field.getType().isPrimitive()){ // if type is primitive
-                    fieldCount++; // increment counter
+
+            if(primitiveCount >= 10){ // heuristic = 10
+                message = "Class " + cls.getSimpleName() + " has " + getNumPrimitiveFields(cls) + " primitive fields and " + getNumPrimitiveMethods(cls) + " primitive methods\n";
+                if (getNumPrimitiveFields(cls)>0){
+                    message += "\nList of Primitive Fields\n";
+                    for(Field field: cls.getDeclaredFields()){
+                        if (field.getType().isPrimitive()){
+                            message += field.getType().getSimpleName()+" "+field.getName()+"\n"; // add each primitive field name and type to data string
+                        }
+                    }
                 }
-            }
-            if(fieldCount >= 5){ // heuristic = 5 needs to be changed
-                message = "Class " + cls.getSimpleName() + " has " + fieldCount + " fields";
+                if(getNumPrimitiveMethods(cls)>0){
+                    message += "\nList of Primitive methods\n";
+                    for(Method method : cls.getDeclaredMethods()){ // for each method in host
+                        if (method.getReturnType().isPrimitive()  && !method.getReturnType().equals(void.class)){ // if method isPrimitive and not void
+                            message += method.getReturnType().getSimpleName()+" "+method.getName()+"\n"; // add each primitive method name and return type to data message
+                        }
+                    }
+                }
                 report.putReportData(cls, message); // add code smell data for each effected class
             }
             else{
