@@ -7,45 +7,35 @@ import java.util.ArrayList;
 public class TooManyLiterals implements Reflectable {
     private ArrayList<Class> loadedClasses;
     private ArrayList<Class> cleanClasses;
+    private Report report;
 
     public TooManyLiterals(ArrayList<Class> loadedClasses) {
         cleanClasses = new ArrayList<>();
         this.loadedClasses = new ArrayList<>();
         this.loadedClasses.addAll(loadedClasses);
+        report = new Report();
     }
 
     @Override
     public void reflectClass() {
 
     }
-
+    // shortens code for every call to getSimpleName
     private String getFieldSimpleName(Field field){
         return field.getType().getSimpleName();
     }
-
-    private boolean isPrimitive(Field field){
-        boolean isPrimitive = false;
-
-        if(getFieldSimpleName(field).equalsIgnoreCase("int") ||
-                getFieldSimpleName(field).equalsIgnoreCase("double") ||
-                getFieldSimpleName(field).equalsIgnoreCase("boolean") ||
-                getFieldSimpleName(field).equalsIgnoreCase("float") ||
-                getFieldSimpleName(field).equalsIgnoreCase("String") ||
-                getFieldSimpleName(field).equalsIgnoreCase("char")){
-
-            isPrimitive = true;
-        }
-        return isPrimitive;
-    }
-
+    // method body will be moved to reflectClass when excepptions are handled correctly
     public void ref() throws IllegalArgumentException, IllegalAccessException, ClassNotFoundException, NoSuchFieldException, InstantiationException {
-        for (Class cls : loadedClasses) {
-            for (final Field field : cls.getDeclaredFields()) {
-                System.out.println(field.getType() +" "+ field.getName());
-                if(isPrimitive(field) && !Modifier.isFinal(field.getModifiers())){
-                    field.setAccessible(true);
-                    if (field.get(cls.newInstance()) != null){
-                        System.out.println(field.getName() + " " + field.get(cls.newInstance()).toString());
+        for (Class cls : loadedClasses) { // for each class
+            System.out.println("Class: " + cls.getSimpleName()); // test print name
+            for (final Field field : cls.getDeclaredFields()) { // for each field in class set filed to final
+                if(field.getType().isPrimitive() && !field.isSynthetic()){ // only get primitives and reject synthetic variables(compiler made)
+                    field.setAccessible(true); // if field modifier is private set to accessible
+                    try{ // report needs to be implemented
+                        System.out.println(Modifier.toString(field.getModifiers())+" "+field.getType()+" "+field.getName()+" = "+field.get(cls).toString()); // test print data
+                    }
+                    catch (IllegalArgumentException e){
+                        continue;
                     }
                 }
             }

@@ -4,39 +4,60 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
-// for large class get number of lines and number of primitives get percent of lines used by primitives
-// Change every instance of getIndexOf() in source and class arraylists with better solution
-// Add logic to smell class or report to catch cases of no smell detected
-// Add if reportFromClass.getEffectedClasses > 0 boolean classObject.IsEffected = true
-// Can be used to reference which classes are effected as some code smells can be an indicator for others e.g large class with small number of methods
-// might indicate long methods or primitive obsession etc
-// further implementation of LazyClass needed. Small class alone does not indicate a lazy class, check for use in other classes(reflection). Some code smells are mutually exclusive e.g GodClass/LazyClass etc
-// duplicate code starts by wednesday
-// Need to add catch for compiler created variables in any class that will access class fields PrimitiveObsession/TooManyLiterals. Check bookmark.
-// LongMethods working need to figure out what data is relevant to add to report, effected methods or string
-// Finish TooManyLiterals check bookmark
-// report file path of effected classes to user
-public class Main { // add to misc smell class check for bad encapsulation e.g check public class variables
-    public static void main(String[] args) throws FileNotFoundException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException, InstantiationException {
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+
+import CodeSmellers.Model.SplashScreen;
+
+public class Main { //extends Application
+
+    // Setting up GUI
+//    @Override
+//    public void start(Stage primaryStage) {
+//        try {
+//            Parent root = FXMLLoader.load(this.getClass().getResource("/CodeSmellers/Model/WelcomeScreen.fxml"));
+//            primaryStage.setScene(new Scene(root));
+//            primaryStage.show();
+//        } catch(Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    public static void main(String[] args) throws InterruptedException, FileNotFoundException, ClassNotFoundException, NoSuchFieldException, InstantiationException, IllegalAccessException {
         String newline = "\n";
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
-        String directoryPath = "/home/johnnymurf/Google Drive/Year 3/Semester2/SoftwareEngineering/Project"; // Add path to root of directory here
-
+        String directoryPath = "C:\\Users\\RickTheRuler\\IdeaProjects\\CodeSmellers"; // Add path to root of directory here
         directoryReader.getFiles(directoryPath);
 
-        if (directoryReader.getDirectoryLevel() > 0) {
+        // Splash Screen
+//        SplashScreen splashScreen = new SplashScreen();
+//        splashScreen.setVisible(true);
+//        Thread thread = Thread.currentThread();
+//        thread.sleep(2500);
+//        splashScreen.dispose();
+
+//        // Calling the Welcome Screen for GUI in main
+//        launch(args);
+
+        if(directoryReader.getDirectoryLevel() > 0){
             packageArray = directoryReader.getClasspath(directoryReader.getClassArrayList().get(0).getPath());
-        } else {
+        }
+        else{
             packageArray[0] = null;
             packageArray[1] = directoryPath;
         }
 
         try {
-
             directoryReader.loadClasses(packageArray);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -45,56 +66,38 @@ public class Main { // add to misc smell class check for bad encapsulation e.g c
         ArrayList<Class> loadedClasses = new ArrayList<>(directoryReader.getLoadedClasses()); // classes ready for reflection
         ArrayList<File> javaSource = new ArrayList<>(directoryReader.getJavaSourceArrayList()); // can read java files as text
 
+        //Bloat Tests
+        // Large Class Finished
+        System.out.println("==========================Test Large Class==========================");
+        LargeClass findLargeClasses = new LargeClass(javaSource, loadedClasses);
+        findLargeClasses.findLargeFiles();
+        findLargeClasses.reflectClass();
+        Report largeClassReport = findLargeClasses.getReport();
+        ArrayList<Class> largeClassEffectedClasses = largeClassReport.getEffectedClasses();
+        largeClassReport.setPercentage(loadedClasses.size());
+        System.out.println(largeClassReport.printSizeOfEffectedClasses());
+        System.out.println(largeClassReport.getPercentage() + " of files in project effected");
+        for (Class cls : largeClassEffectedClasses) {
+            System.out.println(largeClassReport.getCodeSmellData().get(cls));
 
-        /*Make class constructors with loadedClasses and javaSource as params.
-         * All code smell classes can be done by reading java files as text files from javaSource
-         * or by reflecting on classes from loadedClasses or both depending on smell
-         * Java source files are represented as File objects so can be treated as a normal text file i.e can use a file scanner to read*/
-
-
-        FeatureEnvy featureEnvy = new FeatureEnvy(javaSource,loadedClasses);
-     //   featureEnvy.findFeatureEnvy()
-     //   featureEnvy.printReport();
-        Report featureEnvyReport = featureEnvy.returnReport();
-        ArrayList<Class> featureEnvyAffectedClasses = featureEnvyReport.getEffectedClasses();
-        System.out.println(featureEnvyAffectedClasses.toString());
-        for(Class cl : featureEnvyAffectedClasses){
-           System.out.println(featureEnvyReport.getCodeSmellData().get(cl));
-      //      System.out.println(newline);
         }
 
+        //Long Methods finished
+        System.out.println("==========================Test Long Method==========================");
+        LongMethods findLongMethods = new LongMethods(loadedClasses, javaSource);
+        findLongMethods.reflectClass();
+        Report longMethodReport = findLongMethods.getReport();
+        longMethodReport.setPercentage(loadedClasses.size());
+        ArrayList<Class> longMethodEffectedClasses = longMethodReport.getEffectedClasses();
+        System.out.println(longMethodReport.printSizeOfEffectedClasses());
+        System.out.println(longMethodReport.getPercentage() + " of files in project effected");
+        System.out.print(newline);
+        for (Class cls : longMethodEffectedClasses) {
+            System.out.println(longMethodReport.getLongMethodData().get(longMethodReport.getCodeSmellData().get(cls)));
+            System.out.print(newline);
+        }
 
-        //Bloat Tests
-        // Test for Large Classes
-//        System.out.println("==========================Test Large Class==========================");
-//        LargeClass findLargeClasses = new LargeClass(javaSource, loadedClasses);
-//        findLargeClasses.findLargeFiles();
-//        findLargeClasses.reflectClass();
-//        Report largeClassReport = findLargeClasses.getReport();
-//        ArrayList<Class> largeClassEffectedClasses = largeClassReport.getEffectedClasses();
-//        double largePercent = ((double) largeClassReport.getEffectedClasses().size() / (double) loadedClasses.size()) * 100;
-//        System.out.println("Number of effected classes = " + largeClassReport.getEffectedClasses().size());
-//        System.out.println(largeClassReport.df.format(largePercent) + "%" + " of files in project effected");
-//        for (Class cls : largeClassEffectedClasses) {
-//            System.out.println(largeClassReport.getCodeSmellData().get(cls));
-//        }
-//        System.out.println(newline);
-
-        //  Test for Long Methods
-//       System.out.println("==========================Test Long Method==========================");
-//       LongMethods findLongMethods = new LongMethods(loadedClasses, javaSource);
-//       findLongMethods.reflectClass();
-//       Report longMethodReport = findLongMethods.getReport();
-//       ArrayList<Class> longMethodEffectedClasses = longMethodReport.getEffectedClasses();
-//       System.out.println("Size = " + longMethodEffectedClasses.size() + newline);
-//       for(Class cls : longMethodEffectedClasses){
-//           for(Method method: cls.getDeclaredMethods()){
-//               System.out.println( + newline); // toString bug can be used
-//           }
-//
-//       }
-//
-//        // Test for primitive obsession
+        //Test for primitive obsession
 //        System.out.println("==========================Test Primitive Obsession==========================");
 //        PrimitiveObsession primitiveObsession = new PrimitiveObsession(loadedClasses);
 //        primitiveObsession.reflectClass();
@@ -106,35 +109,27 @@ public class Main { // add to misc smell class check for bad encapsulation e.g c
 //        for (Class cls : primitiveEffectedClasses) {
 //            System.out.println("Class " + cls.getSimpleName() + " has " + primitiveReport.getCodeSmellData().get(cls) + " primitive fields");
 //        }
-//
-//        //Test long param list for methods
-//        System.out.println("==========================Test Long Method Param List==========================");
-//        LongParamList longParamList = new LongParamList(loadedClasses);
-//        longParamList.reflectClass();
-//        Report longParamReport = longParamList.getReport();
-//        ArrayList<Class> longParam = longParamReport.getEffectedClasses();
-//        System.out.println("Number of effected Classes = " + longParamReport.getEffectedClasses().size());
-//        double longParamPercent = ((double) longParam.size() / (double) loadedClasses.size()) * 100;
-//        System.out.println(longParamReport.df.format(longParamPercent) + "% of files effected");
-//        for (Class longParamClass : longParam) {
-//            System.out.println("\nName of effected class = " + longParamClass.getSimpleName());
-//            ArrayList<Method> effectedMethods = (ArrayList<Method>) longParamReport.getCodeSmellData().get(longParamClass);
-//
-//            System.out.println("Number of effected methods = " + effectedMethods.size());
-//            double methodPercent = ((double) effectedMethods.size() / (double) longParamClass.getDeclaredMethods().length) * 100;
-//            System.out.println(longParamReport.df.format(methodPercent) + "% of methods effected\n");
-//            System.out.println("Method names");
-//            for (Method method : effectedMethods) {
-//                System.out.println(method.getName() + " has " + method.getParameters().length + " parameters");
-//            }
-//        }
+
+        //Long Param List Done
+        System.out.println("==========================Test Long Parameter List==========================");
+        LongParamList longParamList = new LongParamList(loadedClasses);
+        longParamList.reflectClass();
+        Report longParamReport = longParamList.getReport();
+        ArrayList<Class> longParamEffectedClasses = longParamReport.getEffectedClasses();
+        System.out.println(longParamReport.printSizeOfEffectedClasses());
+        longParamReport.setPercentage(loadedClasses.size());
+        System.out.println(longParamReport.getPercentage() + " of files effected");
+        for(Class cls : longParamEffectedClasses){
+            System.out.print(longParamReport.getCodeSmellData().get(cls));
+        }
+
 //        System.out.println(newline);
 //        //Test for Too Many Literals
-//        //System.out.println("==========================Test Too Many Literals==========================");
-//        //TooManyLiterals tooManyLiterals = new TooManyLiterals(loadedClasses);
-//        //tooManyLiterals.ref();
-//
-        // Test for Lazy Class
+//        System.out.println("==========================Test Too Many Literals==========================");
+//        TooManyLiterals tooManyLiterals = new TooManyLiterals(loadedClasses);
+//        tooManyLiterals.ref();
+
+        //Test for Lazy Class
 //        System.out.println("==========================Test Lazy Class==========================");
 //        LazyClass lazyClass = new LazyClass(loadedClasses, javaSource);
 //        if (lazyClass.findSmallClass()) {
@@ -144,12 +139,40 @@ public class Main { // add to misc smell class check for bad encapsulation e.g c
 //            ArrayList<Class> lazyEffectedClasses = lazyClassReport.getEffectedClasses();
 //            System.out.println("Number of effected classes = " + lazyEffectedClasses.size());
 //            double lazyPercent = ((double) lazyEffectedClasses.size() / (double) loadedClasses.size()) * 100;
-//            System.out.println(largeClassReport.df.format(lazyPercent) + "% of files in project are effected");
+//            //System.out.println(largeClassReport.df.format(lazyPercent) + "% of files in project are effected");
 //            for (Class effectedClass : lazyEffectedClasses) {
 //                System.out.println("\nEffected class name = " + effectedClass.getSimpleName());
 //                System.out.println(lazyClassReport.getCodeSmellData().get(effectedClass));
 //            }
 //        }
-   }
 
+//        LineCounter lineCounter = new LineCounter();
+//        for(File file: javaSource){
+//            if(file.getName().contains("test")){
+//                try {
+//                    System.out.println(lineCounter.countCommentBody(file,0));
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+
+        String a = "abc";
+        String b = "abc";
+        String c = "abb";
+
+        Set<String> set = new HashSet<>();
+        String content = null;
+        String content1 = null;
+        try {
+            content = new String(Files.readAllBytes(Paths.get(javaSource.get(0).getPath())));
+            content1 = new String(Files.readAllBytes(Paths.get(javaSource.get(0).getPath())));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(set.add(content));
+        System.out.println(set.add(content1));
+        System.out.println(set.add(b));
+
+    }
 }
