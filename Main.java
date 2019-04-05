@@ -88,48 +88,45 @@ public class Main { //extends Application
 //        PrimitiveObsession primitiveObsession = new PrimitiveObsession(loadedClasses);
 //        primitiveObsession.reflectClass();
 //        Report primitiveReport = primitiveObsession.getReport();
-//        ArrayList<Class> primitiveEffectedClasses = primitiveReport.getAffectedClasses();
-//        System.out.println("Number of effected classes = " + primitiveEffectedClasses.size());
-//        double primitivePercent = ((double) primitiveEffectedClasses.size() / loadedClasses.size()) * 100;
-//        System.out.println(primitiveReport.df.format(primitivePercent) + "% of files in project effected\n");
-//        for (Class cls : primitiveEffectedClasses) {
-//            System.out.println("Class " + cls.getSimpleName() + " has " + primitiveReport.getReportData().get(cls) + " primitive fields");
+//        ArrayList<Class> primitiveAffectedClasses = primitiveReport.getAffectedClasses();
+//        System.out.println("Number of affected classes = " + primitiveAffectedClasses.size());
+//        primitiveReport.setPercentage(loadedClasses.size());
+//        System.out.println(primitiveReport.percentToString() + " of files in project effected\n");
+//        for (Class cls : primitiveAffectedClasses) {
+//            System.out.println(primitiveReport.getReportData().get(cls) +newline);
 //        }
 
-        //Long Param List Done
+//        //Long Param List Done
 //        System.out.println("==========================Test Long Parameter List==========================");
 //        LongParamList longParamList = new LongParamList(loadedClasses);
 //        longParamList.reflectClass();
 //        Report longParamReport = longParamList.getReport();
-//        ArrayList<Class> longParamEffectedClasses = longParamReport.getAffectedClasses();
+//        ArrayList<Class> longParamAffectedClasses = longParamReport.getAffectedClasses();
 //        System.out.println(longParamReport.printSizeOfAffectedClasses());
 //        longParamReport.setPercentage(loadedClasses.size());
-//        System.out.println(longParamReport.getPercentage() + " of files effected");
-//        for(Class cls : longParamEffectedClasses){
+//        System.out.println(longParamReport.percentToString() + " of files affected");
+//        for(Class cls : longParamAffectedClasses){
 //            System.out.print(longParamReport.getReportData().get(cls));
 //        }
 
 //        System.out.println(newline);
-//        //Test for Too Many Literals
+        //Test for Too Many Literals
 //        System.out.println("==========================Test Too Many Literals==========================");
 //        TooManyLiterals tooManyLiterals = new TooManyLiterals(loadedClasses);
-//        tooManyLiterals.ref();
+//        tooManyLiterals.reflectClass();
 
         //Test for Lazy Class
 //        System.out.println("==========================Test Lazy Class==========================");
 //        LazyClass lazyClass = new LazyClass(loadedClasses, javaSource);
-//        if (lazyClass.findSmallClass()) {
-//            lazyClass.reflectClass();
-//            Report lazyClassReport = lazyClass.getReport();
-//            // for loop for smelly classes in report
-//            ArrayList<Class> lazyEffectedClasses = lazyClassReport.getAffectedClasses();
-//            System.out.println("Number of effected classes = " + lazyEffectedClasses.size());
-//            double lazyPercent = ((double) lazyEffectedClasses.size() / (double) loadedClasses.size()) * 100;
-//            //System.out.println(largeClassReport.df.format(lazyPercent) + "% of files in project are effected");
-//            for (Class effectedClass : lazyEffectedClasses) {
-//                System.out.println("\nEffected class name = " + effectedClass.getSimpleName());
-//                System.out.println(lazyClassReport.getReportData().get(effectedClass));
-//            }
+//        lazyClass.reflectClass();
+//        Report lazyClassReport = lazyClass.getReport();
+//        ArrayList<Class> lazyAffectedClasses = lazyClassReport.getAffectedClasses();
+//        System.out.println("Number of affected classes = " + lazyAffectedClasses.size());
+//        lazyClassReport.setPercentage(loadedClasses.size());
+//        System.out.println(lazyClassReport.percentToString() + " of files in project are affected");
+//        for (Class affectedClass : lazyAffectedClasses) {
+//            System.out.println("\nAffected class name = " + affectedClass.getSimpleName());
+//            System.out.println(lazyClassReport.getReportData().get(affectedClass));
 //        }
 
         Inspection inspection = new Inspection(loadedClasses,javaSource);
@@ -149,8 +146,5 @@ public class Main { //extends Application
         System.out.println("large class percent " + Math.round(largeClassPercent*100.0)/100.0);
         System.out.println("long method percent " + Math.round(longMethodPercent*100.0)/100.0);
         System.out.println("long parameter percent " + Math.round(longParameterPercent * 100.0)/100.0);
-
-
-
     }
 }
