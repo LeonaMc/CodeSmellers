@@ -27,7 +27,7 @@ public class LargeClass implements Inspectable {
         return null;
     }
     // determines if class suffers from large class code smell
-    // when loop is finished only effected classes and java source files will be left in each ArrayList
+    // when loop is finished only affected classes and java source files will be left in each ArrayList
     public void findLargeFiles(){
         ArrayList<Class> cleanClasses = new ArrayList<>();
         ArrayList<File> cleanSource = new ArrayList<>();
@@ -48,7 +48,7 @@ public class LargeClass implements Inspectable {
         }
         loadedClasses.removeAll(cleanClasses);
         javaSource.removeAll(cleanSource);
-        report.setEffectedClasses(loadedClasses); // add list of effected classes to report
+        report.setAffectedClasses(loadedClasses); // add list of affected classes to report
     }
 
     @Reflecting
@@ -63,7 +63,7 @@ public class LargeClass implements Inspectable {
             if (cls.getDeclaredFields().length > 10){
                 reportMessage += "Possible cause for large file is\n" + cls.getSimpleName() + " has " + cls.getDeclaredFields().length + " Declared Fields\n";
             }
-            report.putCodeSmellData(cls,reportMessage);
+            report.putReportData(cls,reportMessage);
         }
     }
     // returns report
