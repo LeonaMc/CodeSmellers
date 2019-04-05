@@ -2,7 +2,6 @@ package CodeSmellers;
 
 import java.io.FileNotFoundException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -46,23 +45,23 @@ public class LongParamList implements Reflectable{
             }
         }
         loadedClasses.removeAll(cleanClasses); // remove clean classes so only effected classes left
-        report.setEffectedClasses(loadedClasses); // add effected classes classes to report
+        report.setAffectedClasses(loadedClasses); // add effected classes classes to report
 
         for (Class cls : loadedClasses) {
-            ArrayList<Method> effectedMethods = new ArrayList<>();
-            effectedMethods.addAll(methodHash.get(cls));
-            String effectedMethodMessage = "\nName of effected class = " + cls.getSimpleName() +
-                                            "\nNumber of effected methods = " + effectedMethods.size();
-            double methodPercent = ((double) effectedMethods.size() / (double) cls.getDeclaredMethods().length) * 100;
-            effectedMethodMessage += "\n" + report.df.format(methodPercent) + "% of methods effected\nMethod names\n";
-            StringBuilder builder = new StringBuilder(effectedMethodMessage);
-            for (Method method : effectedMethods) {
+            ArrayList<Method> affectedMethods = new ArrayList<>();
+            affectedMethods.addAll(methodHash.get(cls));
+            String affectedMethodMessage = "\nName of affected class = " + cls.getSimpleName() +
+                                            "\nNumber of affected methods = " + affectedMethods.size();
+            double methodPercent = ((double) affectedMethods.size() / (double) cls.getDeclaredMethods().length) * 100;
+            affectedMethodMessage += "\n" + report.df.format(methodPercent) + "% of methods affected\nMethod names\n";
+            StringBuilder builder = new StringBuilder(affectedMethodMessage);
+            for (Method method : affectedMethods) {
                 builder.append("\n" + method.getName() + " has " + method.getParameters().length + " parameters\nParameter types are\n");
                 for (Class parameter : method.getParameterTypes()){
                     builder.append(parameter.getTypeName() + "\n");
                 }
             }
-            report.putCodeSmellData(cls, builder.toString());
+            report.putReportData(cls, builder.toString());
         }
     }
     // returns report
