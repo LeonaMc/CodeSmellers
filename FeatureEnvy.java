@@ -75,10 +75,10 @@ public class FeatureEnvy implements SourceReadable,Reportable{
                 }
             }
             if(data.length() > eachClassSmell.className.length() + 1){ // if something was found..
-                report.putCodeSmellData(getClass(eachClassSmell.className),data);
+                report.putReportData(getClass(eachClassSmell.className),data);
             }
         }
-        report.setEffectedClasses(affectedClasses);
+        report.setAffectedClasses(affectedClasses);
         return report;
     }
     @Override
