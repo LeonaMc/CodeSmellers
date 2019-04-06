@@ -2,6 +2,7 @@ package CodeSmellers;
 
 import java.io.*;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,12 +22,17 @@ public class LazyClass implements Reflectable{
         report = new Report();
         lineCounter = new LineCounter();
     }
+
     // Add interface and annotation to clean classes
     private void findSmallClass() throws FileNotFoundException {
-
         ArrayList<File> cleanSource = new ArrayList<>();
+        for(Class cls: loadedClasses){
+            if (cls.isAnnotation() || cls.isInterface()){
+                cleanClasses.add(cls);
+            }
+        }
         for (File file:javaSource){ // for each source file
-            if(lineCounter.countLines(file) > 300){ // if num of lines more than 50
+            if(lineCounter.countLines(file) > 150){ // if num of lines more than 50
                 cleanSource.add(file); // file is clean
                 cleanClasses.add(loadedClasses.get(javaSource.indexOf(file))); // add files .class file to clean array
             }
@@ -39,16 +45,14 @@ public class LazyClass implements Reflectable{
             report.setAffectedClasses(loadedClasses); // catch empty affected classes in Report
         }
     }
+
     // if class found to be small this method attempts to find if it is referenced in many classes which may be an indication it is not a lazy class
     private boolean findReference(Class cls, Class innerClass){ // needs more testing, not working as it should be
         boolean foundReference = false;
         for (Field field: innerClass.getDeclaredFields()){
-            if (field.getType().getSimpleName().compareTo(cls.getSimpleName()) == 0){
-                System.out.println(field.getType().getSimpleName()+" "+cls.getSimpleName()+" "+innerClass.getSimpleName());
-            }
             if(Modifier.isPrivate(field.getModifiers())){
                 field.setAccessible(true);
-                if (field.getType().equals(cls)){
+                if (field.getType().equals(cls) && !cls.getClass().equals(innerClass)){
                     foundReference = true;
                 }
             }
@@ -66,33 +70,49 @@ public class LazyClass implements Reflectable{
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
         ArrayList<Class> tempList = new ArrayList<>();
         tempList.addAll(loadedClasses);
-        HashMap<Class,Class> classReferenceMap = new HashMap<>();
+        HashMap<Class,ArrayList<String>> classReferenceMap = new HashMap<>();
+        String data;
         for(Class cls: loadedClasses){
+            ArrayList<String> className = new ArrayList<>();
             for(Class innerCls: tempList){
                 if (findReference(cls,innerCls)){
-                    classReferenceMap.put(cls,innerCls);
+                    className.add(innerCls.getSimpleName());
+                    classReferenceMap.put(cls,className);
                 }
             }
-        }
-
-        for(Class cls: loadedClasses){
-            System.out.println("Classes with references to " + cls.getSimpleName() + "\n");
+            data = "Class " + cls.getSimpleName() + " has been flagged as a lazy class because it has less than 150 lines of code\n";
+            ArrayList<Method> publicMethods = new ArrayList<>();
+            if(cls.getDeclaredMethods().length == 0){
+                data += "Possible contributing factors are\n";
+                data += cls.getSimpleName() + " has 0 methods which may indicate an unfinished class\n";
+            }
+            else if(cls.getDeclaredFields().length > 5 && cls.getDeclaredMethods().length <= 5 ){
+                data += "Possible contributing factors are\n";
+                data += cls.getSimpleName() + " has " + cls.getDeclaredFields().length + " fields and " + cls.getDeclaredMethods().length + " methods which may indicate a data class\n";
+            }
+            else if(cls.getDeclaredMethods().length > 0){
+                for(Method method: cls.getDeclaredMethods()){
+                    if(Modifier.isPublic(method.getModifiers())){
+                        publicMethods.add(method);
+                    }
+                }
+            }
             if(classReferenceMap.containsKey(cls)){
-                System.out.println(classReferenceMap.values().toString()+"\n");
+                data += "\nPossible false positive result as " + cls.getSimpleName() + " is referenced in these classes\n";
+                for (String string: classReferenceMap.get(cls)) {
+                    data += string + "\n";
+                }
             }
-        }
-
-        for(Class cls : loadedClasses){
-            if(cls.getDeclaredMethods().length == 0 && cls.getDeclaredFields().length > 0){
-                String data = cls.getSimpleName() + " is used for data";
-                report.putReportData(cls, data);
+            if(!publicMethods.isEmpty()){
+                data += "\nPossible false positive result as " + cls.getSimpleName() + " has public method(s)\n";
+                for(Method method: publicMethods){
+                    data += Modifier.toString(method.getModifiers()) +" "+ method.getReturnType().getSimpleName() +" "+ method.getName()+"\n";
+                }
             }
-            else if(cls.getDeclaredMethods().length > 0 && cls.getDeclaredMethods().length < 5){
-                String data = cls.getSimpleName() + " has too few methods";
-                report.putReportData(cls, data);
-            }
+            report.putReportData(cls, data);
         }
     }
 
