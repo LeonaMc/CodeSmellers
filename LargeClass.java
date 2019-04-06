@@ -47,6 +47,7 @@ public class LargeClass implements Inspectable {
             }
         }
         loadedClasses.removeAll(cleanClasses);
+        loadedClasses.remove(Main.class);
         javaSource.removeAll(cleanSource);
         report.setAffectedClasses(loadedClasses); // add list of affected classes to report
     }
@@ -57,11 +58,15 @@ public class LargeClass implements Inspectable {
         for (Class cls : loadedClasses){
             String reportMessage = "\nClass " + cls.getSimpleName() + " has length of " + fileLength.get(javaSource.get(loadedClasses.indexOf(cls))) + "\n";
 
-            if(cls.getDeclaredMethods().length > 10){ // placeholder value, not sure how many methods is too many
-                reportMessage += "Possible cause for large file is\n" + cls.getSimpleName() + " has " + cls.getDeclaredMethods().length + " Methods\n";
+            if(cls.getDeclaredMethods().length > 5){ // placeholder value, not sure how many methods is too many
+                reportMessage += "\nPossible cause for large file is\n" + cls.getSimpleName() + " has " + cls.getDeclaredMethods().length + " Methods\n";
             }
-            if (cls.getDeclaredFields().length > 10){
-                reportMessage += "Possible cause for large file is\n" + cls.getSimpleName() + " has " + cls.getDeclaredFields().length + " Declared Fields\n";
+            if(cls.getDeclaredMethods().length > 0 && cls.getDeclaredMethods().length <= 5){
+                reportMessage += "\nPossible cause for large file is\n" + cls.getSimpleName() + " has only " + cls.getDeclaredMethods().length + " Methods\n" +
+                        "Which may indicate long methods\n";
+            }
+            if (cls.getDeclaredFields().length > 5){
+                reportMessage += "\nPossible cause for large file is\n" + cls.getSimpleName() + " has " + cls.getDeclaredFields().length + " Declared Fields";
             }
             report.putReportData(cls,reportMessage);
         }
