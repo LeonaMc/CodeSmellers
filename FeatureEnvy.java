@@ -33,6 +33,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -58,7 +59,6 @@ public class FeatureEnvy implements SourceReadable,Reportable{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -71,7 +71,9 @@ public class FeatureEnvy implements SourceReadable,Reportable{
             for(Map.Entry<String,Integer> entry : map.entrySet()){
                 if(entry.getValue() >= THRESHOLD){
                     data += "\ncalls " + entry.getKey() + " " + entry.getValue() + " times";
-                    affectedClasses.add(getClass(eachClassSmell.className));
+                    if(!affectedClasses.contains(getClass(eachClassSmell.className))){
+                        affectedClasses.add(getClass(eachClassSmell.className));
+                    }
                 }
             }
             if(data.length() > eachClassSmell.className.length() + 1){ // if something was found..
@@ -81,6 +83,7 @@ public class FeatureEnvy implements SourceReadable,Reportable{
         report.setAffectedClasses(affectedClasses);
         return report;
     }
+
     @Override
     public void formatData() {
     }
@@ -92,7 +95,6 @@ public class FeatureEnvy implements SourceReadable,Reportable{
         }
         return null; //might have to throw class not found error
     }
-
 
     //    Private inner class will hold each class, a list of other classes, and how many times the class uses those
     private class EachClassSmell{
@@ -177,6 +179,7 @@ public class FeatureEnvy implements SourceReadable,Reportable{
         }
         return true;
     }
+
     private boolean checkValidFile(File file){
         String [] invalidStrings = {"test","main"};
         for(String string : invalidStrings){
