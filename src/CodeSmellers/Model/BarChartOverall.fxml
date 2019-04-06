@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CodeSmellers.Controller.BarChartOverall">
+   <children>
+      <BarChart fx:id="SmellChart" layoutX="86.0" layoutY="41.0" prefHeight="750.0" prefWidth="1000.0" title="Overall Analysis" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <xAxis>
+          <CategoryAxis label="Smell" side="BOTTOM" fx:id="x" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="y" label="Percentage" side="LEFT" />
+        </yAxis>
+      </BarChart>
+   </children>
+</AnchorPane>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CodeSmellers.Controller.ChangeSceneController">
+   <children>
+      <Pane prefHeight="750.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text layoutX="14.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Code Smells">
+               <font>
+                  <Font name="System Bold" size="64.0" />
+               </font></Text>
+            <ImageView fitHeight="108.0" fitWidth="122.0" layoutX="880.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Skunk.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="17.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Overview">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="17.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A code smell is a surface indication that usually corresponds to a deeper problem in the system.">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text layoutX="17.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We will generate a report that searches for the following code smells (click on smell for more information):">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Hyperlink layoutX="59.0" layoutY="224.0" onAction="#defineDuplicatedCode" text="Duplicate Code" />
+            <Hyperlink layoutX="379.0" layoutY="616.0" onAction="#definePrimitiveObsessions" text="Primitive Obsessions" />
+            <Hyperlink layoutX="54.0" layoutY="616.0" onAction="#defineBloatedCode" text="Bloated Code" />
+            <Hyperlink layoutX="233.0" layoutY="224.0" onAction="#defineFeatureEnvy" text="Feature Envy" />
+            <Hyperlink layoutX="564.0" layoutY="224.0" onAction="#defineGodComplex" text="God Complex" />
+            <Hyperlink layoutX="206.0" layoutY="616.0" onAction="#defineInappropriateIntimacy" text="Inappropriate Intimacy" />
+            <Hyperlink layoutX="387.0" layoutY="224.0" onAction="#defineTooManyLiterals" text="Too Many Literals" />
+            <Hyperlink layoutX="536.0" layoutY="616.0" onAction="#defineLazyClass" text="Lazy Class/Freeloader" />
+            <Hyperlink layoutX="719.0" layoutY="616.0" onAction="#defineSwitchStatements" text="Switch Statements" />
+            <Hyperlink layoutX="753.0" layoutY="224.0" onAction="#defineComments" text="Comments" />
+            <Button layoutX="14.0" layoutY="711.0" mnemonicParsing="false" onAction="#goBackToWelomeScreen" text="Back" />
+            <Button layoutX="934.0" layoutY="711.0" mnemonicParsing="false" onAction="#goToProjectUploadScreen" text="Next" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
