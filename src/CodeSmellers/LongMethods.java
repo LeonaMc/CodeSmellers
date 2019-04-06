@@ -13,8 +13,10 @@ public class LongMethods implements Inspectable {
     private HashMap<Class, Method[]> classMethods;
     private ArrayList<Class> loadedClasses;
     private ArrayList<File> javaSourceFiles;
-    private Stack<Integer> bracketStack;
+    private Stack<Character> bracketStack;
     private Report report;
+    private char openingBrace;
+    private char closingBrace;
 
     LongMethods(ArrayList<Class> loadedClasses, ArrayList<File> javaSource) {
         this.loadedClasses = new ArrayList<>(loadedClasses);
@@ -22,20 +24,17 @@ public class LongMethods implements Inspectable {
         report = new Report();
         bracketStack = new Stack<>();
         classMethods = new HashMap<>();
+        openingBrace = '{'; // was originally in method body but was being added to bracket stack
+        closingBrace = '}';
     }
 
-    public void getClassMethods() {
+    private void getClassMethods() {
         for (Class cls : loadedClasses) { //
             classMethods.put(cls, cls.getDeclaredMethods());
         }
     }
 
-    public Report getReport() {
-        return report;
-    }
-
-    // Doesn't find body if method body is on one line or if no parameters
-    public int getMethodBody(int startLine, File javaSource) throws IOException {
+    private int getMethodBody(int startLine, File javaSource) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(javaSource);
         BufferedReader input = new BufferedReader(new InputStreamReader(fileInputStream));
         String line;
@@ -45,22 +44,20 @@ public class LongMethods implements Inspectable {
         while ((line = input.readLine()) != null) {
             i++;
             if (i == startLine) {
-                //System.out.println(line);
                 foundStart = true;
                 for (int j = 0; j < line.length(); j++) {
-                    if (line.charAt(j) == '{') {
-                        bracketStack.push((int) line.charAt(j));
+                    if (line.charAt(j) == openingBrace) {
+                        bracketStack.push(line.charAt(j));
                     }
                 }
             } else if (foundStart) {
-                //System.out.println(line);
                 for (int j = 0; j < line.length(); j++) {
-                    if (line.charAt(j) == '{') {
-                        bracketStack.push((int) line.charAt(j));
-                    } else if (line.charAt(j) == '}') {
+                    if (line.charAt(j) == openingBrace) {
+                        bracketStack.push(line.charAt(j));
+                    } else if (line.charAt(j) == closingBrace) {
                         bracketStack.pop();
                         if (bracketStack.isEmpty()) {
-                            endLine = i+1;
+                            endLine = i;
                             foundEnd = true;
                         }
                     }
@@ -77,10 +74,10 @@ public class LongMethods implements Inspectable {
     public String getKeyword(String keyword, File javaSource) throws FileNotFoundException {
         FileInputStream fileInputStream = new FileInputStream(javaSource);
         BufferedReader input = new BufferedReader(new InputStreamReader(fileInputStream));
-        Class myClass =  loadedClasses.get(javaSourceFiles.indexOf(javaSource));
+        Class myClass = loadedClasses.get(javaSourceFiles.indexOf(javaSource));
         Method myMethod = null;
-        for(Method method: myClass.getDeclaredMethods()){
-            if (method.getName().equalsIgnoreCase(keyword)){
+        for (Method method : myClass.getDeclaredMethods()) {
+            if (method.getName().equalsIgnoreCase(keyword)) {
                 myMethod = method;
             }
         }
@@ -96,16 +93,15 @@ public class LongMethods implements Inspectable {
         int i = 0;
         try {
             while ((line = input.readLine()) != null) {
-
                 matcher.reset(line);
                 i++;
                 while (matcher.find()) {
                     startLine = i;
                 }
             }
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         try {
             fileInputStream.close();
@@ -120,12 +116,11 @@ public class LongMethods implements Inspectable {
             e.printStackTrace();
         }
 
-        if(endLine-startLine > 30){
+        if (endLine - startLine > 30) {
             return "Method " + keyword + " in " + javaSource.getName() + " is " + (endLine - startLine) + " lines long\n" +
-                   "Method starts at line " + startLine + " and ends at line " + endLine + " in " + javaSource.getName();
-        }
-        else
-        return null;
+                    "Method starts at line " + startLine + " and ends at line " + endLine + " in " + javaSource.getName();
+        } else
+            return null;
     }
 
     @Reflecting
@@ -134,33 +129,36 @@ public class LongMethods implements Inspectable {
         getClassMethods();
         ArrayList<Class> cleanClasses = new ArrayList<>();
 
-        for(Class cls : loadedClasses){
-            HashMap<Method,String> longMethodData = new HashMap<>();
+        for (Class cls : loadedClasses) {
             Method[] tempClassMethods = classMethods.get(cls);
-            String effectedMethodMessage = null;
-            for(Method method: tempClassMethods){
+            ArrayList<Method> affectedMethods = new ArrayList<>();
+            String affectedMethodMessage = null;
+            for (Method method : tempClassMethods) {
                 try {
-                    effectedMethodMessage = getKeyword(method.getName(), javaSourceFiles.get(loadedClasses.indexOf(cls)));
-                    if(effectedMethodMessage != null){
-                        longMethodData.put(method, effectedMethodMessage);
+                    affectedMethodMessage = getKeyword(method.getName(), javaSourceFiles.get(loadedClasses.indexOf(cls)));
+                    if (affectedMethodMessage != null) {
+                        affectedMethods.add(method);
+                        report.putLongMethodData(method, affectedMethodMessage);
                     }
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
             }
-            if (!longMethodData.isEmpty()){
-                report.putCodeSmellData(cls, longMethodData);
-            }
-        }
-
-        for(Class cls : loadedClasses){
-            if (!report.getCodeSmellData().containsKey(cls)){
+            if (!affectedMethods.isEmpty()) {
+                for (Method method : affectedMethods) {
+                    report.putReportData(cls, method);
+                }
+            } else if (affectedMethods.isEmpty()) {
                 cleanClasses.add(cls);
             }
         }
-        if(!cleanClasses.isEmpty()){
+        if (!cleanClasses.isEmpty()) {
             loadedClasses.removeAll(cleanClasses);
-            report.setEffectedClasses(loadedClasses);
+            report.setAffectedClasses(loadedClasses);
         }
+    }
+
+    public Report getReport(){
+        return report;
     }
 }

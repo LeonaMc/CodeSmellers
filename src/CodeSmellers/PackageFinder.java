@@ -21,16 +21,20 @@ public class PackageFinder implements SourceReadable {
     public String getKeyword(String keyword, File javaSource) throws FileNotFoundException {
         int endOfMultiLine = 0; // stores start line number of multiline comment is there is one at start of file
         try {
-            endOfMultiLine = lineCounter.countBody(javaSource); // countBody finds start and end line number of multiline comment
+            endOfMultiLine = lineCounter.countCommentBody(javaSource, 0); // countCommentBody finds start and end line number of multiline comment
         } catch (IOException e) {
             e.printStackTrace();
         }
         Scanner fileScanner = new Scanner(javaSource);
         int lineNumber = 0; // current line number
         boolean multiLineCommentFound = false; // /* found if true
+        boolean commentFound = false;
         while (fileScanner.hasNextLine()) {
             lineNumber++;
-            packageName = fileScanner.nextLine();
+            do{
+                packageName = fileScanner.nextLine();
+            }while(packageName.startsWith("//"));
+
             Scanner wordScanner = new Scanner(packageName);
 
             while (wordScanner.hasNext()) {
@@ -38,7 +42,7 @@ public class PackageFinder implements SourceReadable {
                 if(nextWord.contains("/*")){
                     multiLineCommentFound = true;
                 }
-                if(!multiLineCommentFound){ // if /* not found
+                if(!multiLineCommentFound && !commentFound){ // if /* not found
                     if (nextWord.equals(keyword)) {
                         packageFound = true;
                         wordScanner.close();

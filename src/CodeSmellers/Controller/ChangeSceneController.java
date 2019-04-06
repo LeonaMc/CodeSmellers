@@ -1,6 +1,7 @@
+package CodeSmellers.Controller;
+
 // TODO: create CodeSmellers.Controller package and place this class in it
 // To change to the next scene 
-package CodeSmellers.Controller;
 
 //import gui.model;
 //import gui.view;
@@ -9,19 +10,26 @@ package CodeSmellers.Controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import CodeSmellers.DirectoryReader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.*;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.*;
 import javafx.scene.control.TextField;
 
-public class ChangeSceneController {
+public class ChangeSceneController  { // implements Initializable
 	 
 	@FXML 
 	private Label lbl;
@@ -31,6 +39,8 @@ public class ChangeSceneController {
 	
 	@FXML 
 	private TextField textField;
+
+    // directory
 	
 	private static String dir;
 	//DirectoryReader directoryReader = new DirectoryReader();
@@ -43,13 +53,24 @@ public class ChangeSceneController {
 		// dont have access to stage information
 		Parent root2 = FXMLLoader.load(getClass().getResource("/CodeSmellers/Model/WelcomeScreen2.fxml"));
 		Scene scene = new Scene(root2);
-		
 		// This line gets the stage informations
 		// Make the object of node type to be returned by getSource which allows us to get scene and window
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(scene);
 		window.show();
 	}
+	
+	public void goToProjectBarChartOverall(ActionEvent event) throws IOException {
+		
+		// dont have access to stage information
+		Parent root2 = FXMLLoader.load(getClass().getResource("/CodeSmellers/Model/BarChartOverall.fxml"));
+		Scene scene = new Scene(root2);
+		// This line gets the stage informations
+		// Make the object of node type to be returned by getSource which allows us to get scene and window
+		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.show();
+	} 
 	
 	public void goBackToWelomeScreen(ActionEvent event) throws IOException {
 		
@@ -101,11 +122,11 @@ public class ChangeSceneController {
 	public void returnInfo(ActionEvent event) {
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
-        String directoryPath = null; // Add path to root of directory here
-      //  String directoryPath = "C:\\Eclipse\\SoftwareEngineering3\\src"; 
+    //    String directoryPath = null; // Add path to root of directory here
+        String directoryPath = "C:\\Eclipse\\SoftwareEngineering3\\src"; 
         directoryReader.getFiles(directoryPath);
         
-        if(DirectoryReader.getDirectoryLevel() > 0){
+        if(directoryReader.getDirectoryLevel() > 0){
             packageArray = directoryReader.getClasspath(directoryReader.getClassArrayList().get(0).getPath());
         }
         else{
@@ -188,7 +209,10 @@ public class ChangeSceneController {
 	public void defineComments() throws IOException{
 		String url_open ="https://refactoring.guru/smells/comments";
 		java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
-	} 
+	}
+	
+
+	
 }
 	
 
