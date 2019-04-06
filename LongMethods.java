@@ -128,7 +128,7 @@ public class LongMethods implements Inspectable {
     public void reflectClass() {
         getClassMethods();
         ArrayList<Class> cleanClasses = new ArrayList<>();
-
+        loadedClasses.remove(Main.class);
         for (Class cls : loadedClasses) {
             Method[] tempClassMethods = classMethods.get(cls);
             ArrayList<Method> affectedMethods = new ArrayList<>();
