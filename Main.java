@@ -22,7 +22,7 @@ public class Main { //extends Application
         String newline = "\n";
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
-        String directoryPath = "C:\\Users\\RickTheRuler\\IdeaProjects\\CodeSmellers"; // Add path to root of directory here
+        String directoryPath = ""; // Add path to root of directory here
         directoryReader.getFiles(directoryPath);
 
         // Splash Screen
@@ -181,34 +181,36 @@ public class Main { //extends Application
                 System.out.println(featureReport.getReportData().get(cls) + newline);
             }
         }
+        System.out.println(newline);
+        //Inspection Class Test
+        System.out.println("==========================Test Inspection Class==========================");
+        Inspection inspection = new Inspection(loadedClasses,javaSource);
+        inspection.runInspection();
 
+        final String FEATURE_ENVY = "FeatureEnvy";
+        final String LARGE_CLASS = "LargeClass";
+        final String LONG_METHOD = "LongMethod";
+        final String LONG_PARAM = "LongParameter";
+        final String PRIMITIVE_OBSESSION = "PrimitiveObsession";
+        final String LAZY_CLASS = "LazyClass";
+        final String TOO_MANY_LITERALS = "TooManyLiterals";
 
-//        Inspection inspection = new Inspection(loadedClasses,javaSource);
-//        inspection.runInspection();
-//
-//        final String FEATURE_ENVY = "FeatureEnvy";
-//        final String LARGE_CLASS = "LargeClass";
-//        final String LONG_METHOD = "LongMethod";
-//        final String LONG_PARAM = "LongParameter";
-//        final String PRIMITIVE_OBSESSION = "PrimitiveObsession";
-//
-//        Double featureEnvyPercent = inspection.getReports().get(FEATURE_ENVY).getPercentage();
-//        Double largeClassPercent = inspection.getReports().get(LARGE_CLASS).getPercentage();
-//        Double longMethodPercent = inspection.getReports().get(LONG_METHOD).getPercentage();
-//        Double longParameterPercent = inspection.getReports().get(LONG_PARAM).getPercentage();
-//        Double primitiveObsessionPercent = inspection.getReports().get(PRIMITIVE_OBSESSION).getPercentage();
-//
-//        ArrayList<Class> temp = new ArrayList<>();
-////        temp = inspection.getReports().get(FEATURE_ENVY).getAffectedClasses();
-////        for(Class cls: temp){
-////            System.out.println(cls.getSimpleName());
-////        }
-//
-//        System.out.println("feature envy percent " + Math.round(featureEnvyPercent*100.0)/100.0);
-//        System.out.println("large class percent " + Math.round(largeClassPercent*100.0)/100.0);
-//        System.out.println("long method percent " + Math.round(longMethodPercent*100.0)/100.0);
-//        System.out.println("long parameter percent " + Math.round(longParameterPercent * 100.0)/100.0);
-//        System.out.println("primitive obsession percent " + Math.round(primitiveObsessionPercent * 100.0)/100.0);
+        Double featureEnvyPercent = inspection.getReports().get(FEATURE_ENVY).getPercentage();
+        Double largeClassPercent = inspection.getReports().get(LARGE_CLASS).getPercentage();
+        Double longMethodPercent = inspection.getReports().get(LONG_METHOD).getPercentage();
+        Double longParameterPercent = inspection.getReports().get(LONG_PARAM).getPercentage();
+        Double primitiveObsessionPercent = inspection.getReports().get(PRIMITIVE_OBSESSION).getPercentage();
+        Double lazyClassPerecnt = inspection.getReports().get(LAZY_CLASS).getPercentage();
+        Double tooManyLiteralsPercent = inspection.getReports().get(TOO_MANY_LITERALS).getPercentage();
+
+        System.out.println("feature envy percent " + Math.round(featureEnvyPercent*100.0)/100.0);
+        System.out.println("large class percent " + Math.round(largeClassPercent*100.0)/100.0);
+        System.out.println("long method percent " + Math.round(longMethodPercent*100.0)/100.0);
+        System.out.println("long parameter percent " + Math.round(longParameterPercent * 100.0)/100.0);
+        System.out.println("primitive obsession percent " + Math.round(primitiveObsessionPercent * 100.0)/100.0);
+        System.out.println("lazy class percent " + Math.round(lazyClassPerecnt * 100.0)/100.0);
+        System.out.println("too many literals percent " + Math.round(tooManyLiteralsPercent * 100.0)/100.0);
+
 
     }
 }
