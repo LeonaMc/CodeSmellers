@@ -61,4 +61,8 @@ public class Report<T> {
     public String percentToString(){
         return df.format(percentOfFilesAffected)+"%";
     }
+    // true is no classes are affected by this code smell
+    public boolean isClean(){
+        return affectedClasses.isEmpty();
+    }
 }
