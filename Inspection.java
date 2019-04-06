@@ -52,16 +52,11 @@ public class Inspection {
     // runs lazy class, sets percent of affected files and puts report in hashmap
     private void runLazyClass(){
         //Lazy Class not finished
-//        final String LAZY = "LazyClass";
-//        LazyClass lazyClass = new LazyClass(loadedClasses,javaSourceFiles);
-//        try {
-//            lazyClass.findSmallClass();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//        lazyClass.reflectClass();
-//        lazyClass.getReport().setPercentage(loadedClasses.size());
-//        reports.put(LAZY,lazyClass.getReport());
+        final String LAZY = "LazyClass";
+        LazyClass lazyClass = new LazyClass(loadedClasses,javaSourceFiles);
+        lazyClass.reflectClass();
+        lazyClass.getReport().setPercentage(loadedClasses.size());
+        reports.put(LAZY,lazyClass.getReport());
     }
     // runs primitive obsession, sets percent of affected files and puts report in hashmap
     private void runPrimitiveObsession(){
@@ -73,17 +68,21 @@ public class Inspection {
     }
     // runs too many literals, sets percent of affected files and puts report in hashmap
     private void runTooManyLiterals(){
-        // TO DO
+        final String LITERALS = "TooManyLiterals";
+        TooManyLiterals tooManyLiterals = new TooManyLiterals(loadedClasses);
+        tooManyLiterals.reflectClass();
+        tooManyLiterals.getReport().setPercentage(loadedClasses.size());
+        reports.put(LITERALS,tooManyLiterals.getReport());
     }
     // runs all inspection classes
     public void runInspection(){
         runFeatureEnvy();
         runLargeClass();
-        //runLazyClass();
+        runLazyClass();
         runLongMethod();
         runLongParamList();
-        //runPrimitiveObsession();
-        //runTooManyLiterals();
+        runPrimitiveObsession();
+        runTooManyLiterals();
     }
     // gets
     public HashMap<String, Report> getReports() {
