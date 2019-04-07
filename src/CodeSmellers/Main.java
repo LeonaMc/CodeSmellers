@@ -4,15 +4,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+import CodeSmellers.Model.BarChartCalc;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main extends Application { //extends Application
+public class Main extends Application{ //extends Application
 
     // Setting up GUI
+	
     @Override
     public void start(Stage primaryStage) {
 	        try {
@@ -22,14 +24,23 @@ public class Main extends Application { //extends Application
         } catch(Exception e) {
             e.printStackTrace();
         }
-    }
+    } 
 
     public static void main(String[] args) throws InterruptedException, FileNotFoundException, ClassNotFoundException, NoSuchFieldException, InstantiationException, IllegalAccessException {
-        String newline = "\n";
+    
+   // BarChartCalc c = new BarChartCalc();  
+   // System.out.println(c.getResults());
+
+    	/**
+    	String newline = "\n";
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
         String directoryPath = "C:\\Eclipse\\ActuallyJavaFX"; // Add path to root of directory here
         directoryReader.getFiles(directoryPath);
+        
+        BarChartCalc bc = new BarChartCalc();
+        
+        System.out.println(bc.getFeatureEnvyPercentage()); **/
 
         // Splash Screen
 //        SplashScreen splashScreen = new SplashScreen();
@@ -40,6 +51,8 @@ public class Main extends Application { //extends Application
 
 //        // Calling the Welcome Screen for GUI in main
         launch(args);
+    	
+    	/**
 
         if(directoryReader.getDirectoryLevel() > 0){
             packageArray = directoryReader.getClasspath(directoryReader.getClassArrayList().get(0).getPath());
@@ -155,8 +168,6 @@ public class Main extends Application { //extends Application
         System.out.println("large class percent " + Math.round(largeClassPercent*100.0)/100.0);
         System.out.println("long method percent " + Math.round(longMethodPercent*100.0)/100.0);
         System.out.println("long parameter percent " + Math.round(longParameterPercent * 100.0)/100.0);  **/
-
-
 
     }
 
