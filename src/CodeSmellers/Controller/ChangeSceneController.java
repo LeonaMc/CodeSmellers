@@ -96,7 +96,7 @@ public class ChangeSceneController  { // implements Initializable
 		window.show();
 	}
 	
-	public void openDirectoryChooser(ActionEvent event) {
+	public String openDirectoryChooser(ActionEvent event) {
 		
         try { 
         	// set title for the stage 
@@ -104,26 +104,30 @@ public class ChangeSceneController  { // implements Initializable
         	stage.setTitle("DirectoryChooser"); 
             // create a Directory chooser 
             DirectoryChooser dir_chooser = new DirectoryChooser(); 
-            // get the file selected 
-            //File file = dir_chooser.showDialog(stage); 
+            // get the file selected  
              File directory = dir_chooser.showDialog(stage); 
      		if (directory != null) { 
                 textField.setText(directory.getAbsolutePath()); 
-                dir = directory.getAbsolutePath(); // TODO: use for drectory in main 
-                System.out.println(dir);
+                dir = directory.getAbsolutePath(); // TODO: use for directory in main 
+        //        System.out.println(dir);
      		}
              stage.show(); 
         }  
         catch (Exception e) { 
-            System.out.println(e.getMessage()); 
+        //    System.out.println(e.getMessage()); 
+        	  textField.setText(e.getMessage()); 
         }
+        
+        return dir;
 	}
 	
 	public void returnInfo(ActionEvent event) {
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
     //    String directoryPath = null; // Add path to root of directory here
-        String directoryPath = "C:\\Eclipse\\SoftwareEngineering3\\src"; 
+   //     String directoryPath = "C:\\Eclipse\\SoftwareEngineering3\\src"; 
+        String directoryPath = null;
+
         directoryReader.getFiles(directoryPath);
         
         if(directoryReader.getDirectoryLevel() > 0){
