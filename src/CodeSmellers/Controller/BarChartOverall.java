@@ -51,6 +51,10 @@ public class BarChartOverall implements Initializable{
  	    										"Primitive Obsessions", "God Complex", "Lazy Class/Freeloader", 
  	    										"Comments", "Switch Statements", "Data Clump");
  	    
+ 	   codeSmellBar.setName(codeSmells.get(0));
+ 	   codeSmellBar.setName(codeSmells.get(1));
+ 	   codeSmellBar.setName(codeSmells.get(2));
+ 	   
  	    // Set name and percentage to bar chart
  		codeSmellBar.getData().add(new XYChart.Data(codeSmells.get(0), barChart.getResults().get(0)));
  		codeSmellBar.getData().add(new XYChart.Data(codeSmells.get(1), barChart.getResults().get(1)));
@@ -68,6 +72,8 @@ public class BarChartOverall implements Initializable{
  		
  		// Add data to bar chart
  		smellChart.getData().addAll(codeSmellBar);
+ 		
+ 
  		
  		// CSS
  		Node n = smellChart.lookup(".data0.chart-bar");
@@ -110,6 +116,18 @@ public class BarChartOverall implements Initializable{
  	    n.setStyle("-fx-bar-fill: blue");
  	   
 }
+    
+	public void goToProjectAnalysis(ActionEvent event) throws IOException {
+		
+		// dont have access to stage information
+		Parent root2 = FXMLLoader.load(getClass().getResource("/CodeSmellers/Model/ProjectAnalysis.fxml"));
+		Scene scene = new Scene(root2);
+		// This line gets the stage informations
+		// Make the object of node type to be returned by getSource which allows us to get scene and window
+		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.show();
+	} 
 		
 		
 	} 
