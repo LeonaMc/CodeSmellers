@@ -29,7 +29,7 @@ public class Main extends Application { //
         String newline = "\n";
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
-        String directoryPath = ""; // Add path to root of directory here
+        String directoryPath = "C:\\Users\\RickTheRuler\\git\\CodeSmellers\\"; // Add path to root of directory here
         directoryReader.getFiles(directoryPath);
 
         // Splash Screen
