@@ -21,6 +21,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import CodeSmellers.*;
@@ -36,7 +37,7 @@ public class BarChartOverall implements Initializable{
 
     @FXML
     private NumberAxis y;
-    
+   
     BarChartCalc barChart = new BarChartCalc();
 
     @Override
@@ -128,7 +129,18 @@ public class BarChartOverall implements Initializable{
 		window.setScene(scene);
 		window.show();
 	} 
+	
+	public void goToProjectAnalysis2(ActionEvent event) throws IOException {
 		
+		// dont have access to stage information
+		Parent root2 = FXMLLoader.load(getClass().getResource("/CodeSmellers/Model/ProjectAnalysis2.fxml"));
+		Scene scene = new Scene(root2);
+		// This line gets the stage informations
+		// Make the object of node type to be returned by getSource which allows us to get scene and window
+		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.show();
+	} 
 		
 	} 
 	  
