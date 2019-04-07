@@ -1,4 +1,4 @@
-package CodeSmells;
+package Interface;
 
 import java.text.DecimalFormat;
 

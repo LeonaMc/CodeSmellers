@@ -1,9 +1,9 @@
-package CodeSmells;
+package Annotation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-
-// for reporting methods
+// Annotation for class loader method
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Reporting {
+public @interface ClassLoader {
+    //empty
 }

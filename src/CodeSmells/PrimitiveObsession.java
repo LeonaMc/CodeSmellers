@@ -1,10 +1,13 @@
 package CodeSmells;
 
+import Annotation.Reflecting;
+import Interface.Reflectable;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-public class PrimitiveObsession implements Reflectable{
+public class PrimitiveObsession implements Reflectable {
     private ArrayList<Class> loadedClasses;
     private ArrayList<Class> cleanClasses;
     private Report report;

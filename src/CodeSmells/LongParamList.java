@@ -1,12 +1,14 @@
 package CodeSmells;
 
+import Interface.Reflectable;
+
 import java.io.FileNotFoundException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 // needs further implementation
-public class LongParamList implements Reflectable{
+public class LongParamList implements Reflectable {
     private ArrayList<Class> loadedClasses;
     private ArrayList<Class> cleanClasses;
     private HashMap<Class, ArrayList<Method>> methodHash;

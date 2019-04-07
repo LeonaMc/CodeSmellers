@@ -1,5 +1,7 @@
 package CodeSmells;
 
+import Interface.Countable;
+
 import java.io.*;
 import java.util.Stack;
 

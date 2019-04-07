@@ -1,5 +1,7 @@
 package CodeSmells;
 
+import Interface.SourceReadable;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;

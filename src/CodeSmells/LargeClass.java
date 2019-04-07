@@ -1,5 +1,8 @@
 package CodeSmells;
 
+import Annotation.Reflecting;
+import Interface.Inspectable;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,5 +1,7 @@
 package CodeSmells;
 
+import Interface.Reflectable;
+
 import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -8,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 // need to better implement whole class
-public class LazyClass implements Reflectable{
+public class LazyClass implements Reflectable {
     private ArrayList<Class> loadedClasses;
     private ArrayList<File> javaSource;
     private ArrayList<Class> cleanClasses;

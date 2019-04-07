@@ -26,6 +26,9 @@
  */
 
 package CodeSmells;
+import Interface.Reportable;
+import Interface.SourceReadable;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -37,7 +40,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FeatureEnvy implements SourceReadable,Reportable{
+public class FeatureEnvy implements SourceReadable, Reportable {
     private final int THRESHOLD = 3;
     private ArrayList<File> javaSources;
     private ArrayList<Class> javaClasses;
