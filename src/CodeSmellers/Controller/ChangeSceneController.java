@@ -176,6 +176,19 @@ public class ChangeSceneController  { // implements Initializable
         } **/
 	}
 	
+	public void lazyImageClicked(ActionEvent event) throws IOException {
+		
+		// dont have access to stage information
+		Parent root2 = FXMLLoader.load(getClass().getResource("/CodeSmellers/Model/WelcomeScreen2.fxml"));
+		Scene scene = new Scene(root2);
+		// This line gets the stage informations
+		// Make the object of node type to be returned by getSource which allows us to get scene and window
+		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.show();
+	} 
+		
+	
 	public void defineDuplicatedCode() throws IOException{
 		String url_open ="https://refactoring.guru/smells/duplicate-code";
 		java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
