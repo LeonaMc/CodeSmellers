@@ -1,17 +1,15 @@
+package Controller;
+
 // TODO: create CodeSmellers.Controller package and place this class in it
 // To change to the next scene 
-package Controller;
 
 //import gui.model;
 //import gui.view;
 //import gui.controller;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 
-import CodeSmells.DirectoryReader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +19,7 @@ import javafx.scene.control.TextArea;
 import javafx.stage.*;
 import javafx.scene.control.TextField;
 
-public class ChangeSceneController {
+public class ChangeSceneController  { // implements Initializable
 	 
 	@FXML 
 	private Label lbl;
@@ -31,8 +29,14 @@ public class ChangeSceneController {
 	
 	@FXML 
 	private TextField textField;
+
+	public ChangeSceneController(){
+
+	}
+
+    // directory
 	
-	private static String dir;
+//	private static String dir;
 	//DirectoryReader directoryReader = new DirectoryReader();
 	
 	// Changes welcome screen to screen 2 
@@ -43,13 +47,24 @@ public class ChangeSceneController {
 		// dont have access to stage information
 		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/WelcomeScreen2.fxml"));
 		Scene scene = new Scene(root2);
-		
 		// This line gets the stage informations
 		// Make the object of node type to be returned by getSource which allows us to get scene and window
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(scene);
 		window.show();
 	}
+	
+	public void goToProjectBarChartOverall(ActionEvent event) throws IOException {
+		
+		// dont have access to stage information
+		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/BarChartOverall.fxml"));
+		Scene scene = new Scene(root2);
+		// This line gets the stage informations
+		// Make the object of node type to be returned by getSource which allows us to get scene and window
+		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.show();
+	} 
 	
 	public void goBackToWelomeScreen(ActionEvent event) throws IOException {
 		
@@ -74,7 +89,7 @@ public class ChangeSceneController {
 		window.setScene(scene);
 		window.show();
 	}
-	
+
 	public void openDirectoryChooser(ActionEvent event) {
 		
         try { 
@@ -83,26 +98,40 @@ public class ChangeSceneController {
         	stage.setTitle("DirectoryChooser"); 
             // create a Directory chooser 
             DirectoryChooser dir_chooser = new DirectoryChooser(); 
-            // get the file selected 
-            //File file = dir_chooser.showDialog(stage); 
+            // get the file selected  
              File directory = dir_chooser.showDialog(stage); 
      		if (directory != null) { 
-                textField.setText(directory.getAbsolutePath()); 
-                dir = directory.getAbsolutePath(); // TODO: use for drectory in main 
-                System.out.println(dir);
+                textField.setAccessibleText(directory.getAbsolutePath()); // set user directory path in text field
+          //      dir = directory.getAbsolutePath(); // TODO: use for directory in main 
      		}
              stage.show(); 
         }  
         catch (Exception e) { 
-            System.out.println(e.getMessage()); 
+        	  textField.setText(e.getMessage()); 
         }
 	}
 	
-	public void returnInfo(ActionEvent event) {
-        String[] packageArray = new String[2];
-        DirectoryReader directoryReader = new DirectoryReader();
-        String directoryPath = null; // Add path to root of directory here
-      //  String directoryPath = "C:\\Eclipse\\SoftwareEngineering3\\src"; 
+	public void getDirectoryPath() {
+  //      String[] packageArray = new String[2];
+   //     DirectoryReader directoryReader = new DirectoryReader();
+    //    String directoryPath = null; // Add path to root of directory here
+   //     String directoryPath = "C:\\Eclipse\\SoftwareEngineering3\\src"; 
+       // String directoryPath = openDirectoryChooser(event);
+        /**
+        String dir = textField.getText();
+        
+        if(textField != null) {
+
+        
+        System.out.println(dir);
+        
+        }{
+        	System.out.println("Nope");
+        } **/
+        
+     
+        /**
+
         directoryReader.getFiles(directoryPath);
         
         if(directoryReader.getDirectoryLevel() > 0){
@@ -136,9 +165,22 @@ public class ChangeSceneController {
             System.out.println(file.getName());
           //  textArea.setText(file.getName());
             textArea.selectNextWord();
-            textArea.appendText(file.getName() + "\n");
-        } 
+            textArea.appendText(file.getName() + "\n"); 
+        } **/
 	}
+	
+	public void lazyImageClicked(ActionEvent event) throws IOException {
+		
+		// dont have access to stage information
+		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/WelcomeScreen2.fxml"));
+		Scene scene = new Scene(root2);
+		// This line gets the stage informations
+		// Make the object of node type to be returned by getSource which allows us to get scene and window
+		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.show();
+	} 
+		
 	
 	public void defineDuplicatedCode() throws IOException{
 		String url_open ="https://refactoring.guru/smells/duplicate-code";
@@ -188,7 +230,7 @@ public class ChangeSceneController {
 	public void defineComments() throws IOException{
 		String url_open ="https://refactoring.guru/smells/comments";
 		java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
-	} 
+	}
 }
 	
 

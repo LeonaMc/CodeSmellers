@@ -1,7 +1,6 @@
 package Test;
 
 import CodeSmells.*;
-import Model.SplashScreen;
 
 import java.io.File;
 import java.io.FileNotFoundException;
