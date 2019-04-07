@@ -40,9 +40,10 @@ public class ChangeSceneController  { // implements Initializable
 	@FXML 
 	private TextField textField;
 
+
     // directory
 	
-	private static String dir;
+//	private static String dir;
 	//DirectoryReader directoryReader = new DirectoryReader();
 	
 	// Changes welcome screen to screen 2 
@@ -95,8 +96,8 @@ public class ChangeSceneController  { // implements Initializable
 		window.setScene(scene);
 		window.show();
 	}
-	
-	public String openDirectoryChooser(ActionEvent event) {
+
+	public void openDirectoryChooser(ActionEvent event) {
 		
         try { 
         	// set title for the stage 
@@ -107,26 +108,36 @@ public class ChangeSceneController  { // implements Initializable
             // get the file selected  
              File directory = dir_chooser.showDialog(stage); 
      		if (directory != null) { 
-                textField.setText(directory.getAbsolutePath()); 
-                dir = directory.getAbsolutePath(); // TODO: use for directory in main 
-        //        System.out.println(dir);
+                textField.setAccessibleText(directory.getAbsolutePath()); // set user directory path in text field
+          //      dir = directory.getAbsolutePath(); // TODO: use for directory in main 
      		}
              stage.show(); 
         }  
         catch (Exception e) { 
-        //    System.out.println(e.getMessage()); 
         	  textField.setText(e.getMessage()); 
         }
-        
-        return dir;
 	}
 	
-	public void returnInfo(ActionEvent event) {
-        String[] packageArray = new String[2];
-        DirectoryReader directoryReader = new DirectoryReader();
+	public void getDirectoryPath() {
+  //      String[] packageArray = new String[2];
+   //     DirectoryReader directoryReader = new DirectoryReader();
     //    String directoryPath = null; // Add path to root of directory here
    //     String directoryPath = "C:\\Eclipse\\SoftwareEngineering3\\src"; 
-        String directoryPath = null;
+       // String directoryPath = openDirectoryChooser(event);
+        /**
+        String dir = textField.getText();
+        
+        if(textField != null) {
+
+        
+        System.out.println(dir);
+        
+        }{
+        	System.out.println("Nope");
+        } **/
+        
+     
+        /**
 
         directoryReader.getFiles(directoryPath);
         
@@ -161,8 +172,8 @@ public class ChangeSceneController  { // implements Initializable
             System.out.println(file.getName());
           //  textArea.setText(file.getName());
             textArea.selectNextWord();
-            textArea.appendText(file.getName() + "\n");
-        } 
+            textArea.appendText(file.getName() + "\n"); 
+        } **/
 	}
 	
 	public void defineDuplicatedCode() throws IOException{
