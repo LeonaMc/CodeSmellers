@@ -7,17 +7,23 @@ import java.util.Iterator;
 
 import CodeSmellers.DirectoryReader;
 import CodeSmellers.Inspection;
+import CodeSmellers.Controller.ChangeSceneController;
 
 public class BarChartCalc{
   
 	ArrayList<Double> percentages = new ArrayList<Double>();
-     
+	ChangeSceneController c = new ChangeSceneController();
+    
     public  ArrayList<Double> getResults() {
     	
     	String newline = "\n";
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
         String directoryPath = "C:\\Eclipse\\ActuallyJavaFX"; // Add path to root of directory here
+        
+       
+   //     System.out.println(c.getDirectoryPath());
+        
         directoryReader.getFiles(directoryPath);
                 
         if(directoryReader.getDirectoryLevel() > 0){
