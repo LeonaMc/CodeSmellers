@@ -1,6 +1,6 @@
 // TODO: create CodeSmellers.Controller package and place this class in it
 // To change to the next scene 
-package CodeSmellers.Controller;
+package Controller;
 
 //import gui.model;
 //import gui.view;
@@ -41,7 +41,7 @@ public class ChangeSceneController {
 	public void goToWelcomeScreen(ActionEvent event) throws IOException {
 		
 		// dont have access to stage information
-		Parent root2 = FXMLLoader.load(getClass().getResource("/CodeSmellers/Model/WelcomeScreen2.fxml"));
+		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/WelcomeScreen2.fxml"));
 		Scene scene = new Scene(root2);
 		
 		// This line gets the stage informations
@@ -54,7 +54,7 @@ public class ChangeSceneController {
 	public void goBackToWelomeScreen(ActionEvent event) throws IOException {
 		
 		// dont have access to stage information
-		Parent root2 = FXMLLoader.load(getClass().getResource("/CodeSmellers/Model/WelcomeScreen.fxml"));
+		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/WelcomeScreen.fxml"));
 		Scene scene = new Scene(root2);
 		// This line gets the stage informations
 		// Make the object of node type to be returned by getSource which allows us to get scene and window
@@ -66,7 +66,7 @@ public class ChangeSceneController {
 	public void goToProjectUploadScreen(ActionEvent event) throws IOException {
 		
 		// dont have access to stage information
-		Parent root2 = FXMLLoader.load(getClass().getResource("/CodeSmellers/Model/ProjectUploadScreen3.fxml"));
+		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/ProjectUploadScreen3.fxml"));
 		Scene scene = new Scene(root2);
 		// This line gets the stage informations
 		// Make the object of node type to be returned by getSource which allows us to get scene and window

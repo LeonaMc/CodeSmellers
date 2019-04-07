@@ -1,0 +1,982 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="fe85428d-da90-4b9a-94cb-0e07a4c7357f" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/ClassLoader.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/Countable.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/DirectoryReader.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/DuplicateCode.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/FeatureEnvy$EachClassSmell.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/FeatureEnvy.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/Inspectable.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/Inspection.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/LargeClass.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/LazyClass.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/LineCounter.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/LongMethods.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/LongParamList.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/Main.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/PackageFinder.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/PrimitiveObsession.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/ReadingSource.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/Reflectable.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/Reflecting.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/Report.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/Reportable.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/Reporting.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/SourceReadable.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/TooManyLiterals.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/Controller/ChangeSceneController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/Model/SplashScreen$1.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/Model/SplashScreen.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Model/Skunk.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/RickTheRuler.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CodeSmellers.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/CodeSmellers/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Model/ProjectUploadScreen3.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Model/WelcomeScreen.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Model/WelcomeScreen2.fxml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ClassLoader.java" afterPath="$PROJECT_DIR$/src/CodeSmellers/ClassLoader.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Controller/ChangeSceneController.java" afterPath="$PROJECT_DIR$/src/Controller/ChangeSceneController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Countable.java" afterPath="$PROJECT_DIR$/src/CodeSmellers/Countable.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/DirectoryReader.java" afterPath="$PROJECT_DIR$/src/CodeSmellers/DirectoryReader.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/DuplicateCode.java" afterPath="$PROJECT_DIR$/src/CodeSmellers/DuplicateCode.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/FeatureEnvy.java" afterPath="$PROJECT_DIR$/src/CodeSmellers/FeatureEnvy.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Inspectable.java" afterPath="$PROJECT_DIR$/src/CodeSmellers/Inspectable.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Inspection.java" afterPath="$PROJECT_DIR$/src/CodeSmellers/Inspection.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LargeClass.java" afterPath="$PROJECT_DIR$/src/CodeSmellers/LargeClass.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LazyClass.java" afterPath="$PROJECT_DIR$/src/CodeSmellers/LazyClass.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LineCounter.java" afterPath="$PROJECT_DIR$/src/CodeSmellers/LineCounter.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LongMethods.java" afterPath="$PROJECT_DIR$/src/CodeSmellers/LongMethods.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/LongParamList.java" afterPath="$PROJECT_DIR$/src/CodeSmellers/LongParamList.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Main.java" afterPath="$PROJECT_DIR$/src/CodeSmellers/Main.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Model/ProjectUploadScreen3.fxml" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/Model/ProjectUploadScreen3.fxml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Model/Skunk.png" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/Model/Skunk.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Model/SplashScreen.java" afterPath="$PROJECT_DIR$/src/Model/SplashScreen.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Model/WelcomeScreen.fxml" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/Model/WelcomeScreen.fxml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Model/WelcomeScreen2.fxml" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/Model/WelcomeScreen2.fxml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/PackageFinder.java" afterPath="$PROJECT_DIR$/src/CodeSmellers/PackageFinder.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/PrimitiveObsession.java" afterPath="$PROJECT_DIR$/src/CodeSmellers/PrimitiveObsession.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/out/production/CodeSmellers/CodeSmellers/README.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ReadingSource.java" afterPath="$PROJECT_DIR$/src/CodeSmellers/ReadingSource.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Reflectable.java" afterPath="$PROJECT_DIR$/src/CodeSmellers/Reflectable.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Reflecting.java" afterPath="$PROJECT_DIR$/src/CodeSmellers/Reflecting.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Report.java" afterPath="$PROJECT_DIR$/src/CodeSmellers/Report.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Reportable.java" afterPath="$PROJECT_DIR$/src/CodeSmellers/Reportable.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Reporting.java" afterPath="$PROJECT_DIR$/src/CodeSmellers/Reporting.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/SourceReadable.java" afterPath="$PROJECT_DIR$/src/CodeSmellers/SourceReadable.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/TooManyLiterals.java" afterPath="$PROJECT_DIR$/src/CodeSmellers/TooManyLiterals.java" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/CodeSmellers$Main.coverage" NAME="Main Coverage Results" MODIFIED="1553424024686" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>CodeSmellers.*</FILTER>
+    </SUITE>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/CodeSmellers/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="26">
+              <caret line="19" column="72" lean-forward="false" selection-start-line="19" selection-start-column="72" selection-end-line="19" selection-end-column="72" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SplashScreen.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Model/SplashScreen.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-238">
+              <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Skunk.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Model/Skunk.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProjectUploadScreen3.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Model/ProjectUploadScreen3.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="136" lean-forward="false" selection-start-line="9" selection-start-column="136" selection-end-line="9" selection-end-column="136" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ChangeSceneController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Controller/ChangeSceneController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1374">
+              <caret line="68" column="63" lean-forward="false" selection-start-line="68" selection-start-column="63" selection-end-line="68" selection-end-column="63" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TooManyLiterals.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/CodeSmellers/TooManyLiterals.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="697">
+              <caret line="43" column="40" lean-forward="false" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SourceReadable.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/CodeSmellers/SourceReadable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PackageFinder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/CodeSmellers/PackageFinder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WelcomeScreen2.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Model/WelcomeScreen2.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-92">
+              <caret line="9" column="136" lean-forward="false" selection-start-line="9" selection-start-column="136" selection-end-line="9" selection-end-column="136" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WelcomeScreen.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Model/WelcomeScreen.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="136" lean-forward="false" selection-start-line="9" selection-start-column="136" selection-end-line="9" selection-end-column="136" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder">
+            <state />
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="AnnotationType" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/CodeSmellers/DirectoryChooser.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/Readable.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/Bloatable.java" />
+        <option value="$PROJECT_DIR$/src/ReadingSource.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/FindLargeClass.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/FindLongParamList.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/FindLongMethods.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/Reporter.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/Model/SplashScreen.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/model/WelcomeScreen.fxml" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/model/SplashScreen.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/controller/ChangeSceneController.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/Controller/ChangeSceneController.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/ClassLoader.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/Inspectable.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/Reflectable.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/Reportable.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/SourceReadable.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/Reporting.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/Reflecting.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/ReadingSource.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/PackageFinder.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/DirectoryReader.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/LineCounter.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/DuplicateCode.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/RunInspection.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/LongParamList.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/Test.java" />
+        <option value="$PROJECT_DIR$/src/test.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/PrimitiveObsession.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/TooManyLiterals.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/Countable.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/LazyClass.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/FeatureEnvy.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/LongMethods.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/LargeClass.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/Inspection.java" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/Report.java" />
+        <option value="$PROJECT_DIR$/src/Model/SplashScreen.java" />
+        <option value="$PROJECT_DIR$/src/Model/WelcomeScreen.fxml" />
+        <option value="$PROJECT_DIR$/src/Model/WelcomeScreen2.fxml" />
+        <option value="$PROJECT_DIR$/src/Model/ProjectUploadScreen3.fxml" />
+        <option value="$PROJECT_DIR$/src/CodeSmellers/Main.java" />
+        <option value="$PROJECT_DIR$/src/Controller/ChangeSceneController.java" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="953" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="AndroidView" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="CodeSmellers" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CodeSmellers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CodeSmellers" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CodeSmellers" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CodeSmellers" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CodeSmellers" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="production" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CodeSmellers" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CodeSmellers" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="production" type="462c0819:PsiDirectoryNode" />
+              <item name="CodeSmellers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CodeSmellers" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CodeSmellers" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CodeSmellers" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CodeSmellers" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="CodeSmellers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CodeSmellers" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CodeSmellers" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CodeSmellers" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CodeSmellers" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Model" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last.edited.regexp" value="Sample Text" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\RickTheRuler\IdeaProjects\CodeSmellers\src\CodeSmellers" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="CodeSmellers" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\RickTheRuler\IdeaProjects\CodeSmellers\src\CodeSmellers" />
+      <recent name="C:\Users\RickTheRuler\IdeaProjects\CodeSmellers\src\Model" />
+      <recent name="C:\Users\RickTheRuler\IdeaProjects\CodeSmellers\src\CodeSmellers\model" />
+      <recent name="C:\Users\RickTheRuler\IdeaProjects\CodeSmellers\src\model" />
+      <recent name="C:\Users\RickTheRuler\IdeaProjects\CodeSmellers\src\CodeSmellers\Model" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="CodeSmellers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="CodeSmellers.Main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="CodeSmellers" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+    </configuration>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fe85428d-da90-4b9a-94cb-0e07a4c7357f" name="Default" comment="" />
+      <created>1551213767136</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1551213767136</updated>
+      <workItem from="1551213769782" duration="3055000" />
+      <workItem from="1551265518547" duration="6485000" />
+      <workItem from="1551386045028" duration="18000" />
+      <workItem from="1551388651310" duration="1540000" />
+      <workItem from="1551456307647" duration="17000" />
+      <workItem from="1551646904598" duration="8413000" />
+      <workItem from="1551696909020" duration="796000" />
+      <workItem from="1551697837024" duration="7101000" />
+      <workItem from="1551726767925" duration="653000" />
+      <workItem from="1552209563362" duration="15000" />
+      <workItem from="1552406939133" duration="3872000" />
+      <workItem from="1552578297486" duration="642000" />
+      <workItem from="1552596498094" duration="5470000" />
+      <workItem from="1552642772549" duration="2607000" />
+      <workItem from="1552676627844" duration="2763000" />
+      <workItem from="1552685684519" duration="4069000" />
+      <workItem from="1552689854065" duration="36000" />
+      <workItem from="1552930459737" duration="8515000" />
+      <workItem from="1552948846044" duration="607000" />
+      <workItem from="1553032821024" duration="182000" />
+      <workItem from="1553033140667" duration="3811000" />
+      <workItem from="1553116376725" duration="4349000" />
+      <workItem from="1553159263990" duration="15247000" />
+      <workItem from="1553208021263" duration="436000" />
+      <workItem from="1553239302463" duration="12637000" />
+      <workItem from="1553339647970" duration="3095000" />
+      <workItem from="1553375209037" duration="9594000" />
+      <workItem from="1553385219369" duration="2858000" />
+      <workItem from="1553422652697" duration="2372000" />
+      <workItem from="1553425932156" duration="2000" />
+      <workItem from="1553430091321" duration="107000" />
+      <workItem from="1553464940294" duration="103000" />
+      <workItem from="1553709516826" duration="2347000" />
+      <workItem from="1553882138210" duration="15000" />
+      <workItem from="1553962364457" duration="17588000" />
+      <workItem from="1554021998519" duration="9818000" />
+      <workItem from="1554049766564" duration="413000" />
+      <workItem from="1554052504999" duration="13000" />
+      <workItem from="1554064245409" duration="11505000" />
+      <workItem from="1554134965334" duration="3312000" />
+      <workItem from="1554305516272" duration="319000" />
+      <workItem from="1554322271411" duration="1519000" />
+      <workItem from="1554411042647" duration="3437000" />
+      <workItem from="1554471761731" duration="18154000" />
+      <workItem from="1554530045079" duration="20620000" />
+      <workItem from="1554558883835" duration="1263000" />
+      <workItem from="1554667195746" duration="421000" />
+      <workItem from="1554667645746" duration="340000" />
+      <workItem from="1554673583727" duration="244000" />
+      <workItem from="1554673844630" duration="984000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="203779000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32826087" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.002173913" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.124200426" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40326086" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40326086" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32826087" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.84782606" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15724947" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/src/CodeSmellers" />
+    </ignored-roots>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="3" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/ReadingSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="4" column="46" lean-forward="false" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/Reporting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="5" column="24" lean-forward="false" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/ChangeSceneController.java" />
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/Inspectable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="54" lean-forward="false" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/Reflectable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="27" lean-forward="false" selection-start-line="1" selection-start-column="27" selection-end-line="1" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/Test.java" />
+    <entry file="file://$PROJECT_DIR$/src/test.java" />
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/LongParamList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="60" column="60" lean-forward="false" selection-start-line="60" selection-start-column="60" selection-end-line="60" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/LineCounter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/DirectoryReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="691">
+          <caret line="147" column="64" lean-forward="false" selection-start-line="147" selection-start-column="64" selection-end-line="147" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/DuplicateCode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="13" column="5" lean-forward="false" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/PackageFinder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="861">
+          <caret line="79" column="5" lean-forward="false" selection-start-line="79" selection-start-column="5" selection-end-line="79" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/PrimitiveObsession.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="51" column="34" lean-forward="false" selection-start-line="51" selection-start-column="34" selection-end-line="51" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/ClassLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" column="11" lean-forward="false" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/Countable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="4" column="29" lean-forward="false" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/FeatureEnvy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="73" column="86" lean-forward="false" selection-start-line="73" selection-start-column="20" selection-end-line="73" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/Inspection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1411">
+          <caret line="86" column="11" lean-forward="false" selection-start-line="86" selection-start-column="11" selection-end-line="86" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/LargeClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="867">
+          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/LongMethods.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2567">
+          <caret line="158" column="5" lean-forward="false" selection-start-line="158" selection-start-column="5" selection-end-line="158" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/Report.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1020">
+          <caret line="63" column="57" lean-forward="false" selection-start-line="63" selection-start-column="57" selection-end-line="63" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/FeatureEnvy.java" />
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/ClassLoader.java" />
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/Inspectable.java" />
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/Inspection.java" />
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/LargeClass.java" />
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/LazyClass.java" />
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/LineCounter.java" />
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/LongParamList.java" />
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/LongMethods.java" />
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/package-info.java" />
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/PrimitiveObsession.java" />
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/ReadingSource.java" />
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/README.md" />
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/Reflecting.java" />
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/Reflectable.java" />
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/LazyClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="829">
+          <caret line="103" column="27" lean-forward="false" selection-start-line="103" selection-start-column="27" selection-end-line="103" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="24" column="33" lean-forward="false" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/BarChartCalc.java" />
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/src/CodeSmellers/Controller/BarChartOverall.java" />
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/src/CodeSmellers/Controller/ChangeSceneController.java" />
+    <entry file="file://$PROJECT_DIR$/CodeSmellers.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/TooManyLiterals.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="43" column="40" lean-forward="false" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/SourceReadable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/PackageFinder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/WelcomeScreen2.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-92">
+          <caret line="9" column="136" lean-forward="false" selection-start-line="9" selection-start-column="136" selection-end-line="9" selection-end-column="136" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/WelcomeScreen.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="136" lean-forward="false" selection-start-line="9" selection-start-column="136" selection-end-line="9" selection-end-column="136" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/SplashScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-238">
+          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/Skunk.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/ProjectUploadScreen3.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="136" lean-forward="false" selection-start-line="9" selection-start-column="136" selection-end-line="9" selection-end-column="136" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CodeSmellers/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="19" column="72" lean-forward="false" selection-start-line="19" selection-start-column="72" selection-end-line="19" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/ChangeSceneController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1374">
+          <caret line="68" column="63" lean-forward="false" selection-start-line="68" selection-start-column="63" selection-end-line="68" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>CodeSmellers</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

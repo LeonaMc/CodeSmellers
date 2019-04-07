@@ -1,4 +1,4 @@
-package CodeSmellers.Model;
+package Model;
  
 import java.awt.Color;
 import java.awt.Dimension;

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ChangeSceneController">
+   <children>
+      <Pane layoutX="-244.0" layoutY="-259.0" prefHeight="750.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text layoutX="14.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Code Smells">
+               <font>
+                  <Font name="System Bold" size="72.0" />
+               </font></Text>
+            <ImageView fitHeight="139.0" fitWidth="183.0" layoutX="845.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Skunk.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="14.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Our Analysis">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Text>
+            <Text layoutX="14.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What is a Code Smell?">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Text>
+            <Text layoutX="14.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A code smell is a surface indication that usually corresponds to a deeper problem in the system.">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="14.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We will generate a report that searches for the following code smells (click on smell for more information):">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Hyperlink layoutX="14.0" layoutY="375.0" onAction="#defineDuplicatedCode" text="Duplicate Code" />
+            <Hyperlink layoutX="229.0" layoutY="416.0" onAction="#definePrimitiveObsessions" text="Primitive Obsessions" />
+            <Hyperlink layoutX="14.0" layoutY="416.0" onAction="#defineBloatedCode" text="Bloated Code" />
+            <Hyperlink layoutX="14.0" layoutY="461.0" onAction="#defineFeatureEnvy" text="Feature Envy" />
+            <Hyperlink layoutX="229.0" layoutY="461.0" onAction="#defineGodComplex" text="God Complex" />
+            <Hyperlink layoutX="14.0" layoutY="492.0" onAction="#defineInappropriateIntimacy" text="Inappropriate Intimacy" />
+            <Hyperlink layoutX="229.0" layoutY="375.0" onAction="#defineTooManyLiterals" text="Too Many Literals" />
+            <Hyperlink layoutX="425.0" layoutY="375.0" onAction="#defineLazyClass" text="Lazy Class/Freeloader" />
+            <Hyperlink layoutX="424.0" layoutY="416.0" onAction="#defineSwitchStatements" text="Switch Statements" />
+            <Hyperlink layoutX="425.0" layoutY="461.0" onAction="#defineComments" text="Comments" />
+            <Button layoutX="14.0" layoutY="711.0" mnemonicParsing="false" onAction="#goBackToWelomeScreen" text="Back" />
+            <Button layoutX="934.0" layoutY="711.0" mnemonicParsing="false" onAction="#goToProjectUploadScreen" text="Next" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
