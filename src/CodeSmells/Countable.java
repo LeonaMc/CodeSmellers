@@ -1,4 +1,4 @@
-package CodeSmellers;
+package CodeSmells;
 
 import java.io.File;
 import java.io.FileNotFoundException;

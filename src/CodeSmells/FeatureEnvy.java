@@ -25,7 +25,7 @@
  *  EachClassSmell will contain a hash map of all the other classes and how many times they are called.
  */
 
-package CodeSmellers;
+package CodeSmells;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -33,7 +33,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

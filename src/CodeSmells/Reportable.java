@@ -1,4 +1,4 @@
-package CodeSmellers;
+package CodeSmells;
 // will be deleted
 public interface Reportable {
     public Report returnReport();

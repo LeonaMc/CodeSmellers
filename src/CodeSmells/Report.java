@@ -1,4 +1,4 @@
-package CodeSmellers;
+package CodeSmells;
 
 import java.lang.reflect.Method;
 import java.text.DecimalFormat;

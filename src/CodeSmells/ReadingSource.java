@@ -1,9 +1,9 @@
-package CodeSmellers;
+package CodeSmells;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-// Annotation for methods using reflection 
+// Annotation for methods reading source files
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Reflecting {
+public @interface ReadingSource {
 
 }
