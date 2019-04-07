@@ -45,7 +45,7 @@ public class FeatureEnvy implements SourceReadable,Reportable{
     protected static ArrayList<EachClassSmell> classSmellsList = new ArrayList<>();
     private Report report;
 
-    FeatureEnvy(ArrayList<File> javaSources, ArrayList<Class> javaClasses) {
+    public FeatureEnvy(ArrayList<File> javaSources, ArrayList<Class> javaClasses) {
         this.javaSources = javaSources;
         this.javaClasses = javaClasses;
         report = new Report();

@@ -2,3 +2,5 @@
 out/
 bin/
 CodeSmellers.iml
+.project
+.classpath

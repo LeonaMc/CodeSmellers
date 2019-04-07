@@ -18,7 +18,7 @@ public class LongMethods implements Inspectable {
     private char openingBrace;
     private char closingBrace;
 
-    LongMethods(ArrayList<Class> loadedClasses, ArrayList<File> javaSource) {
+    public LongMethods(ArrayList<Class> loadedClasses, ArrayList<File> javaSource) {
         this.loadedClasses = new ArrayList<>(loadedClasses);
         this.javaSourceFiles = new ArrayList<>(javaSource);
         report = new Report();

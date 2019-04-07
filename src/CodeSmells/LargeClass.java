@@ -12,7 +12,7 @@ public class LargeClass implements Inspectable {
     private HashMap<File, Integer> fileLength;
     private Report report; // stores results of inspection
 
-    LargeClass(ArrayList<File> javaSource, ArrayList<Class> loadedClasses){
+    public LargeClass(ArrayList<File> javaSource, ArrayList<Class> loadedClasses){
         this.javaSource = new ArrayList<>();
         this.loadedClasses = new ArrayList<>();
         this.javaSource.addAll(javaSource);
