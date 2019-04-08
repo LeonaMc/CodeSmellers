@@ -11,7 +11,7 @@ public class TestSmellData {
         String newline = "\n";
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
-        String directoryPath = "C:\\Users\\RickTheRuler\\IdeaProjects\\CodeSmellers"; // Add path to root of directory here
+        String directoryPath = ""; // Add path to root of directory here
         directoryReader.getFiles(directoryPath);
 
         if(directoryReader.getDirectoryLevel() > 0){
@@ -30,7 +30,6 @@ public class TestSmellData {
 
         ArrayList<Class> loadedClasses = new ArrayList<>(directoryReader.getLoadedClasses()); // classes ready for reflection
         ArrayList<File> javaSource = new ArrayList<>(directoryReader.getJavaSourceArrayList()); // can read java files as text
-
         //Bloat Tests
         // Large Class Finished
         System.out.println("==========================TestSmellData Large Class==========================");
