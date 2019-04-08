@@ -8,14 +8,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
-
+// add exception for directory reader
 public class Main extends Application {
 
     // Setting up GUI
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(this.getClass().getResource("/Model/WelcomeScreen.fxml"));
+            Parent root = FXMLLoader.load(this.getClass().getResource("/Fxml/WelcomeScreen.fxml"));
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
         } catch(Exception e) {
