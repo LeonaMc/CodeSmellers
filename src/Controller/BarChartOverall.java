@@ -42,6 +42,7 @@ public class BarChartOverall implements Initializable{
     	
     	 XYChart.Series codeSmellBar = new XYChart.Series<>();
 
+
  		// 12 code smells
  	    List<String> codeSmells = Arrays.asList("Feature Envy", "Large Class", "Long Method", "Long Parametre",
  	    										"Duplicate Code", "Inappropriate Intimacy", "Too Many Literals", 
@@ -51,6 +52,8 @@ public class BarChartOverall implements Initializable{
  	   codeSmellBar.setName(codeSmells.get(0));
  	   codeSmellBar.setName(codeSmells.get(1));
  	   codeSmellBar.setName(codeSmells.get(2));
+
+		System.out.println("BarCharOverAllCalled");
  	   
  	    // Set name and percentage to bar chart
  		codeSmellBar.getData().add(new XYChart.Data(codeSmells.get(0), barChart.getResults().get(0)));

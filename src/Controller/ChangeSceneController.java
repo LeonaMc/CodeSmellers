@@ -25,10 +25,15 @@ public class ChangeSceneController  { // implements Initializable
 	private Label lbl;
 	
 	@FXML 
-	private TextArea textArea;
-	
+	private  TextArea textArea;
+
+
+
 	@FXML 
-	private TextField textField;
+	private  TextField textField;
+	private static String textPath; //used to store string from text field,
+
+
 
 	public ChangeSceneController(){
 
@@ -102,7 +107,19 @@ public class ChangeSceneController  { // implements Initializable
              File directory = dir_chooser.showDialog(stage); 
      		if (directory != null) { 
                 textField.setAccessibleText(directory.getAbsolutePath()); // set user directory path in text field
-          //      dir = directory.getAbsolutePath(); // TODO: use for directory in main 
+          //      dir = directory.getAbsolutePath(); // TODO: use for directory in main
+
+
+
+
+//				displays directory path that user has selected
+			textField.setText(textField.getAccessibleText());
+			textPath = textField.getAccessibleText();
+
+
+
+
+
      		}
              stage.show(); 
         }  
@@ -231,6 +248,14 @@ public class ChangeSceneController  { // implements Initializable
 		String url_open ="https://refactoring.guru/smells/comments";
 		java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
 	}
+
+
+
+	public static String getTextPath(){
+		return textPath;
+	}
+
+
 }
 	
 

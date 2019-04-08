@@ -19,7 +19,8 @@ public class BarChartCalc{
     	String newline = "\n";
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
-        String directoryPath = "C:\\Eclipse\\ActuallyJavaFX"; // Add path to root of directory here
+        String directoryPath = ChangeSceneController.getTextPath(); // Add path to root of directory here
+
         
        
    //     System.out.println(c.getDirectoryPath());
@@ -70,7 +71,12 @@ public class BarChartCalc{
         double switchStatementsPercent = Math.round(inspection.getReports().get(FEATURE_ENVY).getPercentage());
         double dataClumpPercent = Math.round(inspection.getReports().get(LARGE_CLASS).getPercentage());
         double largeMethodPercent = Math.round(inspection.getReports().get(LONG_METHOD).getPercentage());
-        
+
+
+
+
+
+
         percentages.add(featureEnvyPercent);
         percentages.add(largeClassPercent);
         percentages.add(longMethodPercent);
