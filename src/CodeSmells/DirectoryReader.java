@@ -66,6 +66,7 @@ public class DirectoryReader extends PackageFinder {
             for (File file : rootDirectoryFiles) { // iterate through everything in this directory
                 if (file.isFile()) { // if File
                     if (file.getName().endsWith(".java")) { // and if .java
+                       // System.out.println(file.getName());
                         javaSourceArrayList.add(file); // add to javaSource Array
                     } else if (file.getName().endsWith(".class")) { // else if File is .class
                         classArrayList.add(file); // add to class Array
@@ -98,6 +99,7 @@ public class DirectoryReader extends PackageFinder {
                 index = i;
             }
         }
+
         String[] relevantPath = new String[2];
         relevantPath[0] = splitPath[index]; // add package name
         relevantPath[1] = "";
@@ -139,7 +141,7 @@ public class DirectoryReader extends PackageFinder {
 
                 if (packageName != null) { // check if java source files belong to a package
                     className = packageName + "." + className; // if class has package set className to packageName.className, classLoader won't work otherwise
-                    //System.out.println(className);
+                    System.out.println(className);
                 }
                 try {
                     Class loadedClass = cl.loadClass(className); // load classes for reflection

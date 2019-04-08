@@ -11,7 +11,7 @@ public class TestSmellData {
         String newline = "\n";
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
-        String directoryPath = ""; // Add path to root of directory here
+        String directoryPath = "C:\\Users\\RickTheRuler\\IdeaProjects\\CodeSmellers"; // Add path to root of directory here
         directoryReader.getFiles(directoryPath);
 
         if(directoryReader.getDirectoryLevel() > 0){
