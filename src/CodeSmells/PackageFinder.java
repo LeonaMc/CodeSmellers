@@ -21,6 +21,7 @@ public class PackageFinder implements SourceReadable {
 
     @Override
     public String getKeyword(String keyword, File javaSource) throws FileNotFoundException {
+       // System.out.println(javaSource.getParent()+"\n" +javaSource.getName());
         int endOfMultiLine = 0; // stores start line number of multiline comment is there is one at start of file
         try {
             endOfMultiLine = lineCounter.countCommentBody(javaSource, 0); // countCommentBody finds start and end line number of multiline comment
@@ -30,12 +31,15 @@ public class PackageFinder implements SourceReadable {
         Scanner fileScanner = new Scanner(javaSource);
         int lineNumber = 0; // current line number
         boolean multiLineCommentFound = false; // /* found if true
-        boolean commentFound = false;
         while (fileScanner.hasNextLine()) {
             lineNumber++;
-            do{
-                packageName = fileScanner.nextLine();
-            }while(packageName.startsWith("//"));
+            packageName = fileScanner.nextLine();
+            if(packageName.startsWith("//")){
+                do{
+                    packageName = fileScanner.nextLine();
+                }while(packageName.startsWith("//"));
+            }
+
 
             Scanner wordScanner = new Scanner(packageName);
 
@@ -44,7 +48,7 @@ public class PackageFinder implements SourceReadable {
                 if(nextWord.contains("/*")){
                     multiLineCommentFound = true;
                 }
-                if(!multiLineCommentFound && !commentFound){ // if /* not found
+                if(!multiLineCommentFound){ // if /* not found
                     if (nextWord.equals(keyword)) {
                         packageFound = true;
                         wordScanner.close();
@@ -71,6 +75,7 @@ public class PackageFinder implements SourceReadable {
 
         if(packageName != null && !classKeywordFound){
             packageName = packageName.substring(8, packageName.length()-1); // remove keyword package and " "(8 characters) from string
+            //System.out.println(packageName +" "+javaSource.getName());
         }
         else if(classKeywordFound){ // if class found before package file does not belong to a package
             packageName = null;
