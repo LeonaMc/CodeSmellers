@@ -4,10 +4,9 @@ package Controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
+import CodeSmells.Report;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,78 +41,65 @@ public class BarChartOverall implements Initializable{
     	
     	 XYChart.Series codeSmellBar = new XYChart.Series<>();
 
-
- 		// 12 code smells
- 	    List<String> codeSmells = Arrays.asList("Feature Envy", "Large Class", "Long Method", "Long Parametre",
- 	    										"Duplicate Code", "Inappropriate Intimacy", "Too Many Literals", 
- 	    										"Primitive Obsessions", "God Complex", "Lazy Class/Freeloader", 
- 	    										"Comments", "Switch Statements", "Data Clump");
- 	    
- 	   codeSmellBar.setName(codeSmells.get(0));
- 	   codeSmellBar.setName(codeSmells.get(1));
- 	   codeSmellBar.setName(codeSmells.get(2));
-
 		System.out.println("BarCharOverAllCalled");
- 	   
- 	    // Set name and percentage to bar chart
- 		codeSmellBar.getData().add(new XYChart.Data(codeSmells.get(0), barChart.getResults().get(0)));
- 		codeSmellBar.getData().add(new XYChart.Data(codeSmells.get(1), barChart.getResults().get(1)));
- 		codeSmellBar.getData().add(new XYChart.Data(codeSmells.get(2), barChart.getResults().get(2)));
- 		codeSmellBar.getData().add(new XYChart.Data(codeSmells.get(3), barChart.getResults().get(1)));
- 		codeSmellBar.getData().add(new XYChart.Data(codeSmells.get(4), barChart.getResults().get(1)));
- 		codeSmellBar.getData().add(new XYChart.Data(codeSmells.get(5), barChart.getResults().get(2)));
- 		codeSmellBar.getData().add(new XYChart.Data(codeSmells.get(6), barChart.getResults().get(2)));
- 		codeSmellBar.getData().add(new XYChart.Data(codeSmells.get(7), barChart.getResults().get(1)));
- 		codeSmellBar.getData().add(new XYChart.Data(codeSmells.get(8), barChart.getResults().get(2)));
-		codeSmellBar.getData().add(new XYChart.Data(codeSmells.get(9), barChart.getResults().get(2)));
- 		codeSmellBar.getData().add(new XYChart.Data(codeSmells.get(10), barChart.getResults().get(2)));
- 		codeSmellBar.getData().add(new XYChart.Data(codeSmells.get(11), barChart.getResults().get(1)));
- 		codeSmellBar.getData().add(new XYChart.Data(codeSmells.get(12), barChart.getResults().get(1)));
- 		
- 		// Add data to bar chart
+
+
+		HashMap<String, Report> barResults = barChart.getResults(); //gets the inspection reports
+		ArrayList<String> codeSmells = new ArrayList<>(); // used to store the names of the smells, will be used to set XY names
+
+		int index = 0;
+		//Iterates over the reports, gets their name and their percentage and adds to XY Chart
+		for(Map.Entry<String,Report> reportEntry : barResults.entrySet()){
+			System.out.println("Name: "+reportEntry.getKey()+"  Value: "+ reportEntry.getValue().percentToString());
+			codeSmells.add(reportEntry.getKey());
+			codeSmellBar.getData().add(new XYChart.Data(codeSmells.get(index), reportEntry.getValue().getPercentage()));
+
+			index++;
+		}
+
  		smellChart.getData().addAll(codeSmellBar);
  		
  
  		
  		// CSS
- 		Node n = smellChart.lookup(".data0.chart-bar");
- 	    n.setStyle("-fx-bar-fill: red");
+// 		Node n = smellChart.lookup(".data0.chart-bar");
+// 	    n.setStyle("-fx-bar-fill: red");
+//
+// 	    n = smellChart.lookup(".data1.chart-bar");
+// 	    n.setStyle("-fx-bar-fill: orange");
+//
+// 	    n = smellChart.lookup(".data2.chart-bar");
+// 	    n.setStyle("-fx-bar-fill: yellow");
  	    
- 	    n = smellChart.lookup(".data1.chart-bar");
- 	    n.setStyle("-fx-bar-fill: orange");
- 	    
- 	    n = smellChart.lookup(".data2.chart-bar");
- 	    n.setStyle("-fx-bar-fill: yellow");
- 	    
- 	    n = smellChart.lookup(".data3.chart-bar");
- 	    n.setStyle("-fx-bar-fill: green");
- 	    
- 	    n = smellChart.lookup(".data4.chart-bar");
- 	    n.setStyle("-fx-bar-fill: pink");
- 	    
- 	    n = smellChart.lookup(".data5.chart-bar");
- 	    n.setStyle("-fx-bar-fill: purple");
- 	    
- 	    n = smellChart.lookup(".data6.chart-bar");
- 	    n.setStyle("-fx-bar-fill: blue");
- 	    
- 	    n = smellChart.lookup(".data7.chart-bar");
- 	    n.setStyle("-fx-bar-fill: orange");
- 	    
- 	    n = smellChart.lookup(".data8.chart-bar");
- 	    n.setStyle("-fx-bar-fill: yellow");
- 	    
- 	    n = smellChart.lookup(".data9.chart-bar");
- 	    n.setStyle("-fx-bar-fill: green");
- 	    
- 	    n = smellChart.lookup(".data10.chart-bar");
- 	    n.setStyle("-fx-bar-fill: pink");
- 	    
- 	    n = smellChart.lookup(".data11.chart-bar");
- 	    n.setStyle("-fx-bar-fill: purple");
- 	    
- 	    n = smellChart.lookup(".data12.chart-bar");
- 	    n.setStyle("-fx-bar-fill: blue");
+// 	    n = smellChart.lookup(".data3.chart-bar");
+// 	    n.setStyle("-fx-bar-fill: green");
+//
+// 	    n = smellChart.lookup(".data4.chart-bar");
+// 	    n.setStyle("-fx-bar-fill: pink");
+//
+// 	    n = smellChart.lookup(".data5.chart-bar");
+// 	    n.setStyle("-fx-bar-fill: purple");
+//
+// 	    n = smellChart.lookup(".data6.chart-bar");
+// 	    n.setStyle("-fx-bar-fill: blue");
+//
+// 	    n = smellChart.lookup(".data7.chart-bar");
+// 	    n.setStyle("-fx-bar-fill: orange");
+//
+// 	    n = smellChart.lookup(".data8.chart-bar");
+// 	    n.setStyle("-fx-bar-fill: yellow");
+//
+// 	    n = smellChart.lookup(".data9.chart-bar");
+// 	    n.setStyle("-fx-bar-fill: green");
+//
+// 	    n = smellChart.lookup(".data10.chart-bar");
+// 	    n.setStyle("-fx-bar-fill: pink");
+//
+// 	    n = smellChart.lookup(".data11.chart-bar");
+// 	    n.setStyle("-fx-bar-fill: purple");
+//
+// 	    n = smellChart.lookup(".data12.chart-bar");
+// 	    n.setStyle("-fx-bar-fill: blue");
  	   
 }
     
