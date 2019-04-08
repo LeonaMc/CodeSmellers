@@ -117,7 +117,7 @@ public class BarChartOverall implements Initializable{
 	public void goToProjectAnalysis(ActionEvent event) throws IOException {
 		
 		// dont have access to stage information
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/ProjectAnalysis.fxml"));
+		Parent root2 = FXMLLoader.load(getClass().getResource("/Fxml/ProjectAnalysis.fxml"));
 		Scene scene = new Scene(root2);
 		// This line gets the stage informations
 		// Make the object of node type to be returned by getSource which allows us to get scene and window
@@ -129,7 +129,7 @@ public class BarChartOverall implements Initializable{
 	public void goToProjectAnalysis2(ActionEvent event) throws IOException {
 		
 		// dont have access to stage information
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/ProjectAnalysis2.fxml"));
+		Parent root2 = FXMLLoader.load(getClass().getResource("/Fxml/ProjectAnalysis2.fxml"));
 		Scene scene = new Scene(root2);
 		// This line gets the stage informations
 		// Make the object of node type to be returned by getSource which allows us to get scene and window
