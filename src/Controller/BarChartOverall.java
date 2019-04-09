@@ -18,6 +18,20 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Series;
+import javafx.stage.Stage;
+
+import javafx.application.Application;
+import javafx.beans.value.*;
+import javafx.geometry.Bounds;
+import javafx.geometry.Pos;
+import javafx.scene.*;
+import javafx.scene.chart.*;
+import javafx.scene.control.Label;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.*;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import Model.BarChartCalc;
@@ -34,6 +48,8 @@ public class BarChartOverall implements Initializable{
     private NumberAxis y;
    
     BarChartCalc barChart = new BarChartCalc();
+    
+    
 
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -52,54 +68,52 @@ public class BarChartOverall implements Initializable{
 		for(Map.Entry<String,Report> reportEntry : barResults.entrySet()){
 			System.out.println("Name: "+reportEntry.getKey()+"  Value: "+ reportEntry.getValue().percentToString());
 			codeSmells.add(reportEntry.getKey());
-			codeSmellBar.getData().add(new XYChart.Data(codeSmells.get(index), reportEntry.getValue().getPercentage()));
-
+		    XYChart.Data<String, Number> data = new XYChart.Data(codeSmells.get(index), reportEntry.getValue().getPercentage());
+			codeSmellBar.getData().add(data);	
+		//	codeSmellBar.setName(reportEntry.getKey());
+			
+			data.nodeProperty().addListener(new ChangeListener<Node>() {
+				  @Override public void changed(ObservableValue<? extends Node> ov, Node oldNode, Node newNode) {
+				    if (newNode != null) {
+				    	switch(reportEntry.getKey()) {
+				    	  case "FeatureEnvy":
+				    		  newNode.setStyle("-fx-bar-fill: red;");
+				    	    break;
+				    	  case "LongMethod":
+				    		  newNode.setStyle("-fx-bar-fill: navy;");
+				    	    break;
+				    	  case "LongParameter":
+				    		  newNode.setStyle("-fx-bar-fill: yellow;");
+				    	    break;
+				    	  case "LazyClass":
+				    		  newNode.setStyle("-fx-bar-fill: pink;");
+				    	    break;
+				    	  case "PrimitiveObsession":
+				    		  newNode.setStyle("-fx-bar-fill: green;");
+				    	    break;
+				    	  case "TooManyLiterals":
+				    		  newNode.setStyle("-fx-bar-fill: purple;");
+				    	    break;
+				    	  case "LargeClass":
+				    		  newNode.setStyle("-fx-bar-fill: firebrick;");
+				    	    break;
+				    	  default:
+				    		  newNode.setStyle("-fx-bar-fill: orange;");
+				    	} 
+				    }
+				  }
+				}); 
+			
 			index++;
+		
 		}
+		
+		
+		smellChart.getData().addAll(codeSmellBar); 
+		
+		
 
- 		smellChart.getData().addAll(codeSmellBar);
  		
- 
- 		
- 		// CSS
-// 		Node n = smellChart.lookup(".data0.chart-bar");
-// 	    n.setStyle("-fx-bar-fill: red");
-//
-// 	    n = smellChart.lookup(".data1.chart-bar");
-// 	    n.setStyle("-fx-bar-fill: orange");
-//
-// 	    n = smellChart.lookup(".data2.chart-bar");
-// 	    n.setStyle("-fx-bar-fill: yellow");
- 	    
-// 	    n = smellChart.lookup(".data3.chart-bar");
-// 	    n.setStyle("-fx-bar-fill: green");
-//
-// 	    n = smellChart.lookup(".data4.chart-bar");
-// 	    n.setStyle("-fx-bar-fill: pink");
-//
-// 	    n = smellChart.lookup(".data5.chart-bar");
-// 	    n.setStyle("-fx-bar-fill: purple");
-//
-// 	    n = smellChart.lookup(".data6.chart-bar");
-// 	    n.setStyle("-fx-bar-fill: blue");
-//
-// 	    n = smellChart.lookup(".data7.chart-bar");
-// 	    n.setStyle("-fx-bar-fill: orange");
-//
-// 	    n = smellChart.lookup(".data8.chart-bar");
-// 	    n.setStyle("-fx-bar-fill: yellow");
-//
-// 	    n = smellChart.lookup(".data9.chart-bar");
-// 	    n.setStyle("-fx-bar-fill: green");
-//
-// 	    n = smellChart.lookup(".data10.chart-bar");
-// 	    n.setStyle("-fx-bar-fill: pink");
-//
-// 	    n = smellChart.lookup(".data11.chart-bar");
-// 	    n.setStyle("-fx-bar-fill: purple");
-//
-// 	    n = smellChart.lookup(".data12.chart-bar");
-// 	    n.setStyle("-fx-bar-fill: blue");
  	   
 }
     
@@ -127,5 +141,5 @@ public class BarChartOverall implements Initializable{
 		window.show();
 	} 
 		
-	} 
+} 
 	  
