@@ -75,15 +75,6 @@ public class ChangeSceneController  { // implements Initializable
 		window.show();
 		}
 	} 
-	
-	public void goToDeeperAnalysis(ActionEvent event) throws IOException {
-		
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/DeeperAnalysis.fxml"));
-		Scene scene = new Scene(root2);
-		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		window.setScene(scene);
-		window.show();
-	} 
 
 	public void openDirectoryChooser(ActionEvent event) {
 		
