@@ -32,9 +32,9 @@
             </Text>
             <Button layoutX="14.0" layoutY="339.0" mnemonicParsing="false" onAction="#openDirectoryChooser" text="Upload" />
             <TextField fx:id="textField" layoutX="14.0" layoutY="295.0" prefHeight="25.0" prefWidth="455.0" promptText="No file selected" />
-            <Button layoutX="412.0" layoutY="339.0" mnemonicParsing="false" onAction="#getDirectoryPath" text="Analyse" />
             <TextArea fx:id="textArea" layoutX="14.0" layoutY="396.0" prefHeight="240.0" prefWidth="455.0" />
             <Button layoutX="526.0" layoutY="339.0" mnemonicParsing="false" onAction="#goToProjectBarChartOverall" text="GUI" />
+            <Button layoutX="14.0" layoutY="711.0" mnemonicParsing="false" onAction="#goBackToWelcomeScreen2" text="Back" />
          </children>
       </Pane>
    </children>
