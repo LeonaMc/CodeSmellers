@@ -26,6 +26,7 @@
                <children>
                   <Button layoutX="939.0" layoutY="8.0" mnemonicParsing="false" onAction="#goToProjectAnalysis" text="Next" />
                   <Button layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#goToProjectAnalysis2" text="Next to Sample 2" />
+                  <Button layoutX="212.0" layoutY="8.0" mnemonicParsing="false" onAction="#goBackToProjectUploadScreen" text="Back" />
                </children>
             </AnchorPane>
         </items>
