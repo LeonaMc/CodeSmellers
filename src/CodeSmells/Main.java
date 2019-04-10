@@ -16,7 +16,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         try {
             Parent root = FXMLLoader.load(this.getClass().getResource("/Model/WelcomeScreen.fxml"));
-            root.setStyle("-fx-background-color: white");
+           // root.setStyle("-fx-background-color: white");
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
         } catch(Exception e) {
