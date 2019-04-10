@@ -31,7 +31,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import javafx.scene.Parent;
@@ -51,8 +54,15 @@ public class BarChartController implements Initializable{
 
     @FXML
     private NumberAxis y;
+    
+    @FXML
+    private TextFlow overAllAnalysisText;
    
     BarChartCalc barChart = new BarChartCalc();
+    
+    public void showOverallAnalysisText() {
+    	overAllAnalysisText.setAccessibleText(null);
+    }
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -68,10 +78,17 @@ public class BarChartController implements Initializable{
 		//Iterates over the reports, gets their name and their percentage and adds to XY Chart
 		for(Map.Entry<String,Report> reportEntry : barResults.entrySet()){
 			System.out.println("Name: "+reportEntry.getKey()+"  Value: "+ reportEntry.getValue().percentToString());
+			Text t = new Text("Name: "+reportEntry.getKey()+"  Value: "+ reportEntry.getValue().percentToString() + "\n");
+			t.setFill(Color.BLACK);
+			t.setFont(Font.font("Verdana", 12)); 
+			overAllAnalysisText.getChildren().add(t); 
+            t.setTextAlignment(TextAlignment.CENTER); 
+            t.setLineSpacing(20.0f); 
+			 
 			codeSmells.add(reportEntry.getKey());
-		    XYChart.Data<String, Number> data = new XYChart.Data(codeSmells.get(index), reportEntry.getValue().getPercentage());
+		   // XYChart.Data<String, Number> data = new XYChart.Data(codeSmells.get(index), reportEntry.getValue().getPercentage());
+		    XYChart.Data<String, Number> data = new XYChart.Data(codeSmells.get(index), 100); // use this line to see the bars for every smell regardless of project
 			codeSmellBarSeries.getData().add(data);	
-		//	codeSmellBar.setName(reportEntry.getKey());
 			
 			// For changing individual colours 
 			data.nodeProperty().addListener(new ChangeListener<Node>() {
@@ -126,6 +143,7 @@ public class BarChartController implements Initializable{
 		seriesArray[2].setName("Code Smell Name Tag"); **/
 		
 }
+    
 // TODO: move to ChangeSceneController -> figure out if scene can have two control classes
 	public void goToProjectAnalysis(ActionEvent event) throws IOException {
 		
@@ -156,7 +174,7 @@ public class BarChartController implements Initializable{
 		window.setScene(scene);
 		window.show();
 	}
-	
+
 		
 } 
 	  
