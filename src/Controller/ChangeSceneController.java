@@ -100,6 +100,14 @@ public class ChangeSceneController  { // implements Initializable
         }
 	}	
 	
+	public void goBackToBarChartOverall(ActionEvent event) throws IOException {
+		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/BarChartOverall.fxml"));
+		Scene scene = new Scene(root2);
+		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.show();
+	}
+	
 	// Methods to deal with hyperlinks for definitions 
 	
 	public void defineDuplicatedCode() throws IOException{
