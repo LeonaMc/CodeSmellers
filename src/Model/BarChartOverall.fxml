@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.chart.*?>
 <?import java.lang.*?>
@@ -12,7 +13,7 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="1000.0">
                <children>
-                  <BarChart fx:id="smellChart" prefHeight="701.0" prefWidth="998.0" title="Overall Analysis" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <BarChart fx:id="smellChart" layoutX="14.0" layoutY="14.0" prefHeight="502.0" prefWidth="955.0" title="Overall Analysis" AnchorPane.bottomAnchor="185.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="14.0">
                     <xAxis>
                       <CategoryAxis label="Smell" side="BOTTOM" fx:id="x" />
                     </xAxis>
@@ -20,6 +21,7 @@
                       <NumberAxis fx:id="y" label="Percentage" side="LEFT" />
                     </yAxis>
                   </BarChart>
+                  <TextFlow fx:id="overAllAnalysisText" layoutX="14.0" layoutY="523.0" prefHeight="164.0" prefWidth="955.0" style="-fx-background-color: lightgrey;" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="998.0">
