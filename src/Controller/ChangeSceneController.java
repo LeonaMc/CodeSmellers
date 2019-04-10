@@ -62,7 +62,7 @@ public class ChangeSceneController  { // implements Initializable
 		// if the text path is null then the user won't be able to click next, an alert will pop-up
 		if(textPath == null) {
 			String selection = null;
-			Alert alert = new Alert(AlertType.CONFIRMATION, "You cannot continue until you select a folder.", ButtonType.OK);
+			Alert alert = new Alert(AlertType.ERROR, "You cannot continue until you select a folder.", ButtonType.OK);
 			alert.showAndWait();
 				if (alert.getResult() == ButtonType.OK) {
 				    alert.close();				}		
