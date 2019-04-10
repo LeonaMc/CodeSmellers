@@ -47,10 +47,46 @@ public class ChangeSceneController  { // implements Initializable
 	// Changes welcome screen to screen 2 
 	// Want to be able to read from button to get scene, once read
 	// from scene we can get the stage 
-	public void goToWelcomeScreen(ActionEvent event) throws IOException {
+	public void goToWelcomeScreen2(ActionEvent event) throws IOException {
 		
 		// dont have access to stage information
 		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/WelcomeScreen2.fxml"));
+		Scene scene = new Scene(root2);
+		// This line gets the stage informations
+		// Make the object of node type to be returned by getSource which allows us to get scene and window
+		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.show();
+	}
+	
+	public void goBackToWelcomeScreen(ActionEvent event) throws IOException {
+		
+		// dont have access to stage information
+		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/WelcomeScreen.fxml"));
+		Scene scene = new Scene(root2);
+		// This line gets the stage informations
+		// Make the object of node type to be returned by getSource which allows us to get scene and window
+		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.show();
+	}
+	
+	public void goBackToWelcomeScreen2(ActionEvent event) throws IOException {
+		
+		// dont have access to stage information
+		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/WelcomeScreen2.fxml"));
+		Scene scene = new Scene(root2);
+		// This line gets the stage informations
+		// Make the object of node type to be returned by getSource which allows us to get scene and window
+		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.show();
+	} 
+	
+	public void goToProjectUploadScreen(ActionEvent event) throws IOException {
+		
+		// dont have access to stage information
+		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/ProjectUploadScreen3.fxml"));
 		Scene scene = new Scene(root2);
 		// This line gets the stage informations
 		// Make the object of node type to be returned by getSource which allows us to get scene and window
@@ -70,31 +106,6 @@ public class ChangeSceneController  { // implements Initializable
 		window.setScene(scene);
 		window.show();
 	} 
-	
-	public void goBackToWelcomeScreen(ActionEvent event) throws IOException {
-		
-		// dont have access to stage information
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/WelcomeScreen.fxml"));
-		Scene scene = new Scene(root2);
-		// This line gets the stage informations
-		// Make the object of node type to be returned by getSource which allows us to get scene and window
-		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		window.setScene(scene);
-		window.show();
-	}
-	
-	public void goToProjectUploadScreen(ActionEvent event) throws IOException {
-		
-		// dont have access to stage information
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/ProjectUploadScreen3.fxml"));
-		Scene scene = new Scene(root2);
-		// This line gets the stage informations
-		// Make the object of node type to be returned by getSource which allows us to get scene and window
-		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		window.setScene(scene);
-		window.show();
-	}
-	
 
 	public void openDirectoryChooser(ActionEvent event) {
 		
