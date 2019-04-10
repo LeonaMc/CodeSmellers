@@ -71,7 +71,7 @@ public class ChangeSceneController  { // implements Initializable
 		window.show();
 	} 
 	
-	public void goBackToWelomeScreen(ActionEvent event) throws IOException {
+	public void goBackToWelcomeScreen(ActionEvent event) throws IOException {
 		
 		// dont have access to stage information
 		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/WelcomeScreen.fxml"));
@@ -94,6 +94,7 @@ public class ChangeSceneController  { // implements Initializable
 		window.setScene(scene);
 		window.show();
 	}
+	
 
 	public void openDirectoryChooser(ActionEvent event) {
 		
@@ -248,6 +249,13 @@ public class ChangeSceneController  { // implements Initializable
 		String url_open ="https://refactoring.guru/smells/comments";
 		java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
 	}
+	
+	public void defineDataClumps() throws IOException{
+		String url_open ="https://refactoring.guru/smells/data-clumps";
+		java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
+	}
+	
+	
 
 
 
