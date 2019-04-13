@@ -11,8 +11,13 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.*;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextFlow;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.paint.Color;
 
 public class ChangeSceneController  { // implements Initializable
 	 
@@ -21,6 +26,10 @@ public class ChangeSceneController  { // implements Initializable
 	
 	@FXML 
 	private  TextField textField;
+	
+	@FXML
+	private TextFlow textFlow;
+	
 	private static String textPath; //used to store string from text field
 
 	public void goToWelcomeScreen2(ActionEvent event) throws IOException {
@@ -101,11 +110,13 @@ public class ChangeSceneController  { // implements Initializable
 	}	
 	
 	public void goBackToBarChartOverall(ActionEvent event) throws IOException {
+	
 		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/BarChartOverall.fxml"));
 		Scene scene = new Scene(root2);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(scene);
-		window.show();
+		window.show(); 
+	
 	}
 	
 	// Methods to deal with hyperlinks for definitions 
