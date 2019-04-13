@@ -21,12 +21,17 @@
                       <NumberAxis fx:id="y" label="Percentage" side="LEFT" />
                     </yAxis>
                   </BarChart>
-                  <TextFlow fx:id="overAllAnalysisText" layoutX="14.0" layoutY="523.0" prefHeight="164.0" prefWidth="955.0" style="-fx-background-color: lightgrey;" />
+                  <ScrollPane layoutX="79.0" layoutY="516.0" prefHeight="175.0" prefViewportHeight="173.0" prefViewportWidth="262.0" prefWidth="508.0">
+                     <content>
+                        <TextFlow fx:id="overAllAnalysisText" layoutX="79.0" layoutY="516.0" prefHeight="173.0" prefWidth="506.0" style="-fx-background-color: lightgrey;" />
+                     </content>
+                  </ScrollPane>
+                  <TextFlow layoutX="607.0" layoutY="516.0" prefHeight="175.0" prefWidth="353.0" style="-fx-background-color: lightgrey;" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="998.0">
                <children>
-                  <Button layoutX="939.0" layoutY="8.0" mnemonicParsing="false" onAction="#goToProjectAnalysis" text="Next" />
+                  <Button layoutX="939.0" layoutY="8.0" mnemonicParsing="false" onAction="#goToDeeperAnalysis" text="Next" />
                   <Button layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#goToProjectAnalysis2" text="Next to Sample 2" />
                   <Button layoutX="212.0" layoutY="8.0" mnemonicParsing="false" onAction="#goBackToProjectUploadScreen" text="Back" />
                </children>
