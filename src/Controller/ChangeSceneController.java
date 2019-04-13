@@ -25,10 +25,15 @@ public class ChangeSceneController  { // implements Initializable
 	private Label lbl;
 	
 	@FXML 
-	private TextArea textArea;
-	
+	private  TextArea textArea;
+
+
+
 	@FXML 
-	private TextField textField;
+	private  TextField textField;
+	private static String textPath; //used to store string from text field,
+
+
 
 	public ChangeSceneController(){
 
@@ -45,7 +50,7 @@ public class ChangeSceneController  { // implements Initializable
 	public void goToWelcomeScreen(ActionEvent event) throws IOException {
 		
 		// dont have access to stage information
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Fxml/WelcomeScreen2.fxml"));
+		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/WelcomeScreen2.fxml"));
 		Scene scene = new Scene(root2);
 		// This line gets the stage informations
 		// Make the object of node type to be returned by getSource which allows us to get scene and window
@@ -57,7 +62,7 @@ public class ChangeSceneController  { // implements Initializable
 	public void goToProjectBarChartOverall(ActionEvent event) throws IOException {
 		
 		// dont have access to stage information
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Fxml/BarChartOverall.fxml"));
+		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/BarChartOverall.fxml"));
 		Scene scene = new Scene(root2);
 		// This line gets the stage informations
 		// Make the object of node type to be returned by getSource which allows us to get scene and window
@@ -69,7 +74,7 @@ public class ChangeSceneController  { // implements Initializable
 	public void goBackToWelomeScreen(ActionEvent event) throws IOException {
 		
 		// dont have access to stage information
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Fxml/WelcomeScreen.fxml"));
+		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/WelcomeScreen.fxml"));
 		Scene scene = new Scene(root2);
 		// This line gets the stage informations
 		// Make the object of node type to be returned by getSource which allows us to get scene and window
@@ -81,7 +86,7 @@ public class ChangeSceneController  { // implements Initializable
 	public void goToProjectUploadScreen(ActionEvent event) throws IOException {
 		
 		// dont have access to stage information
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Fxml/ProjectUploadScreen3.fxml"));
+		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/ProjectUploadScreen3.fxml"));
 		Scene scene = new Scene(root2);
 		// This line gets the stage informations
 		// Make the object of node type to be returned by getSource which allows us to get scene and window
@@ -102,7 +107,19 @@ public class ChangeSceneController  { // implements Initializable
              File directory = dir_chooser.showDialog(stage); 
      		if (directory != null) { 
                 textField.setAccessibleText(directory.getAbsolutePath()); // set user directory path in text field
-          //      dir = directory.getAbsolutePath(); // TODO: use for directory in main 
+          //      dir = directory.getAbsolutePath(); // TODO: use for directory in main
+
+
+
+
+//				displays directory path that user has selected
+			textField.setText(textField.getAccessibleText());
+			textPath = textField.getAccessibleText();
+
+
+
+
+
      		}
              stage.show(); 
         }  
@@ -172,7 +189,7 @@ public class ChangeSceneController  { // implements Initializable
 	public void lazyImageClicked(ActionEvent event) throws IOException {
 		
 		// dont have access to stage information
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Fxml/WelcomeScreen2.fxml"));
+		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/WelcomeScreen2.fxml"));
 		Scene scene = new Scene(root2);
 		// This line gets the stage informations
 		// Make the object of node type to be returned by getSource which allows us to get scene and window
@@ -231,6 +248,14 @@ public class ChangeSceneController  { // implements Initializable
 		String url_open ="https://refactoring.guru/smells/comments";
 		java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
 	}
+
+
+
+	public static String getTextPath(){
+		return textPath;
+	}
+
+
 }
 	
 

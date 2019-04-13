@@ -28,7 +28,7 @@ public class SplashScreen extends JFrame{
      setLocationRelativeTo(null);
      setUndecorated(true);
      
-     img = new ImageIcon(getClass().getResource("/Skunk.png"));
+     img = new ImageIcon(getClass().getResource("Skunk.png"));
      imglabel = new JLabel(img);
      imglabel.setBounds(0, 0, 730, 730);
      

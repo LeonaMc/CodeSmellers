@@ -25,7 +25,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
-            <Text layoutX="17.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Test code smell is a surface indication that usually corresponds to a deeper problem in the system.">
+            <Text layoutX="17.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A code smell is a surface indication that usually corresponds to a deeper problem in the system.">
                <font>
                   <Font size="16.0" />
                </font>
