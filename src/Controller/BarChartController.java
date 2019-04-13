@@ -129,7 +129,7 @@ public class BarChartController implements Initializable{
 // TODO: move to ChangeSceneController -> figure out if scene can have two control classes
 	public void goToProjectAnalysis(ActionEvent event) throws IOException {
 		
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/ProjectAnalysis.fxml")); // Access scene information 
+		Parent root2 = FXMLLoader.load(getClass().getResource("/Fxml/ProjectAnalysis.fxml")); // Access scene information
 		Scene scene = new Scene(root2); 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow(); // allows us to get scene and window
 		window.setScene(scene);
@@ -138,7 +138,7 @@ public class BarChartController implements Initializable{
 	
 	public void goToProjectAnalysis2(ActionEvent event) throws IOException {
 		
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/ProjectAnalysis2.fxml")); // Access scene information
+		Parent root2 = FXMLLoader.load(getClass().getResource("/Fxml/ProjectAnalysis2.fxml")); // Access scene information
 		Scene scene = new Scene(root2);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow(); // allows us to get scene and window
 		window.setScene(scene);
