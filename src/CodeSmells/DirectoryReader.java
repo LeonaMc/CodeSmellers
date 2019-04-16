@@ -66,25 +66,18 @@ public class DirectoryReader extends PackageFinder {
             for (File file : rootDirectoryFiles) { // iterate through everything in this directory
                 if (file.isFile()) { // if File
                     if (file.getName().endsWith(".java")) { // and if .java
-                        //System.out.println(file.getName());
                         javaSourceArrayList.add(file); // add to javaSource Array
                     } else if (file.getName().endsWith(".class")) { // else if File is .class
-                        //System.out.println(file.getName());
                         classArrayList.add(file); // add to class Array
                     }
                 } else if (file.isDirectory()) {
-                    //System.out.println(file.getName());
                     subDirectoryQueue.add(file);  // if directory add to queue
                 }
             }
         }
-//        if(subDirectoryQueue.peek().getName().compareTo(".git") == 0 || subDirectoryQueue.peek().getName().compareTo(".idea") == 0){
-//            subDirectoryQueue.remove();
-//        }
 
         if (!subDirectoryQueue.isEmpty()) { // recursion stops on empty queue
             directoryLevel += 1;
-            //System.out.println(subDirectoryQueue.peek().getName());
             getFiles(subDirectoryQueue.remove().getPath()); // remove earliest added directory and pass as Param to recursive call
         }
     }
@@ -129,10 +122,6 @@ public class DirectoryReader extends PackageFinder {
     * packageArray[1] = classpath(just a filepath that is the root folder for the .class files) for package*/
     @ClassLoader
     public void loadClasses(String[] packageArray) throws FileNotFoundException {
-//        for(File file:classArrayList){
-//            System.out.println("source: " + file.getName());
-//        }
-        System.out.println("Package " + packageArray[0]+ " " + packageArray[1]);
         String path = packageArray[1];
         URL[] classUrl = new URL[0];
         try {
@@ -150,7 +139,6 @@ public class DirectoryReader extends PackageFinder {
 
                 if (packageName != null) { // check if java source files belong to a package
                     className = packageName + "." + className; // if class has package set className to packageName.className, classLoader won't work otherwise
-                    //System.out.println(className);
                 }
                 try {
                     Class loadedClass = cl.loadClass(className); // load classes for reflection
