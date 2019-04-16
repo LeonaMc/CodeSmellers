@@ -3,12 +3,17 @@ package CodeSmells;
 import Interface.Countable;
 
 import java.io.*;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LineCounter implements Countable {
     private Stack<String> characterStack;
 
-    public LineCounter(){
+    public LineCounter() {
         characterStack = new Stack<>();
     }
 
@@ -47,19 +52,19 @@ public class LineCounter implements Countable {
             lineCounter++; // increment on each new line
             for (int j = 0; j < line.length(); j++) { // iterate through characters of line to find start of /*
                 if (line.charAt(j) == '/') { // if current character is /
-                    if((j+1) < line.length()){ // check if j+1 is out of bounds
-                      if (line.charAt(j+1) == '*'){ // if j+1 is not out of bounds check if next char is *
-                          String openingComment = "/*"; // set string to opening multiline comment
-                          characterStack.push(openingComment); // push to stack
-                          if(!startComment) { //
-                              startCommentLine = lineCounter; // set starting lineNumber of comment
-                              startComment = true;
-                          }
-                      }
+                    if ((j + 1) < line.length()) { // check if j+1 is out of bounds
+                        if (line.charAt(j + 1) == '*') { // if j+1 is not out of bounds check if next char is *
+                            String openingComment = "/*"; // set string to opening multiline comment
+                            characterStack.push(openingComment); // push to stack
+                            if (!startComment) { //
+                                startCommentLine = lineCounter; // set starting lineNumber of comment
+                                startComment = true;
+                            }
+                        }
                     }
                 } else if (line.charAt(j) == '*') { // check if next char is start of closing comment
-                    if((j+1) < line.length()){ // make sure j+1 is not out of bounds
-                        if(line.charAt(j+1) == '/'){
+                    if ((j + 1) < line.length()) { // make sure j+1 is not out of bounds
+                        if (line.charAt(j + 1) == '/') {
                             characterStack.pop(); // if */ found pop last added /*
                         }
                     }
@@ -74,11 +79,50 @@ public class LineCounter implements Countable {
                 break;
             }
         }
-        if(flag == 0)
+        if (flag == 0)
             return endCommentLine; // return if searching for line in file where multiline comment ends
-        else if(flag == 1)
+        else if (flag == 1)
             return endCommentLine - startCommentLine; //return this for comment length
         else
             return -1; // return -1 if wrong flag param given, check return for -1
+    }
+
+    public void method(Class cls, File javaSource) {
+        for (Method method : cls.getDeclaredMethods()) {
+            FileInputStream fileInputStream = null;
+            try {
+                fileInputStream = new FileInputStream(javaSource);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            BufferedReader input = new BufferedReader(new InputStreamReader(fileInputStream));
+            Method myMethod = null;
+
+            if (method.getName().equalsIgnoreCase(keyword)) {
+                myMethod = method;
+            }
+
+            String buildRegex;
+            buildRegex = Modifier.toString(myMethod.getModifiers()); // add catch for null getModifiers
+            buildRegex = buildRegex + " " + myMethod.getReturnType().getSimpleName();
+            String regex = buildRegex + " " + keyword;
+
+            Pattern methodPattern = Pattern.compile(Pattern.quote(regex)); // regular expression to find first line of method
+            Matcher matcher = methodPattern.matcher("");
+            String line;
+            int startLine = 0;
+            int i = 0;
+            try {
+                while ((line = input.readLine()) != null) {
+                    matcher.reset(line);
+                    i++;
+                    while (matcher.find()) {
+                        startLine = i;
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
