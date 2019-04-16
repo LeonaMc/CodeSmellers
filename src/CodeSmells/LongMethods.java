@@ -1,7 +1,7 @@
 package CodeSmells;
 
 import Annotation.Reflecting;
-import Interface.Inspectable;
+import Interface.Smellable;
 
 import java.io.*;
 import java.lang.reflect.Method;
@@ -12,8 +12,9 @@ import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class LongMethods implements Inspectable {
+public class LongMethods implements Smellable {
     private HashMap<Class, Method[]> classMethods;
+    //private HashMap<Class, >
     private ArrayList<Class> loadedClasses;
     private ArrayList<File> javaSourceFiles;
     private Stack<Character> bracketStack;
@@ -46,7 +47,9 @@ public class LongMethods implements Inspectable {
 
         while ((line = input.readLine()) != null) {
             i++;
+
             if (i == startLine) {
+                System.out.println(line);
                 foundStart = true;
                 for (int j = 0; j < line.length(); j++) {
                     if (line.charAt(j) == openingBrace) {
@@ -54,6 +57,7 @@ public class LongMethods implements Inspectable {
                     }
                 }
             } else if (foundStart) {
+                System.out.println(line);
                 for (int j = 0; j < line.length(); j++) {
                     if (line.charAt(j) == openingBrace) {
                         bracketStack.push(line.charAt(j));
