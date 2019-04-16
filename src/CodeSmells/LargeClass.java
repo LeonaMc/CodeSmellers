@@ -1,14 +1,14 @@
 package CodeSmells;
 
 import Annotation.Reflecting;
-import Interface.Inspectable;
+import Interface.Smellable;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 // need to implement better data return
-public class LargeClass implements Inspectable {
+public class LargeClass implements Smellable {
     private ArrayList<Class> loadedClasses; // All classes to be inspected, loaded for reflection
     private ArrayList<File> javaSource; // all source files from project being inspected
     private LineCounter lineCounter;
