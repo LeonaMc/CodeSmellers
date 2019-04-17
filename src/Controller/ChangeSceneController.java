@@ -32,6 +32,16 @@ public class ChangeSceneController  { // implements Initializable
 	
 	private static String textPath; //used to store string from text field
 
+	
+	public void goToTableOfContentsScreen(ActionEvent event) throws IOException {
+
+		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/TableOfContentsScreen.fxml"));
+		Scene scene = new Scene(root2);
+		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.show();
+	}
+	
 	public void goToWelcomeScreen2(ActionEvent event) throws IOException {
 
 		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/WelcomeScreen2.fxml"));
@@ -40,7 +50,7 @@ public class ChangeSceneController  { // implements Initializable
 		window.setScene(scene);
 		window.show();
 	}
-	
+
 	public void goBackToWelcomeScreen(ActionEvent event) throws IOException {
 		
 		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/WelcomeScreen.fxml"));
@@ -50,15 +60,6 @@ public class ChangeSceneController  { // implements Initializable
 		window.show();
 	}
 	
-	public void goBackToWelcomeScreen2(ActionEvent event) throws IOException {
-		
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/WelcomeScreen2.fxml"));
-		Scene scene = new Scene(root2);
-		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		window.setScene(scene);
-		window.show();
-	} 
-	
 	public void goToProjectUploadScreen(ActionEvent event) throws IOException {
 		
 		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/ProjectUploadScreen3.fxml"));
@@ -67,7 +68,7 @@ public class ChangeSceneController  { // implements Initializable
 		window.setScene(scene);
 		window.show();
 	}
-	
+
 	public void goToProjectBarChartOverall(ActionEvent event) throws IOException {
 		// if the text path is null then the user won't be able to click next, an alert will pop-up
 		if(textPath == null) {
@@ -112,6 +113,26 @@ public class ChangeSceneController  { // implements Initializable
 	public void goBackToBarChartOverall(ActionEvent event) throws IOException {
 	
 		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/BarChartOverall.fxml"));
+		Scene scene = new Scene(root2);
+		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.show(); 
+	
+	}
+	
+	// This method is also in BarChartController due to inability to have multiple controllers per scene
+	public void goToDeeperAnalysis(ActionEvent event) throws IOException {
+		
+		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/DeeperAnalysis.fxml"));
+		Scene scene = new Scene(root2);
+		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.show();
+	} 
+	
+	public void goToExitScreen(ActionEvent event) throws IOException {
+		
+		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/ExitScreen.fxml"));
 		Scene scene = new Scene(root2);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(scene);
