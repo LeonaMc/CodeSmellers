@@ -9,9 +9,9 @@
    <children>
       <Pane layoutX="43.0" layoutY="111.0" prefHeight="750.0" prefWidth="1043.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button layoutX="271.0" layoutY="278.0" mnemonicParsing="false" text="Download &amp; Exit" />
+            <Button layoutX="271.0" layoutY="278.0" mnemonicParsing="false" onAction="#downloadProject" text="Download &amp; Exit" />
             <Button layoutX="402.0" layoutY="278.0" mnemonicParsing="false" text="Exit" />
-            <Button layoutX="14.0" layoutY="711.0" mnemonicParsing="false" onAction="#goToDeeperAnalysis" text="Back" />
+            <Button layoutX="14.0" layoutY="711.0" mnemonicParsing="false" onAction="#goToInDepthAnalysis" text="Back" />
          </children>
       </Pane>
    </children>
