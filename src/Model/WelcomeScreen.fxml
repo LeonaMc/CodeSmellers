@@ -11,7 +11,7 @@
    <children>
       <Pane layoutX="-244.0" layoutY="-259.0" prefHeight="750.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button layoutX="454.0" layoutY="661.0" mnemonicParsing="false" onAction="#goToWelcomeScreen2" prefHeight="35.0" prefWidth="93.0" text="Begin" />
+            <Button layoutX="454.0" layoutY="661.0" mnemonicParsing="false" onAction="#goToTableOfContentsScreen" prefHeight="35.0" prefWidth="93.0" text="Begin" />
             <Text layoutX="177.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team Code Smellers">
                <font>
                   <Font name="System Bold" size="72.0" />
