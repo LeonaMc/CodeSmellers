@@ -16,17 +16,13 @@ public class BarChartCalc{
 	ArrayList<Double> percentages = new ArrayList<Double>();
 	ChangeSceneController c = new ChangeSceneController();
     
-    public  HashMap<String, Report> getResults() {
+    public  HashMap<String, Report> runInspection() {
     	
     	String newline = "\n";
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
         String directoryPath = ChangeSceneController.getTextPath(); // Add path to root of directory here
-
-        
-       
-   //     System.out.println(c.getDirectoryPath());
-        
+        System.out.println(directoryPath);
         directoryReader.getFiles(directoryPath);
                 
         if(directoryReader.getDirectoryLevel() > 0){
@@ -42,13 +38,9 @@ public class BarChartCalc{
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        
-        ArrayList<Class> loadedClasses = new ArrayList<>(directoryReader.getLoadedClasses()); // classes ready for reflection
-        ArrayList<File> javaSource = new ArrayList<>(directoryReader.getJavaSourceArrayList()); // can read java files as text
 
-        Inspection inspection = new Inspection(loadedClasses,javaSource);
+        Inspection inspection = new Inspection(directoryReader.getLoadedClasses(),directoryReader.getJavaSourceArrayList());
         inspection.runInspection();
-
 
         return inspection.getReports();
     }
