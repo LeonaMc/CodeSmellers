@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DeeperAnalysisController">
+   <children>
+      <Pane layoutX="421.0" layoutY="275.0" prefHeight="1025.0" prefWidth="1421.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button layoutX="14.0" layoutY="711.0" mnemonicParsing="false" onAction="#goBackToBarChartOverall" text="Back" />
+            <Button layoutX="938.0" layoutY="711.0" mnemonicParsing="false" onAction="#goToExitScreen" text="Next" />
+            <ImageView fitHeight="110.0" fitWidth="115.0" layoutX="871.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Skunk.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="14.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Project Analysis">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Text>
+            <Button layoutX="474.0" layoutY="711.0" mnemonicParsing="false" onAction="#reportDataToGui" text="Report" />
+            <ScrollPane layoutX="46.0" layoutY="158.0" prefViewportHeight="518.0" prefViewportWidth="909.0">
+               <content>
+                  <TextFlow fx:id="overAllAnalysisText" layoutX="46.0" layoutY="158.0" prefHeight="518.0" prefWidth="909.0" />
+               </content>
+            </ScrollPane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
