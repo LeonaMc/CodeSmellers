@@ -22,7 +22,7 @@ public class BarChartCalc{
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
         String directoryPath = ChangeSceneController.getTextPath(); // Add path to root of directory here
-        System.out.println();
+        System.out.println(directoryPath);
         directoryReader.getFiles(directoryPath);
                 
         if(directoryReader.getDirectoryLevel() > 0){
