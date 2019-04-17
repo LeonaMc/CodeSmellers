@@ -81,6 +81,6 @@
       <Hyperlink layoutX="325.0" layoutY="256.0" onAction="#defineDuplicatedCode" text="Duplicate Code" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
       <Hyperlink layoutX="825.0" layoutY="18.0" text="God Complex" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
       <Button layoutX="906.0" layoutY="719.0" mnemonicParsing="false" onAction="#goToProjectUploadScreen" text="Next" />
-      <Button layoutX="37.0" layoutY="719.0" mnemonicParsing="false" onAction="#goBackToWelcomeScreen" text="Back" />
+      <Button layoutX="37.0" layoutY="719.0" mnemonicParsing="false" onAction="#goToTableOfContentsScreen" text="Back" />
    </children>
 </AnchorPane>
