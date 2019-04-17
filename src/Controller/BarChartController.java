@@ -142,6 +142,12 @@ public class BarChartController implements Initializable {
                 item.getNode().setOnMousePressed((MouseEvent event) -> reportDataToGui(item.getXValue().toString()));
             }
         }
+        Text setText = new Text("Click on a bar for more information on each code smell.");
+        setText.setFill(Color.BLACK);
+        setText.setFont(Font.font("Verdana", 12));
+        codeExplanationText.getChildren().add(setText);
+        setText.setTextAlignment(TextAlignment.CENTER);
+        setText.setLineSpacing(20.0f);
     }
     private Report getReport(String reportKey){
        return reportsHashMap.get(reportKey);
