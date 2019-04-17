@@ -18,6 +18,7 @@ public class DirectoryReader extends PackageFinder {
     private String special; // special character "\\\\" for windows, "/" for linux or mac, set in constructor. Used in class loader
     private ArrayList<Class> loadedClasses = new ArrayList<>(); // array of loaded classes ready for reflection, filled in loadClasses()
     private int directoryLevel = 0;
+    private static int anInt = 0;
 
     public DirectoryReader() {
         subDirectoryQueue = new LinkedList<>();
@@ -61,11 +62,12 @@ public class DirectoryReader extends PackageFinder {
         File rootDirectory;
         rootDirectory = new File(directory); // new file with path of @Param directory
         File[] rootDirectoryFiles = rootDirectory.listFiles(); // listFiles() returns array of Files in directory
-
+        int i = 0;
         if (rootDirectoryFiles != null) {
             for (File file : rootDirectoryFiles) { // iterate through everything in this directory
                 if (file.isFile()) { // if File
                     if (file.getName().endsWith(".java")) { // and if .java
+                        System.out.println("java " + file.getName() + anInt++);
                        // System.out.println(file.getName());
                         javaSourceArrayList.add(file); // add to javaSource Array
                     } else if (file.getName().endsWith(".class")) { // else if File is .class
@@ -141,7 +143,7 @@ public class DirectoryReader extends PackageFinder {
 
                 if (packageName != null) { // check if java source files belong to a package
                     className = packageName + "." + className; // if class has package set className to packageName.className, classLoader won't work otherwise
-                    System.out.println(className);
+                    //System.out.println(className);
                 }
                 try {
                     Class loadedClass = cl.loadClass(className); // load classes for reflection
