@@ -62,8 +62,6 @@ public class BarChartController implements Initializable {
         overAllAnalysisText.setAccessibleText(null);
     }
 
-    //
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -79,8 +77,8 @@ public class BarChartController implements Initializable {
 
         int index = 0;
         for(String keyToSmellReport:keysToSmellReports){
-            XYChart.Data<String, Number> data = new Data(keysToSmellReports, reportsHashMap.get(keyToSmellReport).getPercentage());
-            // XYChart.Data<String, Number> data = new XYChart.Data(keysToSmellReports.get(index), 100); // use this line to see the bars for every smell regardless of project
+            XYChart.Data<String, Number> data = new Data(keyToSmellReport, reportsHashMap.get(keyToSmellReport).getPercentage());
+            //XYChart.Data<String, Number> data = new XYChart.Data(keysToSmellReports.get(index), 100); // use this line to see the bars for every smell regardless of project
             codeSmellBarSeries.getData().add(data);
         }
         //Iterates over the reports, gets their name and their percentage and adds to XY Chart
@@ -141,9 +139,7 @@ public class BarChartController implements Initializable {
 
         for (Series<?, ?> serie : smellChart.getData()) {
             for (Data<?, ?> item : serie.getData()) {
-                item.getNode().setOnMousePressed((MouseEvent event) -> {
-                    reportDataToGui(item.getXValue().toString());
-                });
+                item.getNode().setOnMousePressed((MouseEvent event) -> reportDataToGui(item.getXValue().toString()));
             }
         }
     }
@@ -152,7 +148,8 @@ public class BarChartController implements Initializable {
     }
 
     private void reportDataToGui(String key){
-        Text textOut = new Text();
+        Text textOut = new Text("Name: " + key + "\nValue: " + "formatter.format(item.getYValue())" + "\n" + getReport(key).printNumAffectedClasses() + "\n" +
+                getReport(key).percentToString() + " of files in project affected by "+ key +" Class code smell\n\n");
         textOut.setFill(Color.BLACK);
         textOut.setFont(Font.font("Verdana", 12));
         overAllAnalysisText.getChildren().add(textOut);
@@ -160,16 +157,13 @@ public class BarChartController implements Initializable {
         textOut.setLineSpacing(20.0f);
 
         if (getReport(key).isClean()) {
-            textOut.setText("Project is clean for Lazy Class code smell\n");
+            textOut = new Text("Project is clean for "+ key +" code smell\n");
         } else {
-            textOut.setText("Name: " + key + "\nValue: " + "formatter.format(item.getYValue())" + "\n" + getReport(key).printNumAffectedClasses() + "\n" +
-                    getReport(key).percentToString() + " of files in project affected by "+ key +" Class code smell\n\n");
-
         ArrayList<Class> affectedClasses = new ArrayList<>(getReport(key).getAffectedClasses());
 
         for (Class cls : affectedClasses) {
-                textOut.setText("Affected class name = " + cls.getSimpleName());
-                textOut.setText(getReport(key).getReportData().get(cls).toString());
+            textOut.setText("Affected class name = " + cls.getSimpleName());
+            textOut.setText(getReport(key).getReportData().get(cls).toString());
             }
         }
     }
