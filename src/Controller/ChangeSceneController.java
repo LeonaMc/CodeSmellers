@@ -2,6 +2,7 @@
 package Controller;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -121,23 +122,60 @@ public class ChangeSceneController  { // implements Initializable
 	}
 	
 	// This method is also in BarChartController due to inability to have multiple controllers per scene
-	public void goToDeeperAnalysis(ActionEvent event) throws IOException {
+	public void goToInDepthAnalysis(ActionEvent event) throws IOException {
 		
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/DeeperAnalysis.fxml"));
+		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/InDepthAnalysis.fxml"));
 		Scene scene = new Scene(root2);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(scene);
 		window.show();
 	} 
 	
-	public void goToExitScreen(ActionEvent event) throws IOException {
+	public void downloadProject(ActionEvent event) throws IOException{
 		
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/ExitScreen.fxml"));
-		Scene scene = new Scene(root2);
-		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		window.setScene(scene);
-		window.show(); 
+    //	File file = new File("C:\\Users\\Owner\\Downloads\\ok.txt");
+		
+	    final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	    int count = 0;
+	    
+		StringBuilder builder = new StringBuilder();
+
+		while (count++ != 4) {
+
+		int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
+
+		builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+
+		}
+		// using textPath allows file to be downloaded into user project file 
+		File file = new File(textPath + "\\" +  builder.toString() + ".txt");
+    	System.out.println(textPath + "\\" +  builder.toString() + ".txt");
+  	  
+    	//Create the file
+    	if (file.createNewFile())
+    	{
+    	    System.out.println("File is created!");
+    	} else {
+    		// if file name already exists, generate a new file name 
+    		while (count++ != 4) {
+
+    		int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
+
+    		builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+    		}
+    	}
+    	 
+    	//Write Content
+    	FileWriter writer = new FileWriter(file);
+    	
+    	// TODO: write correct content to file  
+    	writer.write("Test data");
+    	writer.close();
+    	
+	}
 	
+	public void exitProject(ActionEvent event) throws IOException{
+		// close GUI
 	}
 	
 	// Methods to deal with hyperlinks for definitions 
