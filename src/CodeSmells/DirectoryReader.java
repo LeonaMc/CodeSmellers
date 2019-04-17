@@ -74,7 +74,9 @@ public class DirectoryReader extends PackageFinder {
                         classArrayList.add(file); // add to class Array
                     }
                 } else if (file.isDirectory()) {
-                    subDirectoryQueue.add(file);  // if directory add to queue
+                    if(!file.getName().equalsIgnoreCase("artifacts")){ // "fixed" need to check edge cases asap
+                        subDirectoryQueue.add(file);  // if directory add to queue
+                    }
                 }
             }
         }
