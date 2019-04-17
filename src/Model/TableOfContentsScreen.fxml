@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ChangeSceneController">
+   <children>
+      <Pane layoutX="276.0" layoutY="183.0" prefHeight="750.0" prefWidth="1276.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="107.0" fitWidth="132.0" layoutX="868.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Skunk.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="300.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table of Contents">
+               <font>
+                  <Font name="System Bold" size="48.0" />
+               </font>
+            </Text>
+            <Text layoutX="119.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to our NoseJob Application. If you've been here before you can go straight to the projects upload setion by clicking &quot;Project Upload&quot;. If you are new here you can click next to learn more about code smells before getting started.  Screens which are beyond the Project Upload section cannot be visited until a project is uploaded due to data dependencies. " wrappingWidth="761.78125">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="418.0" layoutY="461.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. Result Dashboard ">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="383.0" layoutY="536.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4. Download Project Analysis ">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Hyperlink layoutX="392.0" layoutY="295.0" onAction="#goToWelcomeScreen2" text="1. Code Smell Definitions ">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink layoutX="397.0" layoutY="358.0" onAction="#goToProjectUploadScreen" text="2. Project Upload Screen">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Hyperlink>
+            <Button layoutX="35.0" layoutY="711.0" mnemonicParsing="false" onAction="#goBackToWelcomeScreen" text="Back" />
+            <Button layoutX="935.0" layoutY="711.0" mnemonicParsing="false" onAction="#goToWelcomeScreen2" text="Next" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
