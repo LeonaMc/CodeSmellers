@@ -4,6 +4,8 @@ package Controller;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import Model.SplashScreen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,6 +32,9 @@ public class ChangeSceneController  { // implements Initializable
 	
 	@FXML
 	private TextFlow textFlow;
+	
+	@FXML
+	private TextFlow exitScreenTextFlow;
 	
 	private static String textPath; //used to store string from text field
 
@@ -61,7 +66,7 @@ public class ChangeSceneController  { // implements Initializable
 		window.show();
 	}
 	
-	public void goToProjectUploadScreen(ActionEvent event) throws IOException {
+	public void goToProjectUploadScreen(ActionEvent event) throws IOException{
 		
 		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/ProjectUploadScreen3.fxml"));
 		Scene scene = new Scene(root2);
@@ -70,7 +75,15 @@ public class ChangeSceneController  { // implements Initializable
 		window.show();
 	}
 
-	public void goToProjectBarChartOverall(ActionEvent event) throws IOException {
+	public void goToProjectBarChartOverall(ActionEvent event) throws IOException, InterruptedException {
+		
+        // Splash Screen
+        SplashScreen splashScreen = new SplashScreen();
+        splashScreen.setVisible(true);
+        Thread thread = Thread.currentThread();
+        Thread.sleep(2500);
+        splashScreen.dispose();
+        
 		// if the text path is null then the user won't be able to click next, an alert will pop-up
 		if(textPath == null) {
 			String selection = null;
@@ -164,7 +177,14 @@ public class ChangeSceneController  { // implements Initializable
     		builder.append(ALPHA_NUMERIC_STRING.charAt(character));
     		}
     	}
-    	 
+    	
+        Text setText = new Text("Project saved.\nFile Path: " + textPath + "\\" +  builder.toString() + ".txt");
+        setText.setFill(Color.BLACK);
+        setText.setFont(Font.font("Verdana", 12));
+        exitScreenTextFlow.getChildren().add(setText);
+        setText.setTextAlignment(TextAlignment.CENTER);
+        setText.setLineSpacing(20.0f);
+        
     	//Write Content
     	FileWriter writer = new FileWriter(file);
     	
