@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -9,9 +11,24 @@
    <children>
       <Pane layoutX="43.0" layoutY="111.0" prefHeight="750.0" prefWidth="1043.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button layoutX="271.0" layoutY="278.0" mnemonicParsing="false" onAction="#downloadProject" text="Download &amp; Exit" />
-            <Button layoutX="402.0" layoutY="278.0" mnemonicParsing="false" text="Exit" />
+            <Button layoutX="256.0" layoutY="421.0" mnemonicParsing="false" onAction="#downloadProject" prefHeight="55.0" prefWidth="164.0" text="Download" />
+            <Button layoutX="580.0" layoutY="421.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="164.0" text="Exit" />
             <Button layoutX="14.0" layoutY="711.0" mnemonicParsing="false" onAction="#goToInDepthAnalysis" text="Back" />
+            <ScrollPane layoutX="256.0" layoutY="249.0" prefViewportHeight="149.0" prefViewportWidth="488.0">
+               <content>
+                  <TextFlow fx:id="exitScreenTextFlow" layoutX="256.0" layoutY="249.0" prefHeight="149.0" prefWidth="488.0" />
+               </content>
+            </ScrollPane>
+            <Text layoutX="14.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Download Project">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="127.0" fitWidth="111.0" layoutX="875.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Skunk.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>
