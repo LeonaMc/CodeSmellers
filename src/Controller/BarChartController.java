@@ -8,6 +8,8 @@ import java.text.NumberFormat;
 import java.util.*;
 
 import CodeSmells.Report;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -74,13 +76,30 @@ public class BarChartController implements Initializable {
         keysToSmellReports.add("PrimitiveObsession");
         keysToSmellReports.add("TooManyLiterals");
         keysToSmellReports.add("LargeClass");
+        
+        HashMap<String,String> barColour = new HashMap<>();
+        barColour.put("FeatureEnvy","green");
+        barColour.put("LongMethod","lightcoral");
+        barColour.put("LongParameter","orange");
+        barColour.put("LazyClass","yellow");
+        barColour.put("PrimitiveObsession","blue");
+        barColour.put("TooManyLiterals","grey");
+        barColour.put("LargeClass","crimson");
 
         int index = 0;
         for(String keyToSmellReport:keysToSmellReports){
             XYChart.Data<String, Number> data = new Data(keyToSmellReport, reportsHashMap.get(keyToSmellReport).getPercentage());
             //XYChart.Data<String, Number> data = new XYChart.Data(keysToSmellReports.get(index), 100); // use this line to see the bars for every smell regardless of project
             codeSmellBarSeries.getData().add(data);
+            
+            data.nodeProperty().addListener((ov, oldNode, newNode) -> {
+                if (newNode != null) {
+                    newNode.setStyle("-fx-bar-fill: " +barColour.get(keyToSmellReport));
+                }
+            });
         }
+        
+        
         //Iterates over the reports, gets their name and their percentage and adds to XY Chart
 //        for (Map.Entry<String, Report> reportEntry : reportsHashMap.entrySet()) {
 //            System.out.println("Name: " + reportEntry.getKey() + "  Value: " + reportEntry.getValue().percentToString());
