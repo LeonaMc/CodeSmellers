@@ -149,6 +149,7 @@ public class BarChartController implements Initializable {
         setText.setTextAlignment(TextAlignment.CENTER);
         setText.setLineSpacing(20.0f);
     }
+    
     private Report getReport(String reportKey){
        return reportsHashMap.get(reportKey);
     }
