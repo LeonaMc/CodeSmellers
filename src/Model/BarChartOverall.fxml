@@ -26,7 +26,7 @@
                         <TextFlow fx:id="overAllAnalysisText" layoutX="79.0" layoutY="516.0" prefHeight="173.0" prefWidth="506.0" style="-fx-background-color: lightgrey;" />
                      </content>
                   </ScrollPane>
-                  <TextFlow layoutX="607.0" layoutY="516.0" prefHeight="175.0" prefWidth="353.0" style="-fx-background-color: lightgrey;" />
+                  <TextFlow fx:id="codeExplanationText" layoutX="607.0" layoutY="516.0" prefHeight="175.0" prefWidth="353.0" style="-fx-background-color: lightgrey;" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="998.0">
