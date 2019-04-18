@@ -1,5 +1,7 @@
 package CodeSmells;
 
+import java.io.IOException;
+
 import Model.SplashScreen;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,9 +9,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 
-public class Main extends Application {
+import java.io.IOException; 
+import org.apache.pdfbox.pdmodel.PDDocument;
+
+public class Main extends Application{ //  
 
     // Setting up GUI
     @Override
@@ -22,18 +29,23 @@ public class Main extends Application {
         } catch(Exception e) {
             e.printStackTrace();
         }
-    }
+    } 
 
-    public static void main(String[] args) throws InterruptedException, FileNotFoundException, ClassNotFoundException, NoSuchFieldException, InstantiationException, IllegalAccessException {
-/**
+    public static void main(String[] args) throws InterruptedException, ClassNotFoundException, NoSuchFieldException, InstantiationException, IllegalAccessException {
+    	
+    	
         // Splash Screen
         SplashScreen splashScreen = new SplashScreen();
         splashScreen.setVisible(true);
         Thread thread = Thread.currentThread();
         Thread.sleep(2500);
         splashScreen.dispose();
-**/
+    	
+        
        // Calling the Welcome Screen for GUI in main
         launch(args);
+        
+        
+
     }
 }
