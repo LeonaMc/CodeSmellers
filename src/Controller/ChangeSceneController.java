@@ -41,8 +41,9 @@ public class ChangeSceneController  { // implements Initializable
 	
 	public void goToTableOfContentsScreen(ActionEvent event) throws IOException {
 
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/TableOfContentsScreen.fxml"));
-		Scene scene = new Scene(root2);
+		Parent root = FXMLLoader.load(getClass().getResource("/Model/TableOfContentsScreen.fxml"));
+		root.setStyle("-fx-background-color: white");
+		Scene scene = new Scene(root);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(scene);
 		window.show();
@@ -50,8 +51,9 @@ public class ChangeSceneController  { // implements Initializable
 	
 	public void goToWelcomeScreen2(ActionEvent event) throws IOException {
 
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/WelcomeScreen2.fxml"));
-		Scene scene = new Scene(root2);
+		Parent root = FXMLLoader.load(getClass().getResource("/Model/WelcomeScreen2.fxml"));
+		root.setStyle("-fx-background-color: white");
+		Scene scene = new Scene(root);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(scene);
 		window.show();
@@ -59,8 +61,9 @@ public class ChangeSceneController  { // implements Initializable
 
 	public void goBackToWelcomeScreen(ActionEvent event) throws IOException {
 		
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/WelcomeScreen.fxml"));
-		Scene scene = new Scene(root2);
+		Parent root = FXMLLoader.load(getClass().getResource("/Model/WelcomeScreen.fxml"));
+		root.setStyle("-fx-background-color: white");
+		Scene scene = new Scene(root);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(scene);
 		window.show();
@@ -68,8 +71,9 @@ public class ChangeSceneController  { // implements Initializable
 	
 	public void goToProjectUploadScreen(ActionEvent event) throws IOException{
 		
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/ProjectUploadScreen3.fxml"));
-		Scene scene = new Scene(root2);
+		Parent root = FXMLLoader.load(getClass().getResource("/Model/ProjectUploadScreen3.fxml"));
+		root.setStyle("-fx-background-color: white");
+		Scene scene = new Scene(root);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(scene);
 		window.show();
@@ -92,8 +96,9 @@ public class ChangeSceneController  { // implements Initializable
 				if (alert.getResult() == ButtonType.OK) {
 				    alert.close();				}		
 		}else {
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/BarChartOverall.fxml"));
-		Scene scene = new Scene(root2);
+		Parent root = FXMLLoader.load(getClass().getResource("/Model/BarChartOverall.fxml"));
+		root.setStyle("-fx-background-color: white");
+		Scene scene = new Scene(root);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(scene);
 		window.show();
@@ -126,19 +131,21 @@ public class ChangeSceneController  { // implements Initializable
 	
 	public void goBackToBarChartOverall(ActionEvent event) throws IOException {
 	
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/BarChartOverall.fxml"));
-		Scene scene = new Scene(root2);
+		Parent root = FXMLLoader.load(getClass().getResource("/Model/BarChartOverall.fxml"));
+		root.setStyle("-fx-background-color: white");
+		Scene scene = new Scene(root);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(scene);
-		window.show(); 
+		window.show();
 	
 	}
 	
 	// This method is also in BarChartController due to inability to have multiple controllers per scene
 	public void goToInDepthAnalysis(ActionEvent event) throws IOException {
 		
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/InDepthAnalysis.fxml"));
-		Scene scene = new Scene(root2);
+		Parent root = FXMLLoader.load(getClass().getResource("/Model/InDepthAnalysis.fxml"));
+		root.setStyle("-fx-background-color: white");
+		Scene scene = new Scene(root);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(scene);
 		window.show();
