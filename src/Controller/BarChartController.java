@@ -99,59 +99,6 @@ public class BarChartController implements Initializable {
             });
         }
         
-        
-        //Iterates over the reports, gets their name and their percentage and adds to XY Chart
-//        for (Map.Entry<String, Report> reportEntry : reportsHashMap.entrySet()) {
-//            System.out.println("Name: " + reportEntry.getKey() + "  Value: " + reportEntry.getValue().percentToString());
-//            /**    Text t = new Text("Name: "+reportEntry.getKey()+"  Value: "+ reportEntry.getValue().percentToString() + "\n");
-//             t.setFill(Color.BLACK);
-//             t.setFont(Font.font("Verdana", 12));
-//             overAllAnalysisText.getChildren().add(t);
-//             t.setTextAlignment(TextAlignment.CENTER);
-//             t.setLineSpacing(20.0f);  **/
-
-//            keysToSmellReports.add(reportEntry.getKey());
-//            XYChart.Data<String, Number> data = new XYChart.Data(keysToSmellReports.get(index), reportEntry.getValue().getPercentage());
-//            // XYChart.Data<String, Number> data = new XYChart.Data(keysToSmellReports.get(index), 100); // use this line to see the bars for every smell regardless of project
-//            codeSmellBarSeries.getData().add(data);
-//HERE
-//            // For changing individual colours
-//            data.nodeProperty().addListener(new ChangeListener<Node>() {
-//                @Override
-//                public void changed(ObservableValue<? extends Node> ov, Node oldNode, Node newNode) {
-//                    if (newNode != null) {
-//                        switch (reportEntry.getKey()) {
-
-//                            case "FeatureEnvy":
-//                                newNode.setStyle("-fx-bar-fill: green;");
-//                                break;
-//                            case "LongMethod":
-//                                newNode.setStyle("-fx-bar-fill: lightcoral;");
-//                                break;
-//                            case "LongParameter":
-//                                newNode.setStyle("-fx-bar-fill: orange;");
-//                                break;
-//                            case "LazyClass":
-//                                newNode.setStyle("-fx-bar-fill: yellow;");
-//                                break;
-//                            case "PrimitiveObsession":
-//                                newNode.setStyle("-fx-bar-fill: blue;");
-//                                break;
-//                            case "TooManyLiterals":
-//                                newNode.setStyle("-fx-bar-fill: grey;");
-//                                break;
-//                            case "LargeClass":
-//                                newNode.setStyle("-fx-bar-fill: crimson;");
-//                                break;
-//                            default:
-//                                newNode.setStyle("-fx-bar-fill: navy;");
-//                        }
-//                    }
-//                }
-//            });
-//            index++;
-//        }
-
         smellChart.getData().addAll(codeSmellBarSeries);
 
         //	Text t = new Text("Please click on bar for more information.\n");
@@ -174,24 +121,12 @@ public class BarChartController implements Initializable {
     }
 
     private void reportDataToGui(String key){
-        Text textOut = new Text("Name: " + key + "\nValue: " + "formatter.format(item.getYValue())" + "\n" + getReport(key).printNumAffectedClasses() + "\n" +
-                getReport(key).percentToString() + " of files in project affected by "+ key +" Class code smell\n\n");
+        Text textOut = new Text("Name: " + key + "\nValue: "  + getReport(key).percentToString() + "\n");
         textOut.setFill(Color.BLACK);
         textOut.setFont(Font.font("Verdana", 12));
         overAllAnalysisText.getChildren().add(textOut);
         textOut.setTextAlignment(TextAlignment.CENTER);
         textOut.setLineSpacing(20.0f);
-
-        if (getReport(key).isClean()) {
-            textOut = new Text("Project is clean for "+ key +" code smell\n");
-        } else {
-        ArrayList<Class> affectedClasses = new ArrayList<>(getReport(key).getAffectedClasses());
-
-        for (Class cls : affectedClasses) {
-            textOut.setText("Affected class name = " + cls.getSimpleName());
-            textOut.setText(getReport(key).getReportData().get(cls).toString());
-            }
-        }
     }
 
     // TODO: move to ChangeSceneController -> figure out if scene can have two control classes
