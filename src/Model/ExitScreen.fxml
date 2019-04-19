@@ -13,7 +13,7 @@
          <children>
             <Button layoutX="256.0" layoutY="421.0" mnemonicParsing="false" onAction="#downloadProject" prefHeight="55.0" prefWidth="164.0" text="Download" />
             <Button layoutX="580.0" layoutY="421.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="164.0" text="Exit" />
-            <Button layoutX="14.0" layoutY="711.0" mnemonicParsing="false" onAction="#goToInDepthAnalysis" text="Back" />
+            <Button layoutX="14.0" layoutY="695.0" mnemonicParsing="false" onAction="#goToInDepthAnalysis" prefHeight="41.0" prefWidth="111.0" text="Back" />
             <ScrollPane layoutX="256.0" layoutY="249.0" prefViewportHeight="149.0" prefViewportWidth="488.0">
                <content>
                   <TextFlow fx:id="exitScreenTextFlow" layoutX="256.0" layoutY="249.0" prefHeight="149.0" prefWidth="488.0" />

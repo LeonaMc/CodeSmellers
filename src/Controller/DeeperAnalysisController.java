@@ -38,6 +38,7 @@ public class DeeperAnalysisController  { // implements Initializable
         return reportsHashMap.get(reportKey);
      }
 
+    //TODO: generate for all smells 
     @FXML
       void reportDataToGui(ActionEvent event) throws IOException{
     	 String key = "LazyClass";
@@ -48,6 +49,15 @@ public class DeeperAnalysisController  { // implements Initializable
          overAllAnalysisText.getChildren().add(textOut);
          textOut.setTextAlignment(TextAlignment.CENTER);
          textOut.setLineSpacing(20.0f);
+         
+         // add on to string
+         textOut = new Text("Name: " + key + "\nValue: " + "formatter.format(item.getYValue())" + "\n" + getReport(key).printNumAffectedClasses() + "\n" +
+                 getReport(key).percentToString() + " of files in project affected by "+ key +" Class code smell\n\n");
+         overAllAnalysisText.getChildren().add(textOut);
+         
+         textOut = new Text("Name: " + key + "\nValue: " + "formatter.format(item.getYValue())" + "\n" + getReport(key).printNumAffectedClasses() + "\n" +
+                 getReport(key).percentToString() + " of files in project affected by "+ key +" Class code smell\n\n");
+         overAllAnalysisText.getChildren().add(textOut);
 
          if (getReport(key).isClean()) {
              textOut = new Text("Project is clean for "+ key +" code smell\n");

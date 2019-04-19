@@ -46,8 +46,8 @@
                   <Font size="18.0" />
                </font>
             </Hyperlink>
-            <Button layoutX="35.0" layoutY="711.0" mnemonicParsing="false" onAction="#goBackToWelcomeScreen" text="Back" />
-            <Button layoutX="935.0" layoutY="711.0" mnemonicParsing="false" onAction="#goToWelcomeScreen2" text="Next" />
+            <Button layoutX="14.0" layoutY="695.0" mnemonicParsing="false" onAction="#goBackToWelcomeScreen" prefHeight="41.0" prefWidth="111.0" text="Back" />
+            <Button layoutX="875.0" layoutY="695.0" mnemonicParsing="false" onAction="#goToWelcomeScreen2" prefHeight="41.0" prefWidth="111.0" text="Next" />
          </children>
       </Pane>
    </children>

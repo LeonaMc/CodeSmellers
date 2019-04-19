@@ -11,8 +11,8 @@
    <children>
       <Pane layoutX="421.0" layoutY="275.0" prefHeight="1025.0" prefWidth="1421.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button layoutX="14.0" layoutY="711.0" mnemonicParsing="false" onAction="#goBackToBarChartOverall" text="Back" />
-            <Button layoutX="938.0" layoutY="711.0" mnemonicParsing="false" onAction="#goToExitScreen" text="Next" />
+            <Button layoutX="14.0" layoutY="695.0" mnemonicParsing="false" onAction="#goBackToBarChartOverall" prefHeight="41.0" prefWidth="111.0" text="Back" />
+            <Button layoutX="875.0" layoutY="695.0" mnemonicParsing="false" onAction="#goToExitScreen" prefHeight="41.0" prefWidth="111.0" text="Next" />
             <ImageView fitHeight="110.0" fitWidth="115.0" layoutX="871.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Skunk.png" />
@@ -23,7 +23,7 @@
                   <Font name="System Bold" size="36.0" />
                </font>
             </Text>
-            <Button layoutX="474.0" layoutY="711.0" mnemonicParsing="false" onAction="#reportDataToGui" text="Report" />
+            <Button layoutX="446.0" layoutY="695.0" mnemonicParsing="false" onAction="#reportDataToGui" prefHeight="41.0" prefWidth="111.0" text="Report" />
             <ScrollPane layoutX="46.0" layoutY="158.0" prefViewportHeight="518.0" prefViewportWidth="909.0">
                <content>
                   <TextFlow fx:id="overAllAnalysisText" layoutX="46.0" layoutY="158.0" prefHeight="518.0" prefWidth="909.0" />
