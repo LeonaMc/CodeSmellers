@@ -1,3 +1,4 @@
+/**
 package Test;
 
 import CodeSmells.*;
@@ -191,3 +192,4 @@ public class TestSmellData {
 
     }
 }
+**/
