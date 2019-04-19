@@ -129,30 +129,12 @@ public class BarChartController implements Initializable {
         textOut.setLineSpacing(20.0f);
     }
 
-    // TODO: move to ChangeSceneController -> figure out if scene can have two control classes
-    public void goToProjectAnalysis(ActionEvent event) throws IOException {
-
-        Parent root2 = FXMLLoader.load(getClass().getResource("/Model/ProjectAnalysis.fxml")); // Access scene information
-        Scene scene = new Scene(root2);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow(); // allows us to get scene and window
-        window.setScene(scene);
-        window.show();
-    }
-
-    public void goToProjectAnalysis2(ActionEvent event) throws IOException {
-
-        Parent root2 = FXMLLoader.load(getClass().getResource("/Model/ProjectAnalysis2.fxml")); // Access scene information
-        Scene scene = new Scene(root2);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow(); // allows us to get scene and window
-        window.setScene(scene);
-        window.show();
-    }
-
     public void goBackToProjectUploadScreen(ActionEvent event) throws IOException {
 
         // dont have access to stage information
-        Parent root2 = FXMLLoader.load(getClass().getResource("/Model/ProjectUploadScreen3.fxml"));
-        Scene scene = new Scene(root2);
+        Parent root = FXMLLoader.load(getClass().getResource("/Model/ProjectUploadScreen3.fxml"));
+        root.setStyle("-fx-background-color: white");
+        Scene scene = new Scene(root);
         // This line gets the stage informations
         // Make the object of node type to be returned by getSource which allows us to get scene and window
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -162,8 +144,9 @@ public class BarChartController implements Initializable {
     
     public void goToInDepthAnalysis(ActionEvent event) throws IOException {
 
-        Parent root2 = FXMLLoader.load(getClass().getResource("/Model/InDepthAnalysis.fxml")); // Access scene information
-        Scene scene = new Scene(root2);
+        Parent root = FXMLLoader.load(getClass().getResource("/Model/InDepthAnalysis.fxml")); // Access scene information
+        root.setStyle("-fx-background-color: white");
+        Scene scene = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow(); // allows us to get scene and window
         window.setScene(scene);
         window.show();
