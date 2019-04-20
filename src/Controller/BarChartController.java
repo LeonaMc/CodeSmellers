@@ -90,7 +90,6 @@ public class BarChartController implements Initializable {
         int index = 0;
         for(String keyToSmellReport:keysToSmellReports){
             XYChart.Data<String, Number> data = new Data(keyToSmellReport +" "+ reportsHashMap.get(keyToSmellReport).percentToString(), reportsHashMap.get(keyToSmellReport).getPercentage());
-            //XYChart.Data<String, Number> data = new XYChart.Data(keysToSmellReports.get(index), 100); // use this line to see the bars for every smell regardless of project
             codeSmellBarSeries.getData().add(data);
             
             data.nodeProperty().addListener((ov, oldNode, newNode) -> {
@@ -101,28 +100,7 @@ public class BarChartController implements Initializable {
         }
         
         smellChart.getData().addAll(codeSmellBarSeries);
-
-        //	Text t = new Text("Please click on bar for more information.\n");
-
-//        for (Series<?, ?> serie : smellChart.getData()) {
-//            for (Data<?, ?> item : serie.getData()) {
-//                item.getNode().setOnMousePressed((MouseEvent event) -> reportDataToGui(item.getXValue().toString()));
-//            }
-//        }
     }
-    
-    private Report getReport(String reportKey){
-       return reportsHashMap.get(reportKey);
-    }
-
-//    private void reportDataToGui(String key){
-//        Text textOut = new Text("Name: " + key + "\nValue: "  + getReport(key).percentToString() + "\n");
-//        textOut.setFill(Color.BLACK);
-//        textOut.setFont(Font.font("Verdana", 12));
-//        overAllAnalysisText.getChildren().add(textOut);
-//        textOut.setTextAlignment(TextAlignment.CENTER);
-//        textOut.setLineSpacing(20.0f);
-//    }
 
     public void goBackToProjectUploadScreen(ActionEvent event) throws IOException {
 
