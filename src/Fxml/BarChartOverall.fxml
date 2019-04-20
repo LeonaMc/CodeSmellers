@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BarChartController">
+   <children>
+      <SplitPane dividerPositions="0.9197860962566845" layoutX="-1.0" layoutY="-3.0" orientation="VERTICAL" prefHeight="750.0" prefWidth="1000.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="1000.0">
+               <children>
+                  <BarChart fx:id="smellChart" layoutX="14.0" layoutY="14.0" prefHeight="473.0" prefWidth="956.0" title="Overall Analysis" AnchorPane.bottomAnchor="198.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="14.0">
+                    <xAxis>
+                      <CategoryAxis label="Smell" side="BOTTOM" fx:id="x" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis fx:id="y" label="Percentage" side="LEFT" />
+                    </yAxis>
+                  </BarChart>
+                  <TextFlow fx:id="codeExplanationText" layoutX="607.0" layoutY="496.0" prefHeight="175.0" prefWidth="353.0" style="-fx-background-color: lightgrey;" />
+                  <ScrollPane layoutX="59.0" layoutY="496.0" prefViewportHeight="173.0" prefViewportWidth="506.0">
+                     <content>
+                        <TextFlow fx:id="overAllAnalysisText" layoutX="59.0" layoutY="496.0" prefHeight="173.0" prefWidth="506.0" style="-fx-background-color: lightgrey;" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="998.0">
+               <children>
+                  <Button layoutX="873.0" layoutY="8.0" mnemonicParsing="false" onAction="#goToInDepthAnalysis" prefHeight="41.0" prefWidth="111.0" text="Next" />
+                  <Button layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#goBackToProjectUploadScreen" prefHeight="41.0" prefWidth="111.0" text="Back" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

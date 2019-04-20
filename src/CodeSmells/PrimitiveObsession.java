@@ -17,6 +17,7 @@ public class PrimitiveObsession implements Reflectable {
         this.loadedClasses = new ArrayList<>();
         this.loadedClasses.addAll(loadedClasses);
         report = new Report();
+        report.setName("Primitive Obsession");
     }
 
     // count primitive methods of a class

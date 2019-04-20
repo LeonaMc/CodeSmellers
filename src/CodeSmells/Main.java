@@ -1,6 +1,5 @@
 package CodeSmells;
 
-import Model.SplashScreen;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +14,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(this.getClass().getResource("/Model/WelcomeScreen.fxml"));
+            Parent root = FXMLLoader.load(this.getClass().getResource("/Fxml/WelcomeScreen.fxml"));
            // root.setStyle("-fx-background-color: white");
             primaryStage.setScene(new Scene(root));
             primaryStage.show();

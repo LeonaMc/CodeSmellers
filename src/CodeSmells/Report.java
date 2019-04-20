@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 public class Report<T> {
+    private String name;
     DecimalFormat df = new DecimalFormat("#0.00");
     private ArrayList<Class> affectedClasses; // holds only affected classes of code smell report belongs to
     private HashMap<Class,T> reportData; // holds data found from code smell inspection. All keys are held in affected classes
@@ -52,6 +53,14 @@ public class Report<T> {
     // return percentage of files affected by a smell
     public Double getPercentage(){
         return percentOfFilesAffected;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public String getName(){
+        return name;
     }
 
     public String printNumAffectedClasses(){
