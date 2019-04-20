@@ -1,20 +1,11 @@
 package CodeSmells;
 
-import java.io.IOException;
-
 import Model.SplashScreen;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-
-import java.io.IOException; 
-import org.apache.pdfbox.pdmodel.PDDocument;
 
 public class Main extends Application{ //  
 
