@@ -52,6 +52,7 @@ public class FeatureEnvy implements SourceReadable, Reportable {
         this.javaSources = javaSources;
         this.javaClasses = javaClasses;
         report = new Report();
+        report.setName("Feature Envy");
     }
 
     private void findFeatureEnvy() {
@@ -68,7 +69,7 @@ public class FeatureEnvy implements SourceReadable, Reportable {
         findFeatureEnvy();
         ArrayList<Class> affectedClasses = new ArrayList<>();
         for(EachClassSmell eachClassSmell : classSmellsList){
-            String data = eachClassSmell.className +":";
+            String data = "\n"+eachClassSmell.className +":";
             Map<String,Integer> map = eachClassSmell.otherClassToNumberOfCalls;
             for(Map.Entry<String,Integer> entry : map.entrySet()){
                 if(entry.getValue() >= THRESHOLD){
@@ -98,7 +99,7 @@ public class FeatureEnvy implements SourceReadable, Reportable {
         return null; //might have to throw class not found error
     }
 
-    //    Private inner class will hold each class, a list of other classes, and how many times the class uses those
+    // Private inner class will hold each class, a list of other classes, and how many times the class uses those
     private class EachClassSmell{
         private  String className;
         private HashMap<String,Integer> otherClassToNumberOfCalls = new HashMap<>();

@@ -1,12 +1,13 @@
 package CodeSmells;
-
+//REMINDER: see if removal of T is possible
 import java.lang.reflect.Method;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 public class Report<T> {
+    private String name;
     DecimalFormat df = new DecimalFormat("#0.00");
-    private ArrayList<Class> affectedClasses; // holds only effected classes of code smell report belongs to
+    private ArrayList<Class> affectedClasses; // holds only affected classes of code smell report belongs to
     private HashMap<Class,T> reportData; // holds data found from code smell inspection. All keys are held in affected classes
     private HashMap<Method,String> longMethodData;
     private double percentOfFilesAffected; // overall percent of affected classes
@@ -29,7 +30,7 @@ public class Report<T> {
     public void putReportData(Class key, T data){
         this.reportData.put(key, data);
     }
-    // used by long method smell only, affected method is key data is method name etc
+    // used by long method smell only, affected method is key, data is method name etc
     public void putLongMethodData(Method key, String data){
         this.longMethodData.put(key, data);
     }
@@ -54,14 +55,22 @@ public class Report<T> {
         return percentOfFilesAffected;
     }
 
-    public String printSizeOfAffectedClasses(){
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public String printNumAffectedClasses(){
         return "Number of affected classes = " + affectedClasses.size();
     }
 
     public String percentToString(){
         return df.format(percentOfFilesAffected)+"%";
     }
-    // true is no classes are affected by this code smell
+    // true if no classes are affected by this code smell
     public boolean isClean(){
         return affectedClasses.isEmpty();
     }

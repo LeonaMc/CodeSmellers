@@ -23,6 +23,7 @@ public class LargeClass implements Inspectable {
         fileLength = new HashMap<>();
         lineCounter = new LineCounter();
         report = new Report();
+        report.setName("Large Class");
     }
 
     @Override // no implementation for this class?
@@ -59,10 +60,10 @@ public class LargeClass implements Inspectable {
     @Override
     public void reflectClass() {
         for (Class cls : loadedClasses){
-            String reportMessage = "\nClass " + cls.getSimpleName() + " has length of " + fileLength.get(javaSource.get(loadedClasses.indexOf(cls))) + "\n";
+            String reportMessage = "\nClass " + cls.getSimpleName() + " has length of " + fileLength.get(javaSource.get(loadedClasses.indexOf(cls)));
 
             if(cls.getDeclaredMethods().length > 5){ // placeholder value, not sure how many methods is too many
-                reportMessage += "\nPossible cause for large file is\n" + cls.getSimpleName() + " has " + cls.getDeclaredMethods().length + " Methods\n";
+                reportMessage += "\nPossible cause for large file is\n" + cls.getSimpleName() + " has " + cls.getDeclaredMethods().length + " Methods";
             }
             if(cls.getDeclaredMethods().length > 0 && cls.getDeclaredMethods().length <= 5){
                 reportMessage += "\nPossible cause for large file is\n" + cls.getSimpleName() + " has only " + cls.getDeclaredMethods().length + " Methods\n" +

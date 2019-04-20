@@ -1,6 +1,5 @@
 package CodeSmells;
 
-import Model.SplashScreen;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
-// add exception for directory reader
+
 public class Main extends Application {
 
     // Setting up GUI
@@ -16,6 +15,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         try {
             Parent root = FXMLLoader.load(this.getClass().getResource("/Fxml/WelcomeScreen.fxml"));
+           // root.setStyle("-fx-background-color: white");
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
         } catch(Exception e) {
@@ -24,14 +24,14 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) throws InterruptedException, FileNotFoundException, ClassNotFoundException, NoSuchFieldException, InstantiationException, IllegalAccessException {
-
+/**
         // Splash Screen
         SplashScreen splashScreen = new SplashScreen();
         splashScreen.setVisible(true);
         Thread thread = Thread.currentThread();
         Thread.sleep(2500);
         splashScreen.dispose();
-
+**/
        // Calling the Welcome Screen for GUI in main
         launch(args);
     }

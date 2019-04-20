@@ -18,6 +18,7 @@ public class DirectoryReader extends PackageFinder {
     private String special; // special character "\\\\" for windows, "/" for linux or mac, set in constructor. Used in class loader
     private ArrayList<Class> loadedClasses = new ArrayList<>(); // array of loaded classes ready for reflection, filled in loadClasses()
     private int directoryLevel = 0;
+    private static int anInt = 0;
 
     public DirectoryReader() {
         subDirectoryQueue = new LinkedList<>();
@@ -61,15 +62,15 @@ public class DirectoryReader extends PackageFinder {
         File rootDirectory;
         rootDirectory = new File(directory); // new file with path of @Param directory
         File[] rootDirectoryFiles = rootDirectory.listFiles(); // listFiles() returns array of Files in directory
-
+        int i = 0;
         if (rootDirectoryFiles != null) {
             for (File file : rootDirectoryFiles) { // iterate through everything in this directory
                 if (file.isFile()) { // if File
                     if (file.getName().endsWith(".java")) { // and if .java
-                        System.out.println(file.getParent());
+                        System.out.println("java " + file.getName() + anInt++);
+                       // System.out.println(file.getName());
                         javaSourceArrayList.add(file); // add to javaSource Array
                     } else if (file.getName().endsWith(".class")) { // else if File is .class
-                        //System.out.println(file.getName());
                         classArrayList.add(file); // add to class Array
                     }
                 } else if (file.isDirectory()) {
@@ -126,7 +127,7 @@ public class DirectoryReader extends PackageFinder {
     * packageArray[1] = classpath(just a filepath that is the root folder for the .class files) for package*/
     @ClassLoader
     public void loadClasses(String[] packageArray) throws FileNotFoundException {
-        System.out.println("Package " + packageArray[0]+ " " + packageArray[1]);
+        //System.out.println("Package " + packageArray[0]+ " " + packageArray[1]);
         String path = packageArray[1];
         URL[] classUrl = new URL[0];
         try {

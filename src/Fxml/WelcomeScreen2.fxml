@@ -1,53 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
-<?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ChangeSceneController">
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ChangeSceneController">
    <children>
-      <Pane prefHeight="750.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Text layoutX="14.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Code Smells">
-               <font>
-                  <Font name="System Bold" size="64.0" />
-               </font></Text>
-            <ImageView fitHeight="108.0" fitWidth="122.0" layoutX="880.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../res/Skunk.png" />
-               </image>
-            </ImageView>
-            <Text layoutX="17.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Overview">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Text>
-            <Text layoutX="17.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A code smell is a surface indication that usually corresponds to a deeper problem in the system.">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Text>
-            <Text layoutX="17.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We will generate a report that searches for the following code smells (click on smell for more information):">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Text>
-            <Hyperlink layoutX="59.0" layoutY="224.0" onAction="#defineDuplicatedCode" text="Duplicate Code" />
-            <Hyperlink layoutX="379.0" layoutY="616.0" onAction="#definePrimitiveObsessions" text="Primitive Obsessions" />
-            <Hyperlink layoutX="54.0" layoutY="616.0" onAction="#defineBloatedCode" text="Bloated Code" />
-            <Hyperlink layoutX="233.0" layoutY="224.0" onAction="#defineFeatureEnvy" text="Feature Envy" />
-            <Hyperlink layoutX="564.0" layoutY="224.0" onAction="#defineGodComplex" text="God Complex" />
-            <Hyperlink layoutX="206.0" layoutY="616.0" onAction="#defineInappropriateIntimacy" text="Inappropriate Intimacy" />
-            <Hyperlink layoutX="387.0" layoutY="224.0" onAction="#defineTooManyLiterals" text="Too Many Literals" />
-            <Hyperlink layoutX="536.0" layoutY="616.0" onAction="#defineLazyClass" text="Lazy Class/Freeloader" />
-            <Hyperlink layoutX="719.0" layoutY="616.0" onAction="#defineSwitchStatements" text="Switch Statements" />
-            <Hyperlink layoutX="753.0" layoutY="224.0" onAction="#defineComments" text="Comments" />
-            <Button layoutX="14.0" layoutY="711.0" mnemonicParsing="false" onAction="#goBackToWelomeScreen" text="Back" />
-            <Button layoutX="934.0" layoutY="711.0" mnemonicParsing="false" onAction="#goToProjectUploadScreen" text="Next" />
-         </children>
-      </Pane>
+      <Hyperlink layoutX="580.0" layoutY="234.0" onAction="#defineFeatureEnvy" text="Feature Envy" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+      <ImageView fitHeight="175.0" fitWidth="175.0" layoutX="531.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+         <image>
+            <Image url="@../res/FeatureEnvy.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="175.0" fitWidth="175.0" layoutX="284.0" layoutY="472.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+         <image>
+            <Image url="@../res/BloatedCode.png" />
+         </image>
+      </ImageView>
+      <Hyperlink layoutX="331.0" layoutY="449.0" onAction="#defineBloatedCode" text="Bloated Code" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+      <Text layoutX="37.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="‘Code smell’,  a term first coined by Kent Breck, is a surface indication that may correspond to a deeper design problem in the code base. We will generate a report that searches for the following code smells; click on the hyperlink for more information." textAlignment="JUSTIFY" wrappingWidth="205.13671875" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Hyperlink layoutX="588.0" layoutY="18.0" onAction="#defineLazyClass" text="Lazy Class" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
+      <ImageView fitHeight="175.0" fitWidth="175.0" layoutX="282.0" layoutY="44.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <image>
+            <Image url="@../res/DataClass.png" />
+         </image>
+      </ImageView>
+      <Hyperlink layoutX="74.0" layoutY="449.0" onAction="#defineTooManyLiterals" text="Too Many Literals" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+      <Hyperlink layoutX="69.0" layoutY="234.0" onAction="#definePrimitiveObsessions" text="Primitive Obsession" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+      <ImageView fitHeight="175.0" fitWidth="175.0" layoutX="531.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <image>
+            <Image url="@../res/LazyClass.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="175.0" fitWidth="175.0" layoutX="786.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+         <image>
+            <Image url="@../res/TooManyComments.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="175.0" fitWidth="175.0" layoutX="38.0" layoutY="472.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+         <image>
+            <Image url="@../res/TooManyLiterals.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="175.0" fitWidth="175.0" layoutX="785.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <image>
+            <Image url="@../res/GodComplex.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="175.0" fitWidth="175.0" layoutX="37.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+         <image>
+            <Image url="@../res/PrimitiveObsessions.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="175.0" fitWidth="175.0" layoutX="786.0" layoutY="472.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+         <image>
+            <Image url="@../res/InappropriateIntimacy.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="175.0" fitWidth="175.0" layoutX="531.0" layoutY="472.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+         <image>
+            <Image url="@../res/SwitchStatements.png" />
+         </image>
+      </ImageView>
+      <Hyperlink alignment="TOP_LEFT" layoutX="334.0" layoutY="18.0" onAction="#defineDataClumps" text="Data Clump" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
+      <Hyperlink layoutX="565.0" layoutY="449.0" onAction="#defineSwitchStatements" text="Switch Statements" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+      <Hyperlink layoutX="840.0" layoutY="234.0" onAction="#defineComments" text="Comments" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+      <ImageView fitHeight="175.0" fitWidth="175.0" layoutX="283.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+         <image>
+            <Image url="@../res/DuplicateCode.png" />
+         </image>
+      </ImageView>
+      <Hyperlink layoutX="809.0" layoutY="449.0" onAction="#defineInappropriateIntimacy" text="Inappropriate Intimacy" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+      <Hyperlink layoutX="325.0" layoutY="234.0" onAction="#defineDuplicatedCode" text="Duplicate Code" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+      <Hyperlink layoutX="825.0" layoutY="18.0" text="God Complex" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
+      <Button layoutX="851.0" layoutY="695.0" mnemonicParsing="false" onAction="#goToProjectUploadScreen" prefHeight="41.0" prefWidth="111.0" text="Next" />
+      <Button layoutX="38.0" layoutY="695.0" mnemonicParsing="false" onAction="#goToTableOfContentsScreen" prefHeight="41.0" prefWidth="111.0" text="Back" />
    </children>
 </AnchorPane>

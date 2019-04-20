@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ChangeSceneController">
+   <children>
+      <ScrollPane layoutX="286.0" layoutY="103.0" prefHeight="491.0" prefWidth="564.0">
+        <content>
+            <Pane prefHeight="477.0" prefWidth="549.0">
+               <children>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                  <Text layoutX="252.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" " wrappingWidth="44.9609375" />
+               </children>
+            </Pane>
+        </content>
+      </ScrollPane>
+      <Button layoutX="14.0" layoutY="711.0" mnemonicParsing="false" onAction="#goToProjectBarChartOverall" text="Back" />
+      <Button layoutX="934.0" layoutY="711.0" mnemonicParsing="false" onAction="#goToExitScreen" text="Next" />
+   </children>
+</AnchorPane>

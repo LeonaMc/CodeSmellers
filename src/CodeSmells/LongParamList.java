@@ -20,6 +20,7 @@ public class LongParamList implements Reflectable {
         cleanClasses = new ArrayList<>();
         methodHash = new HashMap<>();
         report = new Report();
+        report.setName("Long Parameter List");
     }
 
     private void findLongParamMethods(Class cls) throws FileNotFoundException {

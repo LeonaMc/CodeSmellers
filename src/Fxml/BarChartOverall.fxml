@@ -1,34 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.chart.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BarChartController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BarChartController">
    <children>
-      <SplitPane dividerPositions="0.9411764705882353" layoutX="-1.0" layoutY="-3.0" orientation="VERTICAL" prefHeight="750.0" prefWidth="1000.0">
+      <SplitPane layoutX="-1.0" layoutY="-3.0" orientation="VERTICAL" prefHeight="600.0" prefWidth="1000.0">
         <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="998.0" />
+        </items>
+      </SplitPane>
+      <Pane prefHeight="200.0" prefWidth="200.0">
+         <children>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="1000.0">
                <children>
-                  <BarChart fx:id="smellChart" prefHeight="701.0" prefWidth="998.0" title="Overall Analysis" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <xAxis>
+                  <BarChart fx:id="smellChart" layoutX="14.0" layoutY="14.0" prefHeight="473.0" prefWidth="956.0" title="Overall Analysis" AnchorPane.bottomAnchor="198.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="14.0">
+                      <xAxis>
                       <CategoryAxis label="Smell" side="BOTTOM" fx:id="x" />
                     </xAxis>
                     <yAxis>
                       <NumberAxis fx:id="y" label="Percentage" side="LEFT" />
                     </yAxis>
                   </BarChart>
+                  <Button layoutX="870.0" layoutY="550.0" mnemonicParsing="false" onAction="#goToInDepthAnalysis" prefHeight="41.0" prefWidth="111.0" text="Next" />
+                  <Button layoutX="14.0" layoutY="550.0" mnemonicParsing="false" onAction="#goBackToProjectUploadScreen" prefHeight="41.0" prefWidth="111.0" text="Back" />
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="998.0">
-               <children>
-                  <Button layoutX="939.0" layoutY="8.0" mnemonicParsing="false" onAction="#goToProjectAnalysis" text="Next" />
-                  <Button layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#goToProjectAnalysis2" text="Next to Sample 2" />
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

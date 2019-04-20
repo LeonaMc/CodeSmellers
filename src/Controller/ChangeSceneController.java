@@ -1,23 +1,31 @@
+// TODO: when String leads to an invalid path, produce error message
 package Controller;
 
-// TODO: create CodeSmellers.Controller package and place this class in it
-// To change to the next scene 
-
-//import gui.model;
-//import gui.view;
-//import gui.controller;
-
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
+import Model.SplashScreen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.stage.*;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextFlow;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.paint.Color;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 public class ChangeSceneController  { // implements Initializable
 	 
@@ -25,75 +33,61 @@ public class ChangeSceneController  { // implements Initializable
 	private Label lbl;
 	
 	@FXML 
-	private  TextArea textArea;
-
-
-
-	@FXML 
 	private  TextField textField;
-	private static String textPath; //used to store string from text field,
-
-
-
-	public ChangeSceneController(){
-
-	}
-
-    // directory
 	
-//	private static String dir;
-	//DirectoryReader directoryReader = new DirectoryReader();
+	@FXML
+	private TextFlow textFlow;
 	
-	// Changes welcome screen to screen 2 
-	// Want to be able to read from button to get scene, once read
-	// from scene we can get the stage 
-	public void goToWelcomeScreen(ActionEvent event) throws IOException {
-		
-		// dont have access to stage information
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Fxml/WelcomeScreen2.fxml"));
-		Scene scene = new Scene(root2);
-		// This line gets the stage informations
-		// Make the object of node type to be returned by getSource which allows us to get scene and window
+	@FXML
+	private TextFlow exitScreenTextFlow;
+	
+	private static String textPath; //used to store string from text field
+
+	private void changeScene(ActionEvent event,String fxmlPath) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+		root.setStyle("-fx-background-color: white");
+		Scene scene = new Scene(root);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(scene);
 		window.show();
 	}
 	
-	public void goToProjectBarChartOverall(ActionEvent event) throws IOException {
+	public void goToTableOfContentsScreen(ActionEvent event) throws IOException {
+		changeScene(event,"/Fxml/TableOfContentsScreen.fxml");
+	}
+	
+	public void goToWelcomeScreen2(ActionEvent event) throws IOException {
+		changeScene(event,"/Fxml/WelcomeScreen2.fxml");
+	}
+
+	public void goBackToWelcomeScreen(ActionEvent event) throws IOException {
+		changeScene(event,"/Fxml/WelcomeScreen.fxml");
+	}
+	
+	public void goToProjectUploadScreen(ActionEvent event) throws IOException{
+		changeScene(event,"/Fxml/ProjectUploadScreen3.fxml");
+	}
+
+	public void goToProjectBarChartOverall(ActionEvent event) throws IOException, InterruptedException {
 		
-		// dont have access to stage information
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Fxml/BarChartOverall.fxml"));
-		Scene scene = new Scene(root2);
-		// This line gets the stage informations
-		// Make the object of node type to be returned by getSource which allows us to get scene and window
-		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		window.setScene(scene);
-		window.show();
+        // Splash Screen
+        SplashScreen splashScreen = new SplashScreen();
+        splashScreen.setVisible(true);
+        Thread thread = Thread.currentThread();
+        Thread.sleep(2500);
+        splashScreen.dispose();
+
+		// if the text path is null then the user won't be able to click next, an alert will pop-up
+		if(textPath == null) {
+			String selection = null;
+			Alert alert = new Alert(AlertType.ERROR, "You cannot continue until you select a folder.", ButtonType.OK);
+			alert.showAndWait();
+				if (alert.getResult() == ButtonType.OK) {
+				    alert.close();				}		
+		}else {
+			changeScene(event,"/Fxml/BarChartOverall.fxml");
+		}
 	} 
-	
-	public void goBackToWelomeScreen(ActionEvent event) throws IOException {
-		
-		// dont have access to stage information
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Fxml/WelcomeScreen.fxml"));
-		Scene scene = new Scene(root2);
-		// This line gets the stage informations
-		// Make the object of node type to be returned by getSource which allows us to get scene and window
-		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		window.setScene(scene);
-		window.show();
-	}
-	
-	public void goToProjectUploadScreen(ActionEvent event) throws IOException {
-		
-		// dont have access to stage information
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Fxml/ProjectUploadScreen3.fxml"));
-		Scene scene = new Scene(root2);
-		// This line gets the stage informations
-		// Make the object of node type to be returned by getSource which allows us to get scene and window
-		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		window.setScene(scene);
-		window.show();
-	}
 
 	public void openDirectoryChooser(ActionEvent event) {
 		
@@ -104,100 +98,49 @@ public class ChangeSceneController  { // implements Initializable
             // create a Directory chooser 
             DirectoryChooser dir_chooser = new DirectoryChooser(); 
             // get the file selected  
-             File directory = dir_chooser.showDialog(stage); 
+             File directory = dir_chooser.showDialog(stage);
      		if (directory != null) { 
                 textField.setAccessibleText(directory.getAbsolutePath()); // set user directory path in text field
-          //      dir = directory.getAbsolutePath(); // TODO: use for directory in main
-
-
-
-
-//				displays directory path that user has selected
+            // dir = directory.getAbsolutePath(); // TODO: use for directory in main
+            // displays directory path that user has selected
 			textField.setText(textField.getAccessibleText());
 			textPath = textField.getAccessibleText();
-
-
-
-
-
      		}
              stage.show(); 
         }  
         catch (Exception e) { 
         	  textField.setText(e.getMessage()); 
         }
+	}	
+	
+	public void goBackToBarChartOverall(ActionEvent event) throws IOException {
+		changeScene(event,"/Fxml/BarChartOverall.fxml");
 	}
 	
-	public void getDirectoryPath() {
-  //      String[] packageArray = new String[2];
-   //     DirectoryReader directoryReader = new DirectoryReader();
-    //    String directoryPath = null; // Add path to root of directory here
-   //     String directoryPath = "C:\\Eclipse\\SoftwareEngineering3\\src"; 
-       // String directoryPath = openDirectoryChooser(event);
-        /**
-        String dir = textField.getText();
-        
-        if(textField != null) {
-
-        
-        System.out.println(dir);
-        
-        }{
-        	System.out.println("Nope");
-        } **/
-        
-     
-        /**
-
-        directoryReader.getFiles(directoryPath);
-        
-        if(directoryReader.getDirectoryLevel() > 0){
-            packageArray = directoryReader.getClasspath(directoryReader.getClassArrayList().get(0).getPath());
-        }
-        else{
-            packageArray[0] = null;
-            packageArray[1] = directoryPath;
-        }
-
-        try {
-            directoryReader.loadClasses(packageArray);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        ArrayList<Class> loadedClasses = new ArrayList<>(directoryReader.getLoadedClasses()); // classes ready for reflection
-        ArrayList<File> javaSource = new ArrayList<>(directoryReader.getJavaSourceArrayList()); // can read java files as text
-
-        textArea.setText("List of classes: \n");
-        // prints list of loaded classes
-        for(Class cls : loadedClasses){
-            System.out.println(cls.getName());
-       //     textArea.setText(cls.getName());
-            textArea.appendText(cls.getName() + "\n");
-        }
-        
-        textArea.appendText("List of java sources: \n");
-        // prints list of java files
-        for (File file : javaSource){
-            System.out.println(file.getName());
-          //  textArea.setText(file.getName());
-            textArea.selectNextWord();
-            textArea.appendText(file.getName() + "\n"); 
-        } **/
-	}
-	
-	public void lazyImageClicked(ActionEvent event) throws IOException {
-		
-		// dont have access to stage information
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Fxml/WelcomeScreen2.fxml"));
-		Scene scene = new Scene(root2);
-		// This line gets the stage informations
-		// Make the object of node type to be returned by getSource which allows us to get scene and window
-		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		window.setScene(scene);
-		window.show();
+	// This method is also in BarChartController due to inability to have multiple controllers per scene
+	public void goToInDepthAnalysis(ActionEvent event) throws IOException {
+		changeScene(event,"/Fxml/InDepthAnalysis.fxml");
 	} 
-		
+	
+	public void downloadProject(ActionEvent event) throws IOException{
+		String desktopPath = System.getProperty("user.home") + "\\Desktop\\report.txt";
+		Path ReportToDesktop = Files.copy(Paths.get("/src/reportLocation/report.txt"),
+													Paths.get(desktopPath),REPLACE_EXISTING);
+
+		Text textOut = new Text("Report added to " + desktopPath + "\nRecommended to view report in anything but notepad");
+
+		textOut.setFill(Color.BLACK);
+		textOut.setFont(Font.font("Verdana", 12));
+		textOut.setTextAlignment(TextAlignment.CENTER);
+		textOut.setLineSpacing(20.0f);
+		exitScreenTextFlow.getChildren().add(textOut);
+	}
+	
+	public void exitProject(ActionEvent event) throws IOException{
+		// close GUI
+	}
+	
+	// Methods to deal with hyperlinks for definitions 
 	
 	public void defineDuplicatedCode() throws IOException{
 		String url_open ="https://refactoring.guru/smells/duplicate-code";
@@ -248,14 +191,17 @@ public class ChangeSceneController  { // implements Initializable
 		String url_open ="https://refactoring.guru/smells/comments";
 		java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
 	}
-
-
-
+	
+	public void defineDataClumps() throws IOException{
+		String url_open ="https://refactoring.guru/smells/data-clumps";
+		java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
+	}
+	
+	// For returning the path of the folder
+	
 	public static String getTextPath(){
 		return textPath;
 	}
-
-
 }
 	
 

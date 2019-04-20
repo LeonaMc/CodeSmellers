@@ -25,6 +25,7 @@ public class LongMethods implements Inspectable {
         this.loadedClasses = new ArrayList<>(loadedClasses);
         this.javaSourceFiles = new ArrayList<>(javaSource);
         report = new Report();
+        report.setName("Long Method");
         bracketStack = new Stack<>();
         classMethods = new HashMap<>();
         openingBrace = '{'; // was originally in method body but was being added to bracket stack
@@ -120,7 +121,7 @@ public class LongMethods implements Inspectable {
         }
 
         if (endLine - startLine > 30) {
-            return "Method " + keyword + " in " + javaSource.getName() + " is " + (endLine - startLine) + " lines long\n" +
+            return "\nMethod " + keyword + " in " + javaSource.getName() + " is " + (endLine - startLine) + " lines long\n" +
                     "Method starts at line " + startLine + " and ends at line " + endLine + " in " + javaSource.getName();
         } else
             return null;

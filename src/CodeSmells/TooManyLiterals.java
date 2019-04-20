@@ -16,6 +16,7 @@ public class TooManyLiterals implements Reflectable {
         this.loadedClasses = new ArrayList<>();
         this.loadedClasses.addAll(loadedClasses);
         report = new Report();
+        report.setName("Too Many Literals");
     }
 
     @Override

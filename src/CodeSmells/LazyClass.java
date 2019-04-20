@@ -22,6 +22,7 @@ public class LazyClass implements Reflectable {
         this.javaSource = new ArrayList<>(javaSource);
         cleanClasses = new ArrayList<>();
         report = new Report();
+        report.setName("Lazy Class");
         lineCounter = new LineCounter();
     }
 
@@ -85,7 +86,7 @@ public class LazyClass implements Reflectable {
                     classReferenceMap.put(cls,className);
                 }
             }
-            data = "Class " + cls.getSimpleName() + " has been flagged as a lazy class because it has less than 150 lines of code\n";
+            data = "\nClass " + cls.getSimpleName() + " has been flagged as a lazy class because it has less than 150 lines of code\n";
             ArrayList<Method> publicMethods = new ArrayList<>();
             if(cls.getDeclaredMethods().length == 0){
                 data += "Possible contributing factors are\n";

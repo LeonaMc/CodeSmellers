@@ -4,14 +4,16 @@ import CodeSmells.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class TestSmellData {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String newline = "\n";
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
-        String directoryPath = "C:\\Users\\RickTheRuler\\IdeaProjects\\CodeSmellers"; // Add path to root of directory here
+        String directoryPath = ""; // Add path to root of directory here
         directoryReader.getFiles(directoryPath);
 
         if(directoryReader.getDirectoryLevel() > 0){
@@ -30,9 +32,22 @@ public class TestSmellData {
 
         ArrayList<Class> loadedClasses = new ArrayList<>(directoryReader.getLoadedClasses()); // classes ready for reflection
         ArrayList<File> javaSource = new ArrayList<>(directoryReader.getJavaSourceArrayList()); // can read java files as text
-        System.out.println(javaSource.size() + " " + loadedClasses.size());
+        File file = new File("/src/reportLocation/report.txt");
+        PrintStream fileWriter = null;
+        try {
+            fileWriter = new PrintStream(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.setOut(fileWriter);
+        System.out.println("java size " + javaSource.size() + " class size " + loadedClasses.size()+"\n");
+//        for(Class cls:loadedClasses){
+//            System.out.println(cls.getSimpleName()+"\n");
+//        }
+
         //Bloat Tests
-        // Large Class Finished
+        //Large Class Finished
         System.out.println("==========================TestSmellData Large Class==========================");
         LargeClass findLargeClasses = new LargeClass(javaSource, loadedClasses);
         findLargeClasses.findLargeFiles();
@@ -40,7 +55,7 @@ public class TestSmellData {
         Report largeClassReport = findLargeClasses.getReport();
         ArrayList<Class> largeClassAffectedClasses = largeClassReport.getAffectedClasses();
         largeClassReport.setPercentage(loadedClasses.size());
-        System.out.println(largeClassReport.printSizeOfAffectedClasses());
+        System.out.println(largeClassReport.printNumAffectedClasses());
         System.out.println(largeClassReport.percentToString() + " of files in project affected by Large Class code smell");
         if(largeClassReport.isClean()){
             System.out.println("Project is clean for Large Class code smell\n");
@@ -58,7 +73,7 @@ public class TestSmellData {
         Report longMethodReport = findLongMethods.getReport();
         longMethodReport.setPercentage(loadedClasses.size());
         ArrayList<Class> longMethodEffectedClasses = longMethodReport.getAffectedClasses();
-        System.out.println(longMethodReport.printSizeOfAffectedClasses());
+        System.out.println(longMethodReport.printNumAffectedClasses());
         System.out.println(longMethodReport.percentToString() + " of files in project affected by Long Method code smell\n");
         if (longMethodReport.isClean()){
             System.out.println("Project is clean for Long Method code smell\n");
@@ -94,7 +109,7 @@ public class TestSmellData {
         longParamList.reflectClass();
         Report longParamReport = longParamList.getReport();
         ArrayList<Class> longParamAffectedClasses = longParamReport.getAffectedClasses();
-        System.out.println(longParamReport.printSizeOfAffectedClasses());
+        System.out.println(longParamReport.printNumAffectedClasses());
         longParamReport.setPercentage(loadedClasses.size());
         System.out.println(longParamReport.percentToString() + " of files in project affected by long parameter code smell\n");
         if (longParamReport.isClean()){
@@ -111,7 +126,7 @@ public class TestSmellData {
         TooManyLiterals tooManyLiterals = new TooManyLiterals(loadedClasses);
         tooManyLiterals.reflectClass();
         Report literalReport = tooManyLiterals.getReport();
-        System.out.println(literalReport.printSizeOfAffectedClasses());
+        System.out.println(literalReport.printNumAffectedClasses());
         literalReport.setPercentage(loadedClasses.size());
         ArrayList<Class> literalAffectedClasses = literalReport.getAffectedClasses();
         System.out.println(literalReport.percentToString() + " of files affected by TooManyLiterals code smell\n");
@@ -148,7 +163,7 @@ public class TestSmellData {
         FeatureEnvy featureEnvy = new FeatureEnvy(javaSource,loadedClasses);
         featureEnvy.formatData();
         Report featureReport = featureEnvy.returnReport();
-        featureReport.printSizeOfAffectedClasses();
+        featureReport.printNumAffectedClasses();
         featureReport.setPercentage(loadedClasses.size());
         System.out.println(featureReport.percentToString() + " of files in project are affected\n");
         ArrayList<Class> envyClasses = featureReport.getAffectedClasses();
@@ -160,34 +175,5 @@ public class TestSmellData {
                 System.out.println(featureReport.getReportData().get(cls) + newline);
             }
         }
-
-
-//        Inspection inspection = new Inspection(loadedClasses,javaSource);
-//        inspection.runInspection();
-//
-//        final String FEATURE_ENVY = "FeatureEnvy";
-//        final String LARGE_CLASS = "LargeClass";
-//        final String LONG_METHOD = "LongMethod";
-//        final String LONG_PARAM = "LongParameter";
-//        final String PRIMITIVE_OBSESSION = "PrimitiveObsession";
-//
-//        Double featureEnvyPercent = inspection.getReports().get(FEATURE_ENVY).getPercentage();
-//        Double largeClassPercent = inspection.getReports().get(LARGE_CLASS).getPercentage();
-//        Double longMethodPercent = inspection.getReports().get(LONG_METHOD).getPercentage();
-//        Double longParameterPercent = inspection.getReports().get(LONG_PARAM).getPercentage();
-//        Double primitiveObsessionPercent = inspection.getReports().get(PRIMITIVE_OBSESSION).getPercentage();
-//
-//        ArrayList<Class> temp = new ArrayList<>();
-////        temp = inspection.getReports().get(FEATURE_ENVY).getAffectedClasses();
-////        for(Class cls: temp){
-////            System.out.println(cls.getSimpleName());
-////        }
-//
-//        System.out.println("feature envy percent " + Math.round(featureEnvyPercent*100.0)/100.0);
-//        System.out.println("large class percent " + Math.round(largeClassPercent*100.0)/100.0);
-//        System.out.println("long method percent " + Math.round(longMethodPercent*100.0)/100.0);
-//        System.out.println("long parameter percent " + Math.round(longParameterPercent * 100.0)/100.0);
-//        System.out.println("primitive obsession percent " + Math.round(primitiveObsessionPercent * 100.0)/100.0);
-
     }
 }
