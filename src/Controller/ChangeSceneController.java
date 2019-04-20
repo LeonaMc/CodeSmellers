@@ -43,56 +43,40 @@ public class ChangeSceneController  { // implements Initializable
 	
 	private static String textPath; //used to store string from text field
 
-	
-	public void goToTableOfContentsScreen(ActionEvent event) throws IOException {
-
-		Parent root = FXMLLoader.load(getClass().getResource("/Fxml/TableOfContentsScreen.fxml"));
+	private void changeScene(ActionEvent event,String fxmlPath) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
 		root.setStyle("-fx-background-color: white");
 		Scene scene = new Scene(root);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(scene);
 		window.show();
+	}
+	
+	public void goToTableOfContentsScreen(ActionEvent event) throws IOException {
+		changeScene(event,"/Fxml/TableOfContentsScreen.fxml");
 	}
 	
 	public void goToWelcomeScreen2(ActionEvent event) throws IOException {
-
-		Parent root = FXMLLoader.load(getClass().getResource("/Fxml/WelcomeScreen2.fxml"));
-		root.setStyle("-fx-background-color: white");
-		Scene scene = new Scene(root);
-		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		window.setScene(scene);
-		window.show();
+		changeScene(event,"/Fxml/WelcomeScreen2.fxml");
 	}
 
 	public void goBackToWelcomeScreen(ActionEvent event) throws IOException {
-		
-		Parent root = FXMLLoader.load(getClass().getResource("/Fxml/WelcomeScreen.fxml"));
-		root.setStyle("-fx-background-color: white");
-		Scene scene = new Scene(root);
-		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		window.setScene(scene);
-		window.show();
+		changeScene(event,"/Fxml/WelcomeScreen.fxml");
 	}
 	
 	public void goToProjectUploadScreen(ActionEvent event) throws IOException{
-		
-		Parent root = FXMLLoader.load(getClass().getResource("/Fxml/ProjectUploadScreen3.fxml"));
-		root.setStyle("-fx-background-color: white");
-		Scene scene = new Scene(root);
-		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		window.setScene(scene);
-		window.show();
+		changeScene(event,"/Fxml/ProjectUploadScreen3.fxml");
 	}
 
 	public void goToProjectBarChartOverall(ActionEvent event) throws IOException, InterruptedException {
 		
         // Splash Screen
-//        SplashScreen splashScreen = new SplashScreen();
-//        splashScreen.setVisible(true);
-//        Thread thread = Thread.currentThread();
-//        Thread.sleep(2500);
-//        splashScreen.dispose();
-//
+        SplashScreen splashScreen = new SplashScreen();
+        splashScreen.setVisible(true);
+        Thread thread = Thread.currentThread();
+        Thread.sleep(2500);
+        splashScreen.dispose();
+
 		// if the text path is null then the user won't be able to click next, an alert will pop-up
 		if(textPath == null) {
 			String selection = null;
@@ -101,12 +85,7 @@ public class ChangeSceneController  { // implements Initializable
 				if (alert.getResult() == ButtonType.OK) {
 				    alert.close();				}		
 		}else {
-		Parent root = FXMLLoader.load(getClass().getResource("/Fxml/BarChartOverall.fxml"));
-		root.setStyle("-fx-background-color: white");
-		Scene scene = new Scene(root);
-		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		window.setScene(scene);
-		window.show();
+			changeScene(event,"/Fxml/BarChartOverall.fxml");
 		}
 	} 
 
@@ -135,25 +114,12 @@ public class ChangeSceneController  { // implements Initializable
 	}	
 	
 	public void goBackToBarChartOverall(ActionEvent event) throws IOException {
-	
-		Parent root = FXMLLoader.load(getClass().getResource("/Fxml/BarChartOverall.fxml"));
-		root.setStyle("-fx-background-color: white");
-		Scene scene = new Scene(root);
-		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		window.setScene(scene);
-		window.show();
-	
+		changeScene(event,"/Fxml/BarChartOverall.fxml");
 	}
 	
 	// This method is also in BarChartController due to inability to have multiple controllers per scene
 	public void goToInDepthAnalysis(ActionEvent event) throws IOException {
-		
-		Parent root = FXMLLoader.load(getClass().getResource("/Fxml/InDepthAnalysis.fxml"));
-		root.setStyle("-fx-background-color: white");
-		Scene scene = new Scene(root);
-		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		window.setScene(scene);
-		window.show();
+		changeScene(event,"/Fxml/InDepthAnalysis.fxml");
 	} 
 	
 	public void downloadProject(ActionEvent event) throws IOException{
@@ -161,7 +127,7 @@ public class ChangeSceneController  { // implements Initializable
 		Path ReportToDesktop = Files.copy(Paths.get("/src/reportLocation/report.txt"),
 													Paths.get(desktopPath),REPLACE_EXISTING);
 
-		Text textOut = new Text("Report added to " + desktopPath);
+		Text textOut = new Text("Report added to " + desktopPath + "\nRecommended to view report in anything but notepad");
 
 		textOut.setFill(Color.BLACK);
 		textOut.setFont(Font.font("Verdana", 12));
