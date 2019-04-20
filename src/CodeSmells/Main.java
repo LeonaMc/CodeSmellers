@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -23,7 +24,7 @@ public class Main extends Application{ //
     public void start(Stage primaryStage) {
         try {
             Parent root = FXMLLoader.load(this.getClass().getResource("/Model/WelcomeScreen.fxml"));
-           // root.setStyle("-fx-background-color: white");
+            root.setStyle("-fx-background-color: white");
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
         } catch(Exception e) {
@@ -33,14 +34,13 @@ public class Main extends Application{ //
 
     public static void main(String[] args) throws InterruptedException, ClassNotFoundException, NoSuchFieldException, InstantiationException, IllegalAccessException {
     	
-    	
+    	/**
         // Splash Screen
         SplashScreen splashScreen = new SplashScreen();
         splashScreen.setVisible(true);
         Thread thread = Thread.currentThread();
         Thread.sleep(2500);
-        splashScreen.dispose();
-    	
+        splashScreen.dispose();**/
         
        // Calling the Welcome Screen for GUI in main
         launch(args);
