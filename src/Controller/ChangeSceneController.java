@@ -123,8 +123,16 @@ public class ChangeSceneController  { // implements Initializable
 	} 
 	
 	public void downloadProject(ActionEvent event) throws IOException{
-		String desktopPath = System.getProperty("user.home") + "\\Desktop\\report.txt";
-		Path ReportToDesktop = Files.copy(Paths.get("/src/reportLocation/report.txt"),
+
+		String fileSeperator = "";
+		if(System.getProperty("os.name").contains("Windows")){
+			fileSeperator ="\\Desktop\\report.txt";
+		}
+		else if(System.getProperty("os.name").contains("Linux") || System.getProperty("os.name").contains("Mac")){
+			fileSeperator = "/Desktop/report.txt";
+		}
+		String desktopPath = System.getProperty("user.home") + fileSeperator;
+		Path ReportToDesktop = Files.copy(Paths.get("src/reportLocation/report.txt"),
 													Paths.get(desktopPath),REPLACE_EXISTING);
 
 		Text textOut = new Text("Report added to " + desktopPath + "\nRecommended to view report in anything but notepad");

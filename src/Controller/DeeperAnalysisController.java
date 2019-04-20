@@ -36,7 +36,8 @@ public class DeeperAnalysisController { // implements Initializable
         textOut.setFont(Font.font("Verdana", 12));
         textOut.setTextAlignment(TextAlignment.CENTER);
         textOut.setLineSpacing(20.0f);
-        File file = new File("/src/reportLocation/report.txt");
+
+        File file = new File("src/reportLocation/report.txt");
         FileInputStream fileInputStream = new FileInputStream(file);
         BufferedReader input = new BufferedReader(new InputStreamReader(fileInputStream));
         String line;

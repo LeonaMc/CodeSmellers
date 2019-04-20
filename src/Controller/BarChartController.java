@@ -90,6 +90,7 @@ public class BarChartController implements Initializable {
         int index = 0;
         for(String keyToSmellReport:keysToSmellReports){
             Data<String, Number> data = new Data(keyToSmellReport +" "+ reportsHashMap.get(keyToSmellReport).percentToString(), reportsHashMap.get(keyToSmellReport).getPercentage());
+
             codeSmellBarSeries.getData().add(data);
             
             data.nodeProperty().addListener((ov, oldNode, newNode) -> {
