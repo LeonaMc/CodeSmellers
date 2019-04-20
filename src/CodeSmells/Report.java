@@ -48,13 +48,14 @@ public class Report<T> {
     // sets percentage of files affected compared to overall class files loadedClassSize = loadedClasses.size()
     public void setPercentage(int loadedClassSize){
         percentOfFilesAffected = ((double) affectedClasses.size()/(double)loadedClassSize)*100;
+
     }
     // return percentage of files affected by a smell
     public Double getPercentage(){
         return percentOfFilesAffected;
     }
 
-    public String printNumAffectedClasses(){
+    public String printSizeOfAffectedClasses(){
         return "Number of affected classes = " + affectedClasses.size();
     }
 
