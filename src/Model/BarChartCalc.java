@@ -2,6 +2,7 @@ package Model;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -16,13 +17,11 @@ public class BarChartCalc{
 	ArrayList<Double> percentages = new ArrayList<Double>();
 	ChangeSceneController c = new ChangeSceneController();
     
-    public  HashMap<String, Report> runInspection() {
+    public  HashMap<String, Report> runInspection() throws IOException {
     	
-    	String newline = "\n";
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
         String directoryPath = ChangeSceneController.getTextPath(); // Add path to root of directory here
-        System.out.println(directoryPath);
         directoryReader.getFiles(directoryPath);
                 
         if(directoryReader.getDirectoryLevel() > 0){
