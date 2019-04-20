@@ -81,13 +81,6 @@ public class ChangeSceneController  { // implements Initializable
 
 	public void goToProjectBarChartOverall(ActionEvent event) throws IOException, InterruptedException {
 		
-        // Splash Screen
-        SplashScreen splashScreen = new SplashScreen();
-        splashScreen.setVisible(true);
-        Thread thread = Thread.currentThread();
-        Thread.sleep(2500);
-        splashScreen.dispose();
-        
 		// if the text path is null then the user won't be able to click next, an alert will pop-up
 		if(textPath == null) {
 			String selection = null;
@@ -96,6 +89,14 @@ public class ChangeSceneController  { // implements Initializable
 				if (alert.getResult() == ButtonType.OK) {
 				    alert.close();				}		
 		}else {
+			
+	    // Splash Screen
+	    SplashScreen splashScreen = new SplashScreen();
+        splashScreen.setVisible(true);
+        Thread thread = Thread.currentThread();
+        Thread.sleep(2500);
+	    splashScreen.dispose();
+	        
 		Parent root = FXMLLoader.load(getClass().getResource("/Model/BarChartOverall.fxml"));
 		root.setStyle("-fx-background-color: white");
 		Scene scene = new Scene(root);
@@ -148,7 +149,7 @@ public class ChangeSceneController  { // implements Initializable
 		Scene scene = new Scene(root);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(scene);
-		window.show();
+		window.show();	
 	} 
 	
 	public void downloadProject(ActionEvent event) throws IOException{
