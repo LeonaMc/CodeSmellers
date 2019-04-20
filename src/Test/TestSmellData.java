@@ -4,10 +4,12 @@ import CodeSmells.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class TestSmellData {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String newline = "\n";
         String[] packageArray = new String[2];
         DirectoryReader directoryReader = new DirectoryReader();
@@ -30,14 +32,22 @@ public class TestSmellData {
 
         ArrayList<Class> loadedClasses = new ArrayList<>(directoryReader.getLoadedClasses()); // classes ready for reflection
         ArrayList<File> javaSource = new ArrayList<>(directoryReader.getJavaSourceArrayList()); // can read java files as text
+        File file = new File("/src/reportLocation/report.txt");
+        PrintStream fileWriter = null;
+        try {
+            fileWriter = new PrintStream(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        System.setOut(fileWriter);
         System.out.println("java size " + javaSource.size() + " class size " + loadedClasses.size()+"\n");
 //        for(Class cls:loadedClasses){
 //            System.out.println(cls.getSimpleName()+"\n");
 //        }
 
         //Bloat Tests
-        // Large Class Finished
+        //Large Class Finished
         System.out.println("==========================TestSmellData Large Class==========================");
         LargeClass findLargeClasses = new LargeClass(javaSource, loadedClasses);
         findLargeClasses.findLargeFiles();
@@ -165,34 +175,5 @@ public class TestSmellData {
                 System.out.println(featureReport.getReportData().get(cls) + newline);
             }
         }
-
-
-//        Inspection inspection = new Inspection(loadedClasses,javaSource);
-//        inspection.runInspection();
-//
-//        final String FEATURE_ENVY = "FeatureEnvy";
-//        final String LARGE_CLASS = "LargeClass";
-//        final String LONG_METHOD = "LongMethod";
-//        final String LONG_PARAM = "LongParameter";
-//        final String PRIMITIVE_OBSESSION = "PrimitiveObsession";
-
-//        Double featureEnvyPercent = inspection.getReports().get(FEATURE_ENVY).getPercentage();
-//        Double largeClassPercent = inspection.getReports().get(LARGE_CLASS).getPercentage();
-//        Double longMethodPercent = inspection.getReports().get(LONG_METHOD).getPercentage();
-//        Double longParameterPercent = inspection.getReports().get(LONG_PARAM).getPercentage();
-//        Double primitiveObsessionPercent = inspection.getReports().get(PRIMITIVE_OBSESSION).getPercentage();
-//
-//        ArrayList<Class> temp = new ArrayList<>();
-////        temp = inspection.getReports().get(FEATURE_ENVY).getAffectedClasses();
-////        for(Class cls: temp){
-////            System.out.println(cls.getSimpleName());
-////        }
-//
-//        System.out.println("feature envy percent " + Math.round(featureEnvyPercent*100.0)/100.0);
-//        System.out.println("large class percent " + Math.round(largeClassPercent*100.0)/100.0);
-//        System.out.println("long method percent " + Math.round(longMethodPercent*100.0)/100.0);
-//        System.out.println("long parameter percent " + Math.round(longParameterPercent * 100.0)/100.0);
-//        System.out.println("primitive obsession percent " + Math.round(primitiveObsessionPercent * 100.0)/100.0);
-
     }
 }
