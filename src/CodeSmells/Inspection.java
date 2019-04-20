@@ -87,7 +87,7 @@ public class Inspection {
         names.add("TooManyLiterals");
         names.add("FeatureEnvy");
 
-        File dir = new File("/src/reportLocation");
+        File dir = new File("src/reportLocation");
         if(dir.mkdir()){
             System.out.println("dir created\n");
         }
@@ -95,7 +95,7 @@ public class Inspection {
             System.out.println("Not\n");
         }
 
-        File file = new File("/src/reportLocation/report.txt");
+        File file = new File("src/reportLocation/report.txt");
         PrintStream fileWriter = null;
 
         try {
@@ -105,7 +105,7 @@ public class Inspection {
         }
         System.setOut(fileWriter);
         for(String name: names){
-            System.out.println("======================================== "+name+" ========================================");
+            System.out.println("================= "+name+" =================");
             Report report = getReports().get(name);
             ArrayList<Class> affectedClasses = report.getAffectedClasses();
             if (report.isClean()){
