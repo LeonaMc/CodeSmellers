@@ -13,7 +13,7 @@
             <Pane prefHeight="477.0" prefWidth="549.0">
                <children>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-                  <Text layoutX="252.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="okokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokokok" wrappingWidth="44.9609375" />
+                  <Text layoutX="252.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" " wrappingWidth="44.9609375" />
                </children>
             </Pane>
         </content>

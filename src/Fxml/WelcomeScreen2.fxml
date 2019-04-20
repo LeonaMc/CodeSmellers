@@ -12,12 +12,12 @@
       <Hyperlink layoutX="580.0" layoutY="234.0" onAction="#defineFeatureEnvy" text="Feature Envy" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
       <ImageView fitHeight="175.0" fitWidth="175.0" layoutX="531.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <image>
-            <Image url="@FeatureEnvy.png" />
+            <Image url="@../res/FeatureEnvy.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="175.0" fitWidth="175.0" layoutX="284.0" layoutY="472.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <image>
-            <Image url="@BloatedCode.png" />
+            <Image url="@../res/BloatedCode.png" />
          </image>
       </ImageView>
       <Hyperlink layoutX="331.0" layoutY="449.0" onAction="#defineBloatedCode" text="Bloated Code" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP" />
@@ -29,44 +29,44 @@
       <Hyperlink layoutX="588.0" layoutY="18.0" onAction="#defineLazyClass" text="Lazy Class" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
       <ImageView fitHeight="175.0" fitWidth="175.0" layoutX="282.0" layoutY="44.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <image>
-            <Image url="@DataClass.png" />
+            <Image url="@../res/DataClass.png" />
          </image>
       </ImageView>
       <Hyperlink layoutX="74.0" layoutY="449.0" onAction="#defineTooManyLiterals" text="Too Many Literals" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP" />
       <Hyperlink layoutX="69.0" layoutY="234.0" onAction="#definePrimitiveObsessions" text="Primitive Obsession" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
       <ImageView fitHeight="175.0" fitWidth="175.0" layoutX="531.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <image>
-            <Image url="@LazyClass.png" />
+            <Image url="@../res/LazyClass.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="175.0" fitWidth="175.0" layoutX="786.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <image>
-            <Image url="@TooManyComments.png" />
+            <Image url="@../res/TooManyComments.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="175.0" fitWidth="175.0" layoutX="38.0" layoutY="472.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <image>
-            <Image url="@TooManyLiterals.png" />
+            <Image url="@../res/TooManyLiterals.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="175.0" fitWidth="175.0" layoutX="785.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <image>
-            <Image url="@GodComplex.png" />
+            <Image url="@../res/GodComplex.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="175.0" fitWidth="175.0" layoutX="37.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <image>
-            <Image url="@PrimitiveObsessions.png" />
+            <Image url="@../res/PrimitiveObsessions.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="175.0" fitWidth="175.0" layoutX="786.0" layoutY="472.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <image>
-            <Image url="@InappropriateIntimacy.png" />
+            <Image url="@../res/InappropriateIntimacy.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="175.0" fitWidth="175.0" layoutX="531.0" layoutY="472.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <image>
-            <Image url="@SwitchStatements.png" />
+            <Image url="@../res/SwitchStatements.png" />
          </image>
       </ImageView>
       <Hyperlink alignment="TOP_LEFT" layoutX="334.0" layoutY="18.0" onAction="#defineDataClumps" text="Data Clump" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
@@ -74,7 +74,7 @@
       <Hyperlink layoutX="840.0" layoutY="234.0" onAction="#defineComments" text="Comments" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
       <ImageView fitHeight="175.0" fitWidth="175.0" layoutX="283.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <image>
-            <Image url="@DuplicateCode.png" />
+            <Image url="@../res/DuplicateCode.png" />
          </image>
       </ImageView>
       <Hyperlink layoutX="809.0" layoutY="449.0" onAction="#defineInappropriateIntimacy" text="Inappropriate Intimacy" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP" />
