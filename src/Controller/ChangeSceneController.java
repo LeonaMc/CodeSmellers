@@ -4,6 +4,9 @@ package Controller;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import Model.SplashScreen;
 import javafx.event.ActionEvent;
@@ -21,6 +24,8 @@ import javafx.scene.text.TextFlow;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 public class ChangeSceneController  { // implements Initializable
 	 
@@ -41,7 +46,7 @@ public class ChangeSceneController  { // implements Initializable
 	
 	public void goToTableOfContentsScreen(ActionEvent event) throws IOException {
 
-		Parent root = FXMLLoader.load(getClass().getResource("/Model/TableOfContentsScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/Fxml/TableOfContentsScreen.fxml"));
 		root.setStyle("-fx-background-color: white");
 		Scene scene = new Scene(root);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -51,7 +56,7 @@ public class ChangeSceneController  { // implements Initializable
 	
 	public void goToWelcomeScreen2(ActionEvent event) throws IOException {
 
-		Parent root = FXMLLoader.load(getClass().getResource("/Model/WelcomeScreen2.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/Fxml/WelcomeScreen2.fxml"));
 		root.setStyle("-fx-background-color: white");
 		Scene scene = new Scene(root);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -61,7 +66,7 @@ public class ChangeSceneController  { // implements Initializable
 
 	public void goBackToWelcomeScreen(ActionEvent event) throws IOException {
 		
-		Parent root = FXMLLoader.load(getClass().getResource("/Model/WelcomeScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/Fxml/WelcomeScreen.fxml"));
 		root.setStyle("-fx-background-color: white");
 		Scene scene = new Scene(root);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -71,7 +76,7 @@ public class ChangeSceneController  { // implements Initializable
 	
 	public void goToProjectUploadScreen(ActionEvent event) throws IOException{
 		
-		Parent root = FXMLLoader.load(getClass().getResource("/Model/ProjectUploadScreen3.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/Fxml/ProjectUploadScreen3.fxml"));
 		root.setStyle("-fx-background-color: white");
 		Scene scene = new Scene(root);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -82,12 +87,12 @@ public class ChangeSceneController  { // implements Initializable
 	public void goToProjectBarChartOverall(ActionEvent event) throws IOException, InterruptedException {
 		
         // Splash Screen
-        SplashScreen splashScreen = new SplashScreen();
-        splashScreen.setVisible(true);
-        Thread thread = Thread.currentThread();
-        Thread.sleep(2500);
-        splashScreen.dispose();
-        
+//        SplashScreen splashScreen = new SplashScreen();
+//        splashScreen.setVisible(true);
+//        Thread thread = Thread.currentThread();
+//        Thread.sleep(2500);
+//        splashScreen.dispose();
+//
 		// if the text path is null then the user won't be able to click next, an alert will pop-up
 		if(textPath == null) {
 			String selection = null;
@@ -96,7 +101,7 @@ public class ChangeSceneController  { // implements Initializable
 				if (alert.getResult() == ButtonType.OK) {
 				    alert.close();				}		
 		}else {
-		Parent root = FXMLLoader.load(getClass().getResource("/Model/BarChartOverall.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/Fxml/BarChartOverall.fxml"));
 		root.setStyle("-fx-background-color: white");
 		Scene scene = new Scene(root);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -131,7 +136,7 @@ public class ChangeSceneController  { // implements Initializable
 	
 	public void goBackToBarChartOverall(ActionEvent event) throws IOException {
 	
-		Parent root = FXMLLoader.load(getClass().getResource("/Model/BarChartOverall.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/Fxml/BarChartOverall.fxml"));
 		root.setStyle("-fx-background-color: white");
 		Scene scene = new Scene(root);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -143,7 +148,7 @@ public class ChangeSceneController  { // implements Initializable
 	// This method is also in BarChartController due to inability to have multiple controllers per scene
 	public void goToInDepthAnalysis(ActionEvent event) throws IOException {
 		
-		Parent root = FXMLLoader.load(getClass().getResource("/Model/InDepthAnalysis.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/Fxml/InDepthAnalysis.fxml"));
 		root.setStyle("-fx-background-color: white");
 		Scene scene = new Scene(root);
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -152,53 +157,17 @@ public class ChangeSceneController  { // implements Initializable
 	} 
 	
 	public void downloadProject(ActionEvent event) throws IOException{
-		
-    //	File file = new File("C:\\Users\\Owner\\Downloads\\ok.txt");
-		
-	    final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-	    int count = 0;
-	    
-		StringBuilder builder = new StringBuilder();
+		String desktopPath = System.getProperty("user.home") + "\\Desktop\\report.txt";
+		Path ReportToDesktop = Files.copy(Paths.get("/src/reportLocation/report.txt"),
+													Paths.get(desktopPath),REPLACE_EXISTING);
 
-		while (count++ != 4) {
+		Text textOut = new Text("Report added to " + desktopPath);
 
-		int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
-
-		builder.append(ALPHA_NUMERIC_STRING.charAt(character));
-
-		}
-		// using textPath allows file to be downloaded into user project file 
-		File file = new File(textPath + "\\" +  builder.toString() + ".txt");
-    	System.out.println(textPath + "\\" +  builder.toString() + ".txt");
-  	  
-    	//Create the file
-    	if (file.createNewFile())
-    	{
-    	    System.out.println("File is created!");
-    	} else {
-    		// if file name already exists, generate a new file name 
-    		while (count++ != 4) {
-
-    		int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
-
-    		builder.append(ALPHA_NUMERIC_STRING.charAt(character));
-    		}
-    	}
-    	
-        Text setText = new Text("Project saved.\nFile Path: " + textPath + "\\" +  builder.toString() + ".txt");
-        setText.setFill(Color.BLACK);
-        setText.setFont(Font.font("Verdana", 12));
-        exitScreenTextFlow.getChildren().add(setText);
-        setText.setTextAlignment(TextAlignment.CENTER);
-        setText.setLineSpacing(20.0f);
-        
-    	//Write Content
-    	FileWriter writer = new FileWriter(file);
-    	
-    	// TODO: write correct content to file  
-    	writer.write("Test data");
-    	writer.close();
-    	
+		textOut.setFill(Color.BLACK);
+		textOut.setFont(Font.font("Verdana", 12));
+		textOut.setTextAlignment(TextAlignment.CENTER);
+		textOut.setLineSpacing(20.0f);
+		exitScreenTextFlow.getChildren().add(textOut);
 	}
 	
 	public void exitProject(ActionEvent event) throws IOException{

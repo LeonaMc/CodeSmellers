@@ -8,8 +8,6 @@ import java.text.NumberFormat;
 import java.util.*;
 
 import CodeSmells.Report;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -60,6 +58,9 @@ public class BarChartController implements Initializable {
 
     public static NumberFormat formatter = new DecimalFormat("#0.00");
 
+    public BarChartController() throws IOException {
+    }
+
     public void showOverallAnalysisText() {
         overAllAnalysisText.setAccessibleText(null);
     }
@@ -88,7 +89,7 @@ public class BarChartController implements Initializable {
 
         int index = 0;
         for(String keyToSmellReport:keysToSmellReports){
-            XYChart.Data<String, Number> data = new Data(keyToSmellReport, reportsHashMap.get(keyToSmellReport).getPercentage());
+            XYChart.Data<String, Number> data = new Data(keyToSmellReport +" "+ reportsHashMap.get(keyToSmellReport).percentToString(), reportsHashMap.get(keyToSmellReport).getPercentage());
             //XYChart.Data<String, Number> data = new XYChart.Data(keysToSmellReports.get(index), 100); // use this line to see the bars for every smell regardless of project
             codeSmellBarSeries.getData().add(data);
             
@@ -103,36 +104,30 @@ public class BarChartController implements Initializable {
 
         //	Text t = new Text("Please click on bar for more information.\n");
 
-        for (Series<?, ?> serie : smellChart.getData()) {
-            for (Data<?, ?> item : serie.getData()) {
-                item.getNode().setOnMousePressed((MouseEvent event) -> reportDataToGui(item.getXValue().toString()));
-            }
-        }
-        Text setText = new Text("Click on a bar for more information on each code smell.");
-        setText.setFill(Color.BLACK);
-        setText.setFont(Font.font("Verdana", 12));
-        codeExplanationText.getChildren().add(setText);
-        setText.setTextAlignment(TextAlignment.CENTER);
-        setText.setLineSpacing(20.0f);
+//        for (Series<?, ?> serie : smellChart.getData()) {
+//            for (Data<?, ?> item : serie.getData()) {
+//                item.getNode().setOnMousePressed((MouseEvent event) -> reportDataToGui(item.getXValue().toString()));
+//            }
+//        }
     }
     
     private Report getReport(String reportKey){
        return reportsHashMap.get(reportKey);
     }
 
-    private void reportDataToGui(String key){
-        Text textOut = new Text("Name: " + key + "\nValue: "  + getReport(key).percentToString() + "\n");
-        textOut.setFill(Color.BLACK);
-        textOut.setFont(Font.font("Verdana", 12));
-        overAllAnalysisText.getChildren().add(textOut);
-        textOut.setTextAlignment(TextAlignment.CENTER);
-        textOut.setLineSpacing(20.0f);
-    }
+//    private void reportDataToGui(String key){
+//        Text textOut = new Text("Name: " + key + "\nValue: "  + getReport(key).percentToString() + "\n");
+//        textOut.setFill(Color.BLACK);
+//        textOut.setFont(Font.font("Verdana", 12));
+//        overAllAnalysisText.getChildren().add(textOut);
+//        textOut.setTextAlignment(TextAlignment.CENTER);
+//        textOut.setLineSpacing(20.0f);
+//    }
 
     public void goBackToProjectUploadScreen(ActionEvent event) throws IOException {
 
         // dont have access to stage information
-        Parent root = FXMLLoader.load(getClass().getResource("/Model/ProjectUploadScreen3.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Fxml/ProjectUploadScreen3.fxml"));
         root.setStyle("-fx-background-color: white");
         Scene scene = new Scene(root);
         // This line gets the stage informations
@@ -144,7 +139,7 @@ public class BarChartController implements Initializable {
     
     public void goToInDepthAnalysis(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/Model/InDepthAnalysis.fxml")); // Access scene information
+        Parent root = FXMLLoader.load(getClass().getResource("/Fxml/InDepthAnalysis.fxml")); // Access scene information
         root.setStyle("-fx-background-color: white");
         Scene scene = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow(); // allows us to get scene and window

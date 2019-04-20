@@ -1,9 +1,7 @@
 // TODO: when String leads to an invalid path, produce error message
 package Controller;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,82 +11,60 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.stage.*;
-import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
 
-public class DeeperAnalysisController  { // implements Initializable
+public class DeeperAnalysisController { // implements Initializable
 
     @FXML
     private TextFlow overAllAnalysisText;
-    
-    private BarChartCalc barChart = new BarChartCalc();
 
-    private HashMap<String, Report> reportsHashMap = barChart.runInspection(); //gets the inspection reports
-    
-    private Report getReport(String reportKey){
-        return reportsHashMap.get(reportKey);
-     }
+    public DeeperAnalysisController() throws IOException {
+
+    }
 
     //TODO: generate for all smells 
     @FXML
-      void reportDataToGui(ActionEvent event) throws IOException{
-    	 String key = "LazyClass";
-         Text textOut = new Text("Name: " + key + "\nValue: " + "formatter.format(item.getYValue())" + "\n" + getReport(key).printNumAffectedClasses() + "\n" +
-                 getReport(key).percentToString() + " of files in project affected by "+ key +" Class code smell\n\n");
-         textOut.setFill(Color.BLACK);
-         textOut.setFont(Font.font("Verdana", 12));
-         overAllAnalysisText.getChildren().add(textOut);
-         textOut.setTextAlignment(TextAlignment.CENTER);
-         textOut.setLineSpacing(20.0f);
-         
-         // add on to string
-         textOut = new Text("Name: " + key + "\nValue: " + "formatter.format(item.getYValue())" + "\n" + getReport(key).printNumAffectedClasses() + "\n" +
-                 getReport(key).percentToString() + " of files in project affected by "+ key +" Class code smell\n\n");
-         overAllAnalysisText.getChildren().add(textOut);
-         
-         textOut = new Text("Name: " + key + "\nValue: " + "formatter.format(item.getYValue())" + "\n" + getReport(key).printNumAffectedClasses() + "\n" +
-                 getReport(key).percentToString() + " of files in project affected by "+ key +" Class code smell\n\n");
-         overAllAnalysisText.getChildren().add(textOut);
+    void reportDataToGui(ActionEvent event) throws IOException {
+        Text textOut = new Text();
 
-         if (getReport(key).isClean()) {
-             textOut = new Text("Project is clean for "+ key +" code smell\n");
-         } else {
-         ArrayList<Class> affectedClasses = new ArrayList<>(getReport(key).getAffectedClasses());
+        textOut.setFill(Color.BLACK);
+        textOut.setFont(Font.font("Verdana", 12));
+        textOut.setTextAlignment(TextAlignment.CENTER);
+        textOut.setLineSpacing(20.0f);
+        File file = new File("/src/reportLocation/report.txt");
+        FileInputStream fileInputStream = new FileInputStream(file);
+        BufferedReader input = new BufferedReader(new InputStreamReader(fileInputStream));
+        String line;
 
-         for (Class cls : affectedClasses) {
-             textOut.setText("Affected class name = " + cls.getSimpleName());
-             textOut.setText(getReport(key).getReportData().get(cls).toString());
-             }
-         }
-     }
-     
-	public void goBackToBarChartOverall(ActionEvent event) throws IOException {
+        while ((line = input.readLine()) != null) {
+            textOut = new Text(line+"\n");
+            overAllAnalysisText.getChildren().add(textOut);
+        }
+    }
 
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/BarChartOverall.fxml"));
-		Scene scene = new Scene(root2);
-		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		window.setScene(scene);
-		window.show();
-	}
-	
-	public void goToExitScreen(ActionEvent event) throws IOException {
+    public void goBackToBarChartOverall(ActionEvent event) throws IOException {
 
-		Parent root2 = FXMLLoader.load(getClass().getResource("/Model/ExitScreen.fxml"));
-		Scene scene = new Scene(root2);
-		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		window.setScene(scene);
-		window.show();
-	}
+        Parent root2 = FXMLLoader.load(getClass().getResource("/Fxml/BarChartOverall.fxml"));
+        Scene scene = new Scene(root2);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
+    }
+
+    public void goToExitScreen(ActionEvent event) throws IOException {
+
+        Parent root2 = FXMLLoader.load(getClass().getResource("/Fxml/ExitScreen.fxml"));
+        Scene scene = new Scene(root2);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
+    }
 
 }
-	
+
 
