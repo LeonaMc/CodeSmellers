@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -16,14 +17,14 @@ public class DirectoryReader extends PackageFinder {
     private ArrayList<File> javaSourceArrayList; // holds java source files found in getFiles
     private ArrayList<File> classArrayList; // holds .class files found in getFiles
     private String special; // special character "\\\\" for windows, "/" for linux or mac, set in constructor. Used in class loader
-    private ArrayList<Class> loadedClasses = new ArrayList<>(); // array of loaded classes ready for reflection, filled in loadClasses()
+    private ArrayList<Class> loadedClasses; // array of loaded classes ready for reflection, filled in loadClasses()
     private int directoryLevel = 0;
-    private static int anInt = 0;
 
     public DirectoryReader() {
         subDirectoryQueue = new LinkedList<>();
         javaSourceArrayList = new ArrayList<>();
         classArrayList = new ArrayList<>();
+        loadedClasses = new ArrayList<>();
 
         if (System.getProperty("os.name").contains("Windows")) special = "\\\\";
         else if (System.getProperty("os.name").contains("Linux") ||
@@ -62,13 +63,10 @@ public class DirectoryReader extends PackageFinder {
         File rootDirectory;
         rootDirectory = new File(directory); // new file with path of @Param directory
         File[] rootDirectoryFiles = rootDirectory.listFiles(); // listFiles() returns array of Files in directory
-        int i = 0;
         if (rootDirectoryFiles != null) {
             for (File file : rootDirectoryFiles) { // iterate through everything in this directory
                 if (file.isFile()) { // if File
                     if (file.getName().endsWith(".java")) { // and if .java
-                        System.out.println("java " + file.getName() + anInt++);
-                       // System.out.println(file.getName());
                         javaSourceArrayList.add(file); // add to javaSource Array
                     } else if (file.getName().endsWith(".class")) { // else if File is .class
                         classArrayList.add(file); // add to class Array
@@ -127,7 +125,6 @@ public class DirectoryReader extends PackageFinder {
     * packageArray[1] = classpath(just a filepath that is the root folder for the .class files) for package*/
     @ClassLoader
     public void loadClasses(String[] packageArray) throws FileNotFoundException {
-        //System.out.println("Package " + packageArray[0]+ " " + packageArray[1]);
         String path = packageArray[1];
         URL[] classUrl = new URL[0];
         try {
@@ -137,24 +134,30 @@ public class DirectoryReader extends PackageFinder {
         }
 
         URLClassLoader cl = URLClassLoader.newInstance(classUrl);
-        int index = 0;
+        HashMap<File, File> classToSource = new HashMap<>();
+        for(File clsFile:classArrayList){
+            for(File sourceFile:javaSourceArrayList){
+                if(sourceFile.getName().replace(".java","").compareTo(clsFile.getName().replace(".class","")) == 0 ){
+                    classToSource.put(clsFile,sourceFile);
+                    break;
+                }
+            }
+        }
         for (int i = 0; i < getClassArrayList().size(); i++) { // iterate through .class files
             if(!getClassArrayList().get(i).getName().contains("$")){ // don't try to load inner classes. Inner classes are compiled separate to the class they are defined in and have a $ in the name
-                String className = getClassName(i).substring(0, getClassName(i).length() - 6); // remove .class from string
-                String packageName = getKeyword("package", getJavaSourceArrayList().get(index));
 
+                String className = getClassName(i).replace(".class",""); // remove .class from string
+                String packageName = getKeyword("package", classToSource.get(getClassArrayList().get(i)));
                 if (packageName != null) { // check if java source files belong to a package
                     className = packageName + "." + className; // if class has package set className to packageName.className, classLoader won't work otherwise
                     //System.out.println(className);
                 }
                 try {
+                   // System.out.println("class: " + className);
                     Class loadedClass = cl.loadClass(className); // load classes for reflection
                     loadedClasses.add(loadedClass); // all new Class objects added to loadedClasses Array
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
-                }
-                if(index < getJavaSourceArrayList().size() - 1){
-                    index++;
                 }
             }
         }
