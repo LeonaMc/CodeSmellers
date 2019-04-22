@@ -1,14 +1,14 @@
 package CodeSmells;
 
 import Annotation.Reflecting;
-import Interface.Inspectable;
+import Interface.Smellable;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 // need to implement better data return
-public class LargeClass implements Inspectable {
+public class LargeClass implements Smellable {
     private ArrayList<Class> loadedClasses; // All classes to be inspected, loaded for reflection
     private ArrayList<File> javaSource; // all source files from project being inspected
     private LineCounter lineCounter;
@@ -43,7 +43,16 @@ public class LargeClass implements Inspectable {
                     fileLength.put(file,fileSize); // put size of file
                 }
                 else{
-                    cleanClasses.add(loadedClasses.get(javaSource.indexOf(file)));
+                    int length = file.getName().length();
+                    String javaName = file.getName().substring(0,length-5);
+                    int index = 0;
+                    for(Class cls : loadedClasses){
+                        if(cls.getSimpleName().compareTo(javaName) == 0 ){
+                            index = loadedClasses.indexOf(cls);
+                            break;
+                        }
+                    }
+                    cleanClasses.add(loadedClasses.get(index));
                     cleanSource.add(file);
                 }
             } catch (FileNotFoundException e) {
@@ -60,7 +69,16 @@ public class LargeClass implements Inspectable {
     @Override
     public void reflectClass() {
         for (Class cls : loadedClasses){
-            String reportMessage = "\nClass " + cls.getSimpleName() + " has length of " + fileLength.get(javaSource.get(loadedClasses.indexOf(cls)));
+            String className = cls.getSimpleName();
+            int index = 0;
+            for(File file : javaSource){
+                int length = file.getName().length();
+                if(file.getName().substring(0,length-5).compareTo(className) == 0 ){
+                    index = javaSource.indexOf(file);
+                    break;
+                }
+            }
+            String reportMessage = "\nClass " + cls.getSimpleName() + " has length of " + fileLength.get(javaSource.get(index));
 
             if(cls.getDeclaredMethods().length > 5){ // placeholder value, not sure how many methods is too many
                 reportMessage += "\nPossible cause for large file is\n" + cls.getSimpleName() + " has " + cls.getDeclaredMethods().length + " Methods";
