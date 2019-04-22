@@ -1,7 +1,7 @@
 package CodeSmells;
 
 import Annotation.Reflecting;
-import Interface.Inspectable;
+import Interface.Smellable;
 
 import java.io.*;
 import java.lang.reflect.Method;
@@ -12,7 +12,7 @@ import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class LongMethods implements Inspectable {
+public class LongMethods implements Smellable {
     private HashMap<Class, Method[]> classMethods;
     private ArrayList<Class> loadedClasses;
     private ArrayList<File> javaSourceFiles;
@@ -78,7 +78,16 @@ public class LongMethods implements Inspectable {
     public String getKeyword(String keyword, File javaSource) throws FileNotFoundException {
         FileInputStream fileInputStream = new FileInputStream(javaSource);
         BufferedReader input = new BufferedReader(new InputStreamReader(fileInputStream));
-        Class myClass = loadedClasses.get(javaSourceFiles.indexOf(javaSource));
+        int length = javaSource.getName().length();
+        String javaName = javaSource.getName().substring(0,length-5);
+        int index = 0;
+        for(Class cls : loadedClasses){
+            if(cls.getSimpleName().compareTo(javaName) == 0 ){
+                index = loadedClasses.indexOf(cls);
+                break;
+            }
+        }
+        Class myClass = loadedClasses.get(index);
         Method myMethod = null;
         for (Method method : myClass.getDeclaredMethods()) {
             if (method.getName().equalsIgnoreCase(keyword)) {
@@ -139,7 +148,16 @@ public class LongMethods implements Inspectable {
             String affectedMethodMessage = null;
             for (Method method : tempClassMethods) {
                 try {
-                    affectedMethodMessage = getKeyword(method.getName(), javaSourceFiles.get(loadedClasses.indexOf(cls)));
+                    String className = cls.getSimpleName();
+                    int index = 0;
+                    for(File file : javaSourceFiles){
+                        int length = file.getName().length();
+                        if(file.getName().substring(0,length-5).compareTo(className) == 0 ){
+                            index = javaSourceFiles.indexOf(file);
+                            break;
+                        }
+                    }
+                    affectedMethodMessage = getKeyword(method.getName(), javaSourceFiles.get(index));
                     if (affectedMethodMessage != null) {
                         affectedMethods.add(method);
                         report.putLongMethodData(method, affectedMethodMessage);
