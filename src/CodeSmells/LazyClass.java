@@ -37,7 +37,16 @@ public class LazyClass implements Reflectable {
         for (File file:javaSource){ // for each source file
             if(lineCounter.countLines(file) > 150){ // if num of lines more than 50
                 cleanSource.add(file); // file is clean
-                cleanClasses.add(loadedClasses.get(javaSource.indexOf(file))); // add files .class file to clean array
+                int length = file.getName().length();
+                String javaName = file.getName().substring(0,length-5);
+                int index = 0;
+                for(Class cls : loadedClasses){
+                    if(cls.getSimpleName().compareTo(javaName) == 0 ){
+                        index = loadedClasses.indexOf(cls);
+                        break;
+                    }
+                }
+                cleanClasses.add(loadedClasses.get(index)); // add files .class file to clean array
             }
         }
         if(cleanSource.size() > 0){ // if clean source not empty
