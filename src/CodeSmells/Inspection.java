@@ -2,6 +2,7 @@ package CodeSmells;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Inspection {
@@ -73,6 +74,21 @@ public class Inspection {
         tooManyLiterals.getReport().setPercentage(loadedClasses.size());
         reports.put(LITERALS,tooManyLiterals.getReport());
     }
+    private void runComments(){
+        final String COMMENTS = "Comments";
+        Comments comments = new Comments(javaSourceFiles, loadedClasses);
+        comments.reflectClass();
+        comments.getReport().setPercentage(loadedClasses.size());
+        reports.put(COMMENTS,comments.getReport());
+    }
+
+    private void runSwitches(){
+        final String SWITCHES = "Switches";
+        Switches switches = new Switches(javaSourceFiles,loadedClasses);
+        switches.reflectClass();
+        switches.getReport().setPercentage(loadedClasses.size());
+        reports.put(SWITCHES,switches.getReport());
+    }
     // runs all inspection classes
     public void runInspection(){
         runFeatureEnvy();
@@ -82,6 +98,8 @@ public class Inspection {
         runLongParamList();
         runPrimitiveObsession();
         runTooManyLiterals();
+        runComments();
+        runSwitches();
     }
     // gets
     public HashMap<String, Report> getReports() {

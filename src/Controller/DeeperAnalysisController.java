@@ -41,7 +41,7 @@ public class DeeperAnalysisController  { // implements Initializable
     @FXML
       void reportDataToGui(ActionEvent event) throws IOException{
     	 String key = "LazyClass";
-         Text textOut = new Text("Name: " + key + "\nValue: " + "formatter.format(item.getYValue())" + "\n" + getReport(key).printNumAffectedClasses() + "\n" +
+         Text textOut = new Text("Name: " + key + "\nValue: " + "formatter.format(item.getYValue())" + "\n" + getReport(key).printSizeOfAffectedClasses() + "\n" +
                  getReport(key).percentToString() + " of files in project affected by "+ key +" Class code smell\n\n");
          textOut.setFill(Color.BLACK);
          textOut.setFont(Font.font("Verdana", 12));

@@ -76,6 +76,8 @@ public class BarChartController implements Initializable {
         keysToSmellReports.add("PrimitiveObsession");
         keysToSmellReports.add("TooManyLiterals");
         keysToSmellReports.add("LargeClass");
+        keysToSmellReports.add("Comments");
+        keysToSmellReports.add("Switches");
         
         HashMap<String,String> barColour = new HashMap<>();
         barColour.put("FeatureEnvy","green");
@@ -85,6 +87,8 @@ public class BarChartController implements Initializable {
         barColour.put("PrimitiveObsession","blue");
         barColour.put("TooManyLiterals","grey");
         barColour.put("LargeClass","crimson");
+        barColour.put("Comments","purple");
+        barColour.put("Switches","lightblue");
 
         int index = 0;
         for(String keyToSmellReport:keysToSmellReports){
@@ -174,7 +178,7 @@ public class BarChartController implements Initializable {
     }
 
     private void reportDataToGui(String key){
-        Text textOut = new Text("Name: " + key + "\nValue: " + "formatter.format(item.getYValue())" + "\n" + getReport(key).printNumAffectedClasses() + "\n" +
+        Text textOut = new Text("Name: " + key + "\nValue: " + "formatter.format(item.getYValue())" + "\n" + getReport(key).printSizeOfAffectedClasses() + "\n" +
                 getReport(key).percentToString() + " of files in project affected by "+ key +" Class code smell\n\n");
         textOut.setFill(Color.BLACK);
         textOut.setFont(Font.font("Verdana", 12));
