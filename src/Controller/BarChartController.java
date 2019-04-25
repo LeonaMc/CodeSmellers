@@ -18,16 +18,10 @@ import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.stage.Stage;
 
-import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 
 
@@ -106,7 +100,7 @@ public class BarChartController implements Initializable {
     public void goBackToProjectUploadScreen(ActionEvent event) throws IOException {
 
         // dont have access to stage information
-        Parent root = FXMLLoader.load(getClass().getResource("/Fxml/ProjectUploadScreen3.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/ProjectUploadScreen3.fxml"));
         root.setStyle("-fx-background-color: white");
         Scene scene = new Scene(root);
         // This line gets the stage informations
@@ -118,7 +112,7 @@ public class BarChartController implements Initializable {
     
     public void goToInDepthAnalysis(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/Fxml/InDepthAnalysis.fxml")); // Access scene information
+        Parent root = FXMLLoader.load(getClass().getResource("/InDepthAnalysis.fxml")); // Access scene information
         root.setStyle("-fx-background-color: white");
         Scene scene = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow(); // allows us to get scene and window

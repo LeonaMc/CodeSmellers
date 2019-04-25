@@ -2,7 +2,6 @@
 package Controller;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -53,29 +52,29 @@ public class ChangeSceneController  { // implements Initializable
 	}
 	
 	public void goToTableOfContentsScreen(ActionEvent event) throws IOException {
-		changeScene(event,"/Fxml/TableOfContentsScreen.fxml");
+		changeScene(event, "/TableOfContentsScreen.fxml");
 	}
 	
 	public void goToWelcomeScreen2(ActionEvent event) throws IOException {
-		changeScene(event,"/Fxml/WelcomeScreen2.fxml");
+		changeScene(event, "/WelcomeScreen2.fxml");
 	}
 
 	public void goBackToWelcomeScreen(ActionEvent event) throws IOException {
-		changeScene(event,"/Fxml/WelcomeScreen.fxml");
+		changeScene(event, "/WelcomeScreen.fxml");
 	}
 	
 	public void goToProjectUploadScreen(ActionEvent event) throws IOException{
-		changeScene(event,"/Fxml/ProjectUploadScreen3.fxml");
+		changeScene(event, "/ProjectUploadScreen3.fxml");
 	}
 
 	public void goToProjectBarChartOverall(ActionEvent event) throws IOException, InterruptedException {
 		
         // Splash Screen
-        SplashScreen splashScreen = new SplashScreen();
-        splashScreen.setVisible(true);
-        Thread thread = Thread.currentThread();
-        Thread.sleep(2500);
-        splashScreen.dispose();
+//        SplashScreen splashScreen = new SplashScreen();
+//        splashScreen.setVisible(true);
+//        Thread thread = Thread.currentThread();
+//        Thread.sleep(2500);
+//        splashScreen.dispose();
 
 		// if the text path is null then the user won't be able to click next, an alert will pop-up
 		if(textPath == null) {
@@ -85,7 +84,7 @@ public class ChangeSceneController  { // implements Initializable
 				if (alert.getResult() == ButtonType.OK) {
 				    alert.close();				}		
 		}else {
-			changeScene(event,"/Fxml/BarChartOverall.fxml");
+			changeScene(event, "/BarChartOverall.fxml");
 		}
 	} 
 
@@ -114,34 +113,12 @@ public class ChangeSceneController  { // implements Initializable
 	}	
 	
 	public void goBackToBarChartOverall(ActionEvent event) throws IOException {
-		changeScene(event,"/Fxml/BarChartOverall.fxml");
+		changeScene(event, "/BarChartOverall.fxml");
 	}
 	
 	// This method is also in BarChartController due to inability to have multiple controllers per scene
 	public void goToInDepthAnalysis(ActionEvent event) throws IOException {
-		changeScene(event,"/Fxml/InDepthAnalysis.fxml");
-	} 
-	
-	public void downloadProject(ActionEvent event) throws IOException{
-
-		String fileSeperator = "";
-		if(System.getProperty("os.name").contains("Windows")){
-			fileSeperator ="\\Desktop\\report.txt";
-		}
-		else if(System.getProperty("os.name").contains("Linux") || System.getProperty("os.name").contains("Mac")){
-			fileSeperator = "/Desktop/report.txt";
-		}
-		String desktopPath = System.getProperty("user.home") + fileSeperator;
-		Path ReportToDesktop = Files.copy(Paths.get("src/reportLocation/report.txt"),
-													Paths.get(desktopPath),REPLACE_EXISTING);
-
-		Text textOut = new Text("Report added to " + desktopPath + "\nRecommended to view report in anything but notepad");
-
-		textOut.setFill(Color.BLACK);
-		textOut.setFont(Font.font("Verdana", 12));
-		textOut.setTextAlignment(TextAlignment.CENTER);
-		textOut.setLineSpacing(20.0f);
-		exitScreenTextFlow.getChildren().add(textOut);
+		changeScene(event, "/InDepthAnalysis.fxml");
 	}
 	
 	public void exitProject(ActionEvent event) throws IOException{

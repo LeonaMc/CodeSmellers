@@ -2,11 +2,8 @@
 package Controller;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
 
-import CodeSmells.Report;
-import Model.BarChartCalc;
+import CodeSmells.Inspection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,7 +34,7 @@ public class DeeperAnalysisController { // implements Initializable
         textOut.setTextAlignment(TextAlignment.CENTER);
         textOut.setLineSpacing(20.0f);
 
-        File file = new File("src/reportLocation/report.txt");
+        File file = new File(Inspection.getDesktopPath());
         FileInputStream fileInputStream = new FileInputStream(file);
         BufferedReader input = new BufferedReader(new InputStreamReader(fileInputStream));
         String line;
@@ -50,21 +47,21 @@ public class DeeperAnalysisController { // implements Initializable
 
     public void goBackToBarChartOverall(ActionEvent event) throws IOException {
 
-        Parent root2 = FXMLLoader.load(getClass().getResource("/Fxml/BarChartOverall.fxml"));
+        Parent root2 = FXMLLoader.load(getClass().getResource("/BarChartOverall.fxml"));
         Scene scene = new Scene(root2);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);
         window.show();
     }
 
-    public void goToExitScreen(ActionEvent event) throws IOException {
+//    public void goToExitScreen(ActionEvent event) throws IOException {
 
-        Parent root2 = FXMLLoader.load(getClass().getResource("/Fxml/ExitScreen.fxml"));
-        Scene scene = new Scene(root2);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
-    }
+//        Parent root2 = FXMLLoader.load(getClass().getResource("/ExitScreen.fxml"));
+//        Scene scene = new Scene(root2);
+//        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        window.setScene(scene);
+//        window.show();
+//    }
 
 }
 
