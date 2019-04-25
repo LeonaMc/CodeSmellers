@@ -19,7 +19,7 @@
                </font></Text>
             <ImageView fitHeight="139.0" fitWidth="183.0" layoutX="845.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../res/Skunk.png" />
+                  <Image url="@res/Skunk.png" />
                </image>
             </ImageView>
             <Text layoutX="14.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Project Upload">
@@ -35,7 +35,7 @@
             <Button layoutX="14.0" layoutY="339.0" mnemonicParsing="false" onAction="#openDirectoryChooser" text="Upload" />
             <TextField fx:id="textField" layoutX="14.0" layoutY="295.0" prefHeight="25.0" prefWidth="455.0" promptText="No file selected" />
             <Button layoutX="876.0" layoutY="550.0" mnemonicParsing="false" onAction="#goToProjectBarChartOverall" prefHeight="41.0" prefWidth="111.0" text="Next" />
-            <Button layoutX="13.0" layoutY="550.0" mnemonicParsing="false" onAction="#goToWelcomeScreen2" prefHeight="41.0" prefWidth="111.0" text="Back" />
+            <Button layoutX="13.0" layoutY="550.0" mnemonicParsing="false" onAction="#goToTableOfContentsScreen" prefHeight="41.0" prefWidth="111.0" text="Back" />
          </children>
       </Pane>
    </children>

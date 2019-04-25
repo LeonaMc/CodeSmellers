@@ -15,10 +15,9 @@
       <Pane layoutX="421.0" layoutY="275.0" prefHeight="500" prefWidth="1421.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Button layoutX="14.0" layoutY="550.0" mnemonicParsing="false" onAction="#goBackToBarChartOverall" prefHeight="41.0" prefWidth="111.0" text="Back" />
-            <Button layoutX="875.0" layoutY="550.0" mnemonicParsing="false" onAction="#goToExitScreen" prefHeight="41.0" prefWidth="111.0" text="Next" />
             <ImageView fitHeight="110.0" fitWidth="115.0" layoutX="871.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../res/Skunk.png" />
+                  <Image url="@res/Skunk.png" />
                </image>
             </ImageView>
             <Text layoutX="14.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Project Analysis">
