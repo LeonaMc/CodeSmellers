@@ -4,13 +4,17 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class Inspection {
     private HashMap<String, Report> reports; // Key is Smell name, report holds all data found in project related to that smell
     private ArrayList<Class> loadedClasses;
     private ArrayList<File> javaSourceFiles;
+    private static String desktopPath;
 
     public Inspection(ArrayList<Class> loadedClasses, ArrayList<File> javaSource){
         this.loadedClasses = new ArrayList<>(loadedClasses);
@@ -87,15 +91,28 @@ public class Inspection {
         names.add("TooManyLiterals");
         names.add("FeatureEnvy");
 
-        File dir = new File("src/reportLocation");
+        String fileSeperator = "";
+        if(System.getProperty("os.name").contains("Windows")){
+            fileSeperator ="\\Desktop\\ReportLocation\\";
+        }
+        else if(System.getProperty("os.name").contains("Linux") || System.getProperty("os.name").contains("Mac")){
+            fileSeperator = "/Desktop/ReportLocation/";
+        }
+        String path = System.getProperty("user.home") + fileSeperator;
+
+        File dir = new File(path);
         if(dir.mkdir()){
             System.out.println("dir created\n");
         }
         else{
-            System.out.println("Not\n");
+            System.out.println("dir not created\n");
         }
-
-        File file = new File("src/reportLocation/report.txt");
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss");
+        Date date = new Date();
+        String fileName = dateFormat.format(date);
+        fileName = fileName+".txt";
+        desktopPath = path+fileName;
+        File file = new File(path+fileName);
         PrintStream fileWriter = null;
 
         try {
@@ -145,5 +162,9 @@ public class Inspection {
     // gets
     public HashMap<String, Report> getReports() {
         return reports;
+    }
+
+    public static String getDesktopPath() {
+        return desktopPath;
     }
 }

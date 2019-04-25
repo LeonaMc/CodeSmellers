@@ -60,7 +60,7 @@ public class LargeClass implements Smellable {
             }
         }
         loadedClasses.removeAll(cleanClasses);
-        loadedClasses.remove(Main.class);
+        //loadedClasses.remove(/CodeSmells.Main.class);
         javaSource.removeAll(cleanSource);
         report.setAffectedClasses(loadedClasses); // add list of affected classes to report
     }

@@ -141,7 +141,7 @@ public class LongMethods implements Smellable {
     public void reflectClass() {
         getClassMethods();
         ArrayList<Class> cleanClasses = new ArrayList<>();
-        loadedClasses.remove(Main.class);
+        //loadedClasses.remove(/src/CodeSmells.Main.class);
         for (Class cls : loadedClasses) {
             Method[] tempClassMethods = classMethods.get(cls);
             ArrayList<Method> affectedMethods = new ArrayList<>();
