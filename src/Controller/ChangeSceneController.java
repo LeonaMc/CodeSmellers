@@ -3,11 +3,7 @@ package Controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
-import Model.SplashScreen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,15 +12,9 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.*;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.paint.Color;
-
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 public class ChangeSceneController  { // implements Initializable
 	 
@@ -52,7 +42,7 @@ public class ChangeSceneController  { // implements Initializable
 	}
 	
 	public void goToTableOfContentsScreen(ActionEvent event) throws IOException {
-		changeScene(event, "/res/TableOfContentsScreen.fxml");
+		changeScene(event, "/Model/TableOfContentsScreen.fxml");
 	}
 	
 	public void goToWelcomeScreen2(ActionEvent event) throws IOException {
@@ -60,11 +50,11 @@ public class ChangeSceneController  { // implements Initializable
 	}
 
 	public void goBackToWelcomeScreen(ActionEvent event) throws IOException {
-		changeScene(event, "/res/WelcomeScreen.fxml");
+		changeScene(event, "/Model/WelcomeScreen.fxml");
 	}
 	
 	public void goToProjectUploadScreen(ActionEvent event) throws IOException{
-		changeScene(event, "/res/ProjectUploadScreen3.fxml");
+		changeScene(event, "/Model/ProjectUploadScreen3.fxml");
 	}
 
 	public void goToProjectBarChartOverall(ActionEvent event) throws IOException, InterruptedException {
@@ -84,7 +74,7 @@ public class ChangeSceneController  { // implements Initializable
 				if (alert.getResult() == ButtonType.OK) {
 				    alert.close();				}		
 		}else {
-			changeScene(event, "/res/BarChartOverall.fxml");
+			changeScene(event, "/Model/BarChartOverall.fxml");
 		}
 	} 
 
@@ -113,12 +103,12 @@ public class ChangeSceneController  { // implements Initializable
 	}	
 	
 	public void goBackToBarChartOverall(ActionEvent event) throws IOException {
-		changeScene(event, "/res/BarChartOverall.fxml");
+		changeScene(event, "/Model/BarChartOverall.fxml");
 	}
 	
 	// This method is also in BarChartController due to inability to have multiple controllers per scene
 	public void goToInDepthAnalysis(ActionEvent event) throws IOException {
-		changeScene(event, "/res/InDepthAnalysis.fxml");
+		changeScene(event, "/Model/InDepthAnalysis.fxml");
 	}
 	
 	public void exitProject(ActionEvent event) throws IOException{

@@ -26,7 +26,7 @@
             </Text>
             <ImageView fitHeight="127.0" fitWidth="111.0" layoutX="875.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@res/Skunk.png" />
+                  <Image url="@../res/Skunk.png" />
                </image>
             </ImageView>
          </children>
