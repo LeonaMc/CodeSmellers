@@ -100,7 +100,7 @@ public class BarChartController implements Initializable {
     public void goBackToProjectUploadScreen(ActionEvent event) throws IOException {
 
         // dont have access to stage information
-        Parent root = FXMLLoader.load(getClass().getResource("/ProjectUploadScreen3.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/res/ProjectUploadScreen3.fxml"));
         root.setStyle("-fx-background-color: white");
         Scene scene = new Scene(root);
         // This line gets the stage informations
@@ -112,7 +112,7 @@ public class BarChartController implements Initializable {
     
     public void goToInDepthAnalysis(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/InDepthAnalysis.fxml")); // Access scene information
+        Parent root = FXMLLoader.load(getClass().getResource("/res/InDepthAnalysis.fxml")); // Access scene information
         root.setStyle("-fx-background-color: white");
         Scene scene = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow(); // allows us to get scene and window

@@ -52,19 +52,19 @@ public class ChangeSceneController  { // implements Initializable
 	}
 	
 	public void goToTableOfContentsScreen(ActionEvent event) throws IOException {
-		changeScene(event, "/TableOfContentsScreen.fxml");
+		changeScene(event, "/res/TableOfContentsScreen.fxml");
 	}
 	
 	public void goToWelcomeScreen2(ActionEvent event) throws IOException {
-		changeScene(event, "/WelcomeScreen2.fxml");
+		changeScene(event, "/res/WelcomeScreen2.fxml");
 	}
 
 	public void goBackToWelcomeScreen(ActionEvent event) throws IOException {
-		changeScene(event, "/WelcomeScreen.fxml");
+		changeScene(event, "/res/WelcomeScreen.fxml");
 	}
 	
 	public void goToProjectUploadScreen(ActionEvent event) throws IOException{
-		changeScene(event, "/ProjectUploadScreen3.fxml");
+		changeScene(event, "/res/ProjectUploadScreen3.fxml");
 	}
 
 	public void goToProjectBarChartOverall(ActionEvent event) throws IOException, InterruptedException {
@@ -84,7 +84,7 @@ public class ChangeSceneController  { // implements Initializable
 				if (alert.getResult() == ButtonType.OK) {
 				    alert.close();				}		
 		}else {
-			changeScene(event, "/BarChartOverall.fxml");
+			changeScene(event, "/res/BarChartOverall.fxml");
 		}
 	} 
 
@@ -113,12 +113,12 @@ public class ChangeSceneController  { // implements Initializable
 	}	
 	
 	public void goBackToBarChartOverall(ActionEvent event) throws IOException {
-		changeScene(event, "/BarChartOverall.fxml");
+		changeScene(event, "/res/BarChartOverall.fxml");
 	}
 	
 	// This method is also in BarChartController due to inability to have multiple controllers per scene
 	public void goToInDepthAnalysis(ActionEvent event) throws IOException {
-		changeScene(event, "/InDepthAnalysis.fxml");
+		changeScene(event, "/res/InDepthAnalysis.fxml");
 	}
 	
 	public void exitProject(ActionEvent event) throws IOException{
