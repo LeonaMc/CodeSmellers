@@ -35,7 +35,7 @@ public class LazyClass implements Reflectable {
             }
         }
         for (File file:javaSource){ // for each source file
-            if(lineCounter.countLines(file) > 150){ // if num of lines more than 50
+            if(lineCounter.countLines(file) > 100){ // if num of lines more than 50
                 cleanSource.add(file); // file is clean
                 int length = file.getName().length();
                 String javaName = file.getName().substring(0,length-5);
@@ -59,9 +59,9 @@ public class LazyClass implements Reflectable {
     }
 
     // if class found to be small this method attempts to find if it is referenced in many classes which may be an indication it is not a lazy class
-    private boolean findReference(Class cls, Class innerClass){ // needs more testing, not working as it should be
+    private boolean findReference(Class cls, Class innerClass){
         boolean foundReference = false;
-        for (Field field: innerClass.getDeclaredFields()){
+        for (Field field: innerClass.getDeclaredFields()){ // check fields for field of type cls, means class object is used in other classes
             if(Modifier.isPrivate(field.getModifiers())){
                 field.setAccessible(true);
                 if (field.getType().equals(cls) && !cls.getClass().equals(innerClass)){
@@ -78,41 +78,44 @@ public class LazyClass implements Reflectable {
     @Override
     public void reflectClass(){
         try {
-            findSmallClass();
+            findSmallClass(); // running this method will remove class with length greater than threshold from both source list and class list
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        ArrayList<Class> tempList = new ArrayList<>();
-        tempList.addAll(loadedClasses);
+        ArrayList<Class> tempList = new ArrayList<>(); // coming back now and reading the code I can't remember why I made an extra list. Maybe for the inner loop?
+        // after findSmallClass() loadedClasses only holds classes with source under 150 lines
+        tempList.addAll(loadedClasses); // add all flagged classes to tempo list
         HashMap<Class,ArrayList<String>> classReferenceMap = new HashMap<>();
         String data;
-        for(Class cls: loadedClasses){
-            ArrayList<String> className = new ArrayList<>();
-            for(Class innerCls: tempList){
-                if (findReference(cls,innerCls)){
-                    className.add(innerCls.getSimpleName());
-                    classReferenceMap.put(cls,className);
+        for(Class cls: loadedClasses){ // for each class
+            ArrayList<String> className = new ArrayList<>(); // will hold names of classes which create objects of type cls
+            for(Class checkReferences: tempList){  // for each class in tempList
+                if (findReference(cls,checkReferences)){ // if checkReference class has objects of type cls cls may not be lazy
+                    className.add(checkReferences.getSimpleName()); // add name of class
+                    classReferenceMap.put(cls,className); // map all class names that reference cls to cls
                 }
             }
-            data = "\nClass " + cls.getSimpleName() + " has been flagged as a lazy class because it has less than 150 lines of code\n";
+            // start of data for report
+            // classes found with under 150 lines are flagged but are not necessarily lazy, further inspection needed
+            data = "\nClass " + cls.getSimpleName() + " has been flagged as a lazy class\n"; //
             ArrayList<Method> publicMethods = new ArrayList<>();
-            if(cls.getDeclaredMethods().length == 0){
+            if(cls.getDeclaredMethods().length == 0){ // if no methods add contributing factor to report
                 data += "Possible contributing factors are\n";
                 data += cls.getSimpleName() + " has 0 methods which may indicate an unfinished class\n";
             }
-            else if(cls.getDeclaredFields().length > 5 && cls.getDeclaredMethods().length <= 5 ){
+            else if(cls.getDeclaredFields().length > 5 && cls.getDeclaredMethods().length <= 5 ){ // more fields than methods may indicate data class
                 data += "Possible contributing factors are\n";
                 data += cls.getSimpleName() + " has " + cls.getDeclaredFields().length + " fields and " + cls.getDeclaredMethods().length + " methods which may indicate a data class\n";
             }
-            else if(cls.getDeclaredMethods().length > 0){
+            else if(cls.getDeclaredMethods().length > 0){ // find public methods
                 for(Method method: cls.getDeclaredMethods()){
                     if(Modifier.isPublic(method.getModifiers())){
                         publicMethods.add(method);
                     }
                 }
             }
-            if(classReferenceMap.containsKey(cls)){
+            if(classReferenceMap.containsKey(cls)){ // let user know that class flagged as lazy may be false positive
                 data += "\nPossible false positive result as " + cls.getSimpleName() + " is referenced in these classes\n";
                 for (String string: classReferenceMap.get(cls)) {
                     data += string + "\n";

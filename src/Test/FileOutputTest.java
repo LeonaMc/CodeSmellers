@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
-
+// Testing output to file for report
 public class FileOutputTest {
     public static void main(String[] args) throws IOException {
         String[] packageArray = new String[2];

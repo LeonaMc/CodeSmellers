@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-
+// Runs all code smell classes returns a report for each smell in a hash map with codesmell name as key and report as data
 public class Inspection {
     private HashMap<String, Report> reports; // Key is Smell name, report holds all data found in project related to that smell
     private ArrayList<Class> loadedClasses;
@@ -80,9 +80,9 @@ public class Inspection {
         tooManyLiterals.getReport().setPercentage(loadedClasses.size());
         reports.put(LITERALS,tooManyLiterals.getReport());
     }
-
+    // opens a folder on user desktop and prints report findings to .txt file inside the folder. Name of folder is system date and time so new report each time
     private void reportToFile() throws IOException {
-        ArrayList<String> names = new ArrayList<>();
+        ArrayList<String> names = new ArrayList<>(); // implemented late so quick fix possibly messy
         names.add("LargeClass");
         names.add("LongMethod");
         names.add("LongParameter");
@@ -92,57 +92,59 @@ public class Inspection {
         names.add("FeatureEnvy");
 
         String fileSeperator = "";
-        if(System.getProperty("os.name").contains("Windows")){
+        // possibly better to set to documents but for ease of grading report folder created on desktop
+        if(System.getProperty("os.name").contains("Windows")){ // if windows set path seperator
             fileSeperator ="\\Desktop\\ReportLocation\\";
         }
-        else if(System.getProperty("os.name").contains("Linux") || System.getProperty("os.name").contains("Mac")){
+        else if(System.getProperty("os.name").contains("Linux") || System.getProperty("os.name").contains("Mac")){ // else if Linux or mac
             fileSeperator = "/Desktop/ReportLocation/";
         }
-        String path = System.getProperty("user.home") + fileSeperator;
+        String path = System.getProperty("user.home") + fileSeperator; // get path to user desktop
 
-        File dir = new File(path);
+        File dir = new File(path); // new directory "Desktop/ReportLocation"
         if(dir.mkdir()){
             System.out.println("dir created\n");
         }
         else{
             System.out.println("dir not created\n");
         }
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss");
+        DateFormat dateFormat = new SimpleDateFormat( "dd-MM-yyyy-HH-mm-ss"); // filename will be date/time so new file created each time
         Date date = new Date();
         String fileName = dateFormat.format(date);
         fileName = fileName+".txt";
-        desktopPath = path+fileName;
+        desktopPath = path+fileName; // set path to open file to write to
         File file = new File(path+fileName);
-        PrintStream fileWriter = null;
+        PrintStream fileWriter = null; // print stream to utilise System.setOut
 
         try {
             fileWriter = new PrintStream(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.setOut(fileWriter);
-        for(String name: names){
-
-            System.out.println("================= "+name+" =================");
-            Report report = getReports().get(name);
-            ArrayList<Class> affectedClasses = report.getAffectedClasses();
+        System.setOut(fileWriter); // set system.out to printStream object
+        System.out.println("Report folder created on desktop, contains report of current inspection\n");
+        for(String name: names){ // for each code smell name print report contents use name as key to report hash map
+            System.out.println("================= "+name+" ================="); // seperates each smell report for readability
+            Report report = getReports().get(name); // get report by name of smell
+            ArrayList<Class> affectedClasses = report.getAffectedClasses(); // list of classes affected by current smell used as key to print report data for current affected class
             if (report.isClean()){
                 System.out.println("Project is clean for "+ report.getName() +" code smell\n");
             }
             else{
-                System.out.println(report.printNumAffectedClasses());
+                System.out.println(report.printNumAffectedClasses()); //
                 System.out.println(report.percentToString() + " of files affected by " + report.getName());
-                for(Class cls : affectedClasses){
+                for(Class cls : affectedClasses){ // for each affected class print its report for current smell
                     if(name.equalsIgnoreCase("LongMethod")){
-                        System.out.println(report.getLongMethodData().get(report.getReportData().get(cls)));
+                        System.out.println(report.getLongMethodData().get(report.getReportData().get(cls))); // report slightly different for long method
                     }
                     else{
-                        System.out.println(report.getReportData().get(cls));
+                        System.out.println(report.getReportData().get(cls)); // print report data for class cls from affected classes.
                     }
                 }
             }
         }
         if (fileWriter != null) {
+            System.setOut(System.out);
             fileWriter.close();
         }
     }

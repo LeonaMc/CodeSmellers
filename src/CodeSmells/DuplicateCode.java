@@ -2,7 +2,7 @@ package CodeSmells;
 
 import java.io.File;
 import java.util.ArrayList;
-//
+// NO IMPLEMENTATION
 public class DuplicateCode {
     ArrayList<Class> loadedClasses;
     ArrayList<File> javaSource;

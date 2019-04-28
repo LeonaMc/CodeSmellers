@@ -1,4 +1,4 @@
-package CodeSmells;
+package CodeSmells; //; asdasd
 
 import Interface.SourceReadable;
 
@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 public class PackageFinder implements SourceReadable {
 
     PackageFinder() {
-        // empty
+        // empty after refactor
     }
 
     @Override
@@ -21,16 +21,16 @@ public class PackageFinder implements SourceReadable {
         FileInputStream fileInputStream = new FileInputStream(javaSource);
         BufferedReader input = new BufferedReader(new InputStreamReader(fileInputStream));
 
-        String line;
-        String p = null;
-        Pattern pattern = Pattern.compile("package" + "\\W+(\\w+)");
-        Matcher matcher = pattern.matcher("");
-        boolean pFound = false;
+        String line; // current line
+        String pack = null; // package name
+        Pattern pattern = Pattern.compile("package" + "\\W+(\\w+)"); // regex to find package name
+        Matcher matcher = pattern.matcher(""); // empty matcher
+        boolean pFound = false; // if true package name found
         try {
-            while((line = input.readLine()) != null){
-                matcher.reset(line);
+            while((line = input.readLine()) != null){ // while lines still to read
+                matcher.reset(line); // reset empty matcher to current line
                 while(matcher.find()){
-                    p = line;
+                    pack = line.substring(8, line.indexOf(';')); // remove package and anything trailing from ; leaving just package name
                     pFound = true;
                     break;
                 }
@@ -47,12 +47,9 @@ public class PackageFinder implements SourceReadable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if(p == null){
-            return null;
+        if(pack == null){
+            return null; // return null and check on receiving end
         }
-        else {
-            p = p.substring(8, p.length()-1);
-        }
-        return p;
+        return pack; // else return package name
     }
 }

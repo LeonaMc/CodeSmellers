@@ -1,9 +1,9 @@
 package CodeSmells;
-//REMINDER: see if removal of T is possible
 import java.lang.reflect.Method;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 public class Report<T> {
     private String name;
     DecimalFormat df = new DecimalFormat("#0.00");

@@ -48,23 +48,23 @@ public class LongParamList implements Reflectable {
             }
         }
         loadedClasses.removeAll(cleanClasses); // remove clean classes so only effected classes left
-        report.setAffectedClasses(loadedClasses); // add effected classes classes to report
+        report.setAffectedClasses(loadedClasses); // add effected classes to report
 
-        for (Class cls : loadedClasses) {
-            ArrayList<Method> affectedMethods = new ArrayList<>();
-            affectedMethods.addAll(methodHash.get(cls));
-            String affectedMethodMessage = "\nName of affected class = " + cls.getSimpleName() +
+        for (Class cls : loadedClasses) { // for each class
+            ArrayList<Method> affectedMethods = new ArrayList<>(); // list to hold affected methods
+            affectedMethods.addAll(methodHash.get(cls)); // get methods declared in this class cls
+            String affectedMethodMessage = "\nName of affected class = " + cls.getSimpleName() + // construct message for report
                                             "\nNumber of affected methods = " + affectedMethods.size();
-            double methodPercent = ((double) affectedMethods.size() / (double) cls.getDeclaredMethods().length) * 100;
-            affectedMethodMessage += "\n" + report.df.format(methodPercent) + "% of methods affected\nMethod names\n";
-            StringBuilder builder = new StringBuilder(affectedMethodMessage);
-            for (Method method : affectedMethods) {
+            double methodPercent = ((double) affectedMethods.size() / (double) cls.getDeclaredMethods().length) * 100; // calculate percent of affected methods for this class
+            affectedMethodMessage += "\n" + report.df.format(methodPercent) + "% of methods affected\nMethod names\n"; // concat to add more info ot report string
+            StringBuilder builder = new StringBuilder(affectedMethodMessage); // string builder for concatenation inside loop
+            for (Method method : affectedMethods) { //for each affected method
                 builder.append("\n" + method.getName() + " has " + method.getParameters().length + " parameters\nParameter types are\n");
-                for (Class parameter : method.getParameterTypes()){
-                    builder.append(parameter.getSimpleName() + "\n");
+                for (Class parameter : method.getParameterTypes()){ // for each param
+                    builder.append(parameter.getSimpleName() + "\n"); // add name to report message
                 }
             }
-            report.putReportData(cls, builder.toString());
+            report.putReportData(cls, builder.toString()); // put class and message pair in report hashmap
         }
     }
     // returns report

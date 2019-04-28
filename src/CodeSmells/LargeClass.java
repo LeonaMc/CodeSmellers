@@ -37,7 +37,7 @@ public class LargeClass implements Smellable {
         ArrayList<File> cleanSource = new ArrayList<>();
         for (File file : javaSource){ // for each javaSource file
             try {
-                int upperBound = 150; // heuristic
+                int upperBound = 200; // heuristic
                 int fileSize = lineCounter.countLines(file);
                 if((fileSize > upperBound)){ // files large
                     fileLength.put(file,fileSize); // put size of file
@@ -60,7 +60,6 @@ public class LargeClass implements Smellable {
             }
         }
         loadedClasses.removeAll(cleanClasses);
-        //loadedClasses.remove(/CodeSmells.Main.class);
         javaSource.removeAll(cleanSource);
         report.setAffectedClasses(loadedClasses); // add list of affected classes to report
     }
@@ -68,16 +67,18 @@ public class LargeClass implements Smellable {
     @Reflecting
     @Override
     public void reflectClass() {
-        for (Class cls : loadedClasses){
-            String className = cls.getSimpleName();
+        // loop matches class file to source file and gets correct index of source
+        for (Class cls : loadedClasses){ // for each loaded class of project
+            String className = cls.getSimpleName(); // get name
             int index = 0;
-            for(File file : javaSource){
-                int length = file.getName().length();
-                if(file.getName().substring(0,length-5).compareTo(className) == 0 ){
-                    index = javaSource.indexOf(file);
+            for(File file : javaSource){ // for each source file
+                int length = file.getName().length(); // get length of name
+                if(file.getName().substring(0,length-5).compareTo(className) == 0 ){ // remove .java and compare source name to class name
+                    index = javaSource.indexOf(file); // get index of matching source file
                     break;
                 }
             }
+            // inspection findings
             String reportMessage = "\nClass " + cls.getSimpleName() + " has length of " + fileLength.get(javaSource.get(index));
 
             if(cls.getDeclaredMethods().length > 5){ // placeholder value, not sure how many methods is too many

@@ -72,7 +72,7 @@ public class DirectoryReader extends PackageFinder {
                         classArrayList.add(file); // add to class Array
                     }
                 } else if (file.isDirectory()) {
-                    if(!file.getName().equalsIgnoreCase("artifacts")){ // "fixed" need to check edge cases asap
+                    if(!file.getName().equalsIgnoreCase("artifacts") && !file.getName().equalsIgnoreCase(".git")){ // "fixed" need to check edge cases asap
                         subDirectoryQueue.add(file);  // if directory add to queue
                     }
                 }
@@ -81,6 +81,7 @@ public class DirectoryReader extends PackageFinder {
 
         if (!subDirectoryQueue.isEmpty()) { // recursion stops on empty queue
             directoryLevel += 1;
+            System.out.println(subDirectoryQueue.peek());
             getFiles(subDirectoryQueue.remove().getPath()); // remove earliest added directory and pass as Param to recursive call
         }
     }
@@ -150,10 +151,8 @@ public class DirectoryReader extends PackageFinder {
                 String packageName = getKeyword("package", classToSource.get(getClassArrayList().get(i)));
                 if (packageName != null) { // check if java source files belong to a package
                     className = packageName + "." + className; // if class has package set className to packageName.className, classLoader won't work otherwise
-                    //System.out.println(className);
                 }
                 try {
-                   // System.out.println("class: " + className);
                     Class loadedClass = cl.loadClass(className); // load classes for reflection
                     loadedClasses.add(loadedClass); // all new Class objects added to loadedClasses Array
                 } catch (ClassNotFoundException e) {

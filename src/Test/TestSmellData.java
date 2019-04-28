@@ -32,22 +32,6 @@ public class TestSmellData {
 
         ArrayList<Class> loadedClasses = new ArrayList<>(directoryReader.getLoadedClasses()); // classes ready for reflection
         ArrayList<File> javaSource = new ArrayList<>(directoryReader.getJavaSourceArrayList()); // can read java files as text
-//        File file = new File("/src/reportLocation/report.txt");
-//        PrintStream fileWriter = null;
-//        try {
-//            fileWriter = new PrintStream(file);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-//        System.setOut(fileWriter);
-        int l = javaSource.get(0).getName().length();
-        String javaName = javaSource.get(0).getName().substring(0,l-5);
-        System.out.println("javaName " + javaName);
-        System.out.println("java size " + javaSource.size() + " class size " + loadedClasses.size()+"\n");
-//        for(Class cls:loadedClasses){
-//            System.out.println(cls.getSimpleName()+"\n");
-//        }
 
         //Bloat Tests
         //Large Class Finished
