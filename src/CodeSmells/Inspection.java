@@ -80,6 +80,22 @@ public class Inspection {
         tooManyLiterals.getReport().setPercentage(loadedClasses.size());
         reports.put(LITERALS,tooManyLiterals.getReport());
     }
+    private void runComments(){
+        final String COMMENTS = "Comments";
+        Comments comments = new Comments(javaSourceFiles, loadedClasses);
+        comments.reflectClass();
+        comments.getReport().setPercentage(loadedClasses.size());
+        reports.put(COMMENTS,comments.getReport());
+    }
+
+    private void runSwitches(){
+        final String SWITCHES = "Switches";
+        Switches switches = new Switches(javaSourceFiles,loadedClasses);
+        switches.reflectClass();
+        switches.getReport().setPercentage(loadedClasses.size());
+        reports.put(SWITCHES,switches.getReport());
+    }
+
     // opens a folder on user desktop and prints report findings to .txt file inside the folder. Name of folder is system date and time so new report each time
     private void reportToFile() throws IOException {
         ArrayList<String> names = new ArrayList<>(); // implemented late so quick fix possibly messy
@@ -90,6 +106,8 @@ public class Inspection {
         names.add("PrimitiveObsession");
         names.add("TooManyLiterals");
         names.add("FeatureEnvy");
+        names.add("Comments");
+        names.add("Switches");
 
         String fileSeperator = "";
         // possibly better to set to documents but for ease of grading report folder created on desktop
@@ -158,6 +176,8 @@ public class Inspection {
         runLongParamList();
         runPrimitiveObsession();
         runTooManyLiterals();
+        runComments();
+        runSwitches();
         reportToFile();
     }
 

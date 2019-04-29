@@ -71,6 +71,8 @@ public class BarChartController implements Initializable {
         keysToSmellReports.add("PrimitiveObsession");
         keysToSmellReports.add("TooManyLiterals");
         keysToSmellReports.add("LargeClass");
+        keysToSmellReports.add("Comments");
+        keysToSmellReports.add("Switches");
         
         HashMap<String,String> barColour = new HashMap<>();
         barColour.put("FeatureEnvy","green");
@@ -80,6 +82,8 @@ public class BarChartController implements Initializable {
         barColour.put("PrimitiveObsession","blue");
         barColour.put("TooManyLiterals","grey");
         barColour.put("LargeClass","crimson");
+        barColour.put("Comments","purple");
+        barColour.put("Switches","lightblue");
 
         int index = 0;
         for(String keyToSmellReport:keysToSmellReports){
@@ -93,12 +97,10 @@ public class BarChartController implements Initializable {
                 }
             });
         }
-        
         smellChart.getData().addAll(codeSmellBarSeries);
     }
 
     public void goBackToProjectUploadScreen(ActionEvent event) throws IOException {
-
         // dont have access to stage information
         Parent root = FXMLLoader.load(getClass().getResource("/Model/ProjectUploadScreen3.fxml"));
         root.setStyle("-fx-background-color: white");
@@ -111,7 +113,6 @@ public class BarChartController implements Initializable {
     }
     
     public void goToInDepthAnalysis(ActionEvent event) throws IOException {
-
         Parent root = FXMLLoader.load(getClass().getResource("/Model/InDepthAnalysis.fxml")); // Access scene information
         root.setStyle("-fx-background-color: white");
         Scene scene = new Scene(root);
@@ -119,7 +120,5 @@ public class BarChartController implements Initializable {
         window.setScene(scene);
         window.show();
     }
-
-
 } 
 
